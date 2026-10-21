@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radar de Vagas</title>
+  <meta name="description" content="Vagas abertas de front-end, full-stack e back-end, atualizadas todo dia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="eyebrow">Front-end · Full-stack · Back-end</div>
+      <h1>Radar de Vagas</h1>
+      <p class="sub">Vagas buscadas todo dia nas APIs do GitHub e da Gupy. Vagas que fecharam saem da lista principal.</p>
+      <div class="rodada" id="rodada">Carregando…</div>
+    </header>
+
+    <section class="filtros" aria-label="Filtros">
+      <div class="grupo" role="group" aria-label="Área">
+        <span class="grupo-label">Área</span>
+        <button class="chip" data-f="area" data-v="todos" aria-pressed="true">Todas</button>
+        <button class="chip" data-f="area" data-v="Front-end" aria-pressed="false">Front-end</button>
+        <button class="chip" data-f="area" data-v="Full-stack" aria-pressed="false">Full-stack</button>
+        <button class="chip" data-f="area" data-v="Back-end" aria-pressed="false">Back-end</button>
+      </div>
+      <div class="grupo" role="group" aria-label="Nível">
+        <span class="grupo-label">Nível</span>
+        <button class="chip" data-f="nivel" data-v="todos" aria-pressed="true">Todos</button>
+        <button class="chip" data-f="nivel" data-v="Júnior" aria-pressed="false">Júnior</button>
+        <button class="chip" data-f="nivel" data-v="Pleno" aria-pressed="false">Pleno</button>
+        <button class="chip" data-f="nivel" data-v="Sênior" aria-pressed="false">Sênior</button>
+      </div>
+      <div class="grupo" role="group" aria-label="Contrato">
+        <span class="grupo-label">Contrato</span>
+        <button class="chip" data-f="regime" data-v="todos" aria-pressed="true">Todos</button>
+        <button class="chip" data-f="regime" data-v="PJ" aria-pressed="false">PJ</button>
+        <button class="chip" data-f="regime" data-v="CLT" aria-pressed="false">CLT</button>
+      </div>
+      <div class="grupo" role="group" aria-label="Opções">
+        <span class="grupo-label">Mostrar</span>
+        <button class="chip" data-f="remoto" aria-pressed="false">Só 100% remoto</button>
+        <button class="chip" data-f="ocultar" aria-pressed="false">Esconder onde já me candidatei</button>
+      </div>
+      <label class="busca">
+        <span class="grupo-label">Buscar</span>
+        <input id="busca" type="search" placeholder="React, Java, nome da empresa…" autocomplete="off">
+      </label>
+    </section>
+
+    <p class="contagem" id="contagem"></p>
+    <ul class="lista" id="lista"></ul>
+
+    <details class="fechadas" id="fechadas" hidden>
+      <summary id="fechadas-resumo"></summary>
+      <ul class="lista" id="lista-fechadas"></ul>
+    </details>
+
+    <footer class="rodape">
+      Fontes: issues abertas de <a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr/vagas</a>,
+      <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br/vagas</a> e
+      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil/vagas</a>, e portal da Gupy.
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <dialog class="cv" id="cv" aria-labelledby="cv-vaga">
+    <div class="cv-interno">
+      <div class="cv-cab">
+        <div>
+          <div class="eyebrow">Adaptar CV com Gemini</div>
+          <h2 id="cv-vaga"></h2>
+          <div class="empresa" id="cv-empresa"></div>
+        </div>
+        <button class="cv-x" id="cv-fechar" type="button" aria-label="Fechar">×</button>
+      </div>
+      <div id="cv-corpo"></div>
+    </div>
+  </dialog>
+  <div id="impressao"></div>
+
+  <script src="app.js"></script>
+  <script src="cv.js"></script>
+</body>
+</html>

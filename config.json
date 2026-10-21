@@ -1,0 +1,50 @@
+{
+  "maxDiasPublicacao": 45,
+  "diasParaApagarEncerradas": 14,
+  "limiteVagas": 120,
+
+  "github": {
+    "repositorios": [
+      "frontendbr/vagas",
+      "backend-br/vagas",
+      "react-brasil/vagas"
+    ],
+    "paginasPorRepositorio": 2
+  },
+
+  "gupy": {
+    "ativo": true,
+    "termos": [
+      "desenvolvedor front-end",
+      "desenvolvedor frontend",
+      "desenvolvedor full stack",
+      "desenvolvedor fullstack",
+      "desenvolvedor back-end",
+      "desenvolvedor backend",
+      "desenvolvedor react",
+      "desenvolvedor node",
+      "desenvolvedor java",
+      "desenvolvedor python",
+      "desenvolvedor php",
+      "desenvolvedor .net",
+      "programador"
+    ],
+    "limitePorTermo": 100
+  },
+
+  "filtros": {
+    "areas": ["Front-end", "Full-stack", "Back-end"],
+    "aceitarEstagio": false,
+    "estadoPresencial": "PR",
+    "cidadesPresencial": ["Curitiba", "Ponta Grossa", "Londrina", "Maringá", "Cascavel", "São José dos Pinhais", "Pinhais", "Foz do Iguaçu"]
+  },
+
+  "prioridade": {
+    "Júnior": 3,
+    "PJ": 2,
+    "Remoto": 2,
+    "Paraná": 2,
+    "Sênior": -1,
+    "Especialista": -2
+  }
+}
