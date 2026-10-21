@@ -1,6 +1,6 @@
 # Radar de vagas · 21/10/2026
 
-69 vagas novas · 0 encerradas · 94 abertas no total
+0 vagas novas · 0 encerradas · 94 abertas no total
 
 ## Front-end
 
