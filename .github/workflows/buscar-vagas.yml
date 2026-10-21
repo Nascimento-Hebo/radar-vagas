@@ -1,0 +1,64 @@
+name: Buscar vagas
+
+on:
+  schedule:
+    # 10:15 UTC = 7:15 em Brasília, todos os dias
+    - cron: "15 10 * * *"
+  workflow_dispatch: # botão "Run workflow" para rodar na hora
+
+permissions:
+  contents: write
+
+concurrency:
+  group: buscar-vagas
+  cancel-in-progress: false
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    env:
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Testar a lógica
+        run: npm test
+
+      - name: Buscar vagas
+        id: busca
+        run: npm run buscar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Salvar resultado no repositório
+        run: |
+          git config user.name "radar-vagas[bot]"
+          git config user.email "radar-vagas@users.noreply.github.com"
+          git add docs/vagas.json docs/novas.md
+          if git diff --cached --quiet; then
+            echo "Nada mudou hoje."
+          else
+            git commit -m "Vagas de $(TZ=America/Sao_Paulo date +%d/%m/%Y)"
+            git push
+          fi
+
+      # Opcional: e-mail com as vagas novas.
+      # Só roda se você criar os secrets MAIL_USERNAME, MAIL_PASSWORD e MAIL_TO (veja o README).
+      - name: Enviar e-mail com as vagas novas
+        if: ${{ steps.busca.outputs.novas != '0' && env.MAIL_USERNAME != '' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Radar de Vagas <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "Radar de vagas: ${{ steps.busca.outputs.novas }} vagas novas"
+          convert_markdown: true
+          html_body: file://docs/novas.md
