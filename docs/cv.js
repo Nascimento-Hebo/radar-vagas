@@ -50,7 +50,10 @@ async function gemini(partes, { json = false, lerLinks = false } = {}) {
   if (!r.ok) {
     const msg = resp.error?.message || `HTTP ${r.status}`;
     if ((r.status === 400 && /api key/i.test(msg)) || r.status === 401 || r.status === 403) {
-      const e = new Error(`O Google recusou a chave do Gemini (${msg}). Confira se ela foi criada no Google AI Studio e está liberada para a Gemini API.`);
+      const motivo = (resp.error?.details || []).map((d) => d.reason).find(Boolean) || "";
+      const e = new Error(motivo === "ACCESS_TOKEN_TYPE_UNSUPPORTED"
+        ? "O Google ainda não aceita esta chave (erro ACCESS_TOKEN_TYPE_UNSUPPORTED). É um problema conhecido das chaves novas \"AQ.\" em algumas contas: crie uma chave nova no Google AI Studio, de preferência num projeto novo, e cole aqui."
+        : `O Google recusou a chave do Gemini (${msg}). Confira se ela foi criada no Google AI Studio e está liberada para a Gemini API.`);
       e.chave = true;
       throw e;
     }
