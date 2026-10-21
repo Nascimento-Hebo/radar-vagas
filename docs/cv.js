@@ -27,6 +27,8 @@ let cvGerado = null;
 // Guarda também em memória: se o navegador bloquear o localStorage, a chave vale pelo menos até fechar a aba.
 let chaveMemoria = "";
 function chaveGemini() { try { return localStorage.getItem(CHAVE_GEMINI) || chaveMemoria; } catch { return chaveMemoria; } }
+// Mostra só o começo e o tamanho, para conferir se a chave certa foi colada sem expor ela
+const mascarar = (k) => (k ? `${k.slice(0, 4)}… (${k.length} caracteres)` : "nenhuma");
 function guardarChave(k) {
   chaveMemoria = k;
   try { localStorage.setItem(CHAVE_GEMINI, k); return localStorage.getItem(CHAVE_GEMINI) === k; } catch { return false; }
@@ -53,7 +55,8 @@ async function gemini(partes, { json = false, lerLinks = false } = {}) {
       const motivo = (resp.error?.details || []).map((d) => d.reason).find(Boolean) || "";
       const e = new Error(motivo === "ACCESS_TOKEN_TYPE_UNSUPPORTED"
         ? "O Google ainda não aceita esta chave (erro ACCESS_TOKEN_TYPE_UNSUPPORTED). É um problema conhecido das chaves novas \"AQ.\" em algumas contas: crie uma chave nova no Google AI Studio, de preferência num projeto novo, e cole aqui."
-        : `O Google recusou a chave do Gemini (${msg}). Confira se ela foi criada no Google AI Studio e está liberada para a Gemini API.`);
+        : `O Google recusou a chave do Gemini (${msg}${motivo ? `, código ${motivo}` : ""}). Confira se ela foi criada no Google AI Studio e está liberada para a Gemini API.`);
+      e.message += ` Chave salva: ${mascarar(chaveGemini())}.`;
       e.chave = true;
       throw e;
     }
