@@ -215,7 +215,7 @@ function telaChave() {
   const inp = el("input");
   inp.type = "password";
   inp.autocomplete = "off";
-  inp.placeholder = "AIza…";
+  inp.placeholder = "Cole aqui a chave criada no Google AI Studio";
   inp.value = chaveGemini();
   campo.append(el("span", null, "Chave da API do Gemini"), inp);
   s.append(campo);
