@@ -4,7 +4,9 @@
 // 3) o CV vira PDF pela impressão do navegador.
 // A chave do Gemini fica só no localStorage de quem usa; nunca vai para o repositório.
 
-const GEMINI_MODELO = "gemini-flash-latest"; // apelido que o Google aponta sempre para o Flash mais novo
+// Tenta em ordem; se um modelo estiver sobrecarregado (503), sem cota (429) ou indisponível (404), passa para o próximo.
+const GEMINI_MODELOS = ["gemini-flash-latest", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-flash-lite-latest", "gemini-3.5-flash-lite"];
+let modeloBom = 0; // começa pelo último que funcionou
 const GEMINI_URL = (m) => `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
 const CHAVE_GEMINI = "radar-vagas:gemini-chave";
 const CHAVE_PERFIL = "radar-vagas:perfil";
@@ -43,12 +45,18 @@ async function gemini(partes, { json = false, lerLinks = false } = {}) {
     generationConfig: { temperature: 0.3, ...(json ? { responseMimeType: "application/json" } : {}) },
   };
   if (lerLinks) corpo.tools = [{ url_context: {} }];
-  const r = await fetch(GEMINI_URL(GEMINI_MODELO), {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": chaveGemini() },
-    body: JSON.stringify(corpo),
-  });
-  const resp = await r.json().catch(() => ({}));
+  let r, resp;
+  for (let i = 0; i < GEMINI_MODELOS.length; i++) {
+    const n = (modeloBom + i) % GEMINI_MODELOS.length;
+    r = await fetch(GEMINI_URL(GEMINI_MODELOS[n]), {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": chaveGemini() },
+      body: JSON.stringify(corpo),
+    });
+    resp = await r.json().catch(() => ({}));
+    if (r.ok) { modeloBom = n; break; }
+    if (![404, 429, 500, 503].includes(r.status)) break; // erro de chave ou de pedido: outro modelo não resolve
+  }
   if (!r.ok) {
     const msg = resp.error?.message || `HTTP ${r.status}`;
     if ((r.status === 400 && /api key/i.test(msg)) || r.status === 401 || r.status === 403) {
@@ -60,7 +68,8 @@ async function gemini(partes, { json = false, lerLinks = false } = {}) {
       e.chave = true;
       throw e;
     }
-    if (r.status === 429) throw new Error("Limite gratuito do Gemini atingido. Espere um minuto e tente de novo.");
+    if (r.status === 429) throw new Error("Limite gratuito do Gemini atingido em todos os modelos. Espere um minuto e tente de novo.");
+    if (r.status === 503) throw new Error("Todos os modelos do Gemini estão sobrecarregados agora. Espere um pouco e clique em \"Tentar de novo\".");
     throw new Error(`O Gemini respondeu com erro: ${msg}`);
   }
   const texto = (resp.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
