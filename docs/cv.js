@@ -149,9 +149,11 @@ Responda só com JSON neste formato:
   "formacao": [{ "curso": "", "instituicao": "", "periodo": "" }],
   "certificacoes": ["..."],
   "idiomas": ["..."],
-  "ajustes": ["o que você mudou e por quê, em frases curtas"],
+  "mudancas": [{ "secao": "Resumo | Habilidades | Experiência | Projetos | Formação | Outros", "tipo": "reescrito" | "adicionado" | "removido" | "reordenado", "antes": "trecho como estava no CV original (vazio se foi adicionado)", "depois": "trecho como ficou (vazio se foi removido)", "motivo": "por que mudou, ligado à vaga" }],
+  "conferir": ["frases do CV novo que a pessoa precisa confirmar que são verdade (números, tempo de experiência, tecnologias que vieram das respostas)"],
   "lacunas": ["..."]
-}`;
+}
+Em "mudancas", liste TODAS as alterações relevantes em relação ao CV original, uma por item, citando os trechos de verdade.`;
   return lerJson(await gemini([{ text: pedido }, ...partesDoCv(p)], { json: true }));
 }
 
@@ -480,34 +482,98 @@ function folhaCv(p, g) {
 function telaResultado(p, rascunho) {
   const g = cvGerado;
   const c = corpoCv();
+
+  // Duas abas: primeiro o que a IA mudou, depois o CV final (editável) para baixar.
+  const abas = el("div", "cv-abas");
+  abas.setAttribute("role", "tablist");
+  const abaRevisao = el("div", "cv-painel");
+  const abaCv = el("div", "cv-painel");
+  const botoesAba = [["1. O que a IA fez", abaRevisao], ["2. CV final", abaCv]].map(([texto, painel]) => {
+    const b = botao(texto, "chip", () => mostrar(painel));
+    b.setAttribute("role", "tab");
+    abas.append(b);
+    return [b, painel];
+  });
+  function mostrar(painel) {
+    botoesAba.forEach(([b, p]) => { b.setAttribute("aria-pressed", String(p === painel)); b.setAttribute("aria-selected", String(p === painel)); p.hidden = p !== painel; });
+    c.scrollTop = 0;
+    $("cv").querySelector(".cv-interno").scrollIntoView({ block: "start" });
+  }
+  c.append(abas, abaRevisao, abaCv);
+
+  // Aba 1: revisão
+  const mudancas = (Array.isArray(g.mudancas) ? g.mudancas : []).filter((m) => m && (m.antes || m.depois));
+  const resumo = el("p", "cv-nota");
+  resumo.textContent = mudancas.length
+    ? `A IA fez ${mudancas.length} ${mudancas.length === 1 ? "mudança" : "mudanças"} no seu CV para esta vaga. Confira cada uma antes de enviar.`
+    : "A IA não detalhou as mudanças. Compare o CV final com o seu original antes de enviar.";
+  abaRevisao.append(resumo);
+
+  const conferir = lista(g.conferir);
+  if (conferir.length) {
+    const box = el("div", "cv-alerta");
+    box.append(el("strong", null, "Confirme se isto é verdade"));
+    const ul = el("ul");
+    conferir.forEach((t) => ul.append(el("li", null, t)));
+    box.append(ul);
+    abaRevisao.append(box);
+  }
+
+  if (mudancas.length) {
+    const ul = el("ul", "cv-mudancas");
+    const rotuloTipo = { reescrito: "Reescrito", adicionado: "Adicionado", removido: "Removido", reordenado: "Reordenado" };
+    mudancas.forEach((m) => {
+      const li = el("li", "cv-mudanca");
+      const cab = el("div", "cv-mudanca-cab");
+      cab.append(el("span", `selo tipo-${m.tipo}`, rotuloTipo[m.tipo] || "Mudado"), el("span", "cv-secao-nome", m.secao || ""));
+      li.append(cab);
+      if (m.antes) { const d = el("div", "cv-antes"); d.append(el("b", null, "Antes"), el("span", null, m.antes)); li.append(d); }
+      if (m.depois) { const d = el("div", "cv-depois"); d.append(el("b", null, "Depois"), el("span", null, m.depois)); li.append(d); }
+      if (m.motivo) li.append(el("p", "cv-motivo", `Por quê: ${m.motivo}`));
+      ul.append(li);
+    });
+    abaRevisao.append(ul);
+  } else if (lista(g.ajustes).length) {
+    abaRevisao.append(listaReq("O que foi ajustado", lista(g.ajustes)));
+  }
+
+  const la = listaReq("Requisitos que o CV não mostra", lista(g.lacunas));
+  if (la) { la.classList.add("cv-lacunas"); abaRevisao.append(la); }
+
+  const acoesRev = el("div", "cv-acoes");
+  acoesRev.append(
+    botao("Está certo, ver o CV final", "btn primario", () => mostrar(abaCv)),
+    botao("Voltar e editar meus dados", "btn", () => { telaDados(); restaurar(rascunho); }),
+  );
+  abaRevisao.append(acoesRev);
+
+  // Aba 2: CV final, editável
+  abaCv.append(el("p", "cv-nota", "Clique em qualquer texto do CV para corrigir. O PDF sai do jeito que estiver aqui."));
+  const folha = folhaCv(p, g);
+  folha.id = "cv-folha";
+  folha.contentEditable = "true";
+  folha.spellcheck = true;
   const acoes = el("div", "cv-acoes");
   acoes.append(
     botao("Baixar PDF", "btn primario", () => imprimir(p)),
     botao("Copiar texto", "btn", async () => {
-      try { await navigator.clipboard.writeText($("cv-folha").innerText); avisar("Texto do CV copiado."); }
+      try { await navigator.clipboard.writeText(folha.innerText); avisar("Texto do CV copiado."); }
       catch { avisar("Não consegui copiar."); }
     }),
-    botao("Voltar e editar", "btn", () => { telaDados(); restaurar(rascunho); }),
+    botao("Rever mudanças", "btn", () => mostrar(abaRevisao)),
   );
-  c.append(acoes);
+  abaCv.append(acoes, folha);
 
-  const notas = el("div", "cv-req");
-  const aj = listaReq("O que foi ajustado", lista(g.ajustes));
-  const la = listaReq("Requisitos que o CV não mostra", lista(g.lacunas));
-  if (la) la.classList.add("cv-lacunas");
-  [aj, la].forEach((n) => n && notas.append(n));
-  if (notas.childNodes.length) c.append(notas);
-
-  const folha = folhaCv(p, g);
-  folha.id = "cv-folha";
-  c.append(folha);
-  c.append(el("p", "cv-nota", "Leia antes de enviar: a IA pode errar. Se algo estiver errado, volte, ajuste o texto do CV e gere de novo."));
+  mostrar(abaRevisao);
 }
 
 function imprimir(p) {
   const alvo = $("impressao");
   alvo.textContent = "";
-  alvo.append($("cv-folha").cloneNode(true));
+  const copia = $("cv-folha").cloneNode(true);
+  copia.removeAttribute("id");
+  copia.removeAttribute("contenteditable");
+  alvo.append(copia);
   const tituloAntes = document.title;
   document.title = ["CV", p.nome, cvVaga.empresa].filter(Boolean).join(" - "); // vira o nome do arquivo PDF
   document.body.classList.add("imprimindo");

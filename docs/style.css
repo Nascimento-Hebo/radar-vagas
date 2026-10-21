@@ -106,8 +106,8 @@ dialog.cv::backdrop { background: rgb(10 14 24 / .55); }
 .cv-secao h3 { font: 600 16px var(--font-display); margin: 0; }
 .cv-nota { color: var(--muted); font-size: 14px; margin: 0; }
 .cv-req { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px; }
-.cv-req h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
-.cv-req ul { margin: 0; padding-left: 18px; font-size: 14px; display: grid; gap: 2px; }
+.cv-req h4, .cv-painel h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
+.cv-req ul, .cv-painel > div > ul:not(.cv-mudancas) { margin: 0; padding-left: 18px; font-size: 14px; display: grid; gap: 2px; }
 .cv-lacunas h4 { color: #b4541a; }
 .campos { display: grid; align-items: start; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 10px 14px; }
 .campo { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
@@ -124,6 +124,28 @@ dialog.cv::backdrop { background: rgb(10 14 24 / .55); }
 @media (prefers-reduced-motion: reduce) { .cv-spin { animation-duration: 3s; } }
 .cv-erro { border: 1px solid #c2410c; border-radius: 10px; padding: 14px; display: grid; gap: 8px; }
 .cv-erro p { margin: 0; }
+
+.cv-abas { display: flex; flex-wrap: wrap; gap: 8px; }
+.cv-painel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.cv-painel[hidden] { display: none; }
+.cv-alerta { border: 1px solid #c2410c; background: color-mix(in srgb, #c2410c 10%, transparent); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.cv-alerta ul { margin: 6px 0 0; padding-left: 18px; }
+.cv-mudancas { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.cv-mudanca { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
+.cv-mudanca-cab { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cv-secao-nome { color: var(--muted); font-size: 13px; }
+.selo.tipo-adicionado { background: var(--new-soft); color: var(--new); }
+.selo.tipo-removido { background: color-mix(in srgb, #dc2626 14%, transparent); color: #dc2626; }
+.cv-antes, .cv-depois { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 8px; padding: 6px 8px; border-radius: 6px; }
+.cv-antes b, .cv-depois b { font: 11px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.cv-antes { background: color-mix(in srgb, #dc2626 9%, transparent); }
+.cv-antes span { text-decoration: line-through; text-decoration-color: color-mix(in srgb, #dc2626 60%, transparent); color: var(--muted); }
+.cv-antes b { color: #dc2626; }
+.cv-depois { background: var(--new-soft); }
+.cv-depois b { color: var(--new); }
+.cv-motivo { margin: 0; color: var(--muted); font-size: 13px; }
+.folha[contenteditable="true"] { outline: none; cursor: text; }
+.folha[contenteditable="true"]:focus-within { box-shadow: 0 0 0 2px var(--accent); }
 
 /* Folha do CV: sempre papel branco, igual ao PDF */
 .folha { background: #fff; color: #1a1f2e; border-radius: 6px; padding: 32px 36px; font: 13.5px/1.45 var(--font-body); box-shadow: 0 1px 4px rgb(0 0 0 / .15); }
