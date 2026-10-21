@@ -238,16 +238,26 @@ function telaChave() {
   s.append(p);
   const campo = el("label", "campo");
   const inp = el("input");
-  inp.type = "password";
+  // Campo de texto (não "password") para o navegador não preencher sozinho com uma senha salva
+  inp.type = "text";
+  inp.name = "gemini-api-key";
   inp.autocomplete = "off";
+  inp.spellcheck = false;
+  inp.setAttribute("data-1p-ignore", "");
+  inp.setAttribute("data-lpignore", "true");
   inp.placeholder = "Cole aqui a chave criada no Google AI Studio";
-  inp.value = chaveGemini();
-  campo.append(el("span", null, "Chave da API do Gemini"), inp);
+  inp.value = "";
+  campo.append(el("span", null, chaveGemini() ? `Chave da API do Gemini (salva agora: ${mascarar(chaveGemini())})` : "Chave da API do Gemini"), inp);
   s.append(campo);
   const acoes = el("div", "grupo");
   acoes.append(botao("Salvar e continuar", "btn primario", () => {
     const k = inp.value.trim().replace(/^["']|["']$/g, "");
     if (!k) { inp.focus(); return; }
+    if (k.length < 30 || /\s/.test(k)) {
+      avisar("Isso não parece uma chave do Gemini (ela tem uns 40 a 60 caracteres, sem espaços). Copie de novo no AI Studio.");
+      inp.focus();
+      return;
+    }
     if (!guardarChave(k)) avisar("O navegador não deixou salvar a chave: ela vale só até fechar esta aba.");
     analises.clear();
     etapaVaga();
