@@ -24,7 +24,13 @@ let cvVaga = null;
 let cvAnalise = null;
 let cvGerado = null;
 
-function chaveGemini() { try { return localStorage.getItem(CHAVE_GEMINI) || ""; } catch { return ""; } }
+// Guarda também em memória: se o navegador bloquear o localStorage, a chave vale pelo menos até fechar a aba.
+let chaveMemoria = "";
+function chaveGemini() { try { return localStorage.getItem(CHAVE_GEMINI) || chaveMemoria; } catch { return chaveMemoria; } }
+function guardarChave(k) {
+  chaveMemoria = k;
+  try { localStorage.setItem(CHAVE_GEMINI, k); return localStorage.getItem(CHAVE_GEMINI) === k; } catch { return false; }
+}
 function perfil() { return ler(CHAVE_PERFIL, {}); }
 
 // ---------- Gemini ----------
@@ -43,8 +49,11 @@ async function gemini(partes, { json = false, lerLinks = false } = {}) {
   const resp = await r.json().catch(() => ({}));
   if (!r.ok) {
     const msg = resp.error?.message || `HTTP ${r.status}`;
-    if (r.status === 400 && /api key/i.test(msg)) throw new Error("A chave do Gemini é inválida. Clique em \"Trocar chave\" e cole de novo.");
-    if (r.status === 403) throw new Error("A chave do Gemini não tem permissão. Gere outra no Google AI Studio.");
+    if ((r.status === 400 && /api key/i.test(msg)) || r.status === 401 || r.status === 403) {
+      const e = new Error(`O Google recusou a chave do Gemini (${msg}). Confira se ela foi criada no Google AI Studio e está liberada para a Gemini API.`);
+      e.chave = true;
+      throw e;
+    }
     if (r.status === 429) throw new Error("Limite gratuito do Gemini atingido. Espere um minuto e tente de novo.");
     throw new Error(`O Gemini respondeu com erro: ${msg}`);
   }
@@ -197,7 +206,8 @@ function falha(e, repetir) {
   const box = el("div", "cv-erro");
   box.append(el("strong", null, "Não deu certo"), el("p", null, e.message || String(e)));
   const acoes = el("div", "grupo");
-  acoes.append(botao("Tentar de novo", "btn primario", repetir), botao("Trocar chave", "btn", telaChave));
+  acoes.append(botao("Tentar de novo", "btn primario", repetir));
+  if (e.chave) acoes.append(botao("Trocar chave", "btn", telaChave)); // só oferece trocar quando o problema é a chave
   box.append(acoes);
   c.append(box);
 }
@@ -221,14 +231,14 @@ function telaChave() {
   s.append(campo);
   const acoes = el("div", "grupo");
   acoes.append(botao("Salvar e continuar", "btn primario", () => {
-    const k = inp.value.trim();
+    const k = inp.value.trim().replace(/^["']|["']$/g, "");
     if (!k) { inp.focus(); return; }
-    try { localStorage.setItem(CHAVE_GEMINI, k); } catch {}
-    if (!chaveGemini()) { avisar("Este navegador não deixou salvar a chave."); return; }
+    if (!guardarChave(k)) avisar("O navegador não deixou salvar a chave: ela vale só até fechar esta aba.");
     analises.clear();
     etapaVaga();
   }));
   if (chaveGemini()) acoes.append(botao("Apagar chave", "btn", () => {
+    chaveMemoria = "";
     try { localStorage.removeItem(CHAVE_GEMINI); } catch {}
     inp.value = "";
     avisar("Chave apagada deste navegador.");
