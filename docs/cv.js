@@ -25,6 +25,9 @@ const analises = new Map(); // id da vaga -> resposta da etapa 1 (evita pagar du
 let cvVaga = null;
 let cvAnalise = null;
 let cvGerado = null;
+let cvHistId = null; // entrada do histórico do CV que está aberto (para guardar carta e entrevista junto)
+const CHAVE_HISTORICO = "radar-vagas:cvs-gerados";
+const MAX_HISTORICO = 15;
 
 // Guarda também em memória: se o navegador bloquear o localStorage, a chave vale pelo menos até fechar a aba.
 let chaveMemoria = "";
@@ -200,6 +203,7 @@ function abrirAdaptador(v) {
   cvVaga = v;
   cvAnalise = null;
   cvGerado = null;
+  cvHistId = null;
   $("cv-vaga").textContent = v.titulo;
   $("cv-empresa").textContent = [v.empresa, v.local].filter(Boolean).join(" · ");
   const d = $("cv");
@@ -478,7 +482,54 @@ async function gerar() {
     falha(e, () => { telaDados(); restaurar(rascunho); });
     return;
   }
+  if (cvGerado.textoOriginal && !p.cvTexto?.trim()) {
+    salvar(CHAVE_PERFIL, { ...perfil(), cvExtraido: String(cvGerado.textoOriginal) });
+  }
+  if (typeof atualizarCompatibilidade === "function") atualizarCompatibilidade(); // em app.js
+  guardarNoHistorico(p);
   telaResultado(p, rascunho);
+}
+
+function guardarNoHistorico(p) {
+  const { cvPdf, ...perfilLeve } = p; // o PDF não vai para o histórico (pesa demais)
+  const entrada = {
+    id: `cv-${Date.now()}`,
+    data: new Date().toISOString().slice(0, 10),
+    vaga: { id: cvVaga.id, titulo: cvVaga.titulo, empresa: cvVaga.empresa || "", local: cvVaga.local || "", link: cvVaga.link, externa: Boolean(cvVaga.externa) },
+    analise: cvAnalise,
+    perfil: perfilLeve,
+    cv: cvGerado,
+    extras: {},
+  };
+  cvHistId = entrada.id;
+  const lista = [entrada, ...ler(CHAVE_HISTORICO, [])].slice(0, MAX_HISTORICO);
+  salvar(CHAVE_HISTORICO, lista);
+  if (!ler(CHAVE_HISTORICO, []).some((x) => x.id === entrada.id)) {
+    // localStorage cheio: guarda só os mais recentes
+    salvar(CHAVE_HISTORICO, lista.slice(0, 5));
+  }
+}
+
+function atualizarHistorico(mudanca) {
+  if (!cvHistId) return;
+  const lista = ler(CHAVE_HISTORICO, []);
+  const h = lista.find((x) => x.id === cvHistId);
+  if (!h) return;
+  Object.assign(h, mudanca(h) || {});
+  salvar(CHAVE_HISTORICO, lista);
+}
+
+// Reabre um CV gerado antes (vem da "Minha área")
+function abrirHistorico(h) {
+  cvVaga = h.vaga;
+  cvAnalise = h.analise;
+  cvGerado = h.cv;
+  cvHistId = h.id;
+  $("cv-vaga").textContent = h.vaga.titulo;
+  $("cv-empresa").textContent = [h.vaga.empresa, h.vaga.local].filter(Boolean).join(" · ");
+  const d = $("cv");
+  if (!d.open) d.showModal();
+  telaResultado({ ...perfil(), ...h.perfil }, { respostas: [] });
 }
 
 function restaurar(rascunho) {
@@ -612,7 +663,9 @@ function telaResultado(p, rascunho) {
   const abaMudou = el("div", "cv-painel");
   const abaCompara = el("div", "cv-painel");
   const abaCv = el("div", "cv-painel");
-  const botoesAba = [["1. O que a IA mudou", abaMudou], ["2. Antes e depois", abaCompara], ["3. CV final", abaCv]].map(([texto, painel]) => {
+  const abaCarta = el("div", "cv-painel");
+  const abaEntrevista = el("div", "cv-painel");
+  const botoesAba = [["1. O que a IA mudou", abaMudou], ["2. Antes e depois", abaCompara], ["3. CV final", abaCv], ["4. Carta e mensagens", abaCarta], ["5. Preparar entrevista", abaEntrevista]].map(([texto, painel]) => {
     const b = botao(texto, "chip", () => mostrar(painel));
     b.setAttribute("role", "tab");
     abas.append(b);
@@ -621,9 +674,11 @@ function telaResultado(p, rascunho) {
   function mostrar(painel) {
     botoesAba.forEach(([b, pn]) => { b.setAttribute("aria-pressed", String(pn === painel)); b.setAttribute("aria-selected", String(pn === painel)); pn.hidden = pn !== painel; });
     if (painel === abaCompara) montarComparacao();
+    if (painel === abaCarta) montarExtra(abaCarta, "carta", p);
+    if (painel === abaEntrevista) montarExtra(abaEntrevista, "entrevista", p);
     $("cv").querySelector(".cv-interno").scrollIntoView({ block: "start" });
   }
-  c.append(abas, abaMudou, abaCompara, abaCv);
+  c.append(abas, abaMudou, abaCompara, abaCv, abaCarta, abaEntrevista);
 
   // ---- Aba 1: o que mudou ----
   const mudancas = (Array.isArray(g.mudancas) ? g.mudancas : []).filter((m) => m && (m.antes || m.depois));
@@ -740,6 +795,137 @@ function telaResultado(p, rascunho) {
   abaCv.append(acoes, lugarFolha);
 
   mostrar(abaMudou);
+}
+
+// ---------- Carta de apresentação, mensagens e preparação para entrevista ----------
+
+const EXTRAS = {
+  carta: {
+    titulo: "Carta e mensagens",
+    explica: "A IA escreve uma carta de apresentação curta, uma mensagem para o recrutador no LinkedIn e um e-mail de follow-up, usando o CV adaptado e a vaga.",
+    botao: "Escrever carta e mensagens",
+    pedido: (v, a, g, p) => `Escreva, em português do Brasil, textos para a candidatura de ${p.nome} à vaga "${v.titulo}"${v.empresa ? ` na ${v.empresa}` : ""}.
+Resumo da vaga: ${a?.resumo || ""}
+Requisitos: ${(a?.obrigatorios || []).join("; ")}
+CV adaptado (JSON): ${JSON.stringify({ titulo: g.titulo, resumo: g.resumo, habilidades: g.habilidades, experiencias: g.experiencias, projetos: g.projetos })}
+
+Regras: tom profissional e humano, sem exageros, sem inventar nada que não esteja no CV. Primeira pessoa.
+Responda só com JSON:
+{
+  "carta": "carta de apresentação com 3 parágrafos curtos (no máximo 180 palavras)",
+  "linkedin": "mensagem para o recrutador no LinkedIn, no máximo 300 caracteres",
+  "followup": "e-mail curto de follow-up para mandar 7 dias depois, com assunto na primeira linha"
+}`,
+    mostrar: (box, r) => {
+      [["Carta de apresentação", r.carta], ["Mensagem para o recrutador (LinkedIn)", r.linkedin], ["E-mail de follow-up", r.followup]].forEach(([titulo, texto]) => {
+        if (!texto) return;
+        box.append(blocoCopiavel(titulo, String(texto)));
+      });
+    },
+  },
+  entrevista: {
+    titulo: "Preparar entrevista",
+    explica: "A IA lista as perguntas mais prováveis para esta vaga e sugere como responder com base no seu CV. Treine em voz alta antes da entrevista.",
+    botao: "Gerar perguntas e respostas",
+    pedido: (v, a, g, p) => `Prepare ${p.nome} para a entrevista da vaga "${v.titulo}"${v.empresa ? ` na ${v.empresa}` : ""}, em português do Brasil.
+Requisitos: ${(a?.obrigatorios || []).join("; ")}. Desejáveis: ${(a?.desejaveis || []).join("; ")}.
+Pontos fracos (requisitos não comprovados): ${(g.lacunas || []).join("; ") || "nenhum"}
+CV (JSON): ${JSON.stringify({ resumo: g.resumo, habilidades: g.habilidades, experiencias: g.experiencias, projetos: g.projetos, formacao: g.formacao })}
+
+Responda só com JSON:
+{
+  "perguntas": [{ "pergunta": "", "tipo": "técnica" | "comportamental" | "sobre a vaga", "porque": "por que costumam perguntar isso", "comoResponder": "roteiro curto de resposta usando experiências reais do CV (método STAR quando for comportamental)" }],
+  "lacunas": [{ "tema": "requisito que a pessoa não tem", "comoLidar": "como responder com honestidade e mostrar vontade de aprender" }],
+  "perguntasParaFazer": ["perguntas inteligentes para a pessoa fazer ao final da entrevista"]
+}
+Entre 6 e 8 perguntas, misturando técnicas e comportamentais. Não invente experiências.`,
+    mostrar: (box, r) => {
+      const ul = el("ol", "entrevista");
+      (r.perguntas || []).forEach((q) => {
+        const li = el("li", "entrevista-item");
+        const d = el("details");
+        const sm = el("summary");
+        sm.append(el("span", "selo", q.tipo || "pergunta"), el("strong", null, q.pergunta));
+        d.append(sm);
+        if (q.porque) d.append(el("p", "cv-nota", `Por que perguntam: ${q.porque}`));
+        if (q.comoResponder) { const r2 = el("div", "cv-depois"); r2.append(el("b", null, "Como responder"), el("span", null, q.comoResponder)); d.append(r2); }
+        li.append(d);
+        ul.append(li);
+      });
+      if ((r.perguntas || []).length) { box.append(el("h4", null, "Perguntas prováveis")); box.append(ul); }
+      if ((r.lacunas || []).length) {
+        const w = el("div", "cv-alerta");
+        w.append(el("strong", null, "Se perguntarem do que você ainda não tem"));
+        const l = el("ul");
+        r.lacunas.forEach((x) => l.append(el("li", null, `${x.tema}: ${x.comoLidar}`)));
+        w.append(l);
+        box.append(w);
+      }
+      const fazer = lista(r.perguntasParaFazer);
+      if (fazer.length) box.append(listaReq("Perguntas para você fazer no final", fazer));
+    },
+  },
+};
+
+function blocoCopiavel(titulo, texto) {
+  const b = el("section", "copiavel");
+  const cab = el("div", "copiavel-cab");
+  cab.append(el("h4", null, titulo));
+  const copiar = botao("Copiar", "btn pequeno", async () => {
+    try { await navigator.clipboard.writeText(area.value); avisar(`${titulo} copiada.`); }
+    catch { area.select(); avisar("Selecionei o texto: use Ctrl+C."); }
+  });
+  cab.append(copiar);
+  const area = el("textarea", "copiavel-texto");
+  area.value = texto;
+  area.rows = Math.min(14, Math.max(3, Math.ceil(texto.length / 80) + texto.split("\n").length));
+  area.setAttribute("aria-label", titulo);
+  b.append(cab, area);
+  return b;
+}
+
+async function montarExtra(box, tipo, p) {
+  const cfg = EXTRAS[tipo];
+  const salvo = cvHistId ? ler(CHAVE_HISTORICO, []).find((x) => x.id === cvHistId)?.extras?.[tipo] : null;
+  box.textContent = "";
+  if (salvo) {
+    box.append(el("p", "cv-nota", cfg.explica));
+    cfg.mostrar(box, salvo);
+    const acoes = el("div", "cv-acoes");
+    acoes.append(botao("Gerar de novo", "btn", () => gerarExtra(box, tipo, p)));
+    box.append(acoes);
+    return;
+  }
+  box.append(el("p", "cv-nota", cfg.explica));
+  const acoes = el("div", "cv-acoes");
+  acoes.append(botao(cfg.botao, "btn primario", () => gerarExtra(box, tipo, p)));
+  box.append(acoes);
+}
+
+async function gerarExtra(box, tipo, p) {
+  const cfg = EXTRAS[tipo];
+  box.textContent = "";
+  const carregandoEl = el("p", "cv-carregando");
+  carregandoEl.append(el("span", "cv-spin"), document.createTextNode("A IA está escrevendo…"));
+  box.append(carregandoEl);
+  try {
+    const r = lerJson(await gemini([{ text: cfg.pedido(cvVaga, cvAnalise, cvGerado, p) }], { json: true }));
+    atualizarHistorico((h) => ({ extras: { ...(h.extras || {}), [tipo]: r } }));
+    box.textContent = "";
+    box.append(el("p", "cv-nota", cfg.explica));
+    cfg.mostrar(box, r);
+    const acoes = el("div", "cv-acoes");
+    acoes.append(botao("Gerar de novo", "btn", () => gerarExtra(box, tipo, p)));
+    box.append(acoes);
+  } catch (e) {
+    box.textContent = "";
+    const erroBox = el("div", "cv-erro");
+    erroBox.append(el("strong", null, "Não deu certo"), el("p", null, e.message || String(e)));
+    const acoes = el("div", "grupo");
+    acoes.append(botao("Tentar de novo", "btn primario", () => gerarExtra(box, tipo, p)));
+    erroBox.append(acoes);
+    box.append(erroBox);
+  }
 }
 
 function imprimir(p) {

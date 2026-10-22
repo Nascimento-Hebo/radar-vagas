@@ -4,28 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Radar de Vagas · OH Tech</title>
-  <meta name="description" content="Vagas abertas de front-end, full-stack e back-end, atualizadas todo dia, com adaptador de CV por IA. Um projeto OH Tech.">
+  <meta name="description" content="Vagas de front-end, full-stack e back-end atualizadas todo dia, com CV adaptado por IA para cada vaga. Um projeto OH Tech Technology.">
   <meta name="theme-color" content="#0a0f1d">
+  <!-- Tema antes de pintar a página, para não piscar -->
+  <script>
+    try { var t = JSON.parse(localStorage.getItem("radar-vagas:tema")); } catch (e) {}
+    document.documentElement.dataset.tema = t || (matchMedia("(prefers-color-scheme: light)").matches ? "claro" : "escuro");
+  </script>
   <link rel="icon" type="image/png" href="oh-tech-icone.png">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <!-- Cartão de compartilhamento (WhatsApp, LinkedIn, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OH Tech Technology">
+  <meta property="og:title" content="Radar de Vagas · OH Tech">
+  <meta property="og:description" content="Vagas de tecnologia atualizadas todo dia e CV adaptado por IA para cada vaga.">
+  <meta property="og:url" content="https://nascimento-hebo.github.io/radar-vagas/">
+  <meta property="og:image" content="https://nascimento-hebo.github.io/radar-vagas/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
+  <a class="pular" href="#vagas">Pular para as vagas</a>
   <header class="topo-site">
     <div class="topo-dentro">
       <a class="marca" href="./" aria-label="OH Tech Technology — Radar de Vagas">
-        <img src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
+        <img class="logo-escuro" src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
+        <img class="logo-claro" src="oh-tech-logo-claro.png" alt="" width="600" height="171">
       </a>
-      <div class="meta-curta" id="meta-curta" title="Candidaturas marcadas nesta semana">
-        <span class="meta-texto"><strong id="meta-feitas">0</strong> de <span id="meta-total">5</span> candidaturas nesta semana</span>
-        <span class="meta-barra" aria-hidden="true"><span id="meta-fill"></span></span>
+      <div class="topo-acoes">
+        <div class="meta-curta" id="meta-curta" title="Candidaturas marcadas nesta semana">
+          <span class="meta-texto"><strong id="meta-feitas">0</strong> de <span id="meta-total">5</span> nesta semana</span>
+          <span class="meta-barra" aria-hidden="true"><span id="meta-fill"></span></span>
+        </div>
+        <button type="button" class="btn topo-btn" id="abrir-painel">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          Minha área <span class="contador" id="abrir-painel-n"></span>
+        </button>
+        <button type="button" class="icone-btn" id="tema"></button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="conteudo">
     <section class="busca-area">
       <div class="busca-principal">
         <div class="eyebrow"><span class="pulso" aria-hidden="true"></span> Radar ativo · atualizado todo dia às 7:15</div>
@@ -81,7 +108,16 @@
             </select>
           </label>
           <label class="marcar"><input type="checkbox" id="f-remoto"> Só 100% remoto</label>
+          <label class="marcar"><input type="checkbox" id="f-salario"> Só com salário</label>
           <label class="marcar"><input type="checkbox" id="f-ocultar"> Esconder as que já me candidatei</label>
+          <label class="seletor ordem">Ordenar
+            <select id="f-ordem">
+              <option value="relevancia">Mais relevantes</option>
+              <option value="compatibilidade">Mais compatíveis com meu CV</option>
+              <option value="recentes">Mais recentes</option>
+              <option value="salario">Maior salário</option>
+            </select>
+          </label>
         </div>
 
         <div class="atalhos" role="group" aria-label="Buscas rápidas">
@@ -122,7 +158,9 @@
       </div>
     </section>
 
-    <div class="resultado">
+    <div class="avisos" id="avisos" aria-live="polite"></div>
+
+    <div class="resultado" id="vagas" tabindex="-1">
       <p class="contagem" id="contagem"></p>
       <button type="button" class="limpar" id="limpar" hidden>Limpar filtros</button>
     </div>
@@ -139,7 +177,8 @@
       <span>Radar de Vagas · <strong>OH Tech Technology</strong> · Vagas do GitHub
       (<a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr</a>,
       <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br</a>,
-      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil</a>) e da Gupy, atualizadas todo dia às 7:15.</span>
+      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil</a> e outros), da Gupy e do Greenhouse, atualizadas todo dia às 7:15.
+      <br>Privacidade: seu CV, suas candidaturas e sua chave do Gemini ficam só neste navegador. Ao usar a IA, o texto da vaga e do CV vai para o Google (Gemini).</span>
     </footer>
   </main>
 
@@ -160,7 +199,22 @@
   </dialog>
   <div id="impressao"></div>
 
-  <script src="app.js?v=10"></script>
-  <script src="cv.js?v=10"></script>
+  <dialog class="painel" id="painel" aria-labelledby="painel-titulo">
+    <div class="painel-dentro">
+      <div class="painel-topo">
+        <h2 id="painel-titulo">Minha área</h2>
+        <button class="cv-x" id="painel-fechar" type="button" aria-label="Fechar">×</button>
+      </div>
+      <div class="painel-abas" role="tablist" aria-label="Seções da minha área">
+        <button type="button" class="painel-aba" role="tab" data-aba="candidaturas">Candidaturas <span class="contador" id="painel-n-cand"></span></button>
+        <button type="button" class="painel-aba" role="tab" data-aba="cvs">CVs gerados <span class="contador" id="painel-n-cvs"></span></button>
+        <button type="button" class="painel-aba" role="tab" data-aba="dados">Meus dados</button>
+      </div>
+      <div class="painel-corpo" id="painel-corpo" role="tabpanel"></div>
+    </div>
+  </dialog>
+
+  <script src="app.js?v=11"></script>
+  <script src="cv.js?v=11"></script>
 </body>
 </html>
