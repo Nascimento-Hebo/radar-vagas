@@ -1,6 +1,6 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=21";
+import "./firebase.js?v=22";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
