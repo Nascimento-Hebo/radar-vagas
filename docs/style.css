@@ -321,7 +321,12 @@ dialog.cv::backdrop { background: var(--veu); backdrop-filter: blur(6px); }
   background: #fff; color: var(--tinta); border-radius: 6px; padding: 34px 38px; font: 13.5px/1.45 var(--font-body); box-shadow: 0 1px 4px rgb(0 0 0 / .15); }
 .folha h1 { font: 700 26px/1.1 var(--font-display); margin: 0; color: #111; }
 .folha-titulo { font-weight: 600; color: var(--cor); margin-top: 4px; }
-.folha .folha-contato { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--suave); font-size: 12.5px; overflow-wrap: anywhere; }
+.folha .folha-contato { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--suave); font-size: 12.5px; overflow-wrap: anywhere; }
+.folha-contato li { display: inline-flex; align-items: center; gap: 5px; }
+.folha-contato a { color: inherit; text-decoration: none; }
+.folha-contato a:hover { text-decoration: underline; }
+.folha-ic { width: 13px; height: 13px; flex: none; fill: none; stroke: var(--cor); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.modelo-executivo .folha-ic { stroke: #a9c3ff; }
 .folha h2 { font: 600 12px var(--font-body); text-transform: uppercase; letter-spacing: .1em; color: var(--cor); border-bottom: 1px solid var(--linha); padding-bottom: 3px; margin: 16px 0 6px; }
 .folha p { margin: 0 0 4px; }
 .folha ul { margin: 2px 0 8px; padding-left: 18px; }
