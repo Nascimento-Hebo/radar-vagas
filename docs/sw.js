@@ -3,9 +3,9 @@
 // vagas.json: tenta a rede primeiro (vagas do dia) e cai para a última cópia guardada.
 // Chamadas a outros sites (Gemini, GitHub, fontes) nunca passam por aqui.
 
-const VERSAO = "radar-v11"; // trocar junto com o ?v= do index.html
+const VERSAO = "radar-v12"; // trocar junto com o ?v= do index.html
 const ARQUIVOS = [
-  "./", "index.html", "style.css?v=11", "app.js?v=11", "cv.js?v=11",
+  "./", "index.html", "style.css?v=12", "app.js?v=12", "cv.js?v=12",
   "oh-tech-logo.png", "oh-tech-logo-claro.png", "oh-tech-icone.png", "icone-192.png", "icone-512.png", "manifest.webmanifest",
 ];
 

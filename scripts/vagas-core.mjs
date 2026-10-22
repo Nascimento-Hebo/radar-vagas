@@ -174,10 +174,21 @@ export function extrairSalario(texto) {
 
 /* ---------- Filtro e prioridade ---------- */
 
+const RE_EXTERIOR = /argentina|m[eé]xico|chile|col[oô]mbia|peru|uruguai|portugal|espanha|europa|europe|\beua\b|\busa\b|estados unidos|united states|canad[aá]|reino unido|\buk\b|alemanha|germany|india/i;
+const RE_NO_BRASIL = /brasil|brazil|s[aã]o paulo|rio de janeiro|curitiba|belo horizonte|porto alegre|bras[ií]lia|recife|fortaleza|salvador|florian[oó]polis|campinas|goi[aâ]nia|\b(sp|rj|mg|pr|sc|rs|df|ba|pe|ce|go)\b/i;
+
+// Vaga só para quem mora fora do Brasil (ex.: "Cidade do México", "somente EUA/Canadá")
+export function soNoExterior(v) {
+  const local = String(v.local || "");
+  return RE_EXTERIOR.test(local) && !RE_NO_BRASIL.test(local);
+}
+
 export function aceitaVaga(v, filtros) {
   if (!v.area || !filtros.areas.includes(v.area)) return false;
+  if (soNoExterior(v)) return false;
   if (!filtros.aceitarEstagio && v.nivel === "Estágio") return false;
   if (v.modelo === "Remoto") return true;
+  if (filtros.aceitarQualquerLocal) return true; // a pessoa filtra o lugar na página
   // Híbrido, presencial ou não informado: só se for no estado escolhido
   const local = SEM_ACENTO([v.local, v.titulo, v.textoLocal].join(" "));
   const uf = SEM_ACENTO(filtros.estadoPresencial);

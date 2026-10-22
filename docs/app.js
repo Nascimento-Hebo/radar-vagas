@@ -1,7 +1,7 @@
 // Página do Radar de Vagas (OH Tech): lê vagas.json e mostra com busca, filtros, radar e a área pessoal.
 // Candidaturas, meta da semana, CVs gerados, perfil e tema ficam só no navegador de quem usa (localStorage).
 
-const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", remoto: false, ocultar: false, salario: false, texto: "", ordem: "relevancia" };
+const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", local: "todos", ocultar: false, salario: false, texto: "", ordem: "relevancia" };
 const filtros = { ...FILTROS_PADRAO };
 let dados = { vagas: [] };
 let carregado = false;
@@ -71,7 +71,7 @@ function passa(v) {
   if (filtros.area !== "todos" && v.area !== filtros.area) return false;
   if (filtros.nivel !== "todos" && !(v.nivel || "").includes(filtros.nivel)) return false;
   if (filtros.regime !== "todos" && !(v.regime || "").includes(filtros.regime)) return false;
-  if (filtros.remoto && v.modelo !== "Remoto") return false;
+  if (filtros.local !== "todos" && !noLocal(v, filtros.local)) return false;
   if (filtros.ocultar && candidaturas[v.id]) return false;
   if (filtros.salario && !v.salario) return false;
   if (filtros.texto) {
@@ -263,8 +263,8 @@ mostrarDica(0);
 // ---------- Buscas rápidas ----------
 
 const ATALHOS = [
-  ["Júnior remoto", { nivel: "Júnior", remoto: true }],
-  ["PJ remoto", { regime: "PJ", remoto: true }],
+  ["Júnior remoto", { nivel: "Júnior", local: "remoto" }],
+  ["PJ remoto", { regime: "PJ", local: "remoto" }],
   ["React", { texto: "React" }],
   ["Node.js", { texto: "Node" }],
   ["Java", { texto: "Java" }],
@@ -360,6 +360,91 @@ function render() {
   renderAtalhos();
   renderAvisos();
   renderRadar(vagas.filter((v) => estado(v) !== "encerrada"));
+}
+
+// ---------- Local da vaga: estados e cidades lidos do texto de "local" ----------
+
+const ESTADOS = {
+  AC: "Acre", AL: "Alagoas", AP: "Amapá", AM: "Amazonas", BA: "Bahia", CE: "Ceará", DF: "Distrito Federal", ES: "Espírito Santo",
+  GO: "Goiás", MA: "Maranhão", MT: "Mato Grosso", MS: "Mato Grosso do Sul", MG: "Minas Gerais", PA: "Pará", PB: "Paraíba",
+  PR: "Paraná", PE: "Pernambuco", PI: "Piauí", RJ: "Rio de Janeiro", RN: "Rio Grande do Norte", RS: "Rio Grande do Sul",
+  RO: "Rondônia", RR: "Roraima", SC: "Santa Catarina", SP: "São Paulo", SE: "Sergipe", TO: "Tocantins",
+};
+// Cidades que costumam aparecer sozinhas, sem o estado
+const CAPITAIS = { "sao paulo": "SP", "rio de janeiro": "RJ", "belo horizonte": "MG", "curitiba": "PR", "porto alegre": "RS", "brasilia": "DF", "recife": "PE", "fortaleza": "CE", "salvador": "BA", "florianopolis": "SC", "goiania": "GO", "campinas": "SP", "manaus": "AM", "belem": "PA", "vitoria": "ES", "joinville": "SC", "londrina": "PR", "maringa": "PR", "ribeirao preto": "SP", "uberlandia": "MG", "sorocaba": "SP", "barueri": "SP", "sao jose dos campos": "SP" };
+const NOME_UF = Object.fromEntries(Object.entries(ESTADOS).map(([uf, nome]) => [semAcento(nome), uf]));
+const NAO_CIDADE = /^(brasil|brazil|remoto|remote|hibrido|presencial|home office|anywhere|latam|todo o brasil|tempo determinado.*|\d.*)$/;
+const cacheLocal = new Map();
+
+function infoLocal(v) {
+  if (cacheLocal.has(v.id)) return cacheLocal.get(v.id);
+  const texto = String(v.local || "");
+  const ufs = new Set();
+  const cidades = new Map(); // nome bonito -> uf
+  for (const m of texto.matchAll(/\b([A-Z]{2})\b/g)) if (ESTADOS[m[1]]) ufs.add(m[1]);
+  const partes = texto.split(/\s*(?:,|;|\/|\||\bou\b|\be\b|\s-\s)\s*/i).map((p) => p.trim()).filter(Boolean);
+  partes.forEach((p, i) => {
+    const n = semAcento(p);
+    if (NOME_UF[n]) {
+      // "São Paulo - São Paulo": a parte anterior é a cidade desse estado
+      ufs.add(NOME_UF[n]);
+      const ant = partes[i - 1];
+      if (ant && !NOME_UF[semAcento(ant)] && !ESTADOS[ant] && !NAO_CIDADE.test(semAcento(ant))) {
+        const ufAnt = CAPITAIS[semAcento(ant)] || NOME_UF[n]; // "Belo Horizonte ou São Paulo": BH continua em MG
+        ufs.add(ufAnt);
+        cidades.set(ant, ufAnt);
+      }
+      return;
+    }
+    if (ESTADOS[p] || NAO_CIDADE.test(n) || p.length < 3) return;
+    const uf = CAPITAIS[n];
+    if (uf) { ufs.add(uf); cidades.set(p, uf); }
+  });
+  // "São Paulo" sozinho também é a cidade
+  for (const [nome, uf] of Object.entries({ "São Paulo": "SP", "Rio de Janeiro": "RJ" })) {
+    if (ufs.has(uf) && semAcento(texto).includes(semAcento(nome)) && ![...cidades.keys()].some((c) => semAcento(c) === semAcento(nome))) cidades.set(nome, uf);
+  }
+  const r = { ufs, cidades };
+  cacheLocal.set(v.id, r);
+  return r;
+}
+
+function noLocal(v, filtro) {
+  if (filtro === "remoto") return v.modelo === "Remoto";
+  const [tipo, valor] = filtro.split(":");
+  const info = infoLocal(v);
+  if (tipo === "uf") return info.ufs.has(valor);
+  if (tipo === "cidade") return [...info.cidades.keys()].some((c) => semAcento(c) === valor);
+  return true;
+}
+
+// Monta a lista "Local" com o que existe nas vagas abertas, com a quantidade de cada uma
+function montarLocais() {
+  const abertas = dados.vagas.filter((v) => v.status !== "encerrada");
+  const porUf = {}, porCidade = {};
+  for (const v of abertas) {
+    const info = infoLocal(v);
+    info.ufs.forEach((uf) => { porUf[uf] = (porUf[uf] || 0) + 1; });
+    info.cidades.forEach((uf, nome) => {
+      const k = semAcento(nome);
+      porCidade[k] = porCidade[k] || { nome, uf, n: 0 };
+      porCidade[k].n++;
+    });
+  }
+  const sel = $("f-local");
+  sel.textContent = "";
+  const opcao = (valor, texto) => { const o = el("option", null, texto); o.value = valor; return o; };
+  sel.append(opcao("todos", "Qualquer lugar"), opcao("remoto", `100% remoto (${abertas.filter((v) => v.modelo === "Remoto").length})`));
+  const grupoUf = el("optgroup");
+  grupoUf.label = "Estado (presencial ou híbrido)";
+  Object.entries(porUf).sort((a, b) => b[1] - a[1]).forEach(([uf, n]) => grupoUf.append(opcao(`uf:${uf}`, `${ESTADOS[uf]} (${n})`)));
+  if (grupoUf.children.length) sel.append(grupoUf);
+  const grupoCidade = el("optgroup");
+  grupoCidade.label = "Cidade";
+  Object.entries(porCidade).sort((a, b) => b[1].n - a[1].n || a[1].nome.localeCompare(b[1].nome)).forEach(([k, c]) => grupoCidade.append(opcao(`cidade:${k}`, `${c.nome} - ${c.uf} (${c.n})`)));
+  if (grupoCidade.children.length) sel.append(grupoCidade);
+  if (![...sel.options].some((o) => o.value === filtros.local)) filtros.local = "todos";
+  sel.value = filtros.local;
 }
 
 // ---------- Compatibilidade com o CV (calculada aqui, sem gastar IA) ----------
@@ -721,7 +806,7 @@ function sincronizarControles() {
   document.querySelectorAll(".aba").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === filtros.area)));
   $("f-nivel").value = filtros.nivel;
   $("f-regime").value = filtros.regime;
-  $("f-remoto").checked = filtros.remoto;
+  $("f-local").value = filtros.local;
   $("f-ocultar").checked = filtros.ocultar;
   $("f-salario").checked = filtros.salario;
   $("f-ordem").value = filtros.ordem;
@@ -731,7 +816,7 @@ function sincronizarControles() {
 document.querySelectorAll(".aba").forEach((b) => b.addEventListener("click", () => { filtros.area = b.dataset.v; sincronizarControles(); render(); }));
 $("f-nivel").addEventListener("change", (e) => { filtros.nivel = e.target.value; render(); });
 $("f-regime").addEventListener("change", (e) => { filtros.regime = e.target.value; render(); });
-$("f-remoto").addEventListener("change", (e) => { filtros.remoto = e.target.checked; render(); });
+$("f-local").addEventListener("change", (e) => { filtros.local = e.target.value; render(); });
 $("f-ocultar").addEventListener("change", (e) => { filtros.ocultar = e.target.checked; render(); });
 $("f-salario").addEventListener("change", (e) => { filtros.salario = e.target.checked; render(); });
 $("f-ordem").addEventListener("change", (e) => { filtros.ordem = e.target.value; render(); });
@@ -752,7 +837,7 @@ fetch("vagas.json", { cache: "no-store" })
       ? "Abrindo o arquivo direto, o navegador bloqueia a leitura do JSON. Use a extensão <b>Live Server</b> do VS Code ou rode <code>npx serve docs</code>."
       : "O arquivo não foi encontrado. Rode <code>npm run buscar</code> para criá-lo.";
   })
-  .finally(() => { carregado = true; completarCandidaturas(); render(); });
+  .finally(() => { carregado = true; completarCandidaturas(); montarLocais(); render(); });
 
 // Modo aplicativo: funciona instalado e mostra a última lista mesmo sem internet
 if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
