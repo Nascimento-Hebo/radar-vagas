@@ -43,6 +43,21 @@ async function desativarPush() {
   try { localStorage.removeItem(CHAVE_PUSH_ID); } catch {}
 }
 
+// Ao abrir o site: se este aparelho perdeu a inscrição (permissão tirada, dados do navegador limpos), tira da ficha.
+// O robô diário só lê o banco, então a limpeza acontece aqui.
+async function conferirPush() {
+  const id = idPush();
+  if (!id || !pushSuportado() || !window.radarNuvem?.ficha?.push?.[id]) return;
+  try {
+    const reg = await navigator.serviceWorker.getRegistration();
+    const inscricao = await reg?.pushManager.getSubscription();
+    if (Notification.permission !== "granted" || !inscricao) await desativarPush();
+    // O navegador às vezes troca o endereço de entrega: grava o novo (a permissão já existe, não pergunta de novo)
+    else if (inscricao.endpoint !== window.radarNuvem.ficha.push[id].endpoint) { await window.radarNuvem.removerPush(id); await ativarPush(); }
+  } catch {}
+}
+window.addEventListener("radar:usuario", (e) => { if (e.detail?.usuario) setTimeout(conferirPush, 4000); });
+
 const pushAtivoAqui = () => pushSuportado() && Notification.permission === "granted" && Boolean(idPush()) && Boolean(window.radarNuvem?.ficha?.push?.[idPush()]);
 
 async function notificacaoDeTeste() {

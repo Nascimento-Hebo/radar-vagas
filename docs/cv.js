@@ -114,8 +114,24 @@ function partesDoCv(p) {
   return partes;
 }
 
+// A análise de uma vaga depende da vaga e do CV: fica guardada neste navegador por 14 dias (não gasta IA ao reabrir)
+const CHAVE_ANALISES = "radar-vagas:analises";
+const ANALISE_DIAS = 14, MAX_ANALISES = 40;
+const chaveAnalise = (v, p) => `${v.id}|${hash(p.cvTexto || p.cvExtraido || p.cvPdf?.nome || "")}|${hash((p.aprendidas || []).join(","))}`;
+function analiseGuardada(chave) {
+  const x = ler(CHAVE_ANALISES, {})[chave];
+  return x && Date.now() - x.em < ANALISE_DIAS * 86400000 ? x.a : null;
+}
+function guardarAnalise(chave, a) {
+  const todas = Object.entries({ ...ler(CHAVE_ANALISES, {}), [chave]: { a, em: Date.now() } })
+    .sort((x, y) => y[1].em - x[1].em).slice(0, MAX_ANALISES);
+  try { localStorage.setItem(CHAVE_ANALISES, JSON.stringify(Object.fromEntries(todas))); } catch {}
+}
+
 async function analisarVaga(v) {
   if (analises.has(v.id)) return analises.get(v.id);
+  const guardada = analiseGuardada(chaveAnalise(v, perfil()));
+  if (guardada) { analises.set(v.id, guardada); return guardada; }
   const descricao = await textoDaVaga(v);
   const p = perfil();
   const temCv = Boolean(p.cvPdf?.base64 || p.cvTexto?.trim());
@@ -156,6 +172,7 @@ Se você NÃO conseguir ler a vaga (página pede login, está vazia ou deu erro)
       .map((q, i) => ({ id: String(q.id || `p${i + 1}`), pergunta: String(q.pergunta), tipo: String(q.tipo || "texto"), dica: String(q.dica || "") })),
   };
   analises.set(v.id, a);
+  guardarAnalise(chaveAnalise(v, p), a);
   return a;
 }
 

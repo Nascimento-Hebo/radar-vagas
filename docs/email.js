@@ -175,6 +175,7 @@ function painelEmails(c) {
   const lista = el("p", "email-empresas");
   lista.append(el("span", null, "Empresas acompanhadas: "), empresas.map((e) => e.nome).join(" · "));
   c.append(lista);
+  blocoColarEmail(c);
 
   if (!nuvem.gmailConectado()) {
     const caixa = el("div", "email-conectar");
@@ -263,6 +264,78 @@ function painelEmails(c) {
     msgs.forEach((m) => grupo.append(cartaoEmail(m)));
     c.append(grupo);
   }
+}
+
+// ---------- Sem Gmail: colar um e-mail recebido ----------
+// Funciona para qualquer pessoa (não usa a permissão do Gmail, que exige verificação paga do Google)
+
+let colado = { texto: "", resultado: null, ocupado: false };
+
+async function entenderEmailColado(texto) {
+  colado = { texto, resultado: null, ocupado: true };
+  renderPainel();
+  const lista = Object.entries(candidaturas).map(([id, c]) => ({ id, vaga: c.titulo || "", empresa: c.empresa || "", etapa: c.etapa }));
+  const etapas = ETAPAS.map(([id, nome]) => `${id} (${nome})`).join(", ");
+  const pedido = `Você ajuda uma pessoa a acompanhar processos seletivos de tecnologia no Brasil. Ela colou um e-mail que recebeu.
+Candidaturas dela (JSON): ${JSON.stringify(lista)}
+Etapas possíveis: ${etapas}. Hoje é ${hojeLocal()}.
+E-mail colado:
+${texto.slice(0, 6000)}
+
+Responda só com JSON:
+{ "candidatura": "id da candidatura deste e-mail, ou vazio se nenhuma combina", "tipo": "entrevista" | "teste" | "proposta" | "recusa" | "confirmacao" | "pedido_info" | "outro", "etapa": "id da etapa ou null se não muda a etapa", "resumo": "1 frase", "acao": "o que a pessoa deve fazer agora, ou vazio", "prazo": "data ou horário citado, ou vazio", "dataHora": "AAAA-MM-DDTHH:MM (horário de Brasília) da entrevista ou do prazo, ou vazio" }
+Não invente: se o texto não deixa claro, use "outro" e etapa null.`;
+  try {
+    colado.resultado = JSON.parse(String(await window.radarNuvem.gerarIA([{ text: pedido }], { json: true })).replace(/```(json)?/g, ""));
+  } catch (e) {
+    avisar(e.message || String(e));
+  } finally {
+    colado.ocupado = false;
+    renderPainel();
+  }
+}
+
+function blocoColarEmail(c) {
+  const box = el("details", "email-colar");
+  box.open = Boolean(colado.texto) || !window.radarNuvem?.gmailConectado();
+  box.append(el("summary", null, "Sem conectar o Gmail: cole um e-mail que você recebeu"));
+  const ta = el("textarea");
+  ta.rows = 5;
+  ta.placeholder = "Copie o e-mail da empresa (assunto e texto) e cole aqui";
+  ta.setAttribute("aria-label", "E-mail recebido");
+  ta.value = colado.texto;
+  const b = el("button", "btn primario", colado.ocupado ? "A IA está lendo…" : "IA: entender este e-mail");
+  b.type = "button";
+  b.disabled = colado.ocupado;
+  b.addEventListener("click", () => {
+    if (ta.value.trim().length < 30) { avisar("Cole o e-mail completo."); return; }
+    entenderEmailColado(ta.value.trim());
+  });
+  box.append(ta, b);
+
+  const r = colado.resultado;
+  if (r) {
+    const cand = candidaturas[r.candidatura];
+    const res = el("div", "email-sugestao");
+    const quando = dataDoEmail(r.dataHora);
+    res.append(el("span", null, [
+      ROTULO_TIPO[r.tipo] || "Outro",
+      cand ? `${cand.titulo || "Vaga"}${cand.empresa ? ` · ${cand.empresa}` : ""}` : "não achei a candidatura deste e-mail",
+      r.resumo, r.acao && `Próximo passo: ${r.acao}`, quando && fmtCompromisso(quando),
+    ].filter(Boolean).join(" · ")));
+    if (cand && r.etapa && NOME_ETAPA[r.etapa] && r.etapa !== cand.etapa) {
+      const aplicar = el("button", "btn pequeno primario", `Mudar para ${NOME_ETAPA[r.etapa]}`);
+      aplicar.type = "button";
+      aplicar.addEventListener("click", () => {
+        aplicarSugestoes([{ cid: r.candidatura, cand, etapa: r.etapa, m: { data: Date.now() }, a: r }]);
+        colado = { texto: "", resultado: null, ocupado: false };
+        renderPainel();
+      });
+      res.append(aplicar);
+    }
+    box.append(res);
+  }
+  c.append(box);
 }
 
 function cartaoEmail(m) {

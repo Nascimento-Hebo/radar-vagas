@@ -6,6 +6,7 @@ rules_version = '2';
 // - Conta bloqueada não grava dados.
 // - A própria pessoa pode apagar a ficha e os dados (Excluir minha conta, LGPD).
 // - config/* (configuração da IA): todos que entraram leem; só o super admin altera.
+// - erros/*: registro de erros do site; todos que entraram criam, só o super admin lê e apaga.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -39,6 +40,20 @@ service cloud.firestore {
         allow create, update: if superAdmin() || (dono(uid) && naoBloqueado(uid));
         allow delete: if superAdmin() || dono(uid); // apagar os próprios dados vale mesmo com a conta bloqueada
       }
+    }
+
+    // Erros do site: quem está logado só cria (campos fixos e curtos, em nome próprio); só o super admin lê e apaga
+    match /erros/{id} {
+      allow create: if logado()
+        && request.resource.data.keys().hasOnly(["tipo", "mensagem", "origem", "pagina", "navegador", "uid", "criadoEm"])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.tipo in ["js", "promessa", "ia"]
+        && request.resource.data.mensagem is string && request.resource.data.mensagem.size() <= 500
+        && request.resource.data.origem is string && request.resource.data.origem.size() <= 300
+        && request.resource.data.pagina is string && request.resource.data.pagina.size() <= 200
+        && request.resource.data.navegador is string && request.resource.data.navegador.size() <= 200
+        && request.resource.data.criadoEm == request.time;
+      allow read, delete: if superAdmin();
     }
 
     match /config/{doc} {

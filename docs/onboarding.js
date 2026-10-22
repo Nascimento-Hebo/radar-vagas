@@ -57,6 +57,7 @@ function passoCv(c) {
     const f = arq.files[0];
     if (!f) return;
     if (f.size > 8 * 1024 * 1024) { avisar("PDF grande demais (máx. 8 MB)."); return; }
+    await precisa("cv");
     ob.pdf = { nome: f.name, base64: await lerArquivo(f) }; // lerArquivo em cv.js
     titulo.textContent = f.name;
   });
@@ -124,7 +125,7 @@ async function extrairDoCv(pdf, texto) {
 Deixe vazio o que não estiver no currículo. Não invente.` }];
   if (pdf?.base64) partes.push({ inline_data: { mime_type: "application/pdf", data: pdf.base64 } });
   if (texto) partes.push({ text: `Currículo:\n${texto}` });
-  const r = await window.radarNuvem.gerarIA(partes, { json: true });
+  const [r] = await Promise.all([window.radarNuvem.gerarIA(partes, { json: true }), precisa("cv")]);
   return lerJson(r); // lerJson em cv.js
 }
 

@@ -133,3 +133,30 @@ test("Preparar candidatura: pesquisa a empresa e o simulador faz pergunta de apr
   await expect(cv.getByText("Como você tratou os erros nessa API?")).toBeVisible();
   await expect(cv.locator(".sim-progresso")).toContainText("Pergunta 3 de 3");
 });
+
+test("abre leve: mostra 30 vagas por vez e não baixa o adaptador antes da hora", async ({ page }) => {
+  const muitas = { ...VAGAS, vagas: Array.from({ length: 70 }, (_, i) => vaga(`m${i}`, { titulo: `Vaga ${i}` })) };
+  await page.route(/\/vagas\.json(\?|$)/, (r) => r.fulfill({ json: muitas }));
+  const html = await (await page.request.get("/index.html")).text();
+  expect(html).not.toContain("cv.js");
+  await page.goto("/index.html");
+  await expect(page.locator("#lista .vaga")).toHaveCount(30);
+  await page.locator(".mais-vagas").scrollIntoViewIfNeeded();
+  await expect(page.locator("#lista .vaga")).toHaveCount(60);
+  await page.locator(".mais-vagas").scrollIntoViewIfNeeded();
+  await expect(page.locator("#lista .vaga")).toHaveCount(70);
+  await expect(page.locator(".mais-vagas")).toHaveCount(0);
+});
+
+test("central de e-mail sem Gmail: cola o e-mail e a IA atualiza a candidatura", async ({ page }) => {
+  await page.goto("/index.html");
+  await page.locator("#lista .vaga").first().getByRole("button", { name: "Já me candidatei" }).click();
+  await page.locator("#abrir-painel").click();
+  await page.getByRole("tab", { name: "E-mails das empresas" }).click();
+  await page.getByLabel("E-mail recebido").fill("Olá! Gostaríamos de convidar você para uma entrevista no dia 10/05 às 14h30. Equipe Alfa.");
+  await page.getByRole("button", { name: "IA: entender este e-mail" }).click();
+  await page.getByRole("button", { name: "Mudar para Entrevista" }).click();
+  await page.getByRole("tab", { name: /Candidaturas/ }).click();
+  await expect(page.locator(".quadro-col.etapa-entrevista .cand")).toHaveCount(1);
+  await expect(page.locator(".quadro-col.etapa-entrevista input[type='datetime-local']")).toHaveValue("2030-05-10T14:30");
+});

@@ -68,7 +68,9 @@ O site usa o projeto Firebase `radar-de-vagas-1f800` (plano gratuito):
 - **Banco** (Firestore, São Paulo): a ficha de cada pessoa fica em `users/{uid}` e os dados em `users/{uid}/dados/*`. As regras ficam em `firestore.rules` (publicar com `firebase deploy --only firestore:rules`). Cada pessoa só vê o que é dela; só o super admin vê tudo.
 - **IA** (Firebase AI Logic, Gemini Developer API): ninguém precisa de chave. Modelos, limite diário e liga/desliga ficam no painel do admin.
 - **App Check** (reCAPTCHA Enterprise): exigido no banco e na IA, para ninguém usar a cota fora do site.
-- **Super admin**: `nascimentohebo2@gmail.com` (em `docs/firebase.js` e em `firestore.rules`). Painel em `admin.html`: usuários, funil (cadastro → primeiro acesso → CV gerado → candidatura → entrevista), uso da IA por dia, alertas ativos e configuração da IA e do assistente.
+- **Super admin**: `nascimentohebo2@gmail.com` (em `docs/firebase.js` e em `firestore.rules`). Painel em `admin.html`: usuários, funil (cadastro → primeiro acesso → CV gerado → candidatura → entrevista), uso da IA por dia, alertas ativos, **erros do site** e configuração da IA e do assistente.
+- **Resumo por pessoa** (`users/{uid}.resumo`): cada pessoa grava na própria ficha quantas candidaturas e CVs tem. O admin lê só as fichas; os dados completos de alguém só são lidos ao abrir o detalhe.
+- **Erros** (`erros/*`): erros do navegador e falhas da IA (só a mensagem, a página e o navegador). Quem está logado só cria; só o super admin lê e apaga.
 
 ## Alertas: e-mail e notificação
 
@@ -82,7 +84,7 @@ Secrets do repositório (*Settings → Secrets and variables → Actions*):
 
 | Secret | O que é |
 |---|---|
-| `FIREBASE_SERVICE_ACCOUNT` | conta de serviço com acesso ao banco (lê quem tem alerta e tira aparelhos que não existem mais) |
+| `FIREBASE_SERVICE_ACCOUNT` | conta de serviço só com leitura do banco (lê quem tem alerta) |
 | `MAIL_USERNAME` | o Gmail que envia os alertas |
 | `MAIL_PASSWORD` | uma **senha de app** desse Gmail (não a senha normal). Crie em myaccount.google.com → Segurança → Senhas de app (precisa da verificação em duas etapas) |
 | `VAPID_PRIVATE_KEY` | chave privada das notificações. A pública está em `docs/push.js` e em `scripts/alertas.mjs`; as duas formam um par |
@@ -142,7 +144,7 @@ O botão **Minha área** guarda tudo na conta da pessoa, com uma cópia no naveg
   - quadro com as etapas *Candidatei → Entrevista → Teste técnico → Proposta → Não avançou*. Dá para arrastar os cartões entre as colunas;
   - data da entrevista com convite de agenda (.ics ou Google Agenda) e lembrete no topo da página no dia e na véspera;
   - aviso de follow-up depois de 7 dias sem resposta.
-- **E-mails das empresas:** conecta o Gmail (só leitura) e mostra só as conversas com as empresas das candidaturas. A IA classifica cada e-mail e pode **atualizar a etapa sozinha**, com a data da entrevista citada no e-mail.
+- **E-mails das empresas:** conecta o Gmail (só leitura) e mostra só as conversas com as empresas das candidaturas. A IA classifica cada e-mail e pode **atualizar a etapa sozinha**, com a data da entrevista citada no e-mail. Sem Gmail, dá para **colar um e-mail** recebido, e a IA faz o mesmo. Até a verificação do Google, o Gmail conectado é limitado a 100 pessoas (veja `VERIFICACAO-GOOGLE.md`).
 - **Evoluir:** compara o seu CV com as vagas do seu perfil.
   - Monta um **plano de estudos** com recursos gratuitos e um projeto para provar cada tecnologia. "Já aprendi" coloca a tecnologia no perfil.
   - **Revisa o LinkedIn e o GitHub** com textos prontos para colar.
@@ -190,6 +192,8 @@ radar-vagas/
    ├─ sw.js, manifest.webmanifest        modo aplicativo e notificações
    ├─ vagas.json, historico.json         gerados pelo script
    └─ novas.md                           resumo do dia
+
+A página carrega primeiro só o essencial (lista, filtros, Minha área). O adaptador de CV, o Mercado, a central de e-mail e a aba Evoluir são carregados quando a pessoa usa (o adaptador também em segundo plano, quando o navegador fica livre). A lista mostra 30 vagas por vez.
 
 Ao mudar um .js ou o style.css, aumente o número `?v=` nas páginas e o `VERSAO` no `sw.js` (o teste da página avisa se ficarem diferentes).
 ```

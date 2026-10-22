@@ -314,7 +314,6 @@ function abrirMercado() {
   renderMercado();
 }
 
-$("abrir-mercado").addEventListener("click", abrirMercado);
 $("mercado-fechar").addEventListener("click", () => $("mercado").close());
 $("mercado").addEventListener("click", (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
 $("mercado").addEventListener("close", esconderDicaGrafico);
