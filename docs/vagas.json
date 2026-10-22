@@ -1,10 +1,10 @@
 {
-  "atualizadoEm": "2026-10-22T03:30:56.013Z",
+  "atualizadoEm": "2026-10-22T03:41:50.184Z",
   "dataRodada": "2026-10-22",
   "totais": {
     "abertas": 89,
-    "novas": 1,
-    "encerradas": 2,
+    "novas": 0,
+    "encerradas": 0,
     "porArea": {
       "Front-end": 8,
       "Full-stack": 34,

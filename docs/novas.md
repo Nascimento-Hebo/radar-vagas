@@ -1,6 +1,6 @@
 # Radar de vagas · 22/10/2026
 
-1 vagas novas · 2 encerradas · 89 abertas no total
+0 vagas novas · 0 encerradas · 89 abertas no total
 
 ## Back-end
 
