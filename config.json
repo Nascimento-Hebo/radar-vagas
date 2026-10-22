@@ -7,7 +7,9 @@
     "repositorios": [
       "frontendbr/vagas",
       "backend-br/vagas",
-      "react-brasil/vagas"
+      "react-brasil/vagas",
+      "phpdevbr/vagas",
+      "vuejs-br/vagas"
     ],
     "paginasPorRepositorio": 2
   },
@@ -30,6 +32,11 @@
       "programador"
     ],
     "limitePorTermo": 100
+  },
+
+  "greenhouse": {
+    "ativo": true,
+    "empresas": ["quintoandar", "stone", "inter", "vtex", "ebanx", "wildlifestudios"]
   },
 
   "filtros": {

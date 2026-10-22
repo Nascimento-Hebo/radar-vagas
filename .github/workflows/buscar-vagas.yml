@@ -46,6 +46,14 @@ jobs:
             git push
           fi
 
+      # Se alguma fonte não respondeu, a execução fica vermelha e o GitHub avisa o dono do repositório por e-mail.
+      # As vagas das outras fontes já foram salvas no passo anterior.
+      - name: Avisar se alguma fonte falhou
+        if: ${{ steps.busca.outputs.alerta != '' }}
+        run: |
+          echo "::error title=Fonte de vagas com problema::${{ steps.busca.outputs.alerta }}"
+          exit 1
+
       # Opcional: e-mail com as vagas novas.
       # Só roda se você criar os secrets MAIL_USERNAME, MAIL_PASSWORD e MAIL_TO (veja o README).
       - name: Enviar e-mail com as vagas novas

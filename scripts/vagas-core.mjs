@@ -137,6 +137,41 @@ export function extrairRequisitos(texto, limite = 8) {
   return out;
 }
 
+/* ---------- Salário ---------- */
+
+const RE_VALOR = String.raw`(\d{1,3}(?:[.,]\d{3})+|\d+(?:[.,]\d+)?)\s*(k|mil)?`;
+const RE_SALARIO = new RegExp(String.raw`(R\$|US\$|USD|\$)\s*${RE_VALOR}(?:\s*(?:a|at[eé]|-|–|~|to)\s*(?:R\$|US\$|USD|\$)?\s*${RE_VALOR})?`, "i");
+
+function numero(txt, sufixo) {
+  let n = String(txt);
+  if (/^\d{1,3}([.,]\d{3})+$/.test(n)) n = n.replace(/[.,]/g, "");
+  else n = n.replace(",", ".");
+  let v = parseFloat(n);
+  if (sufixo) v *= 1000;
+  return v;
+}
+const fmtNumero = (v) => Math.round(v).toLocaleString("pt-BR");
+
+// Acha a faixa salarial no texto do anúncio. Devolve "" quando não há valor plausível.
+export function extrairSalario(texto) {
+  const t = String(texto || "").slice(0, 6000);
+  const linhas = t.split("\n").filter((l) => /sal[aá]rio|remunera|faixa|pretens|r\$|usd|us\$|bolsa|compensation|salary/i.test(l));
+  for (const l of linhas) {
+    if (/\bvale\b|aux[ií]lio|b[oô]nus|benef[ií]cio|reembolso|\bplr\b|gympass|wellhub/i.test(l)) continue; // valor de benefício, não salário
+    const k = l.match(/(\d+)\s*k\s*(?:a|at[eé]|-|–)\s*(\d+)\s*k/i); // "8k a 10k", sem moeda
+    if (k && !RE_SALARIO.test(l)) return `R$ ${fmtNumero(k[1] * 1000)} a ${fmtNumero(k[2] * 1000)}`;
+    const m = l.match(RE_SALARIO);
+    if (!m) continue;
+    const moeda = /us|\$/i.test(m[1]) && m[1] !== "R$" ? "US$" : "R$";
+    const a = numero(m[2], m[3]);
+    const b = m[4] ? numero(m[4], m[5] || m[3]) : 0;
+    const min = moeda === "R$" ? 1000 : 500;
+    if (!(a >= min) || a > 100000 || (b && (b < a || b > 150000))) continue;
+    return b ? `${moeda} ${fmtNumero(a)} a ${fmtNumero(b)}` : `${moeda} ${fmtNumero(a)}`;
+  }
+  return "";
+}
+
 /* ---------- Filtro e prioridade ---------- */
 
 export function aceitaVaga(v, filtros) {
@@ -201,6 +236,7 @@ export function deIssueGithub(issue, repo) {
     local: extrairLocal(titulo) || "Brasil",
     stack: extrairStack(titulo + "\n" + corpo),
     requisitos: extrairRequisitos(corpo),
+    salario: extrairSalario(titulo + "\n" + corpo),
     link: issue.html_url,
     fonte: `GitHub · ${repo}`,
     publicadaEm: String(issue.created_at || "").slice(0, 10),
@@ -227,6 +263,7 @@ export function deVagaGupy(job) {
     local: extrairLocal(titulo, job) || "Brasil",
     stack: extrairStack(titulo + "\n" + descricao),
     requisitos: extrairRequisitos(descricao),
+    salario: extrairSalario(descricao),
     link: job.jobUrl || job.careerPageUrl,
     fonte: "Gupy",
     publicadaEm: String(job.publishedDate || "").slice(0, 10),
@@ -235,10 +272,56 @@ export function deVagaGupy(job) {
   };
 }
 
+const desescapar = (s) => String(s || "").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+const RE_BRASIL = /brasil|brazil|s[aã]o paulo|rio de janeiro|curitiba|belo horizonte|porto alegre|florian[oó]polis|recife|campinas|remote.*(latam|brazil)|latam/i;
+
+// Vagas de empresas que usam o Greenhouse (QuintoAndar, Stone, Inter...). Só fica o que é no Brasil.
+export function deVagaGreenhouse(job, empresaPadrao = "") {
+  if (!job || !job.title || !job.absolute_url) return null;
+  const local = String(job.location?.name || "");
+  if (!RE_BRASIL.test(local)) return null;
+  const titulo = String(job.title).trim();
+  // quadros de empresa grande têm de tudo (vendas, RH...): exige palavra de desenvolvimento no título
+  if (!/develop|desenvolv|engineer|engenheir|programador|software|front|back|full/i.test(titulo)) return null;
+  const descricao = limparHtml(desescapar(job.content));
+  const area = classificarArea(titulo, descricao);
+  if (!area) return null;
+  if (/banco de talentos|talent pool/i.test(titulo)) return null;
+  const nivelMeta = (job.metadata || []).find((m) => /level|n[ií]vel|senioridade/i.test(m.name))?.value || "";
+  const remoto = /remot/i.test(local) || /100% remot|fully remote|remote[- ]first/i.test(descricao.slice(0, 3000));
+  return {
+    id: `gh-board-${job.id}`,
+    titulo,
+    empresa: String(job.company_name || empresaPadrao).replace(/\s+carreiras$/i, "").trim(),
+    area,
+    nivel: classificarNivel(titulo + " " + nivelMeta.replace(/mid-level/i, "pleno").replace(/entry/i, "júnior"), [], descricao),
+    regime: classificarRegime(titulo, [], descricao),
+    modelo: remoto ? "Remoto" : classificarModelo(titulo, [local], descricao),
+    local: local.replace(/;/g, ",") || "Brasil",
+    stack: extrairStack(titulo + "\n" + descricao),
+    requisitos: extrairRequisitos(descricao),
+    salario: extrairSalario(descricao),
+    link: job.absolute_url,
+    fonte: "Greenhouse",
+    publicadaEm: String(job.first_published || job.updated_at || "").slice(0, 10),
+    textoLocal: local,
+  };
+}
+
 /* ---------- Junção com a rodada anterior ---------- */
 
-function chaveDuplicata(v) {
-  return slug(v.empresa) + "|" + slug(v.titulo.replace(/\b(na|no|em|at|@)\b.*$/i, ""));
+const NIVEIS = { jr: "junior", junior: "junior", pl: "pleno", pleno: "pleno", sr: "senior", senior: "senior", mid: "pleno" };
+const PALAVRAS_VAZIAS = new Set(["na", "no", "em", "at", "de", "da", "do", "para", "the", "a", "o", "e", "remoto", "remote", "vaga", "hibrido", "presencial", "pj", "clt", "usd"]);
+
+// Chave de duplicata: empresa + palavras do cargo, sem o nome da empresa, sem o que está entre parênteses
+// e sem a ordem das palavras. "Full Stack Developer Pleno - Rotha IA" e "Full Stack Developer (React) Pleno na Rotha IA" viram a mesma vaga.
+export function chaveDuplicata(v) {
+  const empresa = slug(v.empresa);
+  let titulo = SEM_ACENTO(v.titulo).replace(/\([^)]*\)|\[[^\]]*\]/g, " ");
+  for (const parte of empresa.split("-").filter((p) => p.length > 1)) titulo = titulo.replace(new RegExp(`\\b${parte}\\b`, "g"), " ");
+  const palavras = titulo.replace(/full[\s-]?stack/g, "fullstack").replace(/front[\s-]?end/g, "frontend").replace(/back[\s-]?end/g, "backend")
+    .split(/[^a-z0-9#.+]+/).map((p) => NIVEIS[p] || p).filter((p) => p && !PALAVRAS_VAZIAS.has(p));
+  return empresa + "|" + [...new Set(palavras)].sort().join("-");
 }
 
 export function juntar({ encontradas, anteriores = [], hoje, config }) {
@@ -246,13 +329,21 @@ export function juntar({ encontradas, anteriores = [], hoje, config }) {
 
   // 1. limpa, filtra e remove duplicadas da rodada atual
   const vistas = new Map();
+  const idsNaFonte = new Set(encontradas.filter(Boolean).map((v) => v.id));
   for (const v of encontradas) {
     if (!v) continue;
     if (v.publicadaEm && diasEntre(v.publicadaEm, hoje) > maxDiasPublicacao) continue;
     if (v.prazo && v.prazo < hoje) continue;
     if (!aceitaVaga(v, filtros)) continue;
     const k = chaveDuplicata(v);
-    if (!vistas.has(k) || (vistas.get(k).fonte !== "Gupy" && v.fonte === "Gupy")) vistas.set(k, v);
+    const ja = vistas.get(k);
+    // fica a versão mais completa: Gupy/Greenhouse antes de issue; depois a mais recente
+    const peso = (x) => (x.fonte === "Gupy" || x.fonte === "Greenhouse" ? 2 : 0) + (x.salario ? 1 : 0);
+    if (!ja || peso(v) > peso(ja) || (peso(v) === peso(ja) && String(v.publicadaEm) > String(ja.publicadaEm))) {
+      vistas.set(k, { ...v, repeticoes: (ja?.repeticoes || 1) + (ja ? 1 : 0) });
+    } else {
+      ja.repeticoes = (ja.repeticoes || 1) + 1;
+    }
   }
 
   // 2. aplica o limite pela prioridade
@@ -276,6 +367,7 @@ export function juntar({ encontradas, anteriores = [], hoje, config }) {
   // 3. o que sumiu da fonte foi encerrado
   for (const ant of anteriores) {
     if (idsAtuais.has(ant.id)) continue;
+    if (idsNaFonte.has(ant.id) && ant.status === "aberta") continue; // ainda existe: foi juntada com uma repetida ou cortada pelo limite
     if (ant.status === "aberta") {
       encerradasHoje++;
       resultado.push({ ...ant, status: "encerrada", encerradaEm: hoje });
