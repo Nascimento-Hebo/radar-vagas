@@ -1,0 +1,47 @@
+rules_version = '2';
+
+// Regras do banco do Radar de Vagas.
+// - Cada pessoa lê e escreve só a própria ficha (users/{uid}) e os próprios dados (users/{uid}/dados/*).
+// - O super admin (e-mail verificado abaixo) lê e altera tudo, e é o único que muda "bloqueado" e "papel".
+// - Conta bloqueada não grava dados.
+// - config/* (configuração da IA): todos que entraram leem; só o super admin altera.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function logado() {
+      return request.auth != null;
+    }
+    function superAdmin() {
+      return logado()
+        && request.auth.token.email == "nascimentohebo2@gmail.com"
+        && request.auth.token.email_verified == true;
+    }
+    function dono(uid) {
+      return logado() && request.auth.uid == uid;
+    }
+    function naoBloqueado(uid) {
+      return !exists(/databases/$(database)/documents/users/$(uid))
+        || get(/databases/$(database)/documents/users/$(uid)).data.get("bloqueado", false) != true;
+    }
+
+    match /users/{uid} {
+      allow read: if dono(uid) || superAdmin();
+      allow create: if dono(uid)
+        && request.resource.data.get("papel", "usuario") == "usuario"
+        && request.resource.data.get("bloqueado", false) == false;
+      allow update: if superAdmin()
+        || (dono(uid) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["papel", "bloqueado", "criadoEm"]));
+      allow delete: if superAdmin();
+
+      match /dados/{nome} {
+        allow read: if dono(uid) || superAdmin();
+        allow write: if superAdmin() || (dono(uid) && naoBloqueado(uid));
+      }
+    }
+
+    match /config/{doc} {
+      allow read: if logado();
+      allow write: if superAdmin();
+    }
+  }
+}

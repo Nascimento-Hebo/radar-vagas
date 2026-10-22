@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super admin · Radar de Vagas</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0f1d">
+  <script>
+    try { var t = JSON.parse(localStorage.getItem("radar-vagas:tema")); } catch (e) {}
+    document.documentElement.dataset.tema = t || (matchMedia("(prefers-color-scheme: light)").matches ? "claro" : "escuro");
+  </script>
+  <link rel="icon" type="image/png" href="oh-tech-icone.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css?v=13">
+</head>
+<body>
+  <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Verificando acesso…</div>
+  <header class="topo-site">
+    <div class="topo-dentro">
+      <a class="marca" href="index.html" aria-label="Voltar para o Radar de Vagas">
+        <img class="logo-escuro" src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
+        <img class="logo-claro" src="oh-tech-logo-claro.png" alt="" width="600" height="171">
+      </a>
+      <div class="topo-acoes">
+        <span class="admin-selo">Super admin</span>
+        <a class="btn topo-btn" href="index.html">Voltar ao site</a>
+        <button type="button" class="btn topo-btn" id="sair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap admin" id="conteudo">
+    <section>
+      <h1>Painel do super admin</h1>
+      <p class="sub" id="admin-sub">Controle dos usuários cadastrados e da IA do Radar de Vagas.</p>
+    </section>
+
+    <section class="admin-numeros" id="numeros" aria-label="Resumo"></section>
+
+    <section class="admin-cartao" aria-labelledby="ia-titulo">
+      <div class="admin-cab">
+        <h2 id="ia-titulo">Inteligência artificial</h2>
+        <a class="btn pequeno" id="link-chave" target="_blank" rel="noopener" href="https://console.firebase.google.com/project/radar-de-vagas-1f800/ailogic">Chave e uso no Firebase ↗</a>
+      </div>
+      <p class="painel-nota">A IA roda pelo Firebase AI Logic (Gemini Developer API, plano gratuito). A chave fica guardada no Firebase e nunca chega ao navegador dos usuários. Para trocar a chave ou ver o consumo, use o botão acima.</p>
+      <form class="admin-ia" id="form-ia">
+        <label class="marcar"><input type="checkbox" id="ia-ativa"> IA ligada para todos os usuários</label>
+        <label class="campo"><span>Modelos, em ordem de preferência (separados por vírgula)</span><input id="ia-modelos" type="text"></label>
+        <label class="campo"><span>Limite de usos da IA por pessoa, por dia (0 = sem limite)</span><input id="ia-limite" type="number" min="0" step="1"></label>
+        <button type="submit" class="btn primario">Salvar configuração da IA</button>
+      </form>
+    </section>
+
+    <section class="admin-cartao" aria-labelledby="usuarios-titulo">
+      <div class="admin-cab">
+        <h2 id="usuarios-titulo">Usuários cadastrados</h2>
+        <div class="admin-cab-acoes">
+          <input type="search" id="filtro-usuarios" placeholder="Buscar por nome ou e-mail" aria-label="Buscar usuários">
+          <button type="button" class="btn pequeno" id="exportar">Exportar CSV</button>
+          <button type="button" class="btn pequeno" id="recarregar">Atualizar</button>
+        </div>
+      </div>
+      <div class="admin-tabela-caixa">
+        <table class="admin-tabela">
+          <thead><tr><th>Pessoa</th><th>Cadastro</th><th>Último acesso</th><th>Candidaturas</th><th>CVs</th><th>IA hoje / total</th><th>Situação</th><th><span class="sr">Ações</span></th></tr></thead>
+          <tbody id="usuarios"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="painel" id="detalhe" aria-labelledby="detalhe-titulo">
+    <div class="painel-dentro">
+      <div class="painel-topo">
+        <h2 id="detalhe-titulo">Usuário</h2>
+        <button class="cv-x" id="detalhe-fechar" type="button" aria-label="Fechar">×</button>
+      </div>
+      <div class="painel-corpo" id="detalhe-corpo"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="admin.js?v=13"></script>
+</body>
+</html>

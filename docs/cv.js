@@ -1,8 +1,9 @@
-// Adaptador de CV com a API do Gemini, direto do navegador.
+// Adaptador de CV com o Gemini.
 // 1) o Gemini lê a vaga e devolve requisitos + perguntas que faltam responder;
 // 2) a pessoa confere os dados (salvos no navegador) e o Gemini monta o CV para a vaga;
 // 3) o CV vira PDF pela impressão do navegador.
-// A chave do Gemini fica só no localStorage de quem usa; nunca vai para o repositório.
+// Com a conta conectada, a IA roda pelo Firebase AI Logic (window.radarNuvem.gerarIA) e ninguém precisa de chave.
+// Sem conta (modo offline ou teste local), cai no caminho antigo, com a chave do Gemini guardada no navegador.
 
 // Tenta em ordem; se um modelo estiver sobrecarregado (503), sem cota (429) ou indisponível (404), passa para o próximo.
 const GEMINI_MODELOS = ["gemini-flash-latest", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-flash-lite-latest", "gemini-3.5-flash-lite"];
@@ -42,7 +43,10 @@ function perfil() { return ler(CHAVE_PERFIL, {}); }
 
 // ---------- Gemini ----------
 
+const usaNuvem = () => Boolean(window.radarNuvem?.usuario);
+
 async function gemini(partes, { json = false, lerLinks = false } = {}) {
+  if (usaNuvem()) return window.radarNuvem.gerarIA(partes, { json, lerLinks });
   const corpo = {
     contents: [{ role: "user", parts: partes }],
     generationConfig: { temperature: 0.3, ...(json ? { responseMimeType: "application/json" } : {}) },
@@ -208,7 +212,7 @@ function abrirAdaptador(v) {
   $("cv-empresa").textContent = [v.empresa, v.local].filter(Boolean).join(" · ");
   const d = $("cv");
   if (!d.open) d.showModal();
-  if (!chaveGemini()) telaChave();
+  if (!usaNuvem() && !chaveGemini()) telaChave();
   else etapaVaga();
 }
 
@@ -239,7 +243,7 @@ function falha(e, repetir) {
   box.append(el("strong", null, "Não deu certo"), el("p", null, e.message || String(e)));
   const acoes = el("div", "grupo");
   acoes.append(botao("Tentar de novo", "btn primario", repetir));
-  if (e.chave) acoes.append(botao("Trocar chave", "btn", telaChave)); // só oferece trocar quando o problema é a chave
+  if (e.chave && !usaNuvem()) acoes.append(botao("Trocar chave", "btn", telaChave)); // só oferece trocar quando o problema é a chave
   box.append(acoes);
   c.append(box);
 }
@@ -416,7 +420,8 @@ function telaDados() {
   }
 
   const acoes = el("div", "cv-acoes");
-  acoes.append(botao("Gerar CV para esta vaga", "btn primario", gerar), botao("Trocar chave do Gemini", "toggle", telaChave));
+  acoes.append(botao("Gerar CV para esta vaga", "btn primario", gerar));
+  if (!usaNuvem()) acoes.append(botao("Trocar chave do Gemini", "toggle", telaChave));
   c.append(acoes);
 }
 

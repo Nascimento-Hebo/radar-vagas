@@ -10,7 +10,11 @@ let erro = "";
 const CHAVE_CAND = "radar-vagas:candidaturas";
 const CHAVE_META = "radar-vagas:meta-semana";
 const ler = (k, padrao) => { try { return JSON.parse(localStorage.getItem(k)) ?? padrao; } catch { return padrao; } };
-const salvar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+// Salva no navegador e, com a conta conectada, também na nuvem (Firebase)
+const salvar = (k, v) => {
+  try { localStorage.setItem(k, JSON.stringify(v)); } catch {}
+  window.radarNuvem?.salvar(k, v);
+};
 const CHAVE_PERFIL_APP = "radar-vagas:perfil"; // o mesmo que o cv.js usa
 const CHAVE_HIST = "radar-vagas:cvs-gerados";
 const CHAVE_TEMA = "radar-vagas:tema";
@@ -34,7 +38,7 @@ function normalizarCandidaturas(c) {
 }
 let candidaturas = normalizarCandidaturas(ler(CHAVE_CAND, {}));
 const salvarCandidaturas = () => salvar(CHAVE_CAND, candidaturas);
-const metaSemana = ler(CHAVE_META, 5);
+let metaSemana = ler(CHAVE_META, 5);
 const FOCO_MIN = 4; // prioridade a partir da qual a vaga combina com o foco do config.json (júnior, PJ, remoto, Paraná)
 
 const $ = (id) => document.getElementById(id);
@@ -538,7 +542,7 @@ function renderPainel() {
   $("painel-n-cvs").textContent = ler(CHAVE_HIST, []).length || "";
   const c = $("painel-corpo");
   c.textContent = "";
-  ({ candidaturas: painelCandidaturas, cvs: painelCvs, dados: painelDados })[abaPainel](c);
+  ({ candidaturas: painelCandidaturas, emails: painelEmails, cvs: painelCvs, dados: painelDados })[abaPainel](c); // painelEmails em email.js
 }
 
 function painelCandidaturas(c) {
@@ -738,12 +742,15 @@ async function importarDados(arquivo) {
   } catch { avisar("Esse arquivo não é um backup do Radar de Vagas."); }
 }
 function apagarDados() {
-  if (!confirm("Apagar candidaturas, CVs gerados, perfil e chave do Gemini deste navegador? Isso não pode ser desfeito.")) return;
-  for (const k of [...CHAVES_BACKUP, "radar-vagas:gemini-chave"]) { try { localStorage.removeItem(k); } catch {} }
+  if (!confirm("Apagar suas candidaturas, CVs gerados e perfil (neste navegador e na sua conta)? Isso não pode ser desfeito.")) return;
+  for (const k of [...CHAVES_BACKUP, "radar-vagas:gemini-chave", "radar-vagas:suporte"]) {
+    try { localStorage.removeItem(k); } catch {}
+    window.radarNuvem?.salvar(k, null);
+  }
   candidaturas = {};
   atualizarCompatibilidade();
   renderPainel();
-  avisar("Seus dados foram apagados deste navegador.");
+  avisar("Seus dados foram apagados.");
 }
 
 document.querySelectorAll(".painel-aba").forEach((b) => b.addEventListener("click", () => { abaPainel = b.dataset.aba; renderPainel(); }));
@@ -770,6 +777,69 @@ $("tema").addEventListener("click", () => {
   aplicarTema(novo);
 });
 aplicarTema(document.documentElement.dataset.tema || "escuro");
+
+// ---------- Conta (Firebase): login obrigatório, menu do usuário e dados vindos da nuvem ----------
+
+function recarregarDoNavegador() {
+  candidaturas = normalizarCandidaturas(ler(CHAVE_CAND, {}));
+  metaSemana = ler(CHAVE_META, 5);
+  const tema = ler(CHAVE_TEMA, null);
+  if (tema) aplicarTema(tema);
+  atualizarCompatibilidade(); // também chama render()
+}
+
+function renderConta(u, admin) {
+  const box = $("conta");
+  box.textContent = "";
+  if (!u) return;
+  const nome = u.displayName || u.email || "Minha conta";
+  const botaoConta = el("button", "conta-btn");
+  botaoConta.type = "button";
+  botaoConta.setAttribute("aria-haspopup", "menu");
+  botaoConta.setAttribute("aria-expanded", "false");
+  botaoConta.setAttribute("aria-label", `Conta de ${nome}`);
+  if (u.photoURL) {
+    const img = el("img");
+    img.src = u.photoURL;
+    img.alt = "";
+    img.referrerPolicy = "no-referrer";
+    botaoConta.append(img);
+  } else botaoConta.append(el("span", "conta-inicial", nome.trim()[0].toUpperCase()));
+  const menu = el("div", "conta-menu");
+  menu.hidden = true;
+  menu.setAttribute("role", "menu");
+  menu.append(el("strong", null, nome), el("span", "conta-email", u.email || ""));
+  if (admin) {
+    const a = el("a", "conta-item", "Painel do super admin");
+    a.href = "admin.html";
+    a.setAttribute("role", "menuitem");
+    menu.append(a);
+  }
+  const sairBtn = el("button", "conta-item", "Sair");
+  sairBtn.type = "button";
+  sairBtn.setAttribute("role", "menuitem");
+  sairBtn.addEventListener("click", async () => { await window.radarNuvem.sair(); location.replace("login.html"); });
+  menu.append(sairBtn);
+  botaoConta.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.hidden = !menu.hidden;
+    botaoConta.setAttribute("aria-expanded", String(!menu.hidden));
+  });
+  document.addEventListener("click", () => { menu.hidden = true; botaoConta.setAttribute("aria-expanded", "false"); });
+  box.append(botaoConta, menu);
+}
+
+window.addEventListener("radar:usuario", (e) => {
+  const { usuario, ficha, admin } = e.detail;
+  if (!usuario) { location.replace(`login.html?volta=${encodeURIComponent(location.pathname.split("/").pop() || "index.html")}`); return; }
+  $("carregando-conta").hidden = true;
+  if (ficha?.bloqueado) avisar("Sua conta está bloqueada pelo administrador. Você pode ver as vagas, mas não salvar nem usar a IA.");
+  renderConta(usuario, admin);
+  recarregarDoNavegador();
+});
+window.addEventListener("radar:erro-nuvem", (e) => avisar(`Não consegui falar com a nuvem: ${e.detail}`));
+// Sem internet o Firebase não carrega: libera a página com os dados guardados neste navegador
+setTimeout(() => { if (!window.radarNuvem?.pronto) $("carregando-conta").hidden = true; }, navigator.onLine ? 12000 : 1500);
 
 // ---------- Radar: cada ponto é uma vaga aberta, colorida pela área ----------
 
