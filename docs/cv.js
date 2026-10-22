@@ -87,6 +87,7 @@ function lerJson(texto) {
 
 // Issues do GitHub dá para ler direto pela API; outros sites o Gemini lê pelo link (url_context).
 async function textoDaVaga(v) {
+  if (v.descricao) return String(v.descricao).slice(0, 12000); // texto colado pela pessoa (vaga de outro site)
   const m = /github\.com\/([^/]+)\/([^/]+)\/issues\/(\d+)/.exec(v.link || "");
   if (!m) return "";
   try {
@@ -118,16 +119,24 @@ ${temCv ? "O CV atual da pessoa vem em anexo. Use-o para NÃO perguntar o que j�
 
 Responda só com JSON, em português, neste formato:
 {
+  "titulo": "título da vaga como está no anúncio",
+  "empresa": "nome da empresa, se aparecer",
   "resumo": "1 ou 2 frases sobre a vaga",
   "obrigatorios": ["requisitos obrigatórios, curtos"],
   "desejaveis": ["diferenciais / desejáveis, curtos"],
   "palavrasChave": ["tecnologias e termos que um filtro de RH buscaria"],
   "perguntas": [{ "id": "p1", "pergunta": "pergunta curta e direta", "tipo": "texto" | "sim_nao" | "numero", "dica": "exemplo de resposta" }]
 }
-Regras para "perguntas": no máximo 5, só sobre o que essa vaga exige e que ${temCv ? "não aparece no CV" : "um CV precisaria mostrar"} (ex.: anos com uma tecnologia, um projeto com X, disponibilidade para o modelo de trabalho). Não pergunte nome, e-mail, telefone, cidade, LinkedIn nem GitHub.`;
+Regras para "perguntas": no máximo 5, só sobre o que essa vaga exige e que ${temCv ? "não aparece no CV" : "um CV precisaria mostrar"} (ex.: anos com uma tecnologia, um projeto com X, disponibilidade para o modelo de trabalho). Não pergunte nome, e-mail, telefone, cidade, LinkedIn nem GitHub.
+Se você NÃO conseguir ler a vaga (página pede login, está vazia ou deu erro), NÃO invente: responda só {"erro": "nao_consegui_ler"}.`;
   const partes = [{ text: pedido }, ...partesDoCv(p)];
   const json = lerJson(await gemini(partes, { lerLinks: !descricao }));
+  if (json.erro) {
+    throw new Error("A IA não conseguiu ler essa página (alguns sites, como o LinkedIn, pedem login). Feche esta janela, abra \"A página pede login?\" abaixo da busca, cole o texto da vaga e tente de novo.");
+  }
   const a = {
+    titulo: String(json.titulo || ""),
+    empresa: String(json.empresa || ""),
     resumo: String(json.resumo || ""),
     obrigatorios: lista(json.obrigatorios),
     desejaveis: lista(json.desejaveis),
@@ -173,11 +182,15 @@ Responda só com JSON neste formato:
   "formacao": [{ "curso": "", "instituicao": "", "periodo": "" }],
   "certificacoes": ["..."],
   "idiomas": ["..."],
+  "textoOriginal": "o texto completo do CV original, como está no anexo, em texto simples (para comparar antes e depois)",
+  "modeloSugerido": "classico" | "moderno" | "executivo" | "compacto",
+  "motivoModelo": "1 frase: por que esse visual combina com a vaga",
   "mudancas": [{ "secao": "Resumo | Habilidades | Experiência | Projetos | Formação | Outros", "tipo": "reescrito" | "adicionado" | "removido" | "reordenado", "antes": "trecho como estava no CV original (vazio se foi adicionado)", "depois": "trecho como ficou (vazio se foi removido)", "motivo": "por que mudou, ligado à vaga" }],
   "conferir": ["frases do CV novo que a pessoa precisa confirmar que são verdade (números, tempo de experiência, tecnologias que vieram das respostas)"],
   "lacunas": ["..."]
 }
-Em "mudancas", liste TODAS as alterações relevantes em relação ao CV original, uma por item, citando os trechos de verdade.`;
+Em "mudancas", liste TODAS as alterações relevantes em relação ao CV original, uma por item, citando os trechos de verdade. O campo "depois" é OBRIGATÓRIO e deve trazer o texto novo exatamente como ficou no CV (só fica vazio quando o tipo é "removido").
+Modelos: "classico" (uma coluna, tradicional), "moderno" (coluna lateral com contato e habilidades; bom para tech e startups), "executivo" (cabeçalho forte; bom para pleno/sênior e empresas grandes), "compacto" (denso, para muita experiência).`;
   return lerJson(await gemini([{ text: pedido }, ...partesDoCv(p)], { json: true }));
 }
 
@@ -280,6 +293,11 @@ async function etapaVaga() {
   } catch (e) {
     falha(e, etapaVaga);
     return;
+  }
+  if (cvVaga.externa && cvAnalise.titulo) {
+    cvVaga = { ...cvVaga, titulo: cvAnalise.titulo, empresa: cvAnalise.empresa };
+    $("cv-vaga").textContent = cvVaga.titulo;
+    $("cv-empresa").textContent = [cvVaga.empresa, cvVaga.local].filter(Boolean).join(" · ");
   }
   telaDados();
 }
@@ -467,21 +485,42 @@ function restaurar(rascunho) {
   document.querySelectorAll(".cv-resposta").forEach((i, n) => { if (rascunho.respostas[n]) i.value = rascunho.respostas[n]; });
 }
 
-function folhaCv(p, g) {
-  const f = el("article", "folha");
-  f.append(el("h1", null, p.nome));
-  if (g.titulo) f.append(el("div", "folha-titulo", g.titulo));
+const MODELOS = [
+  ["classico", "Clássico"],
+  ["moderno", "Moderno"],
+  ["executivo", "Executivo"],
+  ["compacto", "Compacto"],
+];
+
+// Monta o CV em duas partes (lateral e principal). Cada modelo arruma essas partes de um jeito no CSS.
+function folhaCv(p, g, modelo = "classico") {
+  const f = el("article", `folha modelo-${modelo}`);
+  const cab = el("header", "folha-cab");
+  cab.append(el("h1", null, p.nome));
+  if (g.titulo) cab.append(el("div", "folha-titulo", g.titulo));
   const contato = [p.cidade, p.email, p.telefone, p.linkedin, p.github].filter(Boolean);
-  if (contato.length) f.append(el("div", "folha-contato", contato.join("  ·  ")));
+  if (contato.length) {
+    const ul = el("ul", "folha-contato");
+    contato.forEach((c) => ul.append(el("li", null, c)));
+    cab.append(ul);
+  }
+  f.append(cab);
 
-  const secao = (titulo) => { const s = el("section"); s.append(el("h2", null, titulo)); f.append(s); return s; };
+  const corpo = el("div", "folha-corpo");
+  const lateral = el("div", "folha-lateral");
+  const principal = el("div", "folha-principal");
+  corpo.append(lateral, principal);
+  f.append(corpo);
+
+  const secao = (pai, titulo, ordem) => { const s = el("section"); s.style.order = ordem; s.append(el("h2", null, titulo)); pai.append(s); return s; };
   const itens = (pai, arr) => { const l = lista(arr); if (!l.length) return; const ul = el("ul"); l.forEach((t) => ul.append(el("li", null, t))); pai.append(ul); };
+  const tags = (pai, arr) => { const ul = el("ul", "folha-tags"); lista(arr).forEach((t) => ul.append(el("li", null, t))); pai.append(ul); };
 
-  if (g.resumo) secao("Resumo").append(el("p", null, g.resumo));
-  if (lista(g.habilidades).length) secao("Habilidades").append(el("p", null, lista(g.habilidades).join(" · ")));
+  if (g.resumo) secao(principal, "Resumo", 1).append(el("p", null, g.resumo));
+  if (lista(g.habilidades).length) tags(secao(lateral, "Habilidades", 2), g.habilidades);
   const exps = Array.isArray(g.experiencias) ? g.experiencias.filter((x) => x && (x.cargo || x.empresa)) : [];
   if (exps.length) {
-    const s = secao("Experiência");
+    const s = secao(principal, "Experiência", 3);
     exps.forEach((x) => {
       const cab = el("div", "folha-item");
       cab.append(el("strong", null, [x.cargo, x.empresa].filter(Boolean).join(" — ")), el("span", null, [x.periodo, x.local].filter(Boolean).join(" · ")));
@@ -491,7 +530,7 @@ function folhaCv(p, g) {
   }
   const projs = Array.isArray(g.projetos) ? g.projetos.filter((x) => x && x.nome) : [];
   if (projs.length) {
-    const s = secao("Projetos");
+    const s = secao(principal, "Projetos", 4);
     projs.forEach((x) => {
       const cab = el("div", "folha-item");
       cab.append(el("strong", null, x.nome));
@@ -502,47 +541,95 @@ function folhaCv(p, g) {
   }
   const form = Array.isArray(g.formacao) ? g.formacao.filter((x) => x && (x.curso || x.instituicao)) : [];
   if (form.length) {
-    const s = secao("Formação");
+    const s = secao(principal, "Formação", 5);
     form.forEach((x) => {
       const cab = el("div", "folha-item");
       cab.append(el("strong", null, [x.curso, x.instituicao].filter(Boolean).join(" — ")), el("span", null, x.periodo || ""));
       s.append(cab);
     });
   }
-  if (lista(g.certificacoes).length) itens(secao("Certificações"), g.certificacoes);
-  if (lista(g.idiomas).length) secao("Idiomas").append(el("p", null, lista(g.idiomas).join(" · ")));
+  if (lista(g.certificacoes).length) itens(secao(lateral, "Certificações", 6), g.certificacoes);
+  if (lista(g.idiomas).length) itens(secao(lateral, "Idiomas", 7), g.idiomas);
   return f;
+}
+
+// Palavras comuns não contam como novidade (senão quase toda frase fica verde).
+const PALAVRAS_COMUNS = new Set("que por para com uma uns umas dos das nos nas pelo pela pelos pelas seu sua seus suas mais como entre sobre ate desde onde quando sem nao sim ser ter foi sao esta este esse essa isso aos ela ele tambem muito muitos muitas cada todo toda todos todas the and for with".split(" "));
+const PALAVRA = /[\p{L}\p{N}+#]+(?:[.\-][\p{L}\p{N}+#]+)*/gu;
+
+// Marca os trechos do CV novo com palavras que não existiam no CV original: é o que a IA colocou.
+// Palavras novas vizinhas viram um destaque só, para a leitura ficar limpa.
+function marcarNovidades(folha, original) {
+  const conhecidas = new Set((semAcento(original).match(PALAVRA) || []));
+  if (!conhecidas.size) return 0;
+  const nova = (w) => {
+    const n = semAcento(w);
+    return n.length >= 3 && /\p{L}/u.test(n) && !PALAVRAS_COMUNS.has(n) && !conhecidas.has(n);
+  };
+  let marcadas = 0;
+  const andar = document.createTreeWalker(folha.querySelector(".folha-corpo") || folha, NodeFilter.SHOW_TEXT);
+  const nos = [];
+  while (andar.nextNode()) nos.push(andar.currentNode);
+  for (const no of nos) {
+    if (no.parentElement.closest("h2")) continue;
+    const texto = no.textContent;
+    // trechos [início, fim) de palavras novas, unindo as que só têm espaço/pontuação/palavra comum entre si
+    const trechos = [];
+    for (const m of texto.matchAll(PALAVRA)) {
+      if (!nova(m[0])) continue;
+      const ini = m.index, fim = m.index + m[0].length;
+      const ultimo = trechos[trechos.length - 1];
+      const meio = ultimo ? texto.slice(ultimo[1], ini) : "";
+      const soLigacao = ultimo && (meio.match(PALAVRA) || []).every((w) => PALAVRAS_COMUNS.has(semAcento(w)) || semAcento(w).length < 3);
+      if (soLigacao && meio.length <= 12) ultimo[1] = fim;
+      else trechos.push([ini, fim]);
+    }
+    if (!trechos.length) continue;
+    const frag = document.createDocumentFragment();
+    let pos = 0;
+    for (const [ini, fim] of trechos) {
+      if (ini > pos) frag.append(texto.slice(pos, ini));
+      frag.append(el("mark", "ia", texto.slice(ini, fim)));
+      marcadas++;
+      pos = fim;
+    }
+    if (pos < texto.length) frag.append(texto.slice(pos));
+    no.replaceWith(frag);
+  }
+  return marcadas;
 }
 
 function telaResultado(p, rascunho) {
   const g = cvGerado;
   const c = corpoCv();
+  const original = String(g.textoOriginal || p.cvTexto || "").trim();
+  let modelo = MODELOS.some(([id]) => id === g.modeloSugerido) ? g.modeloSugerido : "classico";
+  let destacar = true;
 
-  // Duas abas: primeiro o que a IA mudou, depois o CV final (editável) para baixar.
+  // Três abas: o que mudou, antes e depois lado a lado, e o CV final (editável) para baixar.
   const abas = el("div", "cv-abas");
   abas.setAttribute("role", "tablist");
-  const abaRevisao = el("div", "cv-painel");
+  const abaMudou = el("div", "cv-painel");
+  const abaCompara = el("div", "cv-painel");
   const abaCv = el("div", "cv-painel");
-  const botoesAba = [["1. O que a IA fez", abaRevisao], ["2. CV final", abaCv]].map(([texto, painel]) => {
+  const botoesAba = [["1. O que a IA mudou", abaMudou], ["2. Antes e depois", abaCompara], ["3. CV final", abaCv]].map(([texto, painel]) => {
     const b = botao(texto, "chip", () => mostrar(painel));
     b.setAttribute("role", "tab");
     abas.append(b);
     return [b, painel];
   });
   function mostrar(painel) {
-    botoesAba.forEach(([b, p]) => { b.setAttribute("aria-pressed", String(p === painel)); b.setAttribute("aria-selected", String(p === painel)); p.hidden = p !== painel; });
-    c.scrollTop = 0;
+    botoesAba.forEach(([b, pn]) => { b.setAttribute("aria-pressed", String(pn === painel)); b.setAttribute("aria-selected", String(pn === painel)); pn.hidden = pn !== painel; });
+    if (painel === abaCompara) montarComparacao();
     $("cv").querySelector(".cv-interno").scrollIntoView({ block: "start" });
   }
-  c.append(abas, abaRevisao, abaCv);
+  c.append(abas, abaMudou, abaCompara, abaCv);
 
-  // Aba 1: revisão
+  // ---- Aba 1: o que mudou ----
   const mudancas = (Array.isArray(g.mudancas) ? g.mudancas : []).filter((m) => m && (m.antes || m.depois));
-  const resumo = el("p", "cv-nota");
-  resumo.textContent = mudancas.length
-    ? `A IA fez ${mudancas.length} ${mudancas.length === 1 ? "mudança" : "mudanças"} no seu CV para esta vaga. Confira cada uma antes de enviar.`
-    : "A IA não detalhou as mudanças. Compare o CV final com o seu original antes de enviar.";
-  abaRevisao.append(resumo);
+  abaMudou.append(el("p", "cv-nota", mudancas.length
+    ? `A IA fez ${mudancas.length} ${mudancas.length === 1 ? "mudança" : "mudanças"} no seu CV para esta vaga. Em verde está o que ela colocou.`
+    : "A IA não detalhou as mudanças. Veja a aba \"Antes e depois\" para comparar."));
 
   const conferir = lista(g.conferir);
   if (conferir.length) {
@@ -551,7 +638,7 @@ function telaResultado(p, rascunho) {
     const ul = el("ul");
     conferir.forEach((t) => ul.append(el("li", null, t)));
     box.append(ul);
-    abaRevisao.append(box);
+    abaMudou.append(box);
   }
 
   if (mudancas.length) {
@@ -562,32 +649,85 @@ function telaResultado(p, rascunho) {
       const cab = el("div", "cv-mudanca-cab");
       cab.append(el("span", `selo tipo-${m.tipo}`, rotuloTipo[m.tipo] || "Mudado"), el("span", "cv-secao-nome", m.secao || ""));
       li.append(cab);
-      if (m.antes) { const d = el("div", "cv-antes"); d.append(el("b", null, "Antes"), el("span", null, m.antes)); li.append(d); }
-      if (m.depois) { const d = el("div", "cv-depois"); d.append(el("b", null, "Depois"), el("span", null, m.depois)); li.append(d); }
+      if (m.depois) { const d = el("div", "cv-depois"); d.append(el("b", null, "Ficou"), el("span", null, m.depois)); li.append(d); }
+      else if (m.tipo !== "removido") { const d = el("div", "cv-depois"); d.append(el("b", null, "Ficou"), el("span", "cv-vazio", "Veja na aba \"CV final\", destacado em verde.")); li.append(d); }
+      if (m.antes) { const d = el("div", "cv-antes"); d.append(el("b", null, "Era"), el("span", null, m.antes)); li.append(d); }
       if (m.motivo) li.append(el("p", "cv-motivo", `Por quê: ${m.motivo}`));
       ul.append(li);
     });
-    abaRevisao.append(ul);
-  } else if (lista(g.ajustes).length) {
-    abaRevisao.append(listaReq("O que foi ajustado", lista(g.ajustes)));
+    abaMudou.append(ul);
   }
 
   const la = listaReq("Requisitos que o CV não mostra", lista(g.lacunas));
-  if (la) { la.classList.add("cv-lacunas"); abaRevisao.append(la); }
+  if (la) { la.classList.add("cv-lacunas"); abaMudou.append(la); }
 
-  const acoesRev = el("div", "cv-acoes");
-  acoesRev.append(
-    botao("Está certo, ver o CV final", "btn primario", () => mostrar(abaCv)),
+  const acoesMudou = el("div", "cv-acoes");
+  acoesMudou.append(
+    botao("Ver antes e depois", "btn primario", () => mostrar(abaCompara)),
+    botao("Ir para o CV final", "btn", () => mostrar(abaCv)),
     botao("Voltar e editar meus dados", "btn", () => { telaDados(); restaurar(rascunho); }),
   );
-  abaRevisao.append(acoesRev);
+  abaMudou.append(acoesMudou);
 
-  // Aba 2: CV final, editável
-  abaCv.append(el("p", "cv-nota", "Clique em qualquer texto do CV para corrigir. O PDF sai do jeito que estiver aqui."));
-  const folha = folhaCv(p, g);
-  folha.id = "cv-folha";
-  folha.contentEditable = "true";
-  folha.spellcheck = true;
+  // ---- Aba 2: antes e depois lado a lado ----
+  function montarComparacao() {
+    abaCompara.textContent = "";
+    abaCompara.append(el("p", "cv-nota", "À esquerda, seu CV como estava. À direita, o CV adaptado: o que está em verde foi a IA que colocou."));
+    const grade = el("div", "cv-compara");
+    const antes = el("div", "cv-coluna");
+    antes.append(el("h4", null, "Seu CV original"));
+    antes.append(original ? el("pre", "cv-original", original) : el("p", "cv-nota", "Seu CV veio em PDF e a IA não devolveu o texto dele. Compare pelas mudanças na aba 1."));
+    const depois = el("div", "cv-coluna");
+    depois.append(el("h4", null, "CV adaptado"));
+    const copia = folhaCv(p, g, modelo);
+    copia.classList.add("folha-mini");
+    if (original) marcarNovidades(copia, original);
+    depois.append(copia);
+    grade.append(antes, depois);
+    abaCompara.append(grade);
+    const acoes = el("div", "cv-acoes");
+    acoes.append(botao("Ir para o CV final", "btn primario", () => mostrar(abaCv)));
+    abaCompara.append(acoes);
+  }
+
+  // ---- Aba 3: CV final com modelos, destaque e edição ----
+  const opcoes = el("div", "cv-opcoes");
+  const escolha = el("div", "cv-modelos");
+  escolha.setAttribute("role", "group");
+  escolha.setAttribute("aria-label", "Modelo do CV");
+  escolha.append(el("span", "cv-opcoes-rotulo", "Modelo"));
+  const botoesModelo = MODELOS.map(([id, nome]) => {
+    const b = botao(nome + (id === g.modeloSugerido ? " ★" : ""), "chip", () => trocarModelo(id));
+    if (id === g.modeloSugerido) b.title = g.motivoModelo ? `Sugerido pela IA: ${g.motivoModelo}` : "Sugerido pela IA";
+    escolha.append(b);
+    return [id, b];
+  });
+  const rotuloDestaque = el("label", "marcar");
+  const chkDestaque = el("input");
+  chkDestaque.type = "checkbox";
+  chkDestaque.checked = destacar;
+  chkDestaque.addEventListener("change", () => { destacar = chkDestaque.checked; folha.classList.toggle("sem-destaque", !destacar); });
+  rotuloDestaque.append(chkDestaque, " Destacar o que a IA colocou");
+  opcoes.append(escolha, rotuloDestaque);
+  abaCv.append(opcoes);
+  if (g.modeloSugerido && g.motivoModelo) abaCv.append(el("p", "cv-nota", `★ Modelo sugerido pela IA: ${g.motivoModelo}`));
+  abaCv.append(el("p", "cv-nota", "Clique em qualquer texto do CV para corrigir. O destaque verde não sai no PDF."));
+
+  let folha = null;
+  const lugarFolha = el("div");
+  function trocarModelo(id) {
+    modelo = id;
+    botoesModelo.forEach(([m, b]) => b.setAttribute("aria-pressed", String(m === id)));
+    folha = folhaCv(p, g, modelo);
+    folha.id = "cv-folha";
+    folha.contentEditable = "true";
+    folha.spellcheck = true;
+    if (original) marcarNovidades(folha, original);
+    folha.classList.toggle("sem-destaque", !destacar);
+    lugarFolha.replaceChildren(folha);
+  }
+  trocarModelo(modelo);
+
   const acoes = el("div", "cv-acoes");
   acoes.append(
     botao("Baixar PDF", "btn primario", () => imprimir(p)),
@@ -595,11 +735,11 @@ function telaResultado(p, rascunho) {
       try { await navigator.clipboard.writeText(folha.innerText); avisar("Texto do CV copiado."); }
       catch { avisar("Não consegui copiar."); }
     }),
-    botao("Rever mudanças", "btn", () => mostrar(abaRevisao)),
+    botao("Rever mudanças", "btn", () => mostrar(abaMudou)),
   );
-  abaCv.append(acoes, folha);
+  abaCv.append(acoes, lugarFolha);
 
-  mostrar(abaRevisao);
+  mostrar(abaMudou);
 }
 
 function imprimir(p) {
@@ -608,6 +748,7 @@ function imprimir(p) {
   const copia = $("cv-folha").cloneNode(true);
   copia.removeAttribute("id");
   copia.removeAttribute("contenteditable");
+  copia.querySelectorAll("mark.ia").forEach((m) => m.replaceWith(m.textContent)); // destaque não vai para o PDF
   alvo.append(copia);
   const tituloAntes = document.title;
   document.title = ["CV", p.nome, cvVaga.empresa].filter(Boolean).join(" - "); // vira o nome do arquivo PDF
