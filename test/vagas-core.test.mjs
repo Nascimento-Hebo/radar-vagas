@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   classificarArea, classificarNivel, classificarRegime, classificarModelo, extrairEmpresa,
-  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata,
+  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata, soNoExterior,
 } from "../scripts/vagas-core.mjs";
 
 const config = {
@@ -145,4 +145,14 @@ test("Greenhouse: só vagas de dev no Brasil", () => {
   assert.equal(v.empresa, "Inter");
   assert.equal(deVagaGreenhouse({ ...job, location: { name: "Barcelona" } }), null);
   assert.equal(deVagaGreenhouse({ ...job, title: "Executivo(a) Comercial Externo | Goiânia/GO" }), null);
+});
+
+test("vaga só para quem mora fora do Brasil fica de fora; com todo local aceito, presencial em SP passa", () => {
+  assert.equal(soNoExterior({ local: "Cidade do México, México" }), true);
+  assert.equal(soNoExterior({ local: "somente EUA/Canadá" }), true);
+  assert.equal(soNoExterior({ local: "São Paulo ou Remoto, Brasil" }), false);
+  const base = { area: "Back-end", nivel: "Pleno", regime: "CLT", titulo: "Dev" };
+  const todos = { ...config.filtros, aceitarQualquerLocal: true };
+  assert.equal(aceitaVaga({ ...base, modelo: "Presencial", local: "São Paulo - São Paulo" }, todos), true);
+  assert.equal(aceitaVaga({ ...base, modelo: "Remoto", local: "Cidade do México, México" }, todos), false);
 });

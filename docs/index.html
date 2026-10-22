@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
   <a class="pular" href="#vagas">Pular para as vagas</a>
@@ -107,7 +107,9 @@
               <option value="CLT">CLT</option>
             </select>
           </label>
-          <label class="marcar"><input type="checkbox" id="f-remoto"> Só 100% remoto</label>
+          <label class="seletor">Local
+            <select id="f-local"><option value="todos">Qualquer lugar</option></select>
+          </label>
           <label class="marcar"><input type="checkbox" id="f-salario"> Só com salário</label>
           <label class="marcar"><input type="checkbox" id="f-ocultar"> Esconder as que já me candidatei</label>
           <label class="seletor ordem">Ordenar
@@ -214,7 +216,7 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=11"></script>
-  <script src="cv.js?v=11"></script>
+  <script src="app.js?v=12"></script>
+  <script src="cv.js?v=12"></script>
 </body>
 </html>

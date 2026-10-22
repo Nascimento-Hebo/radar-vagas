@@ -1,7 +1,7 @@
 {
   "maxDiasPublicacao": 45,
   "diasParaApagarEncerradas": 14,
-  "limiteVagas": 120,
+  "limiteVagas": 300,
 
   "github": {
     "repositorios": [
@@ -42,6 +42,7 @@
   "filtros": {
     "areas": ["Front-end", "Full-stack", "Back-end"],
     "aceitarEstagio": false,
+    "aceitarQualquerLocal": true,
     "estadoPresencial": "PR",
     "cidadesPresencial": ["Curitiba", "Ponta Grossa", "Londrina", "Maringá", "Cascavel", "São José dos Pinhais", "Pinhais", "Foz do Iguaçu"]
   },
