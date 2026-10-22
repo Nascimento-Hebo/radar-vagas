@@ -1,0 +1,282 @@
+// Central de e-mail: lê o Gmail da pessoa (só leitura) e mostra apenas as conversas com as empresas
+// das candidaturas dela. A IA classifica cada e-mail, sugere a etapa da candidatura e escreve respostas.
+// Os e-mails não são guardados em lugar nenhum: ficam só na memória desta aba.
+
+const EMAIL_DIAS = 120;          // quanto tempo para trás procurar
+const EMAIL_MAX = 60;            // quantas mensagens trazer no máximo
+const EMAIL_IA_MAX = 30;         // quantas mensagens a IA analisa de uma vez
+const QUADROS_DE_VAGA = /(^|\.)(github\.com|gupy\.io|greenhouse\.io|lever\.co|linkedin\.com|indeed\.com|programathor\.com\.br|vagas\.com\.br|catho\.com\.br)$/i;
+
+let emailEstado = { mensagens: null, analises: {}, carregando: false, erro: "", empresas: [] };
+
+// Empresas das candidaturas e as palavras que identificam cada uma num e-mail
+function empresasDasCandidaturas() {
+  const mapa = new Map();
+  for (const [id, c] of Object.entries(candidaturas)) {
+    const nome = String(c.empresa || "").trim();
+    let host = "";
+    try { host = new URL(c.link).hostname.replace(/^www\./, ""); } catch {}
+    const termos = new Set();
+    if (nome.length >= 3) termos.add(nome);
+    // vaga da Gupy: "empresa.gupy.io" -> "empresa"
+    const sub = host.match(/^([a-z0-9-]+)\.(gupy\.io|greenhouse\.io|lever\.co)$/i);
+    if (sub) termos.add(sub[1]);
+    // site próprio da empresa: o domínio identifica quem manda o e-mail
+    else if (host && !QUADROS_DE_VAGA.test(host)) termos.add(host);
+    if (!termos.size) continue;
+    const chave = semAcento(nome || [...termos][0]);
+    const atual = mapa.get(chave) || { nome: nome || [...termos][0], termos: new Set(), candidaturas: [] };
+    termos.forEach((t) => atual.termos.add(t));
+    atual.candidaturas.push(id);
+    mapa.set(chave, atual);
+  }
+  return [...mapa.values()].map((e) => ({ ...e, termos: [...e.termos] }));
+}
+
+const cabecalho = (msg, nome) => (msg.payload?.headers || []).find((h) => h.name.toLowerCase() === nome.toLowerCase())?.value || "";
+
+function decodificar(dados) {
+  try {
+    const bin = atob(String(dados).replace(/-/g, "+").replace(/_/g, "/"));
+    return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+  } catch { return ""; }
+}
+function textoDoCorpo(payload) {
+  const partes = [];
+  (function andar(p) {
+    if (!p) return;
+    if (p.mimeType === "text/plain" && p.body?.data) partes.push({ tipo: "texto", v: decodificar(p.body.data) });
+    else if (p.mimeType === "text/html" && p.body?.data) partes.push({ tipo: "html", v: decodificar(p.body.data) });
+    (p.parts || []).forEach(andar);
+  })(payload);
+  const texto = partes.find((p) => p.tipo === "texto")?.v;
+  if (texto) return texto.trim();
+  const html = partes.find((p) => p.tipo === "html")?.v || "";
+  const d = new DOMParser().parseFromString(html, "text/html");
+  return (d.body?.innerText || d.body?.textContent || "").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+async function emLotes(itens, tamanho, fn) {
+  const saida = [];
+  for (let i = 0; i < itens.length; i += tamanho) saida.push(...await Promise.all(itens.slice(i, i + tamanho).map(fn)));
+  return saida;
+}
+
+async function buscarEmails() {
+  const nuvem = window.radarNuvem;
+  const empresas = empresasDasCandidaturas();
+  emailEstado = { ...emailEstado, empresas, carregando: true, erro: "", mensagens: null, analises: {} };
+  renderPainel();
+  try {
+    if (!empresas.length) { emailEstado.mensagens = []; return; }
+    const termos = empresas.flatMap((e) => e.termos).map((t) => (/\s/.test(t) ? `"${t}"` : t));
+    const q = `newer_than:${EMAIL_DIAS}d -in:chats (${termos.join(" OR ")})`;
+    const lista = await nuvem.gmail(`messages?maxResults=${EMAIL_MAX}&q=${encodeURIComponent(q)}`);
+    const ids = (lista.messages || []).map((m) => m.id);
+    const brutas = await emLotes(ids, 8, (id) => nuvem.gmail(`messages/${id}?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date`));
+    // Filtro final: só fica o que cita uma das empresas no remetente, assunto ou começo do texto
+    emailEstado.mensagens = brutas.map((m) => {
+      const de = cabecalho(m, "From"), assunto = cabecalho(m, "Subject");
+      const alvo = semAcento(`${de} ${assunto} ${m.snippet || ""}`);
+      const empresa = empresas.find((e) => e.termos.some((t) => alvo.includes(semAcento(t))));
+      return empresa && { id: m.id, threadId: m.threadId, de, assunto, data: Number(m.internalDate), trecho: m.snippet || "", empresa: empresa.nome, candidaturas: empresa.candidaturas };
+    }).filter(Boolean).sort((a, b) => b.data - a.data);
+  } catch (e) {
+    emailEstado.erro = e.message || String(e);
+    if (e.codigo === "gmail-desconectado") emailEstado.mensagens = null;
+  } finally {
+    emailEstado.carregando = false;
+    renderPainel();
+  }
+  if (emailEstado.mensagens?.length) analisarEmails();
+}
+
+// A IA lê assunto + trecho de cada e-mail e diz o que aconteceu no processo
+async function analisarEmails() {
+  const msgs = emailEstado.mensagens.slice(0, EMAIL_IA_MAX);
+  emailEstado.analisando = true;
+  renderPainel();
+  const etapas = ETAPAS.map(([id, nome]) => `${id} (${nome})`).join(", ");
+  const pedido = `Você ajuda uma pessoa a acompanhar processos seletivos de tecnologia no Brasil.
+Para cada e-mail abaixo (enviado por empresas onde ela se candidatou), diga o que ele significa para a candidatura.
+
+E-mails (JSON): ${JSON.stringify(msgs.map((m) => ({ id: m.id, empresa: m.empresa, de: m.de, assunto: m.assunto, trecho: m.trecho, data: new Date(m.data).toISOString().slice(0, 10) })))}
+
+Etapas possíveis: ${etapas}.
+Responda só com JSON:
+{ "analises": [{ "id": "id do e-mail", "tipo": "entrevista" | "teste" | "proposta" | "recusa" | "confirmacao" | "pedido_info" | "outro", "etapa": "id da etapa ou null se o e-mail não muda a etapa", "resumo": "1 frase", "acao": "o que a pessoa deve fazer agora, ou vazio", "prazo": "data ou horário citado, ou vazio" }] }
+Não invente: se o trecho não deixa claro, use "outro" e etapa null.`;
+  try {
+    const r = JSON.parse(String(await window.radarNuvem.gerarIA([{ text: pedido }], { json: true })).replace(/```(json)?/g, ""));
+    for (const a of r.analises || []) if (a?.id) emailEstado.analises[a.id] = a;
+  } catch (e) {
+    emailEstado.erroIA = e.message || String(e);
+  } finally {
+    emailEstado.analisando = false;
+    renderPainel();
+  }
+}
+
+const ROTULO_TIPO = { entrevista: "Entrevista", teste: "Teste técnico", proposta: "Proposta", recusa: "Não avançou", confirmacao: "Recebemos sua candidatura", pedido_info: "Pedem informações", outro: "Outro" };
+const ORDEM_ETAPA = Object.fromEntries(ETAPAS.map(([id], i) => [id, i]));
+
+function painelEmails(c) {
+  const nuvem = window.radarNuvem;
+  c.append(el("p", "painel-nota", "Só aparecem e-mails que citam as empresas das suas candidaturas. Os e-mails são lidos direto do seu Gmail, só nesta aba, e não ficam guardados em lugar nenhum."));
+
+  if (!nuvem?.usuario) { c.append(el("p", "painel-vazio", "Entre na sua conta para usar a central de e-mail.")); return; }
+  const empresas = empresasDasCandidaturas();
+  if (!empresas.length) {
+    c.append(el("p", "painel-vazio", "Marque \"Já me candidatei\" em pelo menos uma vaga. A central procura os e-mails das empresas dessas candidaturas."));
+    return;
+  }
+  const lista = el("p", "email-empresas");
+  lista.append(el("span", null, "Empresas acompanhadas: "), empresas.map((e) => e.nome).join(" · "));
+  c.append(lista);
+
+  if (!nuvem.gmailConectado()) {
+    const caixa = el("div", "email-conectar");
+    caixa.innerHTML = svg('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>');
+    const txt = el("div");
+    txt.append(el("strong", null, "Conecte seu Gmail"), el("p", null, "Permissão só de leitura. O acesso vale por 1 hora; depois é só conectar de novo."));
+    const b = el("button", "btn primario", "Conectar meu Gmail");
+    b.type = "button";
+    b.addEventListener("click", async () => {
+      b.disabled = true;
+      try { await nuvem.conectarGmail(); buscarEmails(); }
+      catch (e) { avisar(nuvem.mensagemErro(e)); b.disabled = false; }
+    });
+    caixa.append(txt, b);
+    c.append(caixa);
+    if (emailEstado.erro) c.append(el("p", "cv-erro", emailEstado.erro));
+    return;
+  }
+
+  const barra = el("div", "email-barra");
+  const atualizar = el("button", "btn pequeno", emailEstado.carregando ? "Buscando…" : "Atualizar");
+  atualizar.type = "button";
+  atualizar.disabled = emailEstado.carregando;
+  atualizar.addEventListener("click", buscarEmails);
+  const desligar = el("button", "link-btn", "Desconectar Gmail");
+  desligar.type = "button";
+  desligar.addEventListener("click", () => { nuvem.desconectarGmail(); emailEstado.mensagens = null; renderPainel(); });
+  barra.append(atualizar, desligar);
+  c.append(barra);
+
+  if (emailEstado.mensagens === null && !emailEstado.carregando && !emailEstado.erro) { buscarEmails(); return; }
+  if (emailEstado.carregando) { const p = el("p", "cv-carregando"); p.append(el("span", "cv-spin"), "Procurando e-mails das suas empresas…"); c.append(p); return; }
+  if (emailEstado.erro) { c.append(el("p", "cv-erro", emailEstado.erro)); return; }
+  if (!emailEstado.mensagens.length) { c.append(el("p", "painel-vazio", `Nenhum e-mail dessas empresas nos últimos ${EMAIL_DIAS} dias.`)); return; }
+
+  // Sugestões da IA: etapas que avançaram
+  const sugestoes = [];
+  for (const m of emailEstado.mensagens) {
+    const a = emailEstado.analises[m.id];
+    if (!a?.etapa || !NOME_ETAPA[a.etapa]) continue;
+    for (const cid of m.candidaturas) {
+      const cand = candidaturas[cid];
+      if (cand && cand.etapa !== a.etapa && ORDEM_ETAPA[a.etapa] > ORDEM_ETAPA[cand.etapa] && !sugestoes.some((s) => s.cid === cid)) sugestoes.push({ cid, cand, etapa: a.etapa, m, a });
+    }
+  }
+  if (emailEstado.analisando) { const p = el("p", "cv-carregando"); p.append(el("span", "cv-spin"), "A IA está lendo os e-mails…"); c.append(p); }
+  if (emailEstado.erroIA) c.append(el("p", "cv-nota", `A IA não conseguiu analisar agora: ${emailEstado.erroIA}`));
+  if (sugestoes.length) {
+    const box = el("section", "email-sugestoes");
+    box.append(el("h3", null, "A IA encontrou novidades nas suas candidaturas"));
+    sugestoes.forEach((s) => {
+      const linha = el("div", "email-sugestao");
+      linha.append(el("span", null, `${s.cand.titulo || "Vaga"}${s.cand.empresa ? ` · ${s.cand.empresa}` : ""}: ${NOME_ETAPA[s.cand.etapa]} → ${NOME_ETAPA[s.etapa]}. ${s.a.resumo || ""}`));
+      const b = el("button", "btn pequeno primario", `Mudar para ${NOME_ETAPA[s.etapa]}`);
+      b.type = "button";
+      b.addEventListener("click", () => {
+        s.cand.etapa = s.etapa;
+        s.cand.atualizadaEm = hojeLocal();
+        if (s.a.acao) s.cand.nota = [s.cand.nota, `${fmtData(new Date(s.m.data).toISOString())}: ${s.a.acao}`].filter(Boolean).join("\n");
+        salvarCandidaturas();
+        render();
+        renderPainel();
+        avisar(`Candidatura atualizada para ${NOME_ETAPA[s.etapa]}.`);
+      });
+      linha.append(b);
+      box.append(linha);
+    });
+    c.append(box);
+  }
+
+  // E-mails agrupados por empresa
+  const porEmpresa = new Map();
+  emailEstado.mensagens.forEach((m) => porEmpresa.set(m.empresa, [...(porEmpresa.get(m.empresa) || []), m]));
+  for (const [empresa, msgs] of porEmpresa) {
+    const grupo = el("section", "email-grupo");
+    grupo.append(el("h3", null, `${empresa} (${msgs.length})`));
+    msgs.forEach((m) => grupo.append(cartaoEmail(m)));
+    c.append(grupo);
+  }
+}
+
+function cartaoEmail(m) {
+  const a = emailEstado.analises[m.id];
+  const d = el("details", "email");
+  const s = el("summary");
+  const topo = el("div", "email-topo");
+  topo.append(el("strong", null, m.assunto || "(sem assunto)"), el("span", "email-data", new Date(m.data).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })));
+  s.append(topo, el("span", "email-de", m.de.replace(/<.*>/, "").trim() || m.de));
+  if (a) {
+    const ia = el("div", "email-ia");
+    ia.append(el("span", `selo tipo-${a.tipo}`, ROTULO_TIPO[a.tipo] || "Outro"), el("span", null, [a.resumo, a.prazo && `Prazo: ${a.prazo}`].filter(Boolean).join(" · ")));
+    s.append(ia);
+    if (a.acao) s.append(el("span", "email-acao", `Próximo passo: ${a.acao}`));
+  } else s.append(el("span", "email-trecho", m.trecho));
+  d.append(s);
+
+  const corpo = el("div", "email-corpo");
+  d.addEventListener("toggle", async () => {
+    if (!d.open || corpo.dataset.carregado) return;
+    corpo.dataset.carregado = "1";
+    corpo.append(el("p", "cv-nota", "Abrindo o e-mail…"));
+    try {
+      const completo = await window.radarNuvem.gmail(`messages/${m.id}?format=full`);
+      m.corpo = textoDoCorpo(completo.payload) || m.trecho;
+      corpo.textContent = "";
+      corpo.append(el("pre", "email-texto", m.corpo.slice(0, 6000)));
+      const acoes = el("div", "cv-acoes");
+      const responder = el("button", "btn pequeno primario", "IA: sugerir resposta");
+      responder.type = "button";
+      responder.addEventListener("click", () => sugerirResposta(m, corpo, responder));
+      const abrir = el("a", "btn pequeno", "Abrir no Gmail");
+      abrir.href = `https://mail.google.com/mail/u/0/#all/${m.threadId}`;
+      abrir.target = "_blank";
+      abrir.rel = "noopener noreferrer";
+      acoes.append(responder, abrir);
+      corpo.append(acoes);
+    } catch (e) {
+      corpo.textContent = "";
+      corpo.append(el("p", "cv-erro", e.message || String(e)));
+      delete corpo.dataset.carregado;
+    }
+  });
+  d.append(corpo);
+  return d;
+}
+
+async function sugerirResposta(m, corpo, botaoIA) {
+  botaoIA.disabled = true;
+  botaoIA.textContent = "Escrevendo…";
+  const nome = ler("radar-vagas:perfil", {}).nome || "";
+  const pedido = `Escreva uma resposta curta, educada e profissional, em português do Brasil, para este e-mail de um processo seletivo.
+Quem responde: ${nome || "a pessoa candidata"}. Empresa: ${m.empresa}.
+Assunto: ${m.assunto}
+E-mail recebido:
+${String(m.corpo || m.trecho).slice(0, 5000)}
+
+Regras: confirme datas/horários se houver, responda ao que foi pedido, não invente informações (use [colchetes] onde a pessoa precisa completar). Só o texto da resposta, sem assunto.`;
+  try {
+    const texto = await window.radarNuvem.gerarIA([{ text: pedido }]);
+    corpo.append(blocoCopiavel("Resposta sugerida", String(texto).trim())); // blocoCopiavel em cv.js
+  } catch (e) {
+    avisar(e.message || String(e));
+  } finally {
+    botaoIA.disabled = false;
+    botaoIA.textContent = "IA: sugerir resposta";
+  }
+}

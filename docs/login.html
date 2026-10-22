@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar · Radar de Vagas · OH Tech</title>
+  <meta name="description" content="Entre no Radar de Vagas da OH Tech: vagas de tecnologia todo dia e CV adaptado por IA.">
+  <meta name="theme-color" content="#0a0f1d">
+  <script>
+    try { var t = JSON.parse(localStorage.getItem("radar-vagas:tema")); } catch (e) {}
+    document.documentElement.dataset.tema = t || (matchMedia("(prefers-color-scheme: light)").matches ? "claro" : "escuro");
+  </script>
+  <link rel="icon" type="image/png" href="oh-tech-icone.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta property="og:title" content="Radar de Vagas · OH Tech">
+  <meta property="og:description" content="Vagas de tecnologia atualizadas todo dia e CV adaptado por IA para cada vaga.">
+  <meta property="og:image" content="https://nascimento-hebo.github.io/radar-vagas/og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css?v=13">
+</head>
+<body class="pagina-login">
+  <main class="login">
+    <section class="login-lado" aria-hidden="true">
+      <img class="logo-escuro" src="oh-tech-logo.png" alt="" width="600" height="171">
+      <img class="logo-claro" src="oh-tech-logo-claro.png" alt="" width="600" height="171">
+      <h2>Sua próxima vaga já está no radar.</h2>
+      <ul class="login-beneficios">
+        <li>Vagas de front-end, full-stack e back-end, atualizadas todo dia às 7:15</li>
+        <li>CV adaptado por IA para cada vaga, com cada mudança explicada</li>
+        <li>Acompanhamento das candidaturas, do envio até a proposta</li>
+        <li>E-mails das empresas organizados num só lugar</li>
+      </ul>
+      <div class="radar login-radar">
+        <div class="radar-escala"></div>
+        <div class="radar-anel a1"></div><div class="radar-anel a2"></div><div class="radar-anel a3"></div>
+        <div class="radar-eixo h"></div><div class="radar-eixo v"></div>
+        <div class="radar-varredura"></div>
+        <div class="radar-centro"></div>
+      </div>
+    </section>
+
+    <section class="login-caixa" aria-labelledby="login-titulo">
+      <div class="login-marca">
+        <img class="logo-escuro" src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
+        <img class="logo-claro" src="oh-tech-logo-claro.png" alt="OH Tech Technology" width="600" height="171">
+      </div>
+      <h1 id="login-titulo">Entrar no Radar de Vagas</h1>
+      <p class="sub" id="login-sub">Use sua conta Google ou seu e-mail. É grátis.</p>
+
+      <button type="button" class="btn-google" id="google">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.28-3.14.76-4.59l-7.98-6.19A23.94 23.94 0 0 0 0 24c0 3.87.92 7.53 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Continuar com Google
+      </button>
+
+      <div class="ou"><span>ou com e-mail</span></div>
+
+      <div class="login-abas" role="tablist">
+        <button type="button" role="tab" class="login-aba" data-modo="entrar" aria-selected="true">Entrar</button>
+        <button type="button" role="tab" class="login-aba" data-modo="criar" aria-selected="false">Criar conta</button>
+      </div>
+
+      <form class="login-form" id="form" novalidate>
+        <label class="campo" id="campo-nome" hidden>
+          <span>Seu nome</span>
+          <input id="nome" type="text" autocomplete="name">
+        </label>
+        <label class="campo">
+          <span>E-mail</span>
+          <input id="email" type="email" autocomplete="email" required>
+        </label>
+        <label class="campo">
+          <span>Senha</span>
+          <input id="senha" type="password" autocomplete="current-password" minlength="6" required>
+        </label>
+        <p class="login-erro" id="erro" role="alert" hidden></p>
+        <p class="login-ok" id="ok" role="status" hidden></p>
+        <button type="submit" class="btn primario grande" id="enviar">Entrar</button>
+        <button type="button" class="link-btn" id="esqueci">Esqueci minha senha</button>
+      </form>
+
+      <p class="login-privacidade">Ao entrar, suas candidaturas e CVs ficam guardados na sua conta. Só você e o administrador do sistema têm acesso. A IA usa o texto da vaga e do seu CV para gerar respostas.</p>
+    </section>
+  </main>
+
+  <script type="module">
+    import "./firebase.js?v=13";
+    const $ = (id) => document.getElementById(id);
+    const nuvem = window.radarNuvem;
+    const volta = new URLSearchParams(location.search).get("volta") || "index.html";
+    const destino = /^[\w./-]+(\?[\w=&%-]*)?$/.test(volta) && !volta.includes("//") ? volta : "index.html"; // só páginas deste site
+    let modo = "entrar";
+
+    window.addEventListener("radar:usuario", (e) => { if (e.detail.usuario) location.replace(destino); });
+
+    function mostrar(tipo, texto) {
+      $("erro").hidden = tipo !== "erro";
+      $("ok").hidden = tipo !== "ok";
+      $(tipo).textContent = texto;
+    }
+    function ocupado(sim) {
+      document.querySelectorAll("button").forEach((b) => { b.disabled = sim; });
+    }
+    function trocarModo(m) {
+      modo = m;
+      document.querySelectorAll(".login-aba").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.modo === m)));
+      $("campo-nome").hidden = m !== "criar";
+      $("enviar").textContent = m === "criar" ? "Criar conta" : "Entrar";
+      $("senha").autocomplete = m === "criar" ? "new-password" : "current-password";
+      $("esqueci").hidden = m === "criar";
+      mostrar("", "");
+    }
+    document.querySelectorAll(".login-aba").forEach((b) => b.addEventListener("click", () => trocarModo(b.dataset.modo)));
+
+    $("google").addEventListener("click", async () => {
+      ocupado(true);
+      try { await nuvem.entrarComGoogle(); }
+      catch (e) { mostrar("erro", nuvem.mensagemErro(e)); ocupado(false); }
+    });
+
+    $("form").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const email = $("email").value.trim(), senha = $("senha").value;
+      if (!email || !senha) { mostrar("erro", "Preencha e-mail e senha."); return; }
+      ocupado(true);
+      try {
+        if (modo === "criar") await nuvem.criarConta($("nome").value.trim(), email, senha);
+        else await nuvem.entrarComEmail(email, senha);
+      } catch (e) { mostrar("erro", nuvem.mensagemErro(e)); ocupado(false); }
+    });
+
+    $("esqueci").addEventListener("click", async () => {
+      const email = $("email").value.trim();
+      if (!email) { mostrar("erro", "Digite seu e-mail acima e clique de novo em \"Esqueci minha senha\"."); $("email").focus(); return; }
+      try { await nuvem.recuperarSenha(email); mostrar("ok", "Enviamos um link para criar uma senha nova. Veja seu e-mail (e a caixa de spam)."); }
+      catch (e) { mostrar("erro", nuvem.mensagemErro(e)); }
+    });
+  </script>
+</body>
+</html>

@@ -28,9 +28,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
+  <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Conectando à sua conta…</div>
   <a class="pular" href="#vagas">Pular para as vagas</a>
   <header class="topo-site">
     <div class="topo-dentro">
@@ -48,6 +49,7 @@
           Minha área <span class="contador" id="abrir-painel-n"></span>
         </button>
         <button type="button" class="icone-btn" id="tema"></button>
+        <div class="conta" id="conta"></div>
       </div>
     </div>
   </header>
@@ -209,6 +211,7 @@
       </div>
       <div class="painel-abas" role="tablist" aria-label="Seções da minha área">
         <button type="button" class="painel-aba" role="tab" data-aba="candidaturas">Candidaturas <span class="contador" id="painel-n-cand"></span></button>
+        <button type="button" class="painel-aba" role="tab" data-aba="emails">E-mails das empresas</button>
         <button type="button" class="painel-aba" role="tab" data-aba="cvs">CVs gerados <span class="contador" id="painel-n-cvs"></span></button>
         <button type="button" class="painel-aba" role="tab" data-aba="dados">Meus dados</button>
       </div>
@@ -216,7 +219,31 @@
     </div>
   </dialog>
 
-  <script src="app.js?v=12"></script>
-  <script src="cv.js?v=12"></script>
+  <!-- Suporte com IA -->
+  <button type="button" class="suporte-btn" id="suporte-abrir" aria-controls="suporte">
+    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+    Ajuda
+  </button>
+  <section class="suporte" id="suporte" aria-label="Suporte com IA" hidden>
+    <header class="suporte-cab">
+      <div><strong>Suporte Radar</strong><span>Assistente com IA · responde na hora</span></div>
+      <button type="button" class="cv-x" id="suporte-fechar" aria-label="Fechar suporte">×</button>
+    </header>
+    <div class="suporte-msgs" id="suporte-msgs" aria-live="polite"></div>
+    <div class="suporte-sugestoes" id="suporte-sugestoes"></div>
+    <form class="suporte-form" id="suporte-form">
+      <label class="sr" for="suporte-texto">Sua pergunta</label>
+      <textarea id="suporte-texto" rows="1" placeholder="Pergunte qualquer coisa sobre o Radar…"></textarea>
+      <button type="submit" class="btn primario" aria-label="Enviar pergunta">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+      </button>
+    </form>
+  </section>
+
+  <script src="app.js?v=13"></script>
+  <script src="cv.js?v=13"></script>
+  <script src="email.js?v=13"></script>
+  <script src="suporte.js?v=13"></script>
+  <script type="module" src="firebase.js?v=13"></script>
 </body>
 </html>
