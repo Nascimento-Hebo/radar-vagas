@@ -1,13 +1,13 @@
 {
-  "atualizadoEm": "2026-10-21T15:52:42.365Z",
-  "dataRodada": "2026-10-21",
+  "atualizadoEm": "2026-10-22T03:30:56.013Z",
+  "dataRodada": "2026-10-22",
   "totais": {
-    "abertas": 94,
-    "novas": 0,
-    "encerradas": 0,
+    "abertas": 89,
+    "novas": 1,
+    "encerradas": 2,
     "porArea": {
       "Front-end": 8,
-      "Full-stack": 39,
+      "Full-stack": 34,
       "Back-end": 47
     }
   },
@@ -41,12 +41,14 @@
         "Testes automatizados e Git com revisão de código.",
         "Autonomia e IA: usar IA (Claude Code, Cursor ou similar) para ganhar produtividade, revisando e sabendo explicar tudo o que entrega."
       ],
+      "salario": "R$ 8.000",
       "link": "https://github.com/frontendbr/vagas/issues/8570",
       "fonte": "GitHub · frontendbr/vagas",
       "publicadaEm": "2026-10-17",
+      "repeticoes": 3,
       "prioridade": 7,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -78,160 +80,14 @@
         "Investigar um problema de ponta a ponta e explicar com clareza o que encontrou.",
         "Next.js."
       ],
+      "salario": "R$ 5.000",
       "link": "https://github.com/frontendbr/vagas/issues/8569",
       "fonte": "GitHub · frontendbr/vagas",
       "publicadaEm": "2026-10-17",
+      "repeticoes": 3,
       "prioridade": 7,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-backend-br-vagas-12472",
-      "titulo": "Full Stack Developer Pleno - Rotha IA",
-      "empresa": "Rotha IA",
-      "area": "Full-stack",
-      "nivel": "Júnior/Pleno",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "SQL",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
-        "Pelo menos 3 anos com desenvolvimento web, com pelo menos um sistema em produção usado por clientes.",
-        "Domínio de React e TypeScript, com experiência em Next.js.",
-        "PostgreSQL além do básico: modelagem, índices, consultas complexas e migrations.",
-        "Supabase (Auth, RLS e Edge Functions) ou stack equivalente.",
-        "APIs REST e webhooks.",
-        "Testes automatizados e Git com revisão de código.",
-        "Autonomia e IA: usar IA (Claude Code, Cursor ou similar) para ganhar produtividade, revisando e sabendo explicar tudo o que entrega."
-      ],
-      "link": "https://github.com/backend-br/vagas/issues/12472",
-      "fonte": "GitHub · backend-br/vagas",
-      "publicadaEm": "2026-10-17",
-      "prioridade": 7,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-backend-br-vagas-12471",
-      "titulo": "Full Stack Developer Júnior - Rotha IA",
-      "empresa": "Rotha IA",
-      "area": "Full-stack",
-      "nivel": "Júnior",
-      "regime": "PJ ou Freela",
-      "modelo": "Remoto",
-      "local": "Remoto",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "SQL",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
-        "Pelo menos 1 ano com React e TypeScript (emprego, freela ou projetos próprios publicados).",
-        "Banco de dados relacional e SQL (PostgreSQL ou Supabase).",
-        "Integração de APIs REST.",
-        "Git no dia a dia.",
-        "Autonomia e IA: saber gerenciar o estado da aplicação, fazer requisições HTTP e implementar autenticação, e usar IA (Claude Code, Cursor ou similar) para ganhar produtividade sem ficar dependente dela.",
-        "Investigar um problema de ponta a ponta e explicar com clareza o que encontrou.",
-        "Next.js."
-      ],
-      "link": "https://github.com/backend-br/vagas/issues/12471",
-      "fonte": "GitHub · backend-br/vagas",
-      "publicadaEm": "2026-10-17",
-      "prioridade": 7,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-react-brasil-vagas-3035",
-      "titulo": "Full Stack Developer (React) Pleno na Rotha IA",
-      "empresa": "Rotha IA",
-      "area": "Full-stack",
-      "nivel": "Júnior/Pleno",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "SQL",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
-        "Pelo menos 3 anos com desenvolvimento web, com pelo menos um sistema em produção usado por clientes.",
-        "Domínio de React e TypeScript, com experiência em Next.js.",
-        "PostgreSQL além do básico: modelagem, índices, consultas complexas e migrations.",
-        "Supabase (Auth, RLS e Edge Functions) ou stack equivalente.",
-        "APIs REST e webhooks.",
-        "Testes automatizados e Git com revisão de código.",
-        "Autonomia e IA: usar IA (Claude Code, Cursor ou similar) para ganhar produtividade, revisando e sabendo explicar tudo o que entrega."
-      ],
-      "link": "https://github.com/react-brasil/vagas/issues/3035",
-      "fonte": "GitHub · react-brasil/vagas",
-      "publicadaEm": "2026-10-17",
-      "prioridade": 7,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-react-brasil-vagas-3034",
-      "titulo": "Full Stack Developer (React) Júnior na Rotha IA",
-      "empresa": "Rotha IA",
-      "area": "Full-stack",
-      "nivel": "Júnior",
-      "regime": "PJ ou Freela",
-      "modelo": "Remoto",
-      "local": "Remoto",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "SQL",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
-        "Pelo menos 1 ano com React e TypeScript (emprego, freela ou projetos próprios publicados).",
-        "Banco de dados relacional e SQL (PostgreSQL ou Supabase).",
-        "Integração de APIs REST.",
-        "Git no dia a dia.",
-        "Autonomia e IA: saber gerenciar o estado da aplicação, fazer requisições HTTP e implementar autenticação, e usar IA (Claude Code, Cursor ou similar) para ganhar produtividade sem ficar dependente dela.",
-        "Investigar um problema de ponta a ponta e explicar com clareza o que encontrou.",
-        "Next.js."
-      ],
-      "link": "https://github.com/react-brasil/vagas/issues/3034",
-      "fonte": "GitHub · react-brasil/vagas",
-      "publicadaEm": "2026-10-17",
-      "prioridade": 7,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -261,12 +117,14 @@
         "Conhecimento de banco de dados PostgreSQL e DynamoDB.",
         "Conhecimento de ferramentas AWS (Lambda, S3, etc.)"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12474",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-19",
+      "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -296,12 +154,14 @@
         "Quando erra, reflete sobre o que aconteceu e demonstra aprendizado concreto na próxima entrega.",
         "Spring Boot e/ou Quarkus"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12444",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-13",
+      "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -324,13 +184,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://lamoda.gupy.io/job/eyJqb2JJZCI6MTI2OTExMDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-13",
       "prazo": "2026-12-06",
+      "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -353,13 +215,15 @@
         "MongoDB"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://2024conf.gupy.io/job/eyJqb2JJZCI6MTI3MDU3MDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-09",
       "prazo": "2026-10-31",
+      "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -382,13 +246,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://mplan.gupy.io/job/eyJqb2JJZCI6MTI2ODg3NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-07",
       "prazo": "2026-12-06",
+      "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -411,13 +277,15 @@
         "MongoDB"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://vagasisasaude.gupy.io/job/eyJqb2JJZCI6MTI2NDE4NzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-30",
       "prazo": "2026-11-29",
+      "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -439,13 +307,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://smart.gupy.io/job/eyJqb2JJZCI6MTI1ODI2NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-25",
       "prazo": "2026-10-26",
+      "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -473,13 +343,15 @@
         "Regras de acesso;",
         "Funções e lógica de negócio."
       ],
+      "salario": "R$ 4.000",
       "link": "https://vaga-ja.com/vagas/c/JNF6N9QNC3?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-22",
       "prazo": "2026-10-22",
+      "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -502,13 +374,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://sejadiagonal.gupy.io/job/eyJqb2JJZCI6MTI1MDg2NTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-16",
       "prazo": "2026-10-30",
+      "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -538,12 +412,14 @@
         "Conhecimento sobre arquiteturas de busca vetorial (RAG) e bancos vetoriais.",
         "Noções de segurança da informação e conformidade com a LGPD."
       ],
+      "salario": "R$ 6.000",
       "link": "https://github.com/backend-br/vagas/issues/12422",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-09-15",
+      "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -565,13 +441,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://ame.gupy.io/job/eyJqb2JJZCI6MTI3MDU3MDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-09",
       "prazo": "2026-12-08",
+      "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -594,13 +472,15 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://clicksign.gupy.io/job/eyJqb2JJZCI6MTI3NTA5MTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-20",
       "prazo": "2026-12-30",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -623,13 +503,15 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://spread.gupy.io/job/eyJqb2JJZCI6MTI3NDYzODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-19",
       "prazo": "2027-02-28",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -652,13 +534,15 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://sejaglobalweb.gupy.io/job/eyJqb2JJZCI6MTE3NDI4ODcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-19",
       "prazo": "2026-12-31",
+      "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -681,13 +565,15 @@
         "AWS"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://alterdata.gupy.io/job/eyJqb2JJZCI6MTI3Mjk0NDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-16",
       "prazo": "2026-12-01",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -710,13 +596,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI3MzQyODAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-16",
       "prazo": "2026-12-14",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -738,12 +626,14 @@
         "Rust",
         "+9 habilidades adicionais descritas no anúncio oficial"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12470",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-15",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -765,12 +655,14 @@
         "Rust",
         "+9 habilidades adicionais descritas no anúncio oficial"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12469",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-15",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -795,12 +687,14 @@
         "Master’s degree or PhD in AI, Computer Science, or a related technical field.",
         "Serve as a developer for AI applications, transitioning from rapid prototypes to production-grade agentic workflows (e.g., multi-agent systems, MCP servers) that drive measurable Return on Investment (ROI)."
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12451",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-14",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -820,13 +714,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://cresolcarreiras.gupy.io/job/eyJqb2JJZCI6MTI3MDg5OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-14",
       "prazo": "2026-12-31",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -849,13 +745,15 @@
         "SQL"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://vissimo.gupy.io/job/eyJqb2JJZCI6MTI3MjIxOTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-14",
       "prazo": "2026-10-31",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -878,13 +776,15 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://certsys.gupy.io/job/eyJqb2JJZCI6MTI3MjQ0OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-14",
       "prazo": "2026-12-13",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -904,13 +804,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://sejaglobalweb.gupy.io/job/eyJqb2JJZCI6MTI2NzQyOTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-14",
       "prazo": "2026-12-04",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -941,12 +843,14 @@
         "Vivência real com arquitetura de microsserviços",
         "Experiência com monitoramento em tempo real: Datadog, Grafana, ELK ou similar"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12445",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-13",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -976,12 +880,14 @@
         "Experiência com monitoramento em tempo real: Datadog, Grafana, ELK ou similar",
         "IA incorporada ao fluxo de trabalho: geração e revisão de código, RAG, spec-driven development (SDD)"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12443",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-13",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1002,40 +908,14 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12442",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-10",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12704708",
-      "titulo": "Pessoa Desenvolvedora Full-stack Kotlin/React - Dev II (Produtos Digitais Financeiros)",
-      "empresa": "Grupo Boticário",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Java",
-        "Spring",
-        "Docker",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3MDQ3MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-09",
-      "prazo": "2026-10-30",
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1058,13 +938,15 @@
         "C#"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI2MzE3NTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-09",
       "prazo": "2026-11-09",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1084,13 +966,15 @@
         "PHP"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://globalhitss.gupy.io/job/eyJqb2JJZCI6MTI2MDQxNjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-09",
       "prazo": "2026-11-24",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1113,13 +997,15 @@
         "Express"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://funcionalhealthtech.gupy.io/job/eyJqb2JJZCI6MTI2OTk1MzAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-08",
       "prazo": "2026-12-07",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1137,12 +1023,14 @@
         "Node.js"
       ],
       "requisitos": [],
+      "salario": "US$ 4.000 a 8.000",
       "link": "https://github.com/frontendbr/vagas/issues/8566",
       "fonte": "GitHub · frontendbr/vagas",
       "publicadaEm": "2026-10-07",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1165,13 +1053,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://vagasstefanini.gupy.io/job/eyJqb2JJZCI6MTI0Mzk4NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-07",
       "prazo": "2026-11-07",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1190,13 +1080,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI2OTE3MTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-07",
       "prazo": "2026-12-06",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1219,13 +1111,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://carreirasomie.gupy.io/job/eyJqb2JJZCI6MTI2NzU2ODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-06",
       "prazo": "2026-12-04",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1248,13 +1142,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://starian.gupy.io/job/eyJqb2JJZCI6MTI2Nzg5OTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-05",
       "prazo": "2026-12-04",
+      "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1275,13 +1171,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://starian.gupy.io/job/eyJqb2JJZCI6MTI2Nzg4NTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-05",
       "prazo": "2026-12-04",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1304,13 +1202,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI2NDk2MzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-30",
       "prazo": "2026-11-29",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1333,13 +1233,15 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://matrixcargo.gupy.io/job/eyJqb2JJZCI6MTI2NDE1NjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-30",
       "prazo": "2026-11-29",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1361,13 +1263,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://cresolcarreiras.gupy.io/job/eyJqb2JJZCI6MTI2MDEyNjEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-28",
       "prazo": "2026-11-24",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1390,13 +1294,15 @@
         "MongoDB"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://brisanet.gupy.io/job/eyJqb2JJZCI6MTI0ODMyMDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-24",
       "prazo": "2026-11-13",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1414,12 +1320,14 @@
         "SQL"
       ],
       "requisitos": [],
+      "salario": "US$ 4.000 a 6.000",
       "link": "https://github.com/backend-br/vagas/issues/12432",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-09-23",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1442,13 +1350,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://bemobi.gupy.io/job/eyJqb2JJZCI6MTI0ODI0ODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-21",
       "prazo": "2026-11-13",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1466,12 +1376,14 @@
         "SQL"
       ],
       "requisitos": [],
+      "salario": "US$ 4.000 a 6.000",
       "link": "https://github.com/frontendbr/vagas/issues/8563",
       "fonte": "GitHub · frontendbr/vagas",
       "publicadaEm": "2026-09-17",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1494,13 +1406,15 @@
         "Java"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://vemprabip.gupy.io/job/eyJqb2JJZCI6MTI1MTI3ODMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-17",
       "prazo": "2026-11-16",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1523,13 +1437,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI0Mzk4NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-16",
       "prazo": "2026-11-30",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1551,13 +1467,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://techne.gupy.io/job/eyJqb2JJZCI6MTI0NDk4NDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-14",
       "prazo": "2026-12-31",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1576,13 +1494,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://gaudium.gupy.io/job/eyJqb2JJZCI6MTI0NTY0MTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-10",
       "prazo": "2026-11-06",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1604,13 +1524,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://werecruiter.gupy.io/job/eyJqb2JJZCI6MTI0NDU3MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-09",
       "prazo": "2027-01-29",
+      "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1633,13 +1555,52 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://bhs.gupy.io/job/eyJqb2JJZCI6MTI0MjI1NTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-09",
       "prazo": "2026-11-04",
+      "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gh-board-4710718005",
+      "titulo": "SOFTWARE DEVELOPER SPECIALIST II",
+      "empresa": "Inter",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Não informado",
+      "local": "Belo Horizonte, MG, Curitiba, PR, Recife, PE, São Paulo, SP",
+      "stack": [
+        "Java",
+        "Spring",
+        "Python",
+        "Docker",
+        "AWS",
+        "Git"
+      ],
+      "requisitos": [
+        "Sólida experiência com desenvolvimento orientado a objetos, especialmente Java e Python.",
+        "Experiência avançada com arquitetura de microsserviços.",
+        "Conhecimento profundo em TDD, DDD, Clean Code e Arquitetura Hexagonal.",
+        "Vivência em ambientes ágeis (Scrum/Kanban).",
+        "Capacidade de resolver problemas complexos e atuar em cenários de alta criticidade.",
+        "Domínio de Git/Git Flow.",
+        "Experiência com Spring Boot e/ou Micronaut.",
+        "Experiência com Kafka, mensageria e arquitetura orientada a eventos."
+      ],
+      "salario": "",
+      "link": "https://boards.greenhouse.io/inter/jobs/4710718005?gh_jid=4710718005",
+      "fonte": "Greenhouse",
+      "publicadaEm": "2026-09-09",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-22",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1662,13 +1623,15 @@
         "SQL"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://aurum.gupy.io/job/eyJqb2JJZCI6MTI3NTMwNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-20",
       "prazo": "2026-12-19",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1691,13 +1654,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NDkxNjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-20",
       "prazo": "2026-12-18",
+      "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1720,13 +1685,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://spread.gupy.io/job/eyJqb2JJZCI6MTI3NDYzNzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-19",
       "prazo": "2027-02-28",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1749,13 +1716,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://spread.gupy.io/job/eyJqb2JJZCI6MTI3NDYzODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-19",
       "prazo": "2026-12-31",
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1777,13 +1746,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI3NDg4NTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-19",
       "prazo": "2026-11-20",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1805,13 +1776,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://caju.gupy.io/job/eyJqb2JJZCI6MTI2OTE1MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-16",
       "prazo": "2026-10-23",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1834,13 +1807,15 @@
         "PHP"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://rnp.gupy.io/job/eyJqb2JJZCI6MTI3MzIwODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-15",
       "prazo": "2026-10-22",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1860,13 +1835,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://softplan.gupy.io/job/eyJqb2JJZCI6MTI3MjY3OTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-15",
       "prazo": "2026-11-15",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1889,13 +1866,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI2OTc3MTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-08",
       "prazo": "2026-12-07",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1914,13 +1893,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI2ODQ4ODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-08",
       "prazo": "2026-12-05",
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1943,13 +1924,15 @@
         "Spring"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://vagasstefanini.gupy.io/job/eyJqb2JJZCI6MTI2OTExNDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-08",
       "prazo": "2026-12-06",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1968,13 +1951,15 @@
         "Git"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTI2OTk0ODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-08",
       "prazo": "2026-12-07",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -1992,12 +1977,14 @@
         "NestJS"
       ],
       "requisitos": [],
+      "salario": "US$ 5.500 a 8.500",
       "link": "https://github.com/backend-br/vagas/issues/12439",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-06",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2020,13 +2007,15 @@
         "SQL"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI2ODM1NDcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-06",
       "prazo": "2026-12-05",
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2049,13 +2038,15 @@
         "MongoDB"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://recursoshumanos.gupy.io/job/eyJqb2JJZCI6MTI2ODEwNDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-05",
       "prazo": "2026-11-30",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2072,12 +2063,14 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12438",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-10-02",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2109,12 +2102,14 @@
         "Docker",
         "Figma"
       ],
+      "salario": "",
       "link": "https://github.com/frontendbr/vagas/issues/8565",
       "fonte": "GitHub · frontendbr/vagas",
       "publicadaEm": "2026-09-30",
+      "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2137,13 +2132,15 @@
         "Docker"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://effecti.gupy.io/job/eyJqb2JJZCI6MTI1NjUwMDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-29",
       "prazo": "2026-11-21",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2170,12 +2167,14 @@
         "20+ horas/semana (mínimo de 4h/dia) com 4h de overlap com o horário do Pacífico (PST)",
         "Inglês fluente"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12436",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-09-28",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2199,12 +2198,14 @@
         "8h/dia com 6h de overlap com o horário do Pacífico (PST)",
         "Inglês para comunicação no dia a dia"
       ],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12435",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-09-28",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2226,13 +2227,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://vagasstefanini.gupy.io/job/eyJqb2JJZCI6MTI0Mzk4NjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-24",
       "prazo": "2026-11-07",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2253,13 +2256,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI1NDU0MDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-21",
       "prazo": "2026-11-20",
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2279,13 +2284,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://montreal.gupy.io/job/eyJqb2JJZCI6MTI0NjY5OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-17",
       "prazo": "2026-10-23",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2308,13 +2315,15 @@
         "SQL"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://squidit.gupy.io/job/eyJqb2JJZCI6MTI1MDY1NDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-16",
       "prazo": "2026-10-30",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2336,13 +2345,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://bhs.gupy.io/job/eyJqb2JJZCI6MTI1MDcyMzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-16",
       "prazo": "2026-11-15",
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2365,13 +2376,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI0Mzk4NjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-09-15",
       "prazo": "2026-11-07",
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2394,12 +2407,14 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://github.com/backend-br/vagas/issues/12416",
       "fonte": "GitHub · backend-br/vagas",
       "publicadaEm": "2026-09-08",
+      "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2416,13 +2431,15 @@
         "AWS"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1NjAxMDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-20",
       "prazo": "2026-11-03",
+      "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2441,13 +2458,15 @@
         "Testes"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3MDI2OTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-16",
       "prazo": "2026-11-18",
+      "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2470,13 +2489,15 @@
         "AWS"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3Mjk3MDcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-15",
       "prazo": "2026-11-11",
+      "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2499,13 +2520,15 @@
         "APIs REST"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://yduqstech.gupy.io/job/eyJqb2JJZCI6MTIyMTQ4ODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-07",
       "prazo": "2026-11-07",
+      "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
     },
     {
@@ -2528,14 +2551,215 @@
         "AWS"
       ],
       "requisitos": [],
+      "salario": "",
       "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI2NjQ0NDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-10-01",
       "prazo": "2026-11-30",
+      "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
       "status": "aberta"
+    },
+    {
+      "id": "gupy-12590981",
+      "titulo": "Pessoa Desenvolvedora Fullstack Node/React - Especialista I (Vaga afirmativa para pessoas com deficiência)",
+      "empresa": "Grupo Boticário",
+      "area": "Full-stack",
+      "nivel": "Especialista",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "Next.js",
+        "JavaScript",
+        "Node.js",
+        "NestJS",
+        "Express",
+        "SQL",
+        "MongoDB"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1OTA5ODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-09-24",
+      "prazo": "2026-10-31",
+      "repeticoes": 3,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12590877",
+      "titulo": "Pessoa Desenvolvedora Backend Java/Kotlin - Especialista I (Vaga afirmativa para pessoas com deficiência)",
+      "empresa": "Grupo Boticário",
+      "area": "Back-end",
+      "nivel": "Especialista",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Java",
+        "Spring",
+        "SQL",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1OTA4NzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-09-24",
+      "prazo": "2026-10-31",
+      "repeticoes": 2,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12559262",
+      "titulo": "PESSOA DESENVOLVEDORA FRONTEND (REACT) ESPECIALISTA I (VENDA DIRETA) ·",
+      "empresa": "Grupo Boticário",
+      "area": "Front-end",
+      "nivel": "Especialista",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "Python",
+        "Django",
+        "AWS",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1NTkyNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-09-23",
+      "prazo": "2026-11-21",
+      "repeticoes": 2,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12485771",
+      "titulo": "PESSOA DESENVOLVEDORA FULLSTACK REACT/KOTLIN/JAVA ESPECIALISTA I (RGM E DEMANDA) ·",
+      "empresa": "Grupo Boticário",
+      "area": "Full-stack",
+      "nivel": "Especialista",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Java",
+        "Spring",
+        "SQL",
+        "AWS",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI0ODU3NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-09-18",
+      "prazo": "2026-11-13",
+      "repeticoes": 3,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12393296",
+      "titulo": "Pessoa Desenvolvedora Backend PHP Especialista I (OMS / E-commerce)",
+      "empresa": "Grupo Boticário",
+      "area": "Back-end",
+      "nivel": "Especialista",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "PHP",
+        "Laravel",
+        "Docker",
+        "Git",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTIzOTMyOTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-09-09",
+      "prazo": "2026-10-31",
+      "repeticoes": 2,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gh-frontendbr-vagas-8562",
+      "titulo": "Front-end Developer React-USD (Jcal)",
+      "empresa": "Jcal",
+      "area": "Front-end",
+      "nivel": "Sênior/Especialista",
+      "regime": "Não informado",
+      "modelo": "Híbrido",
+      "local": "Curitiba",
+      "stack": [
+        "React",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "US$ 5.000",
+      "link": "https://github.com/frontendbr/vagas/issues/8562",
+      "fonte": "GitHub · frontendbr/vagas",
+      "publicadaEm": "2026-09-10",
+      "repeticoes": 1,
+      "prioridade": -1,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-22",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12704708",
+      "titulo": "Pessoa Desenvolvedora Full-stack Kotlin/React - Dev II (Produtos Digitais Financeiros)",
+      "empresa": "Grupo Boticário",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "Java",
+        "Spring",
+        "Docker",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3MDQ3MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-09",
+      "prazo": "2026-10-30",
+      "prioridade": 2,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-21",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-22"
     },
     {
       "id": "gupy-12571342",
@@ -2560,165 +2784,8 @@
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
       "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12590981",
-      "titulo": "Pessoa Desenvolvedora Fullstack Node/React - Especialista I (Vaga afirmativa para pessoas com deficiência)",
-      "empresa": "Grupo Boticário",
-      "area": "Full-stack",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Next.js",
-        "JavaScript",
-        "Node.js",
-        "NestJS",
-        "Express",
-        "SQL",
-        "MongoDB"
-      ],
-      "requisitos": [],
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1OTA5ODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-24",
-      "prazo": "2026-10-31",
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12590877",
-      "titulo": "Pessoa Desenvolvedora Backend Java/Kotlin - Especialista I (Vaga afirmativa para pessoas com deficiência)",
-      "empresa": "Grupo Boticário",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Java",
-        "Spring",
-        "SQL",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1OTA4NzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-24",
-      "prazo": "2026-10-31",
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12559262",
-      "titulo": "PESSOA DESENVOLVEDORA FRONTEND (REACT) ESPECIALISTA I (VENDA DIRETA) ·",
-      "empresa": "Grupo Boticário",
-      "area": "Front-end",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Python",
-        "Django",
-        "AWS",
-        "Testes"
-      ],
-      "requisitos": [],
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1NTkyNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-23",
-      "prazo": "2026-11-21",
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12485771",
-      "titulo": "PESSOA DESENVOLVEDORA FULLSTACK REACT/KOTLIN/JAVA ESPECIALISTA I (RGM E DEMANDA) ·",
-      "empresa": "Grupo Boticário",
-      "area": "Full-stack",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "TypeScript",
-        "Java",
-        "Spring",
-        "SQL",
-        "AWS",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI0ODU3NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-18",
-      "prazo": "2026-11-13",
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12393296",
-      "titulo": "Pessoa Desenvolvedora Backend PHP Especialista I (OMS / E-commerce)",
-      "empresa": "Grupo Boticário",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "PHP",
-        "Laravel",
-        "Docker",
-        "Git",
-        "Testes"
-      ],
-      "requisitos": [],
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTIzOTMyOTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-09",
-      "prazo": "2026-10-31",
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-frontendbr-vagas-8562",
-      "titulo": "Front-end Developer React-USD (Jcal)",
-      "empresa": "Jcal",
-      "area": "Front-end",
-      "nivel": "Sênior/Especialista",
-      "regime": "Não informado",
-      "modelo": "Híbrido",
-      "local": "Curitiba",
-      "stack": [
-        "React",
-        "Testes"
-      ],
-      "requisitos": [],
-      "link": "https://github.com/frontendbr/vagas/issues/8562",
-      "fonte": "GitHub · frontendbr/vagas",
-      "publicadaEm": "2026-09-10",
-      "prioridade": -1,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-21",
-      "status": "aberta"
+      "status": "encerrada",
+      "encerradaEm": "2026-10-22"
     }
   ]
 }

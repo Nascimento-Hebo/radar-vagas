@@ -4,7 +4,7 @@
 import { readFile, writeFile, appendFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { deIssueGithub, deVagaGupy, hojeISO, juntar, resumoMarkdown } from "./vagas-core.mjs";
+import { deIssueGithub, deVagaGupy, deVagaGreenhouse, hojeISO, juntar, resumoMarkdown } from "./vagas-core.mjs";
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ARQ_VAGAS = join(RAIZ, "docs", "vagas.json");
@@ -12,6 +12,7 @@ const ARQ_RESUMO = join(RAIZ, "docs", "novas.md");
 const config = JSON.parse(await readFile(join(RAIZ, "config.json"), "utf8"));
 
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+const falhasGerais = []; // fontes que não responderam: viram alerta no GitHub Actions
 
 async function pegarJson(url, headers = {}, tentativas = 2) {
   for (let i = 0; i <= tentativas; i++) {
@@ -44,6 +45,7 @@ async function buscarGithub() {
       console.log(`  GitHub ${repo}: ${total} vagas de dev`);
     } catch (e) {
       console.warn(`  ! GitHub ${repo} falhou: ${e.message}`);
+      falhasGerais.push(`GitHub ${repo}: ${e.message}`);
     }
   }
   return vagas;
@@ -67,7 +69,27 @@ async function buscarGupy() {
       console.warn(`  ! Gupy "${termo}" falhou: ${e.message}`);
     }
   }
-  if (falhas === config.gupy.termos.length) console.warn("  ! A API da Gupy não respondeu. Ela não é oficial e pode ter mudado.");
+  if (falhas === config.gupy.termos.length) {
+    console.warn("  ! A API da Gupy não respondeu. Ela não é oficial e pode ter mudado.");
+    falhasGerais.push("Gupy: nenhuma busca respondeu (a API pode ter mudado)");
+  }
+  return vagas;
+}
+
+async function buscarGreenhouse() {
+  if (!config.greenhouse?.ativo) return [];
+  const vagas = [];
+  for (const empresa of config.greenhouse.empresas) {
+    try {
+      const json = await pegarJson(`https://boards-api.greenhouse.io/v1/boards/${empresa}/jobs?content=true`);
+      let n = 0;
+      for (const job of json?.jobs || []) { const v = deVagaGreenhouse(job, empresa); if (v) { vagas.push(v); n++; } }
+      console.log(`  Greenhouse ${empresa}: ${n} vagas de dev no Brasil`);
+    } catch (e) {
+      console.warn(`  ! Greenhouse ${empresa} falhou: ${e.message}`);
+      falhasGerais.push(`Greenhouse ${empresa}: ${e.message}`);
+    }
+  }
   return vagas;
 }
 
@@ -84,8 +106,10 @@ console.log("Buscando no GitHub…");
 const github = await buscarGithub();
 console.log("Buscando na Gupy…");
 const gupy = await buscarGupy();
+console.log("Buscando no Greenhouse…");
+const greenhouse = await buscarGreenhouse();
 
-const encontradas = [...github, ...gupy];
+const encontradas = [...github, ...gupy, ...greenhouse];
 const anteriores = await lerAnteriores();
 
 if (!encontradas.length && anteriores.length) {
@@ -115,4 +139,13 @@ console.log(`\nPronto: ${abertas.length} abertas · ${novas} novas · ${encerrad
 console.log("Arquivos atualizados: docs/vagas.json e docs/novas.md");
 
 // Informa ao GitHub Actions quantas vagas novas saíram (usado para decidir se manda e-mail)
-if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `novas=${novas}\n`);
+if (process.env.GITHUB_OUTPUT) {
+  const alerta = falhasGerais.join(" · ").replace(/[\r\n]/g, " ");
+  await appendFile(process.env.GITHUB_OUTPUT, `novas=${novas}\nalerta=${alerta}\n`);
+}
+if (process.env.GITHUB_STEP_SUMMARY) {
+  const resumo = [`### Radar de vagas · ${hoje}`, "", `${abertas.length} abertas · ${novas} novas · ${encerradas} encerradas`, ""];
+  if (falhasGerais.length) resumo.push("**Fontes com problema:**", ...falhasGerais.map((f) => `- ${f}`));
+  else resumo.push("Todas as fontes responderam.");
+  await appendFile(process.env.GITHUB_STEP_SUMMARY, resumo.join("\n") + "\n");
+}

@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   classificarArea, classificarNivel, classificarRegime, classificarModelo, extrairEmpresa,
-  extrairRequisitos, deIssueGithub, deVagaGupy, juntar, aceitaVaga,
+  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata,
 } from "../scripts/vagas-core.mjs";
 
 const config = {
@@ -105,4 +105,44 @@ test("junta com a rodada anterior: novas, mantidas e encerradas", () => {
   assert.equal(porId.c.status, "aberta");
   assert.equal(porId.d, undefined, "vaga publicada há mais de 45 dias fica de fora");
   assert.equal(porId.velha, undefined, "encerrada há mais de 14 dias é apagada");
+});
+
+test("extrai a faixa salarial e ignora valor de benefício", () => {
+  assert.equal(extrairSalario("Faixa salarial: R$ 5.000 a R$ 7.000"), "R$ 5.000 a 7.000");
+  assert.equal(extrairSalario("Salário: R$ 4.500,00"), "R$ 4.500");
+  assert.equal(extrairSalario("Remuneração: 8k a 10k (PJ)"), "R$ 8.000 a 10.000");
+  assert.equal(extrairSalario("Salary: USD 3,000 - 4,500 per month"), "US$ 3.000 a 4.500");
+  assert.equal(extrairSalario("R$ 1.500 de vale alimentação"), "");
+  assert.equal(extrairSalario("Salário: a combinar"), "");
+});
+
+test("junta a mesma vaga escrita de jeitos diferentes, mas separa níveis", () => {
+  const k = (titulo) => chaveDuplicata({ empresa: "Rotha IA", titulo });
+  assert.equal(k("Full Stack Developer Pleno na Rotha IA"), k("Full Stack Developer Pleno - Rotha IA"));
+  assert.equal(k("Full Stack Developer Pleno na Rotha IA"), k("Full Stack Developer (React) Pleno na Rotha IA"));
+  assert.notEqual(k("Full Stack Developer Pleno na Rotha IA"), k("Full Stack Developer Júnior na Rotha IA"));
+});
+
+test("vaga juntada com uma repetida não conta como encerrada", () => {
+  const hoje = "2026-10-22";
+  const base = { empresa: "Rotha IA", area: "Full-stack", nivel: "Pleno", regime: "PJ", modelo: "Remoto", local: "Brasil", publicadaEm: "2026-10-20" };
+  const anteriores = [
+    { ...base, id: "a", titulo: "Full Stack Developer Pleno na Rotha IA", status: "aberta", encontradaEm: "2026-10-21", verificadaEm: "2026-10-21" },
+    { ...base, id: "b", titulo: "Full Stack Developer Pleno - Rotha IA", status: "aberta", encontradaEm: "2026-10-21", verificadaEm: "2026-10-21" },
+  ];
+  const encontradas = [{ ...base, id: "a", titulo: anteriores[0].titulo }, { ...base, id: "b", titulo: anteriores[1].titulo }];
+  const r = juntar({ encontradas, anteriores, hoje, config });
+  assert.equal(r.vagas.length, 1);
+  assert.equal(r.encerradas, 0);
+  assert.equal(r.vagas[0].repeticoes, 2);
+});
+
+test("Greenhouse: só vagas de dev no Brasil", () => {
+  const job = { id: 9, title: "Software Engineer Pleno (Backend Java)", absolute_url: "https://x/jobs/9", company_name: "Inter Carreiras", location: { name: "Remote - Brazil" }, first_published: "2026-10-20T10:00:00-03:00", content: "&lt;p&gt;Requisitos&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Java e Spring&lt;/li&gt;&lt;/ul&gt;" };
+  const v = deVagaGreenhouse(job);
+  assert.equal(v.area, "Back-end");
+  assert.equal(v.modelo, "Remoto");
+  assert.equal(v.empresa, "Inter");
+  assert.equal(deVagaGreenhouse({ ...job, location: { name: "Barcelona" } }), null);
+  assert.equal(deVagaGreenhouse({ ...job, title: "Executivo(a) Comercial Externo | Goiânia/GO" }), null);
 });
