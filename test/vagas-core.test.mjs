@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   classificarArea, classificarNivel, classificarRegime, classificarModelo, extrairEmpresa,
-  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata, soNoExterior,
+  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata, soNoExterior, combinaComAlerta, ufsDoLocal,
 } from "../scripts/vagas-core.mjs";
 
 const config = {
@@ -155,4 +155,15 @@ test("vaga só para quem mora fora do Brasil fica de fora; com todo local aceito
   const todos = { ...config.filtros, aceitarQualquerLocal: true };
   assert.equal(aceitaVaga({ ...base, modelo: "Presencial", local: "São Paulo - São Paulo" }, todos), true);
   assert.equal(aceitaVaga({ ...base, modelo: "Remoto", local: "Cidade do México, México" }, todos), false);
+});
+
+test("alerta: área, nível, local e tecnologias", () => {
+  const v = { status: "aberta", titulo: "Dev Front-end Júnior", area: "Front-end", nivel: "Júnior", regime: "PJ", modelo: "Híbrido", local: "Curitiba - Paraná", stack: ["React", "TypeScript"] };
+  assert.deepEqual([...ufsDoLocal("Belo Horizonte, MG, Curitiba, PR")].sort(), ["MG", "PR"]);
+  assert.equal(combinaComAlerta(v, { area: "Front-end", nivel: "Júnior", local: "uf:PR", tecnologias: ["react"] }), true);
+  assert.equal(combinaComAlerta(v, { local: "remoto" }), false, "híbrido não entra em só remoto");
+  assert.equal(combinaComAlerta(v, { local: "uf:SP" }), false);
+  assert.equal(combinaComAlerta({ ...v, modelo: "Remoto", local: "Brasil" }, { local: "uf:SP" }), true, "remota vale para qualquer estado");
+  assert.equal(combinaComAlerta(v, { tecnologias: ["java"] }), false);
+  assert.equal(combinaComAlerta({ ...v, status: "encerrada" }, {}), false);
 });

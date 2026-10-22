@@ -390,6 +390,44 @@ export function juntar({ encontradas, anteriores = [], hoje, config }) {
   return { vagas: resultado, novas, encerradas: encerradasHoje };
 }
 
+/* ---------- Alertas: a vaga combina com o que a pessoa procura? ---------- */
+
+const NOME_PARA_UF = {
+  acre: "AC", alagoas: "AL", amapa: "AP", amazonas: "AM", bahia: "BA", ceara: "CE", "distrito federal": "DF", "espirito santo": "ES",
+  goias: "GO", maranhao: "MA", "mato grosso": "MT", "mato grosso do sul": "MS", "minas gerais": "MG", para: "PA", paraiba: "PB",
+  parana: "PR", pernambuco: "PE", piaui: "PI", "rio de janeiro": "RJ", "rio grande do norte": "RN", "rio grande do sul": "RS",
+  rondonia: "RO", roraima: "RR", "santa catarina": "SC", "sao paulo": "SP", sergipe: "SE", tocantins: "TO",
+  curitiba: "PR", "belo horizonte": "MG", "porto alegre": "RS", brasilia: "DF", recife: "PE", fortaleza: "CE", salvador: "BA", florianopolis: "SC", goiania: "GO", campinas: "SP",
+};
+const UFS = new Set(Object.values(NOME_PARA_UF));
+
+// Estados (UF) citados no texto de local da vaga: "Curitiba - Paraná", "Belo Horizonte, MG", "São Paulo/SP"...
+export function ufsDoLocal(local) {
+  const texto = String(local || "");
+  const achados = new Set();
+  for (const m of texto.matchAll(/\b([A-Z]{2})\b/g)) if (UFS.has(m[1])) achados.add(m[1]);
+  const t = SEM_ACENTO(texto);
+  for (const [nome, uf] of Object.entries(NOME_PARA_UF)) if (new RegExp(`\\b${nome}\\b`).test(t)) achados.add(uf);
+  return achados;
+}
+
+// alerta = { area, nivel, regime, local: "todos" | "remoto" | "uf:PR" (remoto ou no PR), tecnologias: [] }
+export function combinaComAlerta(v, a = {}) {
+  if (v.status && v.status !== "aberta") return false;
+  if (a.area && a.area !== "todos" && v.area !== a.area) return false;
+  if (a.nivel && a.nivel !== "todos" && !String(v.nivel || "").includes(a.nivel)) return false;
+  if (a.regime && a.regime !== "todos" && !String(v.regime || "").includes(a.regime)) return false;
+  const local = a.local || "todos";
+  if (local === "remoto" && v.modelo !== "Remoto") return false;
+  if (local.startsWith("uf:") && v.modelo !== "Remoto" && !ufsDoLocal(v.local).has(local.slice(3))) return false;
+  const tecs = (a.tecnologias || []).map(SEM_ACENTO).filter(Boolean);
+  if (tecs.length) {
+    const alvo = [SEM_ACENTO(v.titulo), ...(v.stack || []).map(SEM_ACENTO)];
+    if (!tecs.some((t) => alvo.some((x) => x.includes(t)))) return false;
+  }
+  return true;
+}
+
 export function resumoMarkdown({ vagas, novas, encerradas, hoje }) {
   const doDia = vagas.filter((v) => v.status === "aberta" && v.encontradaEm === hoje);
   const abertas = vagas.filter((v) => v.status === "aberta").length;

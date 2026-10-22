@@ -1,6 +1,6 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=18";
+import "./firebase.js?v=19";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
@@ -51,6 +51,7 @@ async function carregarTudo() {
     }));
     usuarios.sort((a, b) => (b.ultimoAcesso?.seconds || 0) - (a.ultimoAcesso?.seconds || 0));
     renderNumeros();
+    renderGraficos();
     renderUsuarios();
   } catch (e) {
     avisar(nuvem.mensagemErro(e));
@@ -75,12 +76,146 @@ function renderNumeros() {
     ["CVs gerados", usuarios.reduce((s, u) => s + u.nCvs, 0)],
     ["Usos da IA hoje", usuarios.reduce((s, u) => s + (u.usoIA?.dia === hoje() ? u.usoIA.n : 0), 0)],
     ["Bloqueados", usuarios.filter((u) => u.bloqueado).length],
+    ["Com alerta por e-mail", usuarios.filter((u) => u.alerta?.ativo).length],
   ];
   itens.forEach(([rotulo, valor]) => {
     const c = el("div", "admin-numero");
     c.append(el("strong", null, String(valor)), el("span", null, rotulo));
     box.append(c);
   });
+}
+
+// ---------- Gráficos (SVG simples, uma série por gráfico, com dica ao passar o mouse e tabela) ----------
+
+const NS = "http://www.w3.org/2000/svg";
+const svgEl = (tag, attrs = {}) => { const n = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); return n; };
+const teto = (n) => { if (n <= 4) return Math.max(1, Math.ceil(n)); const p = 10 ** Math.floor(Math.log10(n)); return Math.ceil(n / (p / 2)) * (p / 2); };
+const dataCurta = (iso) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
+
+function dica(box) {
+  let d = box.querySelector(".graf-dica");
+  if (!d) { d = el("div", "graf-dica"); d.hidden = true; box.append(d); }
+  return d;
+}
+
+function tabelaDoGrafico(dados, rotuloValor) {
+  const det = el("details", "graf-tabela");
+  det.append(el("summary", null, "Ver como tabela"));
+  const t = el("table");
+  const cab = el("tr");
+  cab.append(el("th", null, "Item"), el("th", null, rotuloValor));
+  t.append(cab);
+  dados.forEach((d) => { const tr = el("tr"); tr.append(el("td", null, d.rotulo), el("td", "num", String(d.valor))); t.append(tr); });
+  det.append(t);
+  return det;
+}
+
+// Colunas verticais (uma por dia): barras de no máximo 24px, ponta arredondada de 4px, eixo discreto
+function graficoColunas(box, dados, rotuloValor) {
+  box.textContent = "";
+  if (!dados.some((d) => d.valor > 0)) { box.append(el("p", "painel-nota", "Ainda sem dados neste período.")); return; }
+  const L = 560, A = 200, mE = 32, mB = 26, mT = 18;
+  const max = teto(Math.max(...dados.map((d) => d.valor)));
+  const larguraFaixa = (L - mE) / dados.length;
+  const larguraBarra = Math.min(24, larguraFaixa - 2);
+  const y = (v) => mT + (A - mT - mB) * (1 - v / max);
+  const s = svgEl("svg", { viewBox: `0 0 ${L} ${A}`, class: "graf-svg", role: "img", "aria-label": `${rotuloValor} por dia` });
+  [0, ...(Number.isInteger(max / 2) ? [max / 2] : []), max].forEach((v) => { // contagens: só marcas inteiras
+    s.append(svgEl("line", { x1: mE, x2: L, y1: y(v), y2: y(v), class: "graf-grade" }));
+    const tx = svgEl("text", { x: mE - 6, y: y(v) + 4, class: "graf-eixo", "text-anchor": "end" });
+    tx.textContent = Number.isInteger(v) ? v : v.toFixed(1);
+    s.append(tx);
+  });
+  const passo = Math.ceil(dados.length / 6);
+  const indiceMax = dados.reduce((m, d, i) => (d.valor > dados[m].valor ? i : m), 0);
+  const dicaEl = dica(box);
+  dados.forEach((d, i) => {
+    const x = mE + i * larguraFaixa + (larguraFaixa - larguraBarra) / 2;
+    if (d.valor > 0) {
+      const topo = y(d.valor), base = y(0), r = Math.min(4, (base - topo) / 2, larguraBarra / 2);
+      s.append(svgEl("path", { class: "graf-barra", d: `M${x},${base} V${topo + r} Q${x},${topo} ${x + r},${topo} H${x + larguraBarra - r} Q${x + larguraBarra},${topo} ${x + larguraBarra},${topo + r} V${base} Z` }));
+    }
+    if (i % passo === 0 || i === dados.length - 1) {
+      const tx = svgEl("text", { x: x + larguraBarra / 2, y: A - 8, class: "graf-eixo", "text-anchor": "middle" });
+      tx.textContent = d.rotulo;
+      s.append(tx);
+    }
+    if (i === indiceMax) {
+      const tx = svgEl("text", { x: x + larguraBarra / 2, y: y(d.valor) - 5, class: "graf-valor", "text-anchor": "middle" });
+      tx.textContent = d.valor;
+      s.append(tx);
+    }
+    // área de toque maior que a barra
+    const alvo = svgEl("rect", { x: mE + i * larguraFaixa, y: mT, width: larguraFaixa, height: A - mT - mB, class: "graf-alvo", tabindex: 0, "aria-label": `${d.rotulo}: ${d.valor} ${rotuloValor.toLowerCase()}` });
+    const mostrar = () => {
+      dicaEl.textContent = `${d.rotulo}: ${d.valor} ${rotuloValor.toLowerCase()}`;
+      dicaEl.hidden = false;
+      dicaEl.style.left = `${((x + larguraBarra / 2) / L) * 100}%`;
+      dicaEl.style.top = `${(y(d.valor) / A) * 100}%`;
+    };
+    alvo.addEventListener("mouseenter", mostrar);
+    alvo.addEventListener("focus", mostrar);
+    alvo.addEventListener("mouseleave", () => { dicaEl.hidden = true; });
+    alvo.addEventListener("blur", () => { dicaEl.hidden = true; });
+    s.append(alvo);
+  });
+  box.prepend(s);
+  box.append(tabelaDoGrafico(dados, rotuloValor));
+}
+
+// Barras horizontais (categorias): rótulo à esquerda, valor na ponta
+function graficoBarras(box, dados, rotuloValor) {
+  box.textContent = "";
+  if (!dados.some((d) => d.valor > 0)) { box.append(el("p", "painel-nota", "Ainda sem dados.")); return; }
+  const max = Math.max(...dados.map((d) => d.valor));
+  const lista = el("div", "graf-barras");
+  dados.forEach((d) => {
+    const linha = el("div", "graf-linha");
+    linha.title = `${d.rotulo}: ${d.valor} ${rotuloValor.toLowerCase()}`;
+    const trilho = el("div", "graf-trilho");
+    const barra = el("span", "graf-hbarra");
+    barra.style.width = `${Math.max(d.valor ? 2 : 0, (d.valor / max) * 100)}%`;
+    trilho.append(barra, el("span", "graf-hvalor", String(d.valor)));
+    linha.append(el("span", "graf-rotulo", d.rotulo), trilho);
+    lista.append(linha);
+  });
+  box.append(lista, tabelaDoGrafico(dados, rotuloValor));
+}
+
+function diasAtras(n) {
+  const dias = [];
+  for (let i = n - 1; i >= 0; i--) { const d = new Date(Date.now() - i * 86400000); dias.push(d.toISOString().slice(0, 10)); }
+  return dias;
+}
+
+function renderGraficos() {
+  const dias30 = diasAtras(30);
+  const porDia = {};
+  usuarios.forEach((u) => {
+    const d = u.criadoEm?.toDate ? u.criadoEm.toDate() : u.criadoEm ? new Date(u.criadoEm) : null;
+    if (d) { const k = d.toISOString().slice(0, 10); porDia[k] = (porDia[k] || 0) + 1; }
+  });
+  graficoColunas($("graf-cadastros"), dias30.map((k) => ({ rotulo: dataCurta(k), valor: porDia[k] || 0 })), "Cadastros");
+
+  const dias14 = diasAtras(14);
+  const ia = {};
+  usuarios.forEach((u) => Object.entries(u.usoIADias || {}).forEach(([k, n]) => { ia[k] = (ia[k] || 0) + Number(n || 0); }));
+  graficoColunas($("graf-ia"), dias14.map((k) => ({ rotulo: dataCurta(k), valor: ia[k] || 0 })), "Usos da IA");
+
+  const etapas = {};
+  usuarios.forEach((u) => Object.values(u.dados.candidaturas || {}).forEach((c) => {
+    const et = typeof c === "string" ? "candidatei" : c.etapa || "candidatei";
+    etapas[et] = (etapas[et] || 0) + 1;
+  }));
+  graficoBarras($("graf-etapas"), Object.entries(NOME_ETAPA).map(([k, nome]) => ({ rotulo: nome, valor: etapas[k] || 0 })), "Candidaturas");
+
+  const vagas = {};
+  usuarios.forEach((u) => (u.dados.cvs || []).forEach((h) => {
+    const k = [h.vaga?.titulo || "Vaga", h.vaga?.empresa].filter(Boolean).join(" · ");
+    vagas[k] = (vagas[k] || 0) + 1;
+  }));
+  const top = Object.entries(vagas).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([rotulo, valor]) => ({ rotulo, valor }));
+  graficoBarras($("graf-vagas"), top, "CVs gerados");
 }
 
 function renderUsuarios() {
@@ -221,6 +356,12 @@ function abrirDetalhe(u) {
 
 function preencherIA() {
   const cfg = nuvem.configIA;
+  const st = $("appcheck-status");
+  st.textContent = "Verificando a proteção App Check…";
+  nuvem.verificarAppCheck().then((ok) => {
+    st.textContent = ok ? "Proteção App Check ativa: só este site consegue usar a IA e o banco." : "App Check não conseguiu verificar este navegador. Se continuar, avise o desenvolvedor.";
+    st.className = `appcheck ${ok ? "ok" : "erro"}`;
+  });
   $("ia-ativa").checked = cfg.ativa !== false;
   $("ia-modelos").value = (cfg.modelos || []).join(", ");
   $("ia-limite").value = cfg.limiteDiario ?? 0;

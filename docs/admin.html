@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=19">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Verificando acesso…</div>
@@ -40,12 +40,20 @@
 
     <section class="admin-numeros" id="numeros" aria-label="Resumo"></section>
 
+    <section class="admin-graficos" aria-label="Gráficos">
+      <figure class="admin-cartao grafico"><figcaption><strong>Cadastros por dia</strong><span>Últimos 30 dias</span></figcaption><div id="graf-cadastros"></div></figure>
+      <figure class="admin-cartao grafico"><figcaption><strong>Usos da IA por dia</strong><span>Últimos 14 dias, todos os usuários</span></figcaption><div id="graf-ia"></div></figure>
+      <figure class="admin-cartao grafico"><figcaption><strong>Candidaturas por etapa</strong><span>Todos os usuários</span></figcaption><div id="graf-etapas"></div></figure>
+      <figure class="admin-cartao grafico"><figcaption><strong>Vagas mais adaptadas com IA</strong><span>CVs gerados por vaga</span></figcaption><div id="graf-vagas"></div></figure>
+    </section>
+
     <section class="admin-cartao" aria-labelledby="ia-titulo">
       <div class="admin-cab">
         <h2 id="ia-titulo">Inteligência artificial</h2>
         <a class="btn pequeno" id="link-chave" target="_blank" rel="noopener" href="https://console.firebase.google.com/project/radar-de-vagas-1f800/ailogic">Chave e uso no Firebase ↗</a>
       </div>
       <p class="painel-nota">A IA roda pelo Firebase AI Logic (Gemini Developer API, plano gratuito). A chave fica guardada no Firebase e nunca chega ao navegador dos usuários. Para trocar a chave ou ver o consumo, use o botão acima.</p>
+      <p class="appcheck" id="appcheck-status" role="status"></p>
       <form class="admin-ia" id="form-ia">
         <label class="marcar"><input type="checkbox" id="ia-ativa"> IA ligada para todos os usuários</label>
         <label class="campo"><span>Modelos, em ordem de preferência (separados por vírgula)</span><input id="ia-modelos" type="text"></label>
@@ -104,7 +112,7 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="avatares.js?v=18"></script>
-  <script type="module" src="admin.js?v=18"></script>
+  <script src="avatares.js?v=19"></script>
+  <script type="module" src="admin.js?v=19"></script>
 </body>
 </html>

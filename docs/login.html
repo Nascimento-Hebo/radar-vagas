@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=19">
 </head>
 <body class="pagina-login">
   <main class="login">
@@ -80,12 +80,12 @@
         <button type="button" class="link-btn" id="esqueci">Esqueci minha senha</button>
       </form>
 
-      <p class="login-privacidade">Ao entrar, suas candidaturas e CVs ficam guardados na sua conta. Só você e o administrador do sistema têm acesso. A IA usa o texto da vaga e do seu CV para gerar respostas.</p>
+      <p class="login-privacidade">Ao continuar, você concorda com os <a href="termos.html" target="_blank" rel="noopener">Termos de uso</a> e com a <a href="privacidade.html" target="_blank" rel="noopener">Política de privacidade</a>. Suas candidaturas e CVs ficam na sua conta; só você e o administrador do sistema têm acesso.</p>
     </section>
   </main>
 
   <script type="module">
-    import "./firebase.js?v=18";
+    import "./firebase.js?v=19";
     const $ = (id) => document.getElementById(id);
     const nuvem = window.radarNuvem;
     const volta = new URLSearchParams(location.search).get("volta") || "index.html";

@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=19">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Conectando à sua conta…</div>
@@ -182,7 +182,7 @@
       (<a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr</a>,
       <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br</a>,
       <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil</a> e outros), da Gupy e do Greenhouse, atualizadas todo dia às 7:15.
-      <br>Privacidade: seu CV, suas candidaturas e sua chave do Gemini ficam só neste navegador. Ao usar a IA, o texto da vaga e do CV vai para o Google (Gemini).</span>
+      <br><a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a></span>
     </footer>
   </main>
 
@@ -202,6 +202,10 @@
     </div>
   </dialog>
   <div id="impressao"></div>
+
+  <dialog class="cv onboarding" id="boasvindas" aria-label="Configurar o Radar de Vagas">
+    <div class="cv-interno" id="ob-corpo"></div>
+  </dialog>
 
   <dialog class="painel" id="painel" aria-labelledby="painel-titulo">
     <div class="painel-dentro">
@@ -246,11 +250,12 @@
     </form>
   </section>
 
-  <script src="app.js?v=18"></script>
-  <script src="cv.js?v=18"></script>
-  <script src="email.js?v=18"></script>
-  <script src="avatares.js?v=18"></script>
-  <script src="suporte.js?v=18"></script>
-  <script type="module" src="firebase.js?v=18"></script>
+  <script src="app.js?v=19"></script>
+  <script src="cv.js?v=19"></script>
+  <script src="email.js?v=19"></script>
+  <script src="onboarding.js?v=19"></script>
+  <script src="avatares.js?v=19"></script>
+  <script src="suporte.js?v=19"></script>
+  <script type="module" src="firebase.js?v=19"></script>
 </body>
 </html>
