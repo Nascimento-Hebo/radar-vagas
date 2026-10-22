@@ -15,7 +15,7 @@ const cv = ler("cv.js");
 const idsUsados = (js) => [...new Set([...js.matchAll(/\$\("([\w-]+)"\)/g)].map((m) => m[1]))];
 
 test("todo id que app.js, suporte.js, email.js e onboarding.js procuram existe no index.html", () => {
-  const ids = ["app.js", "suporte.js", "email.js", "onboarding.js"].flatMap((arq) => idsUsados(ler(arq)));
+  const ids = ["app.js", "suporte.js", "email.js", "onboarding.js", "cv-ferramentas.js"].flatMap((arq) => idsUsados(ler(arq)));
   const faltando = [...new Set(ids)].filter((id) => !html.includes(`id="${id}"`));
   assert.deepEqual(faltando, []);
 });
