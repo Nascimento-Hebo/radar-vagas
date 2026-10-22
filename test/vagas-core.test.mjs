@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   classificarArea, classificarNivel, classificarRegime, classificarModelo, extrairEmpresa,
-  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata, soNoExterior, combinaComAlerta, ufsDoLocal,
+  extrairRequisitos, deIssueGithub, deVagaGupy, deVagaGreenhouse, juntar, aceitaVaga, extrairSalario, chaveDuplicata, soNoExterior, combinaComAlerta, ufsDoLocal, deVagaRemotar, fotoDoMercado, salarioMensalReais,
 } from "../scripts/vagas-core.mjs";
 
 const config = {
@@ -166,4 +166,38 @@ test("alerta: área, nível, local e tecnologias", () => {
   assert.equal(combinaComAlerta({ ...v, modelo: "Remoto", local: "Brasil" }, { local: "uf:SP" }), true, "remota vale para qualquer estado");
   assert.equal(combinaComAlerta(v, { tecnologias: ["java"] }), false);
   assert.equal(combinaComAlerta({ ...v, status: "encerrada" }, {}), false);
+});
+
+test("Remotar: só programação, título sem o sufixo de remoto e salário em centavos", () => {
+  const job = {
+    id: 1, title: "Backend Engineer Consultant - (remote - Brazil)", subtitle: "PJ, USD", active: true, expired: false,
+    description: "<p>Node.js, TypeScript e APIs REST</p>", createdAt: "2026-10-22T16:20:39.968-03:00",
+    company: { name: "Inflect" }, jobSalary: { from: 500000, to: 650000, currency: "USD", type: "monthly" },
+    jobCategories: [{ category: { name: "Programação" } }], jobTags: [{ tag: { name: "💬 Inglês" } }],
+  };
+  const v = deVagaRemotar(job);
+  assert.equal(v.titulo, "Backend Engineer Consultant");
+  assert.equal(v.area, "Back-end");
+  assert.equal(v.modelo, "Remoto");
+  assert.equal(v.salario, "US$ 5.000 a 6.500");
+  assert.equal(v.link, "https://remotar.com.br/job/1");
+  assert.equal(deVagaRemotar({ ...job, jobCategories: [{ category: { name: "Marketing" } }] }), null);
+  assert.equal(deVagaRemotar({ ...job, title: "Senior Site Reliability Engineer" }), null, "SRE não é vaga de dev");
+});
+
+test("retrato do mercado: contagens e mediana de salário em reais", () => {
+  assert.equal(salarioMensalReais("R$ 5.000 a 7.000"), 6000);
+  assert.equal(salarioMensalReais("US$ 5.000"), 0);
+  const vagas = [
+    { area: "Back-end", nivel: "Júnior", regime: "PJ", modelo: "Remoto", fonte: "Remotar", stack: ["Node.js"], salario: "R$ 4.000" },
+    { area: "Back-end", nivel: "Júnior", regime: "PJ", modelo: "Remoto", fonte: "GitHub · frontendbr/vagas", stack: ["Node.js", "SQL"], salario: "R$ 6.000 a 8.000" },
+    { area: "Front-end", nivel: "Pleno", regime: "CLT", modelo: "Híbrido", fonte: "Gupy", stack: ["React"], salario: "" },
+  ];
+  const f = fotoDoMercado(vagas, "2026-10-22", 2);
+  assert.equal(f.abertas, 3);
+  assert.equal(f.remotas, 2);
+  assert.deepEqual(f.porArea, { "Back-end": 2, "Front-end": 1 });
+  assert.deepEqual(f.porFonte, { Remotar: 1, GitHub: 1, Gupy: 1 });
+  assert.equal(f.tecnologias["Node.js"], 2);
+  assert.deepEqual(f.salarios["Júnior|PJ"], { n: 2, mediana: 5500, min: 4000, max: 7000 });
 });

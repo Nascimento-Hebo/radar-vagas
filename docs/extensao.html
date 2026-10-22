@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Extensão do navegador · Radar de Vagas</title>
+  <meta name="description" content="Adapte seu CV para vagas do LinkedIn, Indeed ou de qualquer site com um clique.">
+  <script>
+    try { var t = JSON.parse(localStorage.getItem("radar-vagas:tema")); } catch (e) {}
+    document.documentElement.dataset.tema = t || (matchMedia("(prefers-color-scheme: light)").matches ? "claro" : "escuro");
+  </script>
+  <link rel="icon" type="image/png" href="oh-tech-icone.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css?v=23">
+</head>
+<body>
+  <header class="topo-site">
+    <div class="topo-dentro">
+      <a class="marca" href="index.html" aria-label="Voltar para o Radar de Vagas">
+        <img class="logo-escuro" src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
+        <img class="logo-claro" src="oh-tech-logo-claro.png" alt="" width="600" height="171">
+      </a>
+      <a class="btn topo-btn" href="index.html">Voltar ao site</a>
+    </div>
+  </header>
+
+  <main class="wrap texto-legal">
+    <h1>Adapte seu CV em qualquer site de vagas</h1>
+    <p class="sub">Extensão gratuita para Chrome, Edge, Brave e Opera no computador.</p>
+
+    <p>Achou uma vaga no LinkedIn, na Indeed, na Gupy ou no site de uma empresa? Clique no ícone do Radar na barra do navegador. A extensão pega o anúncio da página e abre o Radar com ele preenchido: é só conferir e clicar em <strong>Ler a vaga e adaptar meu CV</strong>.</p>
+
+    <p><a class="btn primario" href="radar-vagas-extensao.zip" download>Baixar a extensão (.zip)</a></p>
+
+    <h2>Como instalar (2 minutos)</h2>
+    <ol>
+      <li>Baixe o arquivo acima e <strong>extraia</strong> (botão direito → Extrair tudo). Vai aparecer uma pasta <code>radar-vagas-extensao</code>.</li>
+      <li>No navegador, abra <code>chrome://extensions</code> (no Edge: <code>edge://extensions</code>).</li>
+      <li>Ligue o <strong>Modo do desenvolvedor</strong> (canto superior direito; no Edge, na barra da esquerda).</li>
+      <li>Clique em <strong>Carregar sem compactação</strong> e escolha a pasta extraída.</li>
+      <li>Clique no ícone de quebra-cabeça da barra e fixe o <strong>Radar de Vagas</strong>.</li>
+    </ol>
+
+    <h2>Como usar</h2>
+    <ul>
+      <li><strong>Um clique:</strong> numa página de vaga, clique no ícone do Radar. A extensão pega o texto do anúncio e abre o Radar com ele.</li>
+      <li><strong>Só um trecho:</strong> selecione o texto da vaga, clique com o botão direito e escolha <em>Adaptar meu CV com este texto</em>.</li>
+      <li>Você precisa estar logado no Radar de Vagas nesse navegador.</li>
+    </ul>
+
+    <h2>Privacidade</h2>
+    <p>A extensão não lê nada sozinha e não guarda nada. Ela só age quando você clica no ícone ou no menu, e só na aba aberta (permissão <code>activeTab</code>). O texto da vaga vai direto para o Radar de Vagas, na sua conta, como se você tivesse colado. O código é aberto e está no <a href="https://github.com/Nascimento-Hebo/radar-vagas/tree/main/extensao" target="_blank" rel="noopener">GitHub</a>.</p>
+
+    <p class="texto-rodape"><a href="privacidade.html">Política de privacidade</a> · <a href="index.html">Voltar ao Radar de Vagas</a></p>
+  </main>
+</body>
+</html>

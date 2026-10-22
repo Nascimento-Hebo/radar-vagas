@@ -1,6 +1,6 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=22";
+import "./firebase.js?v=23";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
@@ -216,6 +216,26 @@ function renderGraficos() {
   }));
   const top = Object.entries(vagas).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([rotulo, valor]) => ({ rotulo, valor }));
   graficoBarras($("graf-vagas"), top, "CVs gerados");
+
+  // Funil: quantas pessoas chegam a cada passo (cada passo conta quem fez pelo menos uma vez)
+  const avancou = (u) => Object.values(u.dados.candidaturas || {}).some((c) => typeof c === "object" && ["entrevista", "teste", "proposta"].includes(c.etapa));
+  const total = usuarios.length || 1;
+  const funil = [
+    ["Cadastrou", usuarios.length],
+    ["Fez o primeiro acesso", usuarios.filter((u) => u.onboardingFeito).length],
+    ["Gerou um CV com IA", usuarios.filter((u) => u.nCvs > 0).length],
+    ["Marcou candidatura", usuarios.filter((u) => u.nCand > 0).length],
+    ["Chegou à entrevista", usuarios.filter(avancou).length],
+  ].map(([rotulo, valor]) => ({ rotulo: `${rotulo} (${Math.round((valor / total) * 100)}%)`, valor }));
+  graficoBarras($("graf-funil"), funil, "Pessoas");
+
+  // Canais de alerta ativos
+  const canais = [
+    ["Alerta por e-mail", usuarios.filter((u) => u.alerta?.ativo).length],
+    ["Notificação no aparelho", usuarios.filter((u) => u.pushAtivo).length],
+    ["Aparelhos com notificação", usuarios.reduce((n, u) => n + Object.keys(u.push || {}).length, 0)],
+  ].map(([rotulo, valor]) => ({ rotulo, valor }));
+  graficoBarras($("graf-canais"), canais, "Pessoas ou aparelhos");
 }
 
 function renderUsuarios() {

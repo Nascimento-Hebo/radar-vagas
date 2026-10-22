@@ -5,7 +5,7 @@
 const EMAIL_DIAS = 120;          // quanto tempo para trás procurar
 const EMAIL_MAX = 60;            // quantas mensagens trazer no máximo
 const EMAIL_IA_MAX = 30;         // quantas mensagens a IA analisa de uma vez
-const QUADROS_DE_VAGA = /(^|\.)(github\.com|gupy\.io|greenhouse\.io|lever\.co|linkedin\.com|indeed\.com|programathor\.com\.br|vagas\.com\.br|catho\.com\.br)$/i;
+const QUADROS_DE_VAGA = /(^|\.)(github\.com|gupy\.io|remotar\.com\.br|greenhouse\.io|lever\.co|linkedin\.com|indeed\.com|programathor\.com\.br|vagas\.com\.br|catho\.com\.br)$/i;
 
 let emailEstado = { mensagens: null, analises: {}, carregando: false, erro: "", empresas: [] };
 
@@ -104,7 +104,8 @@ E-mails (JSON): ${JSON.stringify(msgs.map((m) => ({ id: m.id, empresa: m.empresa
 
 Etapas possíveis: ${etapas}.
 Responda só com JSON:
-{ "analises": [{ "id": "id do e-mail", "tipo": "entrevista" | "teste" | "proposta" | "recusa" | "confirmacao" | "pedido_info" | "outro", "etapa": "id da etapa ou null se o e-mail não muda a etapa", "resumo": "1 frase", "acao": "o que a pessoa deve fazer agora, ou vazio", "prazo": "data ou horário citado, ou vazio" }] }
+{ "analises": [{ "id": "id do e-mail", "tipo": "entrevista" | "teste" | "proposta" | "recusa" | "confirmacao" | "pedido_info" | "outro", "etapa": "id da etapa ou null se o e-mail não muda a etapa", "resumo": "1 frase", "acao": "o que a pessoa deve fazer agora, ou vazio", "prazo": "data ou horário citado, ou vazio", "dataHora": "data e hora da entrevista ou do prazo no formato AAAA-MM-DDTHH:MM (horário de Brasília), ou vazio se não houver data exata" }] }
+Hoje é ${hojeLocal()}. Para datas sem ano, use o ano certo.
 Não invente: se o trecho não deixa claro, use "outro" e etapa null.`;
   try {
     const r = JSON.parse(String(await window.radarNuvem.gerarIA([{ text: pedido }], { json: true })).replace(/```(json)?/g, ""));
@@ -113,8 +114,49 @@ Não invente: se o trecho não deixa claro, use "outro" e etapa null.`;
     emailEstado.erroIA = e.message || String(e);
   } finally {
     emailEstado.analisando = false;
+    if (lerAuto()) aplicarSugestoes(sugestoesDosEmails(), true);
     renderPainel();
   }
+}
+
+// "Atualizar sozinho": a etapa muda assim que a IA entende o e-mail (opção salva neste navegador)
+const CHAVE_EMAIL_AUTO = "radar-vagas:email-auto";
+const lerAuto = () => ler(CHAVE_EMAIL_AUTO, false);
+
+function sugestoesDosEmails() {
+  const sugestoes = [];
+  for (const m of emailEstado.mensagens || []) {
+    const a = emailEstado.analises[m.id];
+    if (!a?.etapa || !NOME_ETAPA[a.etapa]) continue;
+    for (const cid of m.candidaturas) {
+      const cand = candidaturas[cid];
+      if (cand && cand.etapa !== a.etapa && ORDEM_ETAPA[a.etapa] > ORDEM_ETAPA[cand.etapa] && !sugestoes.some((s) => s.cid === cid)) sugestoes.push({ cid, cand, etapa: a.etapa, m, a });
+    }
+  }
+  return sugestoes;
+}
+
+// "2026-10-25T14:30" (horário de Brasília) -> ISO; vazio se a IA não deu data exata
+function dataDoEmail(txt) {
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(String(txt || ""))) return "";
+  const t = Date.parse(`${txt.slice(0, 16)}:00-03:00`);
+  return Number.isNaN(t) ? "" : new Date(t).toISOString();
+}
+
+function aplicarSugestoes(lista, automatico = false) {
+  if (!lista.length) return;
+  for (const s of lista) {
+    s.cand.etapa = s.etapa;
+    s.cand.atualizadaEm = hojeLocal();
+    if (s.a.acao) s.cand.nota = [s.cand.nota, `${fmtData(new Date(s.m.data).toISOString())}: ${s.a.acao}`].filter(Boolean).join("\n");
+    const quando = dataDoEmail(s.a.dataHora);
+    if ((s.etapa === "entrevista" || s.etapa === "teste") && quando) s.cand.compromisso = quando;
+  }
+  salvarCandidaturas();
+  render();
+  renderPainel();
+  const inicio = automatico ? "Atualizei sozinho" : "Atualizei";
+  avisar(lista.length === 1 ? `${inicio}: ${lista[0].cand.titulo || "candidatura"} foi para ${NOME_ETAPA[lista[0].etapa]}.` : `${inicio} ${lista.length} candidaturas pelos e-mails.`);
 }
 
 const ROTULO_TIPO = { entrevista: "Entrevista", teste: "Teste técnico", proposta: "Proposta", recusa: "Não avançou", confirmacao: "Recebemos sua candidatura", pedido_info: "Pedem informações", outro: "Outro" };
@@ -175,34 +217,37 @@ function painelEmails(c) {
   if (!emailEstado.mensagens.length) { c.append(el("p", "painel-vazio", `Nenhum e-mail dessas empresas nos últimos ${EMAIL_DIAS} dias.`)); return; }
 
   // Sugestões da IA: etapas que avançaram
-  const sugestoes = [];
-  for (const m of emailEstado.mensagens) {
-    const a = emailEstado.analises[m.id];
-    if (!a?.etapa || !NOME_ETAPA[a.etapa]) continue;
-    for (const cid of m.candidaturas) {
-      const cand = candidaturas[cid];
-      if (cand && cand.etapa !== a.etapa && ORDEM_ETAPA[a.etapa] > ORDEM_ETAPA[cand.etapa] && !sugestoes.some((s) => s.cid === cid)) sugestoes.push({ cid, cand, etapa: a.etapa, m, a });
-    }
-  }
+  const sugestoes = sugestoesDosEmails();
+  const auto = el("label", "email-auto");
+  const caixa = el("input");
+  caixa.type = "checkbox";
+  caixa.checked = lerAuto();
+  caixa.addEventListener("change", () => {
+    try { localStorage.setItem(CHAVE_EMAIL_AUTO, JSON.stringify(caixa.checked)); } catch {}
+    if (caixa.checked) aplicarSugestoes(sugestoesDosEmails(), true);
+  });
+  auto.append(caixa, " Atualizar minhas candidaturas sozinho quando a IA entender o e-mail (entrevista, teste, proposta ou recusa)");
+  c.append(auto);
   if (emailEstado.analisando) { const p = el("p", "cv-carregando"); p.append(el("span", "cv-spin"), "A IA está lendo os e-mails…"); c.append(p); }
   if (emailEstado.erroIA) c.append(el("p", "cv-nota", `A IA não conseguiu analisar agora: ${emailEstado.erroIA}`));
   if (sugestoes.length) {
     const box = el("section", "email-sugestoes");
-    box.append(el("h3", null, "A IA encontrou novidades nas suas candidaturas"));
+    const cabSug = el("div", "email-sug-cab");
+    cabSug.append(el("h3", null, "A IA encontrou novidades nas suas candidaturas"));
+    if (sugestoes.length > 1) {
+      const todas = el("button", "btn pequeno", "Aplicar todas");
+      todas.type = "button";
+      todas.addEventListener("click", () => aplicarSugestoes(sugestoes));
+      cabSug.append(todas);
+    }
+    box.append(cabSug);
     sugestoes.forEach((s) => {
       const linha = el("div", "email-sugestao");
-      linha.append(el("span", null, `${s.cand.titulo || "Vaga"}${s.cand.empresa ? ` · ${s.cand.empresa}` : ""}: ${NOME_ETAPA[s.cand.etapa]} → ${NOME_ETAPA[s.etapa]}. ${s.a.resumo || ""}`));
+      const quando = dataDoEmail(s.a.dataHora);
+      linha.append(el("span", null, `${s.cand.titulo || "Vaga"}${s.cand.empresa ? ` · ${s.cand.empresa}` : ""}: ${NOME_ETAPA[s.cand.etapa]} → ${NOME_ETAPA[s.etapa]}. ${s.a.resumo || ""}${quando ? ` (${fmtCompromisso(quando)})` : ""}`));
       const b = el("button", "btn pequeno primario", `Mudar para ${NOME_ETAPA[s.etapa]}`);
       b.type = "button";
-      b.addEventListener("click", () => {
-        s.cand.etapa = s.etapa;
-        s.cand.atualizadaEm = hojeLocal();
-        if (s.a.acao) s.cand.nota = [s.cand.nota, `${fmtData(new Date(s.m.data).toISOString())}: ${s.a.acao}`].filter(Boolean).join("\n");
-        salvarCandidaturas();
-        render();
-        renderPainel();
-        avisar(`Candidatura atualizada para ${NOME_ETAPA[s.etapa]}.`);
-      });
+      b.addEventListener("click", () => aplicarSugestoes([s]));
       linha.append(b);
       box.append(linha);
     });

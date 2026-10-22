@@ -1,9 +1,10 @@
-// Alerta diário por e-mail: depois da busca, manda para cada pessoa que ativou o alerta
-// as vagas novas de hoje que combinam com o que ela procura.
+// Alerta diário: depois da busca, manda para cada pessoa as vagas novas de hoje que combinam com o que ela procura,
+// por e-mail (se ativou o alerta) e por notificação nos aparelhos que ela ativou.
 // Precisa dos secrets do GitHub:
-//   FIREBASE_SERVICE_ACCOUNT  conta de serviço com leitura do Firestore (já configurada)
+//   FIREBASE_SERVICE_ACCOUNT  conta de serviço com acesso ao Firestore (já configurada)
 //   MAIL_USERNAME / MAIL_PASSWORD  Gmail que envia + senha de app do Gmail
-// Sem MAIL_*, roda em modo de teste: mostra quantos e-mails mandaria, sem enviar.
+//   VAPID_PRIVATE_KEY  chave privada das notificações (a pública está em docs/push.js)
+// Sem MAIL_* ou sem VAPID_PRIVATE_KEY, aquele canal roda em modo de teste: mostra quantos mandaria, sem enviar.
 
 import { readFile, appendFile } from "node:fs/promises";
 import { createSign } from "node:crypto";
@@ -14,6 +15,7 @@ import { combinaComAlerta } from "./vagas-core.mjs";
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://nascimento-hebo.github.io/radar-vagas/";
 const MAX_VAGAS_POR_EMAIL = 15;
+const VAPID_PUBLICA = "BD0x7EOdUjwhMPycjYPwwOFuKa8YjBWE3zlibdKU0rnkNtWF9V63DzFScOFGlpBWgj5bsW9zkX0WFg8vYSjKSL4"; // a mesma de docs/push.js
 
 const b64url = (b) => Buffer.from(b).toString("base64").replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
 
@@ -47,17 +49,37 @@ function valor(v) {
   return null;
 }
 
-async function pessoasComAlerta(sa, token) {
+async function consultar(sa, token, campo) {
   const url = `https://firestore.googleapis.com/v1/projects/${sa.project_id}/databases/(default)/documents:runQuery`;
   const r = await fetch(url, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ structuredQuery: { from: [{ collectionId: "users" }], where: { fieldFilter: { field: { fieldPath: "alerta.ativo" }, op: "EQUAL", value: { booleanValue: true } } } } }),
+    body: JSON.stringify({ structuredQuery: { from: [{ collectionId: "users" }], where: { fieldFilter: { field: { fieldPath: campo }, op: "EQUAL", value: { booleanValue: true } } } } }),
   });
   const linhas = await r.json();
   if (!r.ok) throw new Error(`Firestore respondeu ${r.status}: ${JSON.stringify(linhas).slice(0, 200)}`);
-  return linhas.filter((l) => l.document).map((l) => ({ uid: l.document.name.split("/").pop(), ...valor({ mapValue: { fields: l.document.fields } }) }))
-    .filter((u) => u.email && !u.bloqueado);
+  return linhas.filter((l) => l.document).map((l) => ({ uid: l.document.name.split("/").pop(), ...valor({ mapValue: { fields: l.document.fields } }) }));
+}
+
+// Quem ativou o e-mail ou alguma notificação (uma pessoa pode estar nas duas listas)
+async function pessoasComAlerta(sa, token) {
+  const [email, push] = await Promise.all([consultar(sa, token, "alerta.ativo"), consultar(sa, token, "pushAtivo")]);
+  const porUid = new Map([...email, ...push].map((u) => [u.uid, u]));
+  return [...porUid.values()].filter((u) => !u.bloqueado);
+}
+
+// Aparelho que não existe mais (desinstalou, limpou o navegador): tira da ficha
+async function removerInscricao(sa, token, uid, id) {
+  const url = `https://firestore.googleapis.com/v1/projects/${sa.project_id}/databases/(default)/documents/users/${uid}?updateMask.fieldPaths=push.${id}`;
+  await fetch(url, { method: "PATCH", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ fields: {} }) }).catch(() => {});
+}
+
+function montarNotificacao(vagas, total) {
+  const primeira = vagas[0];
+  const corpo = total === 1
+    ? `${primeira.titulo}${primeira.empresa ? ` · ${primeira.empresa}` : ""}`
+    : `${vagas.slice(0, 3).map((v) => v.titulo).join(" · ")}${total > 3 ? ` e mais ${total - 3}` : ""}`;
+  return JSON.stringify({ titulo: `${total} ${total === 1 ? "vaga nova combina" : "vagas novas combinam"} com você`, corpo, url: "./#para-voce", tag: "vagas-novas" });
 }
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -102,19 +124,46 @@ if (process.env.MAIL_USERNAME && process.env.MAIL_PASSWORD) {
   console.log("Sem MAIL_USERNAME/MAIL_PASSWORD: modo de teste, nenhum e-mail será enviado.");
 }
 
-let enviados = 0, falhas = 0;
+let webpush = null;
+if (process.env.VAPID_PRIVATE_KEY) {
+  webpush = (await import("web-push")).default;
+  webpush.setVapidDetails(`mailto:${process.env.MAIL_USERNAME || "nascimentohebo2@gmail.com"}`, VAPID_PUBLICA, process.env.VAPID_PRIVATE_KEY);
+} else {
+  console.log("Sem VAPID_PRIVATE_KEY: modo de teste, nenhuma notificação será enviada.");
+}
+
+let enviados = 0, falhas = 0, notificacoes = 0, removidas = 0;
 for (const p of pessoas) {
   const combinam = novasHoje.filter((v) => combinaComAlerta(v, p.alerta || {}));
   if (!combinam.length) continue;
-  const email = montarEmail(p, combinam.slice(0, MAX_VAGAS_POR_EMAIL), combinam.length);
-  if (!transporte) { console.log(`  [teste] mandaria ${combinam.length} vagas para uma pessoa`); continue; }
-  try {
-    await transporte.sendMail({ from: `Radar de Vagas <${process.env.MAIL_USERNAME}>`, to: p.email, subject: email.assunto, html: email.html, text: email.texto });
-    enviados++;
-  } catch (e) {
-    falhas++;
-    console.warn(`  ! falhou para uma pessoa: ${e.message}`);
+
+  if (p.alerta?.ativo && p.email) {
+    const email = montarEmail(p, combinam.slice(0, MAX_VAGAS_POR_EMAIL), combinam.length);
+    if (!transporte) console.log(`  [teste] mandaria e-mail com ${combinam.length} vagas para uma pessoa`);
+    else {
+      try {
+        await transporte.sendMail({ from: `Radar de Vagas <${process.env.MAIL_USERNAME}>`, to: p.email, subject: email.assunto, html: email.html, text: email.texto });
+        enviados++;
+      } catch (e) {
+        falhas++;
+        console.warn(`  ! e-mail falhou para uma pessoa: ${e.message}`);
+      }
+    }
+  }
+
+  const aparelhos = Object.entries(p.push || {}).filter(([, x]) => x?.endpoint && x?.keys?.p256dh && x?.keys?.auth);
+  if (!aparelhos.length) continue;
+  if (!webpush) { console.log(`  [teste] mandaria notificação para ${aparelhos.length} aparelho(s)`); continue; }
+  const msg = montarNotificacao(combinam, combinam.length);
+  for (const [id, x] of aparelhos) {
+    try {
+      await webpush.sendNotification({ endpoint: x.endpoint, keys: x.keys }, msg, { TTL: 12 * 3600 });
+      notificacoes++;
+    } catch (e) {
+      if (e.statusCode === 404 || e.statusCode === 410) { await removerInscricao(sa, token, p.uid, id); removidas++; }
+      else { falhas++; console.warn(`  ! notificação falhou: ${e.statusCode || e.message}`); }
+    }
   }
 }
-console.log(`Alertas enviados: ${enviados}${falhas ? ` · falhas: ${falhas}` : ""}`);
-if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `\n### Alertas por e-mail\n${pessoas.length} pessoas com alerta · ${enviados} e-mails enviados${transporte ? "" : " (modo de teste: falta MAIL_USERNAME/MAIL_PASSWORD)"}\n`);
+console.log(`E-mails: ${enviados} · notificações: ${notificacoes}${removidas ? ` · aparelhos removidos: ${removidas}` : ""}${falhas ? ` · falhas: ${falhas}` : ""}`);
+if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `\n### Alertas\n${pessoas.length} pessoas com alerta · ${enviados} e-mails${transporte ? "" : " (modo de teste: falta MAIL_USERNAME/MAIL_PASSWORD)"} · ${notificacoes} notificações${webpush ? "" : " (modo de teste: falta VAPID_PRIVATE_KEY)"}\n`);

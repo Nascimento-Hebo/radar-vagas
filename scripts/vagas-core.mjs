@@ -34,7 +34,7 @@ const RE_DEV = /\b(desenvolvedor|desenvolvedora|developer|dev|engineer|engenheir
 const RE_FULL = /full[\s-]?stack|fullstack|full[\s-]?cycle/;
 const RE_FRONT = /front[\s-]?end|frontend|\breact\b|angular|\bvue|next\.?js|\bui\b|web designer|wordpress|shopify|vtex/;
 const RE_BACK = /back[\s-]?end|backend|\bjava\b|python|\bphp\b|laravel|\.net|\bc#|golang|\bgo\b|node\.?js|nestjs|ruby|rails|elixir|kotlin|spring|django|\bapi\b/;
-const RE_NAO_DEV = /\b(qa|quality|tester|devops|sre|dados|data engineer|data scientist|cientista|analista de dados|designer|product manager|product owner|scrum|suporte|mobile|android|ios|flutter|react native|salesforce|sap|infra|seguran[cç]a|security|recrutador|vendas|sales)\b/;
+const RE_NAO_DEV = /\b(qa|quality|tester|devops|sre|dados|data engineer|data scientist|cientista|analista de dados|designer|product manager|product owner|scrum|suporte|mobile|android|ios|flutter|react native|salesforce|sap|infra|seguran[cç]a|security|recrutador|vendas|sales|site reliability|machine learning|ml engineer|ai engineer|engineering manager|forward deployed|solutions engineer|infrastructure|data warehouse)\b/;
 
 export function classificarArea(titulo, texto = "") {
   const t = SEM_ACENTO(titulo);
@@ -319,6 +319,44 @@ export function deVagaGreenhouse(job, empresaPadrao = "") {
   };
 }
 
+// Remotar: vagas 100% remotas para quem mora no Brasil. Só a categoria "Programação" interessa.
+const MOEDA_REMOTAR = { BRL: "R$", USD: "US$" };
+function salarioRemotar(s) {
+  if (!s || !MOEDA_REMOTAR[s.currency] || !s.from) return "";
+  const div = s.type === "yearly" ? 1200 : s.type === "monthly" ? 100 : 0; // valores vêm em centavos
+  if (!div) return "";
+  const a = s.from / div, b = s.to ? s.to / div : 0;
+  const moeda = MOEDA_REMOTAR[s.currency];
+  return b && b > a ? `${moeda} ${fmtNumero(a)} a ${fmtNumero(b)}` : `${moeda} ${fmtNumero(a)}`;
+}
+
+export function deVagaRemotar(job) {
+  if (!job || !job.id || !job.title || job.active === false || job.expired) return null;
+  if (!(job.jobCategories || []).some((c) => /programa/i.test(c.category?.name || ""))) return null;
+  const titulo = String(job.title).trim();
+  const descricao = limparHtml(job.description || "");
+  const area = classificarArea(titulo, descricao);
+  if (!area) return null;
+  const tags = (job.jobTags || []).map((t) => String(t.tag?.name || "").replace(/^\W+/u, "").trim()).filter(Boolean);
+  return {
+    id: `remotar-${job.id}`,
+    titulo: titulo.replace(/[\s\-–(]*remote\s*-\s*brazil\s*\)?\s*$/i, "").replace(/[\s\-–]+$/, "").trim(),
+    empresa: String(job.companyDisplayName || job.company?.name || "").trim(),
+    area,
+    nivel: classificarNivel(titulo, tags, descricao),
+    regime: classificarRegime(titulo + " " + (job.subtitle || ""), tags, descricao),
+    modelo: "Remoto",
+    local: "Remoto (Brasil)",
+    stack: extrairStack(titulo + "\n" + descricao),
+    requisitos: extrairRequisitos(descricao),
+    salario: salarioRemotar(job.jobSalary) || extrairSalario(descricao),
+    link: `https://remotar.com.br/job/${job.id}`,
+    fonte: "Remotar",
+    publicadaEm: String(job.createdAt || "").slice(0, 10),
+    textoLocal: tags.join(" "),
+  };
+}
+
 /* ---------- Junção com a rodada anterior ---------- */
 
 const NIVEIS = { jr: "junior", junior: "junior", pl: "pleno", pleno: "pleno", sr: "senior", senior: "senior", mid: "pleno" };
@@ -441,4 +479,44 @@ export function resumoMarkdown({ vagas, novas, encerradas, hoje }) {
   }
   if (!doDia.length) linhas.push("Nenhuma vaga nova hoje.");
   return linhas.join("\n");
+}
+
+/* ---------- Retrato do mercado (docs/historico.json) ---------- */
+
+// Valor mensal em reais do texto de salário ("R$ 5.000 a 7.000" -> 6000). Dólar fica de fora da mediana.
+export function salarioMensalReais(salario) {
+  const m = String(salario || "").match(/^R\$\s*([\d.]+)(?:\s*a\s*([\d.]+))?/);
+  if (!m) return 0;
+  const a = Number(m[1].replace(/\./g, "")), b = m[2] ? Number(m[2].replace(/\./g, "")) : a;
+  return (a + b) / 2;
+}
+
+const mediana = (ns) => {
+  if (!ns.length) return 0;
+  const o = [...ns].sort((a, b) => a - b), meio = Math.floor(o.length / 2);
+  return Math.round(o.length % 2 ? o[meio] : (o[meio - 1] + o[meio]) / 2);
+};
+const contar = (itens) => itens.reduce((acc, k) => { if (k) acc[k] = (acc[k] || 0) + 1; return acc; }, {});
+
+// Um dia do mercado: quantas vagas, de quê, onde e quanto pagam
+export function fotoDoMercado(abertas, hoje, novas = 0) {
+  const salarios = {};
+  for (const nivel of ["Estágio", "Júnior", "Pleno", "Sênior"]) {
+    for (const regime of ["CLT", "PJ"]) {
+      const valores = abertas.filter((v) => String(v.nivel).includes(nivel) && String(v.regime).includes(regime)).map((v) => salarioMensalReais(v.salario)).filter(Boolean);
+      if (valores.length) salarios[`${nivel}|${regime}`] = { n: valores.length, mediana: mediana(valores), min: Math.min(...valores), max: Math.max(...valores) };
+    }
+  }
+  return {
+    data: hoje,
+    abertas: abertas.length,
+    novas,
+    remotas: abertas.filter((v) => v.modelo === "Remoto").length,
+    porArea: contar(abertas.map((v) => v.area)),
+    porNivel: contar(abertas.map((v) => v.nivel)),
+    porRegime: contar(abertas.map((v) => v.regime)),
+    porFonte: contar(abertas.map((v) => String(v.fonte).split(" · ")[0])),
+    tecnologias: contar(abertas.flatMap((v) => v.stack || [])),
+    salarios,
+  };
 }

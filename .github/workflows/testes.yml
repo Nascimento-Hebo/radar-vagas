@@ -1,0 +1,44 @@
+name: Testes
+
+# A cada envio de código: testes da lógica + o site aberto num navegador de verdade (Firebase simulado).
+# Os commits diários do robô (só vagas.json, novas.md e historico.json) não disparam.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["docs/vagas.json", "docs/novas.md", "docs/historico.json"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Instalar
+        run: npm install --no-audit --no-fund
+
+      - name: Testes da lógica
+        run: npm test
+
+      - name: Instalar o navegador
+        run: npx playwright install --with-deps chromium
+
+      - name: Testes de ponta a ponta
+        run: npm run test:e2e
+
+      - name: Guardar o relatório se falhar
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: resultado-dos-testes
+          path: test-results/
+          retention-days: 7

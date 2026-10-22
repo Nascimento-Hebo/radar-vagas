@@ -109,6 +109,8 @@ function partesDoCv(p) {
   if (p.cvPdf?.base64) partes.push({ inline_data: { mime_type: "application/pdf", data: p.cvPdf.base64 } });
   if (p.cvTexto?.trim()) partes.push({ text: `CV / experiência escrita pela pessoa:\n${p.cvTexto.trim()}` });
   else if (!p.cvPdf?.base64 && p.cvExtraido?.trim()) partes.push({ text: `CV da pessoa (texto extraído do PDF dela):\n${p.cvExtraido.trim()}` });
+  // Marcadas como aprendidas no plano de estudos (aba Evoluir): entram como estudo recente, não como experiência
+  if (p.aprendidas?.length) partes.push({ text: `Tecnologias que a pessoa estudou recentemente (pode citar em Habilidades e em estudos/projetos pessoais, nunca como experiência profissional): ${p.aprendidas.join(", ")}` });
   return partes;
 }
 
@@ -854,6 +856,7 @@ function telaResultado(p, rascunho) {
   function montarPreparar() {
     subAbas(abaPreparar, [
       ["Carta e mensagens", (box) => montarExtra(box, "carta", p)],
+      ["Sobre a empresa", (box) => montarExtra(box, "empresa", p)],
       ["Perguntas da entrevista", (box) => montarExtra(box, "entrevista", p)],
       ["Simular entrevista", (box) => montarSimulador(box, p)],
     ]);
@@ -1144,6 +1147,44 @@ Responda só com JSON:
       });
     },
   },
+  empresa: {
+    titulo: "Sobre a empresa",
+    explica: "A IA lê o anúncio e junta o que se sabe da empresa: o que ela faz, o produto, como trabalha e como você pode se posicionar. Confira no site da empresa antes da entrevista, porque a IA pode estar desatualizada.",
+    botao: "Pesquisar a empresa",
+    lerLinks: true, // abre o link da vaga para ler o anúncio e o que ele diz da empresa
+    pedido: (v, a, g, p) => `Pesquise a empresa desta vaga para preparar ${p.nome || "a pessoa candidata"} para a entrevista, em português do Brasil.
+Vaga: "${v.titulo}"${v.empresa ? ` na ${v.empresa}` : ""}.${v.link ? ` Anúncio: ${v.link}` : ""}
+Resumo da vaga: ${a?.resumo || ""}
+Requisitos: ${(a?.obrigatorios || []).join("; ")}
+O que a pessoa tem (CV adaptado): ${JSON.stringify({ titulo: g.titulo, habilidades: g.habilidades, experiencias: (g.experiencias || []).map((e) => `${e.cargo} na ${e.empresa}`) })}
+
+Use o anúncio e o que você sabe da empresa. Se não conhecer a empresa, diga isso em "confianca" e baseie-se só no anúncio. Nunca invente números, clientes, notícias ou pessoas.
+Responda só com JSON (sem texto fora dele):
+{
+  "confianca": "alta" | "media" | "baixa",
+  "oQueFaz": "2 ou 3 frases: o que a empresa faz e para quem",
+  "produto": "produto ou serviço principal e onde esta vaga entra nele",
+  "porte": "porte e momento (startup, grande empresa, consultoria...), se souber",
+  "cultura": ["até 4 pontos sobre o jeito de trabalhar que aparecem no anúncio ou são conhecidos"],
+  "comoSePosicionar": ["até 4 frases de como ligar a sua experiência ao que a empresa precisa"],
+  "perguntasParaFazer": ["até 5 perguntas inteligentes para fazer ao recrutador sobre a empresa e o time"],
+  "pesquisarAntes": ["o que conferir sozinho antes da entrevista (site, LinkedIn da empresa, Glassdoor, produto)"]
+}`,
+    mostrar: (box, r) => {
+      const conf = { alta: "A IA conhece bem esta empresa.", media: "A IA conhece em parte. Confira os detalhes.", baixa: "A IA não conhece esta empresa: o resumo vem só do anúncio." }[r.confianca];
+      if (conf) box.append(el("p", `cv-nota confianca-${r.confianca}`, conf));
+      [["O que faz", r.oQueFaz], ["Produto", r.produto], ["Porte e momento", r.porte]].forEach(([t, txt]) => {
+        if (!txt) return;
+        const d = el("div", "cv-depois");
+        d.append(el("b", null, t), el("span", null, String(txt)));
+        box.append(d);
+      });
+      [["Jeito de trabalhar", r.cultura], ["Como se posicionar", r.comoSePosicionar], ["Perguntas para fazer ao recrutador", r.perguntasParaFazer], ["Confira antes da entrevista", r.pesquisarAntes]].forEach(([t, itens]) => {
+        const l = lista(itens);
+        if (l.length) box.append(listaReq(t, l));
+      });
+    },
+  },
   entrevista: {
     titulo: "Preparar entrevista",
     explica: "A IA lista as perguntas mais prováveis para esta vaga e sugere como responder com base no seu CV. Treine em voz alta antes da entrevista.",
@@ -1230,7 +1271,9 @@ async function gerarExtra(box, tipo, p) {
   carregandoEl.append(el("span", "cv-spin"), document.createTextNode("A IA está escrevendo…"));
   box.append(carregandoEl);
   try {
-    const r = lerJson(await gemini([{ text: cfg.pedido(cvVaga, cvAnalise, cvGerado, p) }], { json: true }));
+    // Ler links (url_context) não combina com resposta em JSON forçado: nesse caso o lerJson tira o JSON do texto
+    const lerLinks = Boolean(cfg.lerLinks && cvVaga.link);
+    const r = lerJson(await gemini([{ text: cfg.pedido(cvVaga, cvAnalise, cvGerado, p) }], { json: !lerLinks, lerLinks }));
     atualizarHistorico((h) => ({ extras: { ...(h.extras || {}), [tipo]: r } }));
     box.textContent = "";
     box.append(el("p", "cv-nota", cfg.explica));
@@ -1307,9 +1350,67 @@ async function montarSimulador(box, p) {
   const dicas = el("ul", "sim-dicas");
   ["Responda como se fosse a entrevista de verdade, com exemplos do seu trabalho.", Reconhecimento ? "Pode responder falando: clique no microfone." : "Seu navegador não reconhece voz; responda escrevendo.", "Leva uns 10 minutos."].forEach((d) => dicas.append(el("li", null, d)));
   box.append(dicas);
+  const op = el("label", "sim-auto");
+  const caixa = el("input");
+  caixa.type = "checkbox";
+  caixa.checked = ler(CHAVE_SIM_APROFUNDAR, true);
+  caixa.addEventListener("change", () => { try { localStorage.setItem(CHAVE_SIM_APROFUNDAR, JSON.stringify(caixa.checked)); } catch {} });
+  op.append(caixa, " O recrutador pode fazer perguntas de aprofundamento sobre as suas respostas, como numa entrevista de verdade");
+  box.append(op);
   const acoes = el("div", "cv-acoes");
   acoes.append(botao("Começar a simulação", "btn primario", () => iniciarSimulacao(box, p)));
   box.append(acoes);
+}
+
+// ---------- Conversa: perguntas de aprofundamento e jeito de falar ----------
+
+const CHAVE_SIM_APROFUNDAR = "radar-vagas:sim-aprofundar";
+const MAX_APROFUNDAR = 2;
+const MULETAS = ["tipo", "né", "então", "aí", "assim", "basicamente", "meio que", "sabe", "enfim", "na verdade"];
+
+// Depois de uma resposta, o recrutador decide se pede mais detalhe (no máximo 2 vezes por simulação)
+async function talvezAprofundar(box, q, resposta) {
+  if (!sim.aprofundar || sim.aprofundou >= MAX_APROFUNDAR || q.tipo === "aprofundamento" || q.tipo === "abertura" || resposta.length < 40) return;
+  const espera = el("p", "cv-carregando");
+  espera.append(el("span", "cv-spin"), document.createTextNode("O recrutador está pensando na sua resposta…"));
+  box.append(espera);
+  try {
+    const pedido = `Você é recrutador(a) técnico(a) entrevistando para a vaga "${cvVaga.titulo}". Você perguntou: "${q.pergunta}" (quer descobrir: ${q.avalia || "—"}).
+A pessoa respondeu: "${resposta.slice(0, 2500)}"
+Numa entrevista real, você faria UMA pergunta curta de aprofundamento? Faça só se a resposta foi vaga, genérica, sem exemplo concreto, sem resultado, ou citou algo técnico que vale explorar. Se a resposta já foi completa, não faça.
+Responda só com JSON: { "aprofundar": true | false, "pergunta": "pergunta curta e natural, falada, em português do Brasil", "avalia": "o que quer descobrir" }`;
+    const r = lerJson(await gemini([{ text: pedido }], { json: true }));
+    if (r.aprofundar && r.pergunta) {
+      sim.perguntas.splice(sim.i + 1, 0, { pergunta: String(r.pergunta), tipo: "aprofundamento", avalia: String(r.avalia || "") });
+      sim.aprofundou++;
+    }
+  } catch { /* sem aprofundamento: a entrevista segue normal */ }
+  espera.remove();
+}
+
+// Ritmo (palavras por minuto) e palavras de apoio nas respostas faladas
+function analiseFala() {
+  const faladas = (sim.fala || []).filter((f) => f?.texto && f.segundos > 3);
+  if (!faladas.length) return null;
+  const palavras = faladas.reduce((n, f) => n + f.texto.split(/\s+/).filter(Boolean).length, 0);
+  const segundos = faladas.reduce((n, f) => n + f.segundos, 0);
+  const texto = semAcento(faladas.map((f) => f.texto).join(" "));
+  const muletas = MULETAS.map((m) => [m, (texto.match(new RegExp(`(^|\\s)${semAcento(m)}(?=\\s|$|[,.!?])`, "g")) || []).length]).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
+  return { respostas: faladas.length, ppm: Math.round(palavras / (segundos / 60)), palavras, muletas, porCem: Math.round((muletas.reduce((n, [, k]) => n + k, 0) / Math.max(1, palavras)) * 1000) / 10 };
+}
+
+function blocoFala(f) {
+  const box = el("section", "sim-fala");
+  box.append(el("h4", null, "Seu jeito de falar"));
+  const ritmo = f.ppm < 100 ? ["devagar", "Você falou um pouco devagar. Tente frases mais diretas, sem pausas longas."]
+    : f.ppm > 170 ? ["rápido", "Você falou rápido. Respire entre as ideias: quem entrevista precisa anotar."]
+    : ["bom", "Ritmo bom e natural para uma entrevista."];
+  const grade = el("div", "sim-fala-grade");
+  const item = (valor, rotulo, sub) => { const d = el("div", "sim-fala-item"); d.append(el("strong", null, valor), el("span", null, rotulo), el("small", null, sub)); grade.append(d); };
+  item(`${f.ppm}`, "palavras por minuto", `ritmo ${ritmo[0]} (o ideal fica entre 120 e 160)`);
+  item(f.muletas.length ? f.muletas.slice(0, 3).map(([m, n]) => `"${m}" ${n}×`).join(" · ") : "nenhuma", "palavras de apoio", `${f.porCem} a cada 100 palavras`);
+  box.append(grade, el("p", "cv-nota", `${ritmo[1]} ${f.porCem > 3 ? "Diminua as palavras de apoio: troque por uma pausa curta." : ""} Baseado em ${f.respostas} ${f.respostas === 1 ? "resposta falada" : "respostas faladas"}; o reconhecimento de voz não escreve "é…" e "ãh", então eles não entram na conta.`));
+  return box;
 }
 
 async function iniciarSimulacao(box, p) {
@@ -1327,7 +1428,7 @@ Responda só com JSON: { "perguntas": [{ "pergunta": "", "tipo": "abertura" | "t
     const r = lerJson(await gemini([{ text: pedido }], { json: true }));
     const perguntas = (r.perguntas || []).filter((q) => q?.pergunta).slice(0, SIM_PERGUNTAS);
     if (!perguntas.length) throw new Error("A IA não montou as perguntas. Tente de novo.");
-    sim = { perguntas, i: 0, respostas: [], resultado: null };
+    sim = { perguntas, i: 0, respostas: [], fala: [], aprofundar: ler(CHAVE_SIM_APROFUNDAR, true), aprofundou: 0, resultado: null };
     mostrarPerguntaSim(box, p);
   } catch (e) {
     box.textContent = "";
@@ -1340,6 +1441,7 @@ Responda só com JSON: { "perguntas": [{ "pergunta": "", "tipo": "abertura" | "t
 
 function mostrarPerguntaSim(box, p) {
   box.textContent = "";
+  sim.fala = sim.fala || [];
   if (sim.i >= sim.perguntas.length) { avaliarSimulacao(box, p); return; }
   const q = sim.perguntas[sim.i];
   const prog = el("div", "sim-progresso");
@@ -1415,8 +1517,20 @@ function mostrarPerguntaSim(box, p) {
       rec.continuous = true;
       rec.interimResults = true;
       const base = ta.value ? ta.value.trimEnd() + " " : "";
-      rec.onresult = (ev) => { ta.value = base + [...ev.results].map((r) => r[0].transcript).join(" "); };
-      rec.onend = () => { rec = null; mic.textContent = "Responder falando"; mic.classList.remove("gravando"); };
+      const inicio = Date.now();
+      let falado = "";
+      rec.onresult = (ev) => {
+        falado = [...ev.results].map((r) => r[0].transcript).join(" ");
+        ta.value = base + falado;
+      };
+      rec.onend = () => {
+        rec = null; mic.textContent = "Responder falando"; mic.classList.remove("gravando");
+        // Guarda quanto tempo falou e o que falou: vira ritmo e vícios de fala no resultado
+        if (falado.trim()) {
+          const f = sim.fala[sim.i] || { texto: "", segundos: 0 };
+          sim.fala[sim.i] = { texto: `${f.texto} ${falado}`.trim(), segundos: f.segundos + (Date.now() - inicio) / 1000 };
+        }
+      };
       rec.onerror = (ev) => { avisar(ev.error === "not-allowed" ? "Libere o microfone para responder falando." : "Não consegui ouvir. Tente de novo ou escreva."); };
       rec.start();
       mic.textContent = "Parar de gravar";
@@ -1428,11 +1542,12 @@ function mostrarPerguntaSim(box, p) {
 
   const acoes = el("div", "cv-acoes");
   acoes.append(
-    botao(sim.i + 1 === sim.perguntas.length ? "Responder e ver meu resultado" : "Responder e ir para a próxima", "btn primario", () => {
+    botao(sim.i + 1 === sim.perguntas.length ? "Responder e ver meu resultado" : "Responder e ir para a próxima", "btn primario", async () => {
       if (!ta.value.trim()) { avisar("Escreva ou fale sua resposta (ou use Pular)."); return; }
       sim.respostas[sim.i] = ta.value.trim();
-      sim.i++;
       pararVoz();
+      await talvezAprofundar(box, q, sim.respostas[sim.i]);
+      sim.i++;
       mostrarPerguntaSim(box, p);
     }),
     botao("Pular", "btn", () => { pararVoz(); sim.respostas[sim.i] = ""; sim.i++; mostrarPerguntaSim(box, p); }),
@@ -1447,9 +1562,12 @@ async function avaliarSimulacao(box, p) {
   const carregandoEl = el("p", "cv-carregando");
   carregandoEl.append(el("span", "cv-spin"), document.createTextNode("A IA está avaliando suas respostas…"));
   box.append(carregandoEl);
-  const pares = sim.perguntas.map((q, i) => ({ pergunta: q.pergunta, avalia: q.avalia, resposta: sim.respostas[i] || "(pulou)" }));
+  const pares = sim.perguntas.map((q, i) => ({ pergunta: q.pergunta, tipo: q.tipo, avalia: q.avalia, resposta: sim.respostas[i] || "(pulou)", falada: Boolean(sim.fala?.[i]) }));
+  const fala = analiseFala();
   const pedido = `Você entrevistou ${p.nome || "uma pessoa"} para a vaga "${cvVaga.titulo}"${cvVaga.empresa ? ` na ${cvVaga.empresa}` : ""}. Avalie as respostas como um(a) recrutador(a) justo(a) e construtivo(a), em português do Brasil.
 Perguntas e respostas (JSON): ${JSON.stringify(pares)}
+${fala ? `Respostas faladas (transcritas por reconhecimento de voz, ignore erros de transcrição): ritmo de ${fala.ppm} palavras por minuto; palavras de apoio: ${fala.muletas.map(([m, n]) => `${m} ${n}x`).join(", ") || "nenhuma"}. Comente a comunicação em "melhorar" se fizer sentido.` : ""}
+Perguntas do tipo "aprofundamento" foram feitas por você depois de uma resposta incompleta: avalie se a pessoa completou bem.
 Responda só com JSON:
 {
   "nota": número de 0 a 10,
@@ -1460,7 +1578,7 @@ Responda só com JSON:
 }`;
   try {
     sim.resultado = lerJson(await gemini([{ text: pedido }], { json: true }));
-    atualizarHistorico((h) => ({ extras: { ...(h.extras || {}), simulacao: { perguntas: sim.perguntas, respostas: sim.respostas, resultado: sim.resultado } } }));
+    atualizarHistorico((h) => ({ extras: { ...(h.extras || {}), simulacao: { perguntas: sim.perguntas, respostas: sim.respostas, fala: sim.fala, resultado: sim.resultado } } }));
     mostrarResultadoSim(box, p);
   } catch (e) {
     box.textContent = "";
@@ -1485,6 +1603,8 @@ function mostrarResultadoSim(box, p) {
   const colunas = el("div", "cv-req");
   [listaReq("Pontos fortes", lista(r.pontosFortes)), listaReq("Para melhorar", lista(r.melhorar))].forEach((n) => n && colunas.append(n));
   box.append(colunas);
+  const fala = analiseFala();
+  if (fala) box.append(blocoFala(fala));
 
   const ol = el("ol", "entrevista");
   sim.perguntas.forEach((q, i) => {
