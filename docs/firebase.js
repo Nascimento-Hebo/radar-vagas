@@ -45,6 +45,8 @@ const SCOPE_GMAIL = "https://www.googleapis.com/auth/gmail.readonly";
 
 let usuario = null;
 let fichaUsuario = null; // documento users/{uid}
+// Assistente de suporte: nome, avatar (imagem pequena em data URL) e saudação. O super admin edita no painel.
+let configSuporte = { nome: "Suporte Radar", avatar: "", saudacao: "" };
 let configIA = { ativa: true, modelos: ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash"], limiteDiario: 60 };
 const pendentes = new Map();
 let timerEnvio = null;
@@ -167,8 +169,9 @@ window.addEventListener("pagehide", () => { if (pendentes.size) enviarPendentes(
 
 async function carregarConfigIA() {
   try {
-    const snap = await getDoc(doc(db, "config", "ia"));
-    if (snap.exists()) configIA = { ...configIA, ...snap.data() };
+    const [ia, sup] = await Promise.all([getDoc(doc(db, "config", "ia")), getDoc(doc(db, "config", "suporte"))]);
+    if (ia.exists()) configIA = { ...configIA, ...ia.data() };
+    if (sup.exists()) configSuporte = { ...configSuporte, ...sup.data() };
   } catch {}
 }
 
@@ -281,6 +284,7 @@ async function apagarDadosDoUsuario(uid) {
   await Promise.all(snaps.docs.map((d) => deleteDoc(d.ref)));
   await deleteDoc(doc(db, "users", uid));
 }
+const salvarConfigSuporte = async (campos) => { await setDoc(doc(db, "config", "suporte"), campos, { merge: true }); configSuporte = { ...configSuporte, ...campos }; };
 const salvarConfigIA = async (campos) => { await setDoc(doc(db, "config", "ia"), campos, { merge: true }); configIA = { ...configIA, ...campos }; };
 
 // ---------- Início ----------
@@ -291,12 +295,13 @@ const nuvem = {
   get usuario() { return usuario; },
   get ficha() { return fichaUsuario; },
   get configIA() { return configIA; },
+  get configSuporte() { return configSuporte; },
   ehAdmin: () => ehAdmin(),
   entrarComGoogle, entrarComEmail, criarConta, recuperarSenha, reenviarVerificacao, sair, mensagemErro,
   salvar: agendarEnvio,
   gerarIA,
   conectarGmail, desconectarGmail, gmailConectado: () => Boolean(tokenGmail()), gmail,
-  listarUsuarios, dadosDoUsuario, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA,
+  listarUsuarios, dadosDoUsuario, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA, salvarConfigSuporte,
 };
 window.radarNuvem = nuvem;
 

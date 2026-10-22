@@ -1,6 +1,6 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=15";
+import "./firebase.js?v=16";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
@@ -38,6 +38,7 @@ window.addEventListener("radar:usuario", (e) => {
 
 async function carregarTudo() {
   preencherIA();
+  preencherAssistente();
   try {
     const lista = await nuvem.listarUsuarios();
     // Para cada pessoa, conta candidaturas e CVs (lê os dados dela)
@@ -230,6 +231,79 @@ $("form-ia").addEventListener("submit", async (e) => {
   try {
     await nuvem.salvarConfigIA({ ativa: $("ia-ativa").checked, modelos, limiteDiario: Math.max(0, Number($("ia-limite").value) || 0) });
     avisar("Configuração da IA salva. Vale para todos na próxima vez que abrirem o site.");
+  } catch (err) { avisar(nuvem.mensagemErro(err)); }
+});
+
+// ---------- Assistente de suporte: nome, avatar e saudação ----------
+
+let avatarEscolhido = "";
+
+function mostrarPrevia() {
+  $("ass-previa").src = avatarEscolhido || window.avatarPadrao();
+  $("ass-previa-nome").textContent = $("ass-nome").value.trim() || "Suporte Radar";
+  document.querySelectorAll(".avatar-opcao").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.src === (avatarEscolhido || window.avatarPadrao()))));
+}
+
+function preencherAssistente() {
+  const cfg = nuvem.configSuporte;
+  avatarEscolhido = cfg.avatar || "";
+  $("ass-nome").value = cfg.nome || "Suporte Radar";
+  $("ass-saudacao").value = cfg.saudacao || "";
+  const box = $("ass-avatares");
+  box.textContent = "";
+  window.AVATARES.forEach((a) => {
+    const b = el("button", "avatar-opcao");
+    b.type = "button";
+    b.dataset.src = a.src;
+    b.title = a.nome;
+    b.setAttribute("aria-label", `Usar o avatar ${a.nome}`);
+    const img = el("img");
+    img.src = a.src;
+    img.alt = "";
+    b.append(img);
+    b.addEventListener("click", () => { avatarEscolhido = a.src; mostrarPrevia(); });
+    box.append(b);
+  });
+  mostrarPrevia();
+}
+
+// Recorta a imagem enviada num quadrado do centro e reduz para 160 px, para caber no banco (limite de 1 MB por documento)
+function reduzirImagem(arquivo) {
+  return new Promise((ok, falhou) => {
+    const url = URL.createObjectURL(arquivo);
+    const img = new Image();
+    img.onload = () => {
+      const lado = Math.min(img.width, img.height);
+      const c = document.createElement("canvas");
+      c.width = c.height = 160;
+      c.getContext("2d").drawImage(img, (img.width - lado) / 2, (img.height - lado) / 2, lado, lado, 0, 0, 160, 160);
+      URL.revokeObjectURL(url);
+      const webp = c.toDataURL("image/webp", 0.85);
+      ok(webp.startsWith("data:image/webp") ? webp : c.toDataURL("image/jpeg", 0.85));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); falhou(new Error("Não consegui abrir essa imagem.")); };
+    img.src = url;
+  });
+}
+
+$("ass-arquivo").addEventListener("change", async (e) => {
+  const arq = e.target.files[0];
+  if (!arq) return;
+  if (arq.size > 8 * 1024 * 1024) { avisar("Imagem grande demais (máx. 8 MB)."); return; }
+  try { avatarEscolhido = await reduzirImagem(arq); mostrarPrevia(); }
+  catch (err) { avisar(err.message); }
+});
+$("ass-nome").addEventListener("input", mostrarPrevia);
+
+$("form-assistente").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  try {
+    await nuvem.salvarConfigSuporte({
+      nome: $("ass-nome").value.trim() || "Suporte Radar",
+      avatar: avatarEscolhido === window.avatarPadrao() ? "" : avatarEscolhido,
+      saudacao: $("ass-saudacao").value.trim(),
+    });
+    avisar("Assistente salvo. Aparece para todos na próxima vez que abrirem o site.");
   } catch (err) { avisar(nuvem.mensagemErro(err)); }
 });
 

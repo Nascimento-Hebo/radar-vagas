@@ -588,12 +588,24 @@ button:disabled { opacity: .6; cursor: wait; }
 
 /* ---------- Suporte com IA ---------- */
 .suporte-btn { position: fixed; right: 20px; bottom: 20px; z-index: 30; display: inline-flex; align-items: center; gap: 8px; font: 700 15px var(--font-body); color: var(--accent-ink); background: var(--accent); border: 0; border-radius: 99px; padding: 13px 20px; cursor: pointer; box-shadow: 0 12px 30px -10px rgb(0 0 0 / .6); }
-.suporte-btn .ic { width: 20px; height: 20px; }
+.suporte-btn { padding: 7px 18px 7px 7px; }
+.suporte-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex: none; background: var(--surface-2); }
+.suporte-avatar.grande { width: 40px; height: 40px; box-shadow: 0 0 0 2px rgb(255 255 255 / .6); }
+.suporte-avatar.pequeno { width: 28px; height: 28px; }
+.suporte-titulo { flex: 1; min-width: 0; }
+.suporte-acao { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: var(--accent-ink); background: rgb(255 255 255 / .18); border: 0; cursor: pointer; }
+.suporte-acao:hover { background: rgb(255 255 255 / .32); }
+.suporte-acao .ic { width: 18px; height: 18px; }
+.suporte-acao:focus-visible { outline: 3px solid #fff; outline-offset: 1px; }
+.msg-linha { display: flex; gap: 8px; align-items: flex-end; max-width: 92%; }
+.msg-linha .msg { max-width: none; }
+.msg-linha.erro .msg { background: color-mix(in srgb, var(--perigo) 12%, transparent); }
+.msg-linha.erro .link-btn { margin-top: 4px; font-size: 13px; }
+.msg.eu.falhou { opacity: .6; }
 .suporte { position: fixed; right: 20px; bottom: 84px; z-index: 31; width: min(400px, calc(100% - 24px)); height: min(600px, calc(100dvh - 120px)); display: grid; grid-template-rows: auto 1fr auto auto; border-radius: 18px; overflow: hidden; background: var(--surface); border: 1px solid var(--line-strong); box-shadow: 0 30px 70px -20px rgb(0 0 0 / .7); }
 .suporte-cab { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 16px; background: var(--accent); color: var(--accent-ink); }
 .suporte-cab strong { display: block; font: 700 16px var(--font-display); }
 .suporte-cab span { font-size: 12.5px; opacity: .85; }
-.suporte-cab .cv-x { color: var(--accent-ink); }
 .suporte-msgs { overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .msg { max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: 14.5px; line-height: 1.5; }
 .msg p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -676,3 +688,19 @@ button:disabled { opacity: .6; cursor: wait; }
 .admin-linha { display: grid; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .admin-linha span { font-size: 13.5px; color: var(--muted); }
 .admin-msgs { max-height: 360px; border: 1px solid var(--line); border-radius: 12px; }
+
+/* Assistente: linha da resposta fica à esquerda; editor de avatar no painel do admin */
+.msg-linha.ia { align-self: flex-start; }
+.assistente { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: start; }
+.assistente-previa { display: grid; justify-items: center; gap: 8px; }
+.assistente-previa img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; background: var(--surface-2); box-shadow: 0 0 0 3px var(--accent-soft); }
+.assistente-previa span { font: 700 15px var(--font-display); text-align: center; }
+.assistente-form { display: grid; gap: 12px; max-width: 640px; }
+.avatares { display: flex; flex-wrap: wrap; gap: 10px; }
+.avatar-opcao { width: 56px; height: 56px; padding: 0; border-radius: 50%; border: 3px solid transparent; background: none; cursor: pointer; }
+.avatar-opcao img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+.avatar-opcao[aria-pressed="true"] { border-color: var(--accent); }
+.avatar-opcao:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.assistente-form textarea { width: 100%; font: 14.5px var(--font-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; padding: 10px 12px; resize: vertical; }
+.assistente-form .btn { justify-self: start; }
+@media (max-width: 640px) { .assistente { grid-template-columns: 1fr; } }
