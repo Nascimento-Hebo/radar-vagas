@@ -21,32 +21,71 @@ Também ajude com dúvidas de carreira: como melhorar o CV, como se preparar par
 Se não souber algo do site, diga que não tem certeza e sugira falar com o administrador. Nunca peça senhas nem chaves.`;
 const SUPORTE_SUGESTOES = ["Como adapto meu CV para uma vaga?", "Como filtro vagas da minha cidade?", "Como funciona a central de e-mail?", "Dicas para entrevista técnica"];
 
-let suporteConversa = ler(CHAVE_SUPORTE, []);
+let suporteConversa = ler(CHAVE_SUPORTE, []).filter((m) => !m.erro);
 let suporteEnviando = false;
 
+// Nome, avatar e saudação vêm do painel do super admin (config/suporte); sem configuração, usa o padrão.
+const suporteNome = () => window.radarNuvem?.configSuporte?.nome || "Suporte Radar";
+const suporteAvatar = () => window.radarNuvem?.configSuporte?.avatar || window.avatarPadrao();
+const suporteSaudacao = () => window.radarNuvem?.configSuporte?.saudacao
+  || `Olá! Sou ${suporteNome()}, o assistente do Radar de Vagas. Posso explicar como usar o site, ajudar com seu CV ou com entrevistas. O que você precisa?`;
+
+function aplicarIdentidadeSuporte() {
+  const src = suporteAvatar();
+  $("suporte-avatar-btn").src = src;
+  $("suporte-avatar-cab").src = src;
+  $("suporte-nome").textContent = suporteNome();
+}
+
+function msgIa(texto, extra = "") {
+  const linha = el("div", `msg-linha ia ${extra}`.trim());
+  const img = el("img", "suporte-avatar pequeno");
+  img.src = suporteAvatar();
+  img.alt = "";
+  const d = el("div", "msg ia");
+  if (texto) d.append(el("p", null, texto));
+  linha.append(img, d);
+  return [linha, d];
+}
+
 function renderSuporte() {
+  aplicarIdentidadeSuporte();
   const box = $("suporte-msgs");
   box.textContent = "";
-  if (!suporteConversa.length) {
-    const ola = el("div", "msg ia");
-    ola.append(el("p", null, "Olá! Sou o assistente do Radar de Vagas. Posso explicar como usar o site, ajudar com seu CV ou com entrevistas. O que você precisa?"));
-    box.append(ola);
-  }
+  if (!suporteConversa.length) box.append(msgIa(suporteSaudacao())[0]);
   suporteConversa.forEach((m) => {
-    const d = el("div", `msg ${m.de === "eu" ? "eu" : "ia"}`);
-    d.append(el("p", null, m.texto));
-    box.append(d);
+    if (m.de === "eu") {
+      const d = el("div", `msg eu${m.erro ? " falhou" : ""}`);
+      d.append(el("p", null, m.texto));
+      box.append(d);
+      return;
+    }
+    const [linha, balao] = msgIa(m.texto, m.erro ? "erro" : "");
+    if (m.erro) {
+      const b = el("button", "link-btn", "Tentar de novo");
+      b.type = "button";
+      b.addEventListener("click", () => {
+        // tira a pergunta que falhou e o aviso de erro, e manda de novo
+        const i = suporteConversa.indexOf(m);
+        const pergunta = suporteConversa[i - 1];
+        suporteConversa.splice(i - 1, 2);
+        enviarSuporte(pergunta?.texto);
+      });
+      balao.append(b);
+    }
+    box.append(linha);
   });
   if (suporteEnviando) {
-    const d = el("div", "msg ia digitando");
-    d.append(el("span"), el("span"), el("span"));
-    d.setAttribute("aria-label", "O assistente está escrevendo");
-    box.append(d);
+    const [linha, balao] = msgIa("", "digitando");
+    balao.classList.add("digitando");
+    balao.append(el("span"), el("span"), el("span"));
+    balao.setAttribute("aria-label", `${suporteNome()} está escrevendo`);
+    box.append(linha);
   }
   box.scrollTop = box.scrollHeight;
   const sug = $("suporte-sugestoes");
   sug.textContent = "";
-  if (suporteConversa.length < 2) SUPORTE_SUGESTOES.forEach((s) => {
+  if (!suporteConversa.length) SUPORTE_SUGESTOES.forEach((s) => {
     const b = el("button", "atalho", s);
     b.type = "button";
     b.addEventListener("click", () => enviarSuporte(s));
@@ -54,32 +93,55 @@ function renderSuporte() {
   });
 }
 
+// Só vai para a conta a parte da conversa que deu certo (pergunta sem resposta não fica guardada)
+const guardarSuporte = () => salvar(CHAVE_SUPORTE, suporteConversa.filter((m) => !m.erro).slice(-SUPORTE_MAX));
+
 async function enviarSuporte(texto) {
   texto = String(texto || "").trim();
   if (!texto || suporteEnviando) return;
   if (!window.radarNuvem?.usuario) { avisar("Entre na sua conta para usar o suporte."); return; }
-  const historico = suporteConversa.slice(-16).map((m) => ({ role: m.de === "eu" ? "user" : "model", parts: [{ text: m.texto }] }));
-  suporteConversa.push({ de: "eu", texto, em: new Date().toISOString() });
+  const historico = suporteConversa.filter((m) => !m.erro).slice(-16).map((m) => ({ role: m.de === "eu" ? "user" : "model", parts: [{ text: m.texto }] }));
+  const pergunta = { de: "eu", texto, em: new Date().toISOString() };
+  suporteConversa.push(pergunta);
   suporteEnviando = true;
   renderSuporte();
   try {
-    const resposta = await window.radarNuvem.gerarIA([{ text: texto }], { sistema: SUPORTE_SISTEMA, historico });
+    const sistema = SUPORTE_SISTEMA.replace('"Suporte Radar"', `"${suporteNome()}"`);
+    const resposta = await window.radarNuvem.gerarIA([{ text: texto }], { sistema, historico });
     suporteConversa.push({ de: "ia", texto: String(resposta).replace(/\*\*/g, "").trim(), em: new Date().toISOString() });
   } catch (e) {
+    pergunta.erro = true;
     suporteConversa.push({ de: "ia", texto: `Não consegui responder agora: ${e.message || e}`, em: new Date().toISOString(), erro: true });
   } finally {
     suporteEnviando = false;
-    suporteConversa = suporteConversa.slice(-SUPORTE_MAX);
-    salvar(CHAVE_SUPORTE, suporteConversa.filter((m) => !m.erro));
+    guardarSuporte();
     renderSuporte();
   }
+}
+
+function resetarSuporte() {
+  if (suporteEnviando) return;
+  if (suporteConversa.length && !confirm("Apagar esta conversa e começar uma nova?")) return;
+  suporteConversa = [];
+  guardarSuporte();
+  renderSuporte();
+  $("suporte-texto").focus();
 }
 
 function abrirSuporte(abrir) {
   $("suporte").hidden = !abrir;
   $("suporte-abrir").setAttribute("aria-expanded", String(abrir));
-  if (abrir) { suporteConversa = ler(CHAVE_SUPORTE, suporteConversa); renderSuporte(); $("suporte-texto").focus(); }
+  if (abrir) {
+    const salvas = ler(CHAVE_SUPORTE, []);
+    suporteConversa = [...salvas, ...suporteConversa.filter((m) => m.erro)]; // mantém os avisos de erro desta sessão
+    renderSuporte();
+    $("suporte-texto").focus();
+  }
 }
+
+$("suporte-resetar").addEventListener("click", resetarSuporte);
+window.addEventListener("radar:usuario", aplicarIdentidadeSuporte);
+aplicarIdentidadeSuporte();
 
 $("suporte-abrir").addEventListener("click", () => abrirSuporte($("suporte").hidden));
 $("suporte-fechar").addEventListener("click", () => { abrirSuporte(false); $("suporte-abrir").focus(); });

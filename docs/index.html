@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Conectando à sua conta…</div>
@@ -220,14 +220,20 @@
   </dialog>
 
   <!-- Suporte com IA -->
-  <button type="button" class="suporte-btn" id="suporte-abrir" aria-controls="suporte">
-    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+  <button type="button" class="suporte-btn" id="suporte-abrir" aria-controls="suporte" aria-expanded="false">
+    <img class="suporte-avatar" id="suporte-avatar-btn" src="" alt="" width="32" height="32">
     Ajuda
   </button>
-  <section class="suporte" id="suporte" aria-label="Suporte com IA" hidden>
+  <section class="suporte" id="suporte" aria-labelledby="suporte-nome" hidden>
     <header class="suporte-cab">
-      <div><strong>Suporte Radar</strong><span>Assistente com IA · responde na hora</span></div>
-      <button type="button" class="cv-x" id="suporte-fechar" aria-label="Fechar suporte">×</button>
+      <img class="suporte-avatar grande" id="suporte-avatar-cab" src="" alt="" width="40" height="40">
+      <div class="suporte-titulo"><strong id="suporte-nome">Suporte Radar</strong><span>Assistente com IA · responde na hora</span></div>
+      <button type="button" class="suporte-acao" id="suporte-resetar" aria-label="Recomeçar a conversa" title="Recomeçar a conversa">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      </button>
+      <button type="button" class="suporte-acao" id="suporte-fechar" aria-label="Fechar suporte" title="Fechar">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
     </header>
     <div class="suporte-msgs" id="suporte-msgs" aria-live="polite"></div>
     <div class="suporte-sugestoes" id="suporte-sugestoes"></div>
@@ -240,10 +246,11 @@
     </form>
   </section>
 
-  <script src="app.js?v=15"></script>
-  <script src="cv.js?v=15"></script>
-  <script src="email.js?v=15"></script>
-  <script src="suporte.js?v=15"></script>
-  <script type="module" src="firebase.js?v=15"></script>
+  <script src="app.js?v=16"></script>
+  <script src="cv.js?v=16"></script>
+  <script src="email.js?v=16"></script>
+  <script src="avatares.js?v=16"></script>
+  <script src="suporte.js?v=16"></script>
+  <script type="module" src="firebase.js?v=16"></script>
 </body>
 </html>

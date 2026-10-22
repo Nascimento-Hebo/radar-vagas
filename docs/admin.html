@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Verificando acesso…</div>
@@ -54,6 +54,27 @@
       </form>
     </section>
 
+    <section class="admin-cartao" aria-labelledby="assistente-titulo">
+      <div class="admin-cab"><h2 id="assistente-titulo">Assistente de suporte</h2></div>
+      <p class="painel-nota">Nome, avatar e mensagem de boas-vindas do chat "Ajuda". Vale para todos os usuários.</p>
+      <div class="assistente">
+        <div class="assistente-previa" aria-live="polite">
+          <img id="ass-previa" src="" alt="Avatar atual do assistente" width="96" height="96">
+          <span id="ass-previa-nome"></span>
+        </div>
+        <form class="assistente-form" id="form-assistente">
+          <label class="campo"><span>Nome do assistente</span><input id="ass-nome" type="text" maxlength="40"></label>
+          <div class="campo">
+            <span>Avatar: escolha um pronto ou envie uma imagem</span>
+            <div class="avatares" id="ass-avatares" role="group" aria-label="Avatares prontos"></div>
+          </div>
+          <label class="campo"><span>Enviar imagem (JPG, PNG ou WebP; vira um círculo de 160 px)</span><input id="ass-arquivo" type="file" accept="image/png,image/jpeg,image/webp"></label>
+          <label class="campo"><span>Mensagem de boas-vindas (deixe vazio para usar a padrão)</span><textarea id="ass-saudacao" rows="3" maxlength="400"></textarea></label>
+          <button type="submit" class="btn primario">Salvar assistente</button>
+        </form>
+      </div>
+    </section>
+
     <section class="admin-cartao" aria-labelledby="usuarios-titulo">
       <div class="admin-cab">
         <h2 id="usuarios-titulo">Usuários cadastrados</h2>
@@ -83,6 +104,7 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="admin.js?v=15"></script>
+  <script src="avatares.js?v=16"></script>
+  <script type="module" src="admin.js?v=16"></script>
 </body>
 </html>
