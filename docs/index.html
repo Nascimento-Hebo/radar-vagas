@@ -3,23 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Radar de Vagas</title>
-  <meta name="description" content="Vagas abertas de front-end, full-stack e back-end, atualizadas todo dia.">
+  <title>Radar de Vagas · OH Tech</title>
+  <meta name="description" content="Vagas abertas de front-end, full-stack e back-end, atualizadas todo dia, com adaptador de CV por IA. Um projeto OH Tech.">
+  <meta name="theme-color" content="#070b16">
+  <link rel="icon" type="image/png" href="oh-tech-icone.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
+  <div class="fundo" aria-hidden="true"><div class="grade"></div><div class="brilho b1"></div><div class="brilho b2"></div></div>
+
   <main class="wrap">
-    <header>
-      <div class="eyebrow">Front-end · Full-stack · Back-end</div>
-      <h1>Radar de Vagas</h1>
-      <p class="sub">Vagas buscadas todo dia nas APIs do GitHub e da Gupy. Vagas que fecharam saem da lista principal.</p>
-      <div class="rodada" id="rodada">Carregando…</div>
+    <header class="barra">
+      <a class="marca" href="./" aria-label="OH Tech Technology — Radar de Vagas">
+        <img src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
+      </a>
+      <span class="status"><span class="pulso" aria-hidden="true"></span><span id="status-texto">Radar online</span></span>
     </header>
 
-    <section class="filtros" aria-label="Filtros">
+    <section class="hero">
+      <div class="hero-texto">
+        <div class="eyebrow">// Radar de vagas · Front-end · Full-stack · Back-end</div>
+        <h1>Sua próxima vaga <span class="grad">já está no radar.</span></h1>
+        <p class="sub">Todo dia às 7:15 o radar varre o GitHub e a Gupy, tira as vagas que fecharam e coloca no topo as que mais combinam com o seu foco. Você escolhe, a IA adapta o CV, você se candidata.</p>
+        <div class="rodada" id="rodada">Carregando…</div>
+      </div>
+      <div class="radar" id="radar" aria-hidden="true">
+        <div class="radar-anel a1"></div><div class="radar-anel a2"></div><div class="radar-anel a3"></div>
+        <div class="radar-eixo h"></div><div class="radar-eixo v"></div>
+        <div class="radar-varredura"></div>
+        <div class="radar-pontos" id="radar-pontos"></div>
+        <div class="radar-centro"></div>
+      </div>
+    </section>
+
+    <section class="hud" id="hud" aria-label="Resumo"></section>
+
+    <section class="duo">
+      <article class="painel meta-semana" aria-labelledby="meta-titulo">
+        <div class="painel-cab">
+          <span class="painel-rotulo" id="meta-titulo">Meta da semana</span>
+          <span class="meta-ajuste">
+            <button type="button" class="mini" id="meta-menos" aria-label="Diminuir meta">−</button>
+            <span id="meta-valor">5</span>
+            <button type="button" class="mini" id="meta-mais" aria-label="Aumentar meta">+</button>
+          </span>
+        </div>
+        <div class="meta-numero"><strong id="meta-feitas">0</strong><span id="meta-de">/ 5 candidaturas</span></div>
+        <div class="barra-prog" role="progressbar" aria-labelledby="meta-titulo" id="meta-barra" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span id="meta-fill"></span></div>
+        <p class="painel-nota" id="meta-msg"></p>
+      </article>
+
+      <article class="painel dica" aria-live="polite">
+        <div class="painel-cab">
+          <span class="painel-rotulo"><span class="dica-icone" aria-hidden="true">◆</span> Dica do radar</span>
+          <button type="button" class="mini texto" id="dica-proxima">Próxima dica →</button>
+        </div>
+        <p class="dica-texto" id="dica-texto"></p>
+        <div class="dica-pontos" id="dica-pontos" aria-hidden="true"></div>
+      </article>
+    </section>
+
+    <section class="filtros painel" aria-label="Filtros">
       <div class="grupo" role="group" aria-label="Área">
         <span class="grupo-label">Área</span>
         <button class="chip" data-f="area" data-v="todos" aria-pressed="true">Todas</button>
@@ -51,7 +98,8 @@
       </label>
     </section>
 
-    <p class="contagem" id="contagem"></p>
+    <div class="leitura" id="leitura" aria-live="polite"></div>
+
     <ul class="lista" id="lista"></ul>
 
     <details class="fechadas" id="fechadas" hidden>
@@ -60,18 +108,21 @@
     </details>
 
     <footer class="rodape">
-      Fontes: issues abertas de <a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr/vagas</a>,
-      <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br/vagas</a> e
-      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil/vagas</a>, e portal da Gupy.
+      <img src="oh-tech-icone.png" alt="" width="28" height="28">
+      <span>Radar de Vagas é um projeto <strong>OH Tech Technology</strong>. Fontes: issues abertas de
+      <a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr/vagas</a>,
+      <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br/vagas</a>,
+      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil/vagas</a> e portal da Gupy.</span>
     </footer>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
   <dialog class="cv" id="cv" aria-labelledby="cv-vaga">
     <div class="cv-interno">
       <div class="cv-cab">
         <div>
-          <div class="eyebrow">Adaptar CV com Gemini</div>
+          <div class="eyebrow">// Adaptar CV com Gemini</div>
           <h2 id="cv-vaga"></h2>
           <div class="empresa" id="cv-empresa"></div>
         </div>
@@ -82,7 +133,7 @@
   </dialog>
   <div id="impressao"></div>
 
-  <script src="app.js?v=5"></script>
-  <script src="cv.js?v=5"></script>
+  <script src="app.js?v=6"></script>
+  <script src="cv.js?v=6"></script>
 </body>
 </html>
