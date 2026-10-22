@@ -1,6 +1,6 @@
 # Radar de vagas · 22/10/2026
 
-4 vagas novas · 5 encerradas · 166 abertas no total
+0 vagas novas · 30 encerradas · 136 abertas no total
 
 ## Front-end
 
@@ -29,14 +29,10 @@
   https://saquerstech.gupy.io/job/eyJqb2JJZCI6MTI1NjMwNDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **DESENVOLVEDOR FULL STACK JR** · Grupo Eletropoll · Júnior · CLT · Presencial  
   https://eletropoll.gupy.io/job/eyJqb2JJZCI6MTI1NDA0NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Desenvolvedor(a) Fullstack Java/React Pleno - Protege Cash** · Protege Cash · Pleno · CLT ou PJ · Híbrido  
-  https://github.com/backend-br/vagas/issues/12479
 - **Dev Fullstack React/React Native + Java Pleno na Protege Cash** · Protege Cash · Pleno · CLT ou PJ · Presencial  
   https://github.com/react-brasil/vagas/issues/3036
 - **Desenvolvedor Fullstack Java/Angular Pleno** · Deliver IT · Pleno · CLT · Remoto  
   https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI3MjkwODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Full Stack Developer - Cogfy** · Cogfy · Não informado · PJ · Híbrido  
-  https://github.com/backend-br/vagas/issues/12441
 - **Desenvolvedor de Software Full Stack | CRIE** · RodOil Distribuidora de Combustíveis S.A. · Não informado · PJ · Presencial  
   https://rodoil.gupy.io/job/eyJqb2JJZCI6MTI2ODM5ODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **Desenvolvedor Fullstack Sênior | Payments** · Yooga · Sênior · CLT ou PJ · Híbrido  
@@ -51,14 +47,6 @@
   https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3Mzk4OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **Desenvolvedor Fullstack Java/ React - Pleno** · VENHA SER #SANGUELARANJA 🧡🚀 · Pleno · CLT · Híbrido  
   https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3MjE0NTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Early Career Software Engineer, People with Disabilities na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12460
-- **Software Engineer, People with Disabilities na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12458
-- **Software Engineer (For Women in Tech Candidates) na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12456
-- **Software Engineer, Early Career (For Women in Tech Candidates) na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12453
 - **AZZAS F&L | DESENVOLVEDOR FULLSTACK II | Labs** · AZZAS 2154 FASHION & LIFESTYLE · Não informado · CLT · Híbrido  
   https://azzasfashion.gupy.io/job/eyJqb2JJZCI6MTI2MDE4OTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **AZZAS F&L | DESENVOLVEDOR FULLSTACK III | Labs** · AZZAS 2154 FASHION & LIFESTYLE · Não informado · CLT · Híbrido  
@@ -85,10 +73,6 @@
   https://github.com/frontendbr/vagas/issues/8568
 - **Senior UX Engineer, Search AI na Google** · Google · Sênior · Não informado · Presencial  
   https://github.com/frontendbr/vagas/issues/8567
-- **Senior Software Engineer, Egregious Abuse Protection na Google** · Google · Sênior · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12449
-- **Senior Software Engineer, Localization on AI Answers na Google** · Google · Sênior · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12447
 - **Desenvolvedor FullStack React/Node.js - Foco em Segurança (Vaga Híbrida)** · Deliver IT · Sênior · CLT · Híbrido  
   https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI2Mjg5NjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **ANALISTA DESENVOLVEDOR FULLSTACK SR (JAVA + Angular) - RHA3979** · Spread Tecnologia · Sênior · CLT · Híbrido  
@@ -97,10 +81,6 @@
   https://teknisa.gupy.io/job/eyJqb2JJZCI6MTI1MTQzNzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **Desenvolvedor(a) III Full‑Stack (Tech Lead)** · Saquers Tech · Especialista · CLT · Presencial  
   https://saquerstech.gupy.io/job/eyJqb2JJZCI6MTI3MTg4NjEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Tech Lead, Software Engineering, People with Disabilities na Google** · Google · Especialista · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12459
-- **Tech Lead, Software Engineering (For Women in Tech Candidates) na Google** · Google · Especialista · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12455
 - **Fullstack developer Python/React & IA na Evertec 🧡** · Evertec 🧡 · Pleno/Sênior/Especialista · CLT · Híbrido  
   https://github.com/frontendbr/vagas/issues/8559
 
@@ -124,12 +104,6 @@
   https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NDA4MjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **SOFTWARE DEVELOPER SPECIALIST I (JAVA) |  PLATARFORM MG** · Inter · Não informado · Não informado · Não informado  
   https://boards.greenhouse.io/inter/jobs/4731723005?gh_jid=4731723005
-- **Software Engineering Manager, People with Disabilities na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12457
-- **Software Engineering Manager (For Women in Tech Candidates) na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12454
-- **Ads Solutions Engineering Manager (English, Portuguese) na Google** · Google · Não informado · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12446
 - **Desenvolvedor Java Pleno I Auto** · Porto · Pleno · CLT · Híbrido  
   https://porto.gupy.io/job/eyJqb2JJZCI6MTI1OTI2ODAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **SOFTWARE DEVELOPER ANALYST III (Java) - Channels** · Inter · Não informado · Não informado · Não informado  
@@ -148,8 +122,6 @@
   https://vagaslogicalisbrasil.gupy.io/job/eyJqb2JJZCI6MTI2OTA5MzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **Pessoa Desenvolvedora Java - Sênior** · VENHA SER #SANGUELARANJA 🧡🚀 · Sênior · CLT · Híbrido  
   https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3MzIwMTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Senior Software Engineer, AI/ML, Agentic Ecosystem na Google** · Google · Sênior · Não informado · Não informado  
-  https://github.com/backend-br/vagas/issues/12448
 - **Desenvolvedor(a) Back-End Kotlin - Sênior** · VENHA SER #SANGUELARANJA 🧡🚀 · Sênior · CLT · Presencial  
   https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3MjI0NTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **Desenvolvedor(a) .NET Sênior** · Vetta Tecnologia · Sênior · CLT · Híbrido  
@@ -162,14 +134,10 @@
   https://certisign.gupy.io/job/eyJqb2JJZCI6MTI2NzA4NTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **Analista Desenvolvedor .Net Sênior** · Montreal | Tecnologia e Inovação · Sênior · CLT · Híbrido  
   https://montreal.gupy.io/job/eyJqb2JJZCI6MTI2NTE4NjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Desenvolvedor / Engenheiro de IA (AI Stack) - Programa AI Stack - Rio de Janeiro - RJ** · RJ · Sênior/Especialista · PJ ou Freela · Híbrido  
-  https://github.com/backend-br/vagas/issues/12434
 - **DESENVOLVEDOR BACK END SR - NodeJS** · Stefanini Group · Sênior · CLT · Híbrido  
   https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI1MDE3NzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 - **[GenAI] Sênior Software Engineer - híbrido Florianópolis** · Stone - Linkedin · Sênior · Não informado · Híbrido  
   https://job-boards.greenhouse.io/stone/jobs/7984857003
 - **Desenvolvedor Sênior .Net** · Ouribank · Sênior · CLT · Híbrido  
   https://ouribank.gupy.io/job/eyJqb2JJZCI6MTI0NDc3MjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Engenheiro de Software Backend Sênior (Híbrido, São Paulo) na Coodesh** · Coodesh · Sênior/Especialista · Não informado · Híbrido  
-  https://github.com/backend-br/vagas/issues/12475
 
