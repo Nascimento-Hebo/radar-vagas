@@ -5,161 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Radar de Vagas · OH Tech</title>
   <meta name="description" content="Vagas abertas de front-end, full-stack e back-end, atualizadas todo dia, com adaptador de CV por IA. Um projeto OH Tech.">
-  <meta name="theme-color" content="#070b16">
+  <meta name="theme-color" content="#0a0f1d">
   <link rel="icon" type="image/png" href="oh-tech-icone.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
-  <div class="fundo" aria-hidden="true"><div class="grade"></div><div class="brilho b1"></div><div class="brilho b2"></div></div>
-
-  <main class="wrap">
-    <header class="barra">
+  <header class="topo-site">
+    <div class="topo-dentro">
       <a class="marca" href="./" aria-label="OH Tech Technology — Radar de Vagas">
         <img src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
       </a>
-      <nav class="barra-links" aria-label="Atalhos">
-        <a href="#vagas">Vagas</a>
-        <a href="#guia">Como usar</a>
-        <a href="#checklist">Antes de enviar</a>
-      </nav>
-      <span class="status"><span class="pulso" aria-hidden="true"></span><span id="status-texto">Radar online</span></span>
-    </header>
-
-    <section class="hero">
-      <div class="hero-texto">
-        <div class="eyebrow">// Radar de vagas · Front-end · Full-stack · Back-end</div>
-        <h1>Sua próxima vaga <span class="grad">já está no radar.</span></h1>
-        <p class="sub">Todo dia às 7:15 o radar varre o GitHub e a Gupy, tira as vagas que fecharam e coloca no topo as que mais combinam com o seu foco. Você escolhe, a IA adapta o CV, você se candidata.</p>
-        <div class="hero-acoes">
-          <a class="btn primario grande" href="#vagas">Ver vagas de hoje</a>
-          <a class="btn grande" href="#guia">Como funciona</a>
-        </div>
-        <div class="rodada" id="rodada">Carregando…</div>
+      <div class="meta-curta" id="meta-curta" title="Candidaturas marcadas nesta semana">
+        <span class="meta-texto"><strong id="meta-feitas">0</strong> de <span id="meta-total">5</span> candidaturas nesta semana</span>
+        <span class="meta-barra" aria-hidden="true"><span id="meta-fill"></span></span>
       </div>
-      <div class="hud" id="hud" aria-label="Resumo"></div>
-      <div class="radar" id="radar" aria-hidden="true">
-        <div class="radar-anel a1"></div><div class="radar-anel a2"></div><div class="radar-anel a3"></div>
-        <div class="radar-eixo h"></div><div class="radar-eixo v"></div>
-        <div class="radar-varredura"></div>
-        <div class="radar-pontos" id="radar-pontos"></div>
-        <div class="radar-centro"></div>
-        <div class="radar-legenda"><span data-area="Front-end">Front</span><span data-area="Full-stack">Full</span><span data-area="Back-end">Back</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="busca-area">
+      <h1>Encontre sua próxima vaga</h1>
+      <p class="sub" id="rodada">Carregando vagas…</p>
+
+      <label class="busca">
+        <span class="sr">Buscar vagas</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="busca" type="search" placeholder="Busque por tecnologia ou empresa. Ex.: React, Java, Nubank" autocomplete="off">
+      </label>
+
+      <div class="filtros">
+        <div class="abas" role="group" aria-label="Área">
+          <button class="aba" data-v="todos" aria-pressed="true">Todas</button>
+          <button class="aba" data-v="Front-end" aria-pressed="false">Front-end</button>
+          <button class="aba" data-v="Full-stack" aria-pressed="false">Full-stack</button>
+          <button class="aba" data-v="Back-end" aria-pressed="false">Back-end</button>
+        </div>
+        <label class="seletor">Nível
+          <select id="f-nivel">
+            <option value="todos">Todos</option>
+            <option value="Júnior">Júnior</option>
+            <option value="Pleno">Pleno</option>
+            <option value="Sênior">Sênior</option>
+          </select>
+        </label>
+        <label class="seletor">Contrato
+          <select id="f-regime">
+            <option value="todos">Todos</option>
+            <option value="PJ">PJ</option>
+            <option value="CLT">CLT</option>
+          </select>
+        </label>
+        <label class="marcar"><input type="checkbox" id="f-remoto"> Só 100% remoto</label>
+        <label class="marcar"><input type="checkbox" id="f-ocultar"> Esconder as que já me candidatei</label>
       </div>
     </section>
 
-    <div class="app" id="vagas">
-      <!-- Coluna esquerda: busca, atalhos e filtros -->
-      <aside class="col-esq" aria-label="Filtros">
-        <div class="painel filtros">
-          <label class="busca">
-            <span class="painel-rotulo">Buscar</span>
-            <input id="busca" type="search" placeholder="React, Java, nome da empresa…" autocomplete="off">
-          </label>
+    <aside class="dica" id="dica" aria-live="polite">
+      <span class="dica-icone" aria-hidden="true">💡</span>
+      <p id="dica-texto"></p>
+      <button type="button" class="dica-botao" id="dica-proxima">Outra dica</button>
+      <button type="button" class="dica-fechar" id="dica-fechar" aria-label="Esconder dicas">×</button>
+    </aside>
 
-          <div class="atalhos">
-            <span class="painel-rotulo">Atalhos</span>
-            <div class="atalhos-lista" id="atalhos"></div>
-          </div>
-
-          <div class="grupo" role="group" aria-label="Área">
-            <span class="grupo-label">Área</span>
-            <button class="chip" data-f="area" data-v="todos" aria-pressed="true">Todas</button>
-            <button class="chip" data-f="area" data-v="Front-end" aria-pressed="false">Front-end</button>
-            <button class="chip" data-f="area" data-v="Full-stack" aria-pressed="false">Full-stack</button>
-            <button class="chip" data-f="area" data-v="Back-end" aria-pressed="false">Back-end</button>
-          </div>
-          <div class="grupo" role="group" aria-label="Nível">
-            <span class="grupo-label">Nível</span>
-            <button class="chip" data-f="nivel" data-v="todos" aria-pressed="true">Todos</button>
-            <button class="chip" data-f="nivel" data-v="Júnior" aria-pressed="false">Júnior</button>
-            <button class="chip" data-f="nivel" data-v="Pleno" aria-pressed="false">Pleno</button>
-            <button class="chip" data-f="nivel" data-v="Sênior" aria-pressed="false">Sênior</button>
-          </div>
-          <div class="grupo" role="group" aria-label="Contrato">
-            <span class="grupo-label">Contrato</span>
-            <button class="chip" data-f="regime" data-v="todos" aria-pressed="true">Todos</button>
-            <button class="chip" data-f="regime" data-v="PJ" aria-pressed="false">PJ</button>
-            <button class="chip" data-f="regime" data-v="CLT" aria-pressed="false">CLT</button>
-          </div>
-          <div class="grupo" role="group" aria-label="Opções">
-            <span class="grupo-label">Mostrar</span>
-            <button class="chip" data-f="remoto" aria-pressed="false">Só 100% remoto</button>
-            <button class="chip" data-f="ocultar" aria-pressed="false">Esconder onde já me candidatei</button>
-          </div>
-          <button type="button" class="limpar" id="limpar">Limpar filtros</button>
-        </div>
-
-        <div class="painel tecs">
-          <span class="painel-rotulo">Em alta nestas vagas</span>
-          <div class="tecs-lista" id="tecs"></div>
-          <p class="painel-nota">Clique numa tecnologia para ver só as vagas que pedem ela.</p>
-        </div>
-      </aside>
-
-      <!-- Centro: lista de vagas -->
-      <section class="col-centro" aria-label="Lista de vagas">
-        <div class="leitura" id="leitura" aria-live="polite"></div>
-        <ul class="lista" id="lista"></ul>
-        <details class="fechadas" id="fechadas" hidden>
-          <summary id="fechadas-resumo"></summary>
-          <ul class="lista" id="lista-fechadas"></ul>
-        </details>
-      </section>
-
-      <!-- Coluna direita: meta, dicas, guia e checklist -->
-      <aside class="col-dir" aria-label="Seu progresso e dicas">
-        <article class="painel meta-semana" aria-labelledby="meta-titulo">
-          <div class="painel-cab">
-            <span class="painel-rotulo" id="meta-titulo">Meta da semana</span>
-            <span class="meta-ajuste">
-              <button type="button" class="mini" id="meta-menos" aria-label="Diminuir meta">−</button>
-              <span id="meta-valor">5</span>
-              <button type="button" class="mini" id="meta-mais" aria-label="Aumentar meta">+</button>
-            </span>
-          </div>
-          <div class="meta-numero"><strong id="meta-feitas">0</strong><span id="meta-de">/ 5 candidaturas</span></div>
-          <div class="barra-prog" role="progressbar" aria-labelledby="meta-titulo" id="meta-barra" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span id="meta-fill"></span></div>
-          <div class="semana" id="semana" aria-label="Candidaturas por dia"></div>
-          <p class="painel-nota" id="meta-msg"></p>
-        </article>
-
-        <article class="painel dica" aria-live="polite">
-          <div class="painel-cab">
-            <span class="painel-rotulo"><span class="dica-icone" aria-hidden="true">◆</span> Dica do radar</span>
-            <button type="button" class="mini texto" id="dica-proxima">Próxima →</button>
-          </div>
-          <p class="dica-texto" id="dica-texto"></p>
-          <div class="dica-pontos" id="dica-pontos" aria-hidden="true"></div>
-        </article>
-
-        <article class="painel guia" id="guia">
-          <span class="painel-rotulo">Como usar o radar</span>
-          <ol class="passos">
-            <li><span class="passo-n">1</span><div><strong>Filtre e escolha</strong><p>Comece pelas vagas "No seu foco": elas já estão no topo.</p></div></li>
-            <li><span class="passo-n">2</span><div><strong>Adapte o CV com IA</strong><p>O Gemini lê a vaga, pergunta só o que falta e mostra cada mudança antes do PDF.</p></div></li>
-            <li><span class="passo-n">3</span><div><strong>Candidate-se e marque</strong><p>Clique em "Já me candidatei" para somar na meta e não repetir vaga.</p></div></li>
-          </ol>
-        </article>
-
-        <article class="painel checklist" id="checklist">
-          <div class="painel-cab">
-            <span class="painel-rotulo">Antes de enviar</span>
-            <span class="check-cont" id="check-cont"></span>
-          </div>
-          <ul class="checks" id="checks"></ul>
-        </article>
-      </aside>
+    <div class="resultado">
+      <p class="contagem" id="contagem"></p>
+      <button type="button" class="limpar" id="limpar" hidden>Limpar filtros</button>
     </div>
 
+    <ul class="lista" id="lista"></ul>
+
+    <details class="fechadas" id="fechadas" hidden>
+      <summary id="fechadas-resumo"></summary>
+      <ul class="lista" id="lista-fechadas"></ul>
+    </details>
+
     <footer class="rodape">
-      <img src="oh-tech-icone.png" alt="" width="28" height="28">
-      <span>Radar de Vagas é um projeto <strong>OH Tech Technology</strong>. Fontes: issues abertas de
-      <a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr/vagas</a>,
-      <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br/vagas</a>,
-      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil/vagas</a> e portal da Gupy.</span>
+      <img src="oh-tech-icone.png" alt="" width="24" height="24">
+      <span>Radar de Vagas · <strong>OH Tech Technology</strong> · Vagas do GitHub
+      (<a href="https://github.com/frontendbr/vagas" target="_blank" rel="noopener">frontendbr</a>,
+      <a href="https://github.com/backend-br/vagas" target="_blank" rel="noopener">backend-br</a>,
+      <a href="https://github.com/react-brasil/vagas" target="_blank" rel="noopener">react-brasil</a>) e da Gupy, atualizadas todo dia às 7:15.</span>
     </footer>
   </main>
 
@@ -169,7 +97,7 @@
     <div class="cv-interno">
       <div class="cv-cab">
         <div>
-          <div class="eyebrow">// Adaptar CV com Gemini</div>
+          <div class="eyebrow">Adaptar CV com IA</div>
           <h2 id="cv-vaga"></h2>
           <div class="empresa" id="cv-empresa"></div>
         </div>
@@ -180,7 +108,7 @@
   </dialog>
   <div id="impressao"></div>
 
-  <script src="app.js?v=7"></script>
-  <script src="cv.js?v=7"></script>
+  <script src="app.js?v=8"></script>
+  <script src="cv.js?v=8"></script>
 </body>
 </html>
