@@ -1,8 +1,7 @@
 {
   "maxDiasPublicacao": 45,
   "diasParaApagarEncerradas": 14,
-  "limiteVagas": 300,
-
+  "limiteVagas": 500,
   "github": {
     "repositorios": [
       "frontendbr/vagas",
@@ -13,7 +12,6 @@
     ],
     "paginasPorRepositorio": 2
   },
-
   "gupy": {
     "ativo": true,
     "termos": [
@@ -33,20 +31,44 @@
     ],
     "limitePorTermo": 100
   },
-
   "greenhouse": {
     "ativo": true,
-    "empresas": ["quintoandar", "stone", "inter", "vtex", "ebanx", "wildlifestudios"]
+    "empresas": [
+      "quintoandar",
+      "stone",
+      "inter",
+      "vtex",
+      "ebanx",
+      "wildlifestudios",
+      "gympass",
+      "jusbrasil",
+      "rdstation"
+    ]
   },
-
+  "remotar": {
+    "ativo": true,
+    "paginas": 6
+  },
   "filtros": {
-    "areas": ["Front-end", "Full-stack", "Back-end"],
+    "areas": [
+      "Front-end",
+      "Full-stack",
+      "Back-end"
+    ],
     "aceitarEstagio": false,
     "aceitarQualquerLocal": true,
     "estadoPresencial": "PR",
-    "cidadesPresencial": ["Curitiba", "Ponta Grossa", "Londrina", "Maringá", "Cascavel", "São José dos Pinhais", "Pinhais", "Foz do Iguaçu"]
+    "cidadesPresencial": [
+      "Curitiba",
+      "Ponta Grossa",
+      "Londrina",
+      "Maringá",
+      "Cascavel",
+      "São José dos Pinhais",
+      "Pinhais",
+      "Foz do Iguaçu"
+    ]
   },
-
   "prioridade": {
     "Júnior": 3,
     "PJ": 2,

@@ -12,7 +12,7 @@ import {
   reauthenticateWithPopup, linkWithPopup, deleteUser, EmailAuthProvider, reauthenticateWithCredential,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, collection, serverTimestamp, increment,
+  getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, collection, serverTimestamp, increment, deleteField,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken as tokenAppCheck } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
@@ -46,6 +46,7 @@ const SINCRONIZADAS = {
   "radar-vagas:cvs-gerados": "cvs",
   "radar-vagas:tema": "tema",
   "radar-vagas:suporte": "suporte",
+  "radar-vagas:evoluir": "evoluir",
 };
 const SCOPE_GMAIL = "https://www.googleapis.com/auth/gmail.readonly";
 
@@ -350,6 +351,19 @@ async function atualizarMinhaFicha(campos) {
   await updateDoc(doc(db, "users", usuario.uid), campos);
   fichaUsuario = { ...fichaUsuario, ...campos };
 }
+// Notificações: cada aparelho vira users/{uid}.push.{id}; o robô diário manda as vagas novas para eles
+async function registrarPush(id, inscricao) {
+  if (!usuario) throw new Error("Entre na sua conta primeiro.");
+  await updateDoc(doc(db, "users", usuario.uid), { [`push.${id}`]: inscricao, pushAtivo: true });
+  fichaUsuario = { ...fichaUsuario, push: { ...(fichaUsuario?.push || {}), [id]: inscricao }, pushAtivo: true };
+}
+async function removerPush(id) {
+  if (!usuario) return;
+  const { [id]: _, ...outros } = fichaUsuario?.push || {};
+  await updateDoc(doc(db, "users", usuario.uid), { [`push.${id}`]: deleteField(), pushAtivo: Object.keys(outros).length > 0 });
+  fichaUsuario = { ...fichaUsuario, push: outros, pushAtivo: Object.keys(outros).length > 0 };
+}
+
 const salvarConfigSuporte = async (campos) => { await setDoc(doc(db, "config", "suporte"), campos, { merge: true }); configSuporte = { ...configSuporte, ...campos }; };
 const salvarConfigIA = async (campos) => { await setDoc(doc(db, "config", "ia"), campos, { merge: true }); configIA = { ...configIA, ...campos }; };
 
@@ -367,7 +381,7 @@ const nuvem = {
   ehAdmin: () => ehAdmin(),
   entrarComGoogle, entrarComEmail, criarConta, recuperarSenha, reenviarVerificacao, excluirConta, sair, mensagemErro,
   salvar: agendarEnvio,
-  atualizarMinhaFicha,
+  atualizarMinhaFicha, registrarPush, removerPush,
   gerarIA,
   conectarGmail, desconectarGmail, gmailConectado: () => Boolean(tokenGmail()), gmail,
   listarUsuarios, dadosDoUsuario, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA, salvarConfigSuporte,

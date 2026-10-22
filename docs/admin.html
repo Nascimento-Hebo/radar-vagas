@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=22">
+  <link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Verificando acesso…</div>
@@ -41,6 +41,8 @@
     <section class="admin-numeros" id="numeros" aria-label="Resumo"></section>
 
     <section class="admin-graficos" aria-label="Gráficos">
+      <figure class="admin-cartao grafico"><figcaption><strong>Funil de usuários</strong><span>Quantas pessoas chegaram a cada passo</span></figcaption><div id="graf-funil"></div></figure>
+      <figure class="admin-cartao grafico"><figcaption><strong>Alertas ativos</strong><span>E-mail e notificações no aparelho</span></figcaption><div id="graf-canais"></div></figure>
       <figure class="admin-cartao grafico"><figcaption><strong>Cadastros por dia</strong><span>Últimos 30 dias</span></figcaption><div id="graf-cadastros"></div></figure>
       <figure class="admin-cartao grafico"><figcaption><strong>Usos da IA por dia</strong><span>Últimos 14 dias, todos os usuários</span></figcaption><div id="graf-ia"></div></figure>
       <figure class="admin-cartao grafico"><figcaption><strong>Candidaturas por etapa</strong><span>Todos os usuários</span></figcaption><div id="graf-etapas"></div></figure>
@@ -112,7 +114,7 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="avatares.js?v=22"></script>
-  <script type="module" src="admin.js?v=22"></script>
+  <script src="avatares.js?v=23"></script>
+  <script type="module" src="admin.js?v=23"></script>
 </body>
 </html>

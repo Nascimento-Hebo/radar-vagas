@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "radar-vagas[bot]"
           git config user.email "radar-vagas@users.noreply.github.com"
-          git add docs/vagas.json docs/novas.md
+          git add docs/vagas.json docs/novas.md docs/historico.json
           if git diff --cached --quiet; then
             echo "Nada mudou hoje."
           else
@@ -47,16 +47,17 @@ jobs:
             git push
           fi
 
-      # Alerta diário: e-mail para quem ativou, só com as vagas novas que combinam com o que a pessoa procura.
-      - name: Alertas de vagas por e-mail
+      # Alerta diário: e-mail e notificação para quem ativou, só com as vagas novas que combinam com o que a pessoa procura.
+      - name: Alertas de vagas (e-mail e notificação)
         if: ${{ env.TEM_FIREBASE == 'true' }}
         run: |
-          npm install --no-save --no-audit --no-fund nodemailer@10.0.16
+          npm install --no-save --no-audit --no-fund nodemailer@10.0.16 web-push@3.6.7
           node scripts/alertas.mjs
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
 
       # Se alguma fonte não respondeu, a execução fica vermelha e o GitHub avisa o dono do repositório por e-mail.
       # As vagas das outras fontes já foram salvas no passo anterior.

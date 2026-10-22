@@ -1,7 +1,7 @@
 {
   "name": "radar-vagas",
   "version": "1.0.0",
-  "description": "Busca diária de vagas de front-end, full-stack e back-end (GitHub e Gupy), com página para filtrar as vagas abertas.",
+  "description": "Busca diária de vagas de front-end, full-stack e back-end (GitHub, Gupy, Greenhouse e Remotar), com página para filtrar as vagas abertas.",
   "type": "module",
   "private": true,
   "engines": {
@@ -9,6 +9,10 @@
   },
   "scripts": {
     "buscar": "node scripts/buscar-vagas.mjs",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
   }
 }

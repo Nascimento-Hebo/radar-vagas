@@ -4,11 +4,12 @@
 import { readFile, writeFile, appendFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { deIssueGithub, deVagaGupy, deVagaGreenhouse, hojeISO, juntar, resumoMarkdown } from "./vagas-core.mjs";
+import { deIssueGithub, deVagaGupy, deVagaGreenhouse, deVagaRemotar, hojeISO, juntar, resumoMarkdown, fotoDoMercado } from "./vagas-core.mjs";
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ARQ_VAGAS = join(RAIZ, "docs", "vagas.json");
 const ARQ_RESUMO = join(RAIZ, "docs", "novas.md");
+const ARQ_HISTORICO = join(RAIZ, "docs", "historico.json"); // um retrato do mercado por dia, para o painel do mercado
 const config = JSON.parse(await readFile(join(RAIZ, "config.json"), "utf8"));
 
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -93,6 +94,25 @@ async function buscarGreenhouse() {
   return vagas;
 }
 
+// Remotar: só a categoria Programação (id 13), das mais novas para as mais antigas
+async function buscarRemotar() {
+  if (!config.remotar?.ativo) return [];
+  const vagas = [];
+  try {
+    for (let pagina = 1; pagina <= config.remotar.paginas; pagina++) {
+      const json = await pegarJson(`https://api.remotar.com.br/jobs?categoryId=13&page=${pagina}`);
+      for (const job of json?.data || []) { const v = deVagaRemotar(job); if (v) vagas.push(v); }
+      if (!json?.meta || pagina >= json.meta.last_page) break;
+      await esperar(400);
+    }
+    console.log(`  Remotar: ${vagas.length} vagas de dev`);
+  } catch (e) {
+    console.warn(`  ! Remotar falhou: ${e.message}`);
+    falhasGerais.push(`Remotar: ${e.message}`);
+  }
+  return vagas;
+}
+
 async function lerAnteriores() {
   try {
     const json = JSON.parse(await readFile(ARQ_VAGAS, "utf8"));
@@ -108,8 +128,10 @@ console.log("Buscando na Gupy…");
 const gupy = await buscarGupy();
 console.log("Buscando no Greenhouse…");
 const greenhouse = await buscarGreenhouse();
+console.log("Buscando na Remotar…");
+const remotar = await buscarRemotar();
 
-const encontradas = [...github, ...gupy, ...greenhouse];
+const encontradas = [...github, ...gupy, ...greenhouse, ...remotar];
 const anteriores = await lerAnteriores();
 
 if (!encontradas.length && anteriores.length) {
@@ -135,8 +157,14 @@ const saida = {
 await writeFile(ARQ_VAGAS, JSON.stringify(saida, null, 2) + "\n");
 await writeFile(ARQ_RESUMO, resumoMarkdown({ vagas, novas, encerradas, hoje }) + "\n");
 
+// Histórico do mercado: um retrato por dia (o do mesmo dia é trocado), guardando no máximo 1 ano
+let historico = [];
+try { historico = JSON.parse(await readFile(ARQ_HISTORICO, "utf8")).dias || []; } catch {}
+historico = [...historico.filter((d) => d.data !== hoje), fotoDoMercado(abertas, hoje, novas)].sort((a, b) => a.data.localeCompare(b.data)).slice(-366);
+await writeFile(ARQ_HISTORICO, JSON.stringify({ atualizadoEm: saida.atualizadoEm, dias: historico }) + "\n");
+
 console.log(`\nPronto: ${abertas.length} abertas · ${novas} novas · ${encerradas} encerradas`);
-console.log("Arquivos atualizados: docs/vagas.json e docs/novas.md");
+console.log("Arquivos atualizados: docs/vagas.json, docs/novas.md e docs/historico.json");
 
 // Informa ao GitHub Actions quantas vagas novas saíram (usado para decidir se manda e-mail)
 if (process.env.GITHUB_OUTPUT) {

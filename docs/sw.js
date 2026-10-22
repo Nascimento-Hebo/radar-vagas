@@ -3,9 +3,9 @@
 // vagas.json: tenta a rede primeiro (vagas do dia) e cai para a última cópia guardada.
 // Chamadas a outros sites (Gemini, GitHub, fontes) nunca passam por aqui.
 
-const VERSAO = "radar-v22"; // trocar junto com o ?v= do index.html
+const VERSAO = "radar-v23"; // trocar junto com o ?v= do index.html
 const ARQUIVOS = [
-  "./", "index.html", "login.html", "termos.html", "privacidade.html", "style.css?v=22", "app.js?v=22", "cv.js?v=22", "cv-ferramentas.js?v=22", "email.js?v=22", "onboarding.js?v=22", "suporte.js?v=22", "avatares.js?v=22", "firebase.js?v=22",
+  "./", "index.html", "login.html", "termos.html", "privacidade.html", "extensao.html", "style.css?v=23", "app.js?v=23", "cv.js?v=23", "cv-ferramentas.js?v=23", "email.js?v=23", "mercado.js?v=23", "evoluir.js?v=23", "push.js?v=23", "onboarding.js?v=23", "suporte.js?v=23", "avatares.js?v=23", "firebase.js?v=23",
   "oh-tech-logo.png", "oh-tech-logo-claro.png", "oh-tech-icone.png", "icone-192.png", "icone-512.png", "manifest.webmanifest",
 ];
 
@@ -42,4 +42,28 @@ self.addEventListener("fetch", (e) => {
       return guardado || daRede;
     }),
   );
+});
+
+// Notificação das vagas novas (mandada pelo robô diário, scripts/alertas.mjs)
+self.addEventListener("push", (e) => {
+  let d = {};
+  try { d = e.data ? e.data.json() : {}; } catch { d = { corpo: e.data?.text() }; }
+  e.waitUntil(self.registration.showNotification(d.titulo || "Radar de Vagas", {
+    body: d.corpo || "Chegaram vagas novas para você.",
+    icon: "icone-192.png",
+    badge: "icone-192.png",
+    tag: d.tag || "vagas-novas",
+    data: { url: d.url || "./" },
+  }));
+});
+
+// Clique na notificação: volta para a aba do Radar (ou abre uma)
+self.addEventListener("notificationclick", (e) => {
+  e.notification.close();
+  const alvo = new URL(e.notification.data?.url || "./", self.registration.scope).href;
+  e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((abas) => {
+    const aba = abas.find((c) => c.url.startsWith(self.registration.scope));
+    if (aba) { aba.navigate(alvo).catch(() => {}); return aba.focus(); }
+    return self.clients.openWindow(alvo);
+  }));
 });

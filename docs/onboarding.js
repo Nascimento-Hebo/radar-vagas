@@ -250,11 +250,26 @@ function passoMeta(c) {
   alerta.append(chk, txt);
   c.append(alerta);
 
+  // Notificação no aparelho (só aparece onde o navegador suporta)
+  let chkPush = null;
+  if (pushSuportado() && !pushAtivoAqui()) {
+    const push = el("label", "ob-alerta");
+    chkPush = el("input");
+    chkPush.type = "checkbox";
+    chkPush.checked = true;
+    const t2 = el("div");
+    t2.append(el("strong", null, "Avisar também neste aparelho"), el("span", null, "Uma notificação de manhã com as vagas novas que combinam com você. O navegador vai pedir permissão."));
+    push.append(chkPush, t2);
+    c.append(push);
+  }
+
   const acoes = el("div", "cv-acoes");
   const fim = el("button", "btn primario", "Concluir e ver minhas vagas");
   fim.type = "button";
   fim.addEventListener("click", async () => {
     fim.disabled = true;
+    // Pede a permissão logo no clique (alguns navegadores só deixam pedir assim)
+    if (chkPush?.checked) { try { await ativarPush(); } catch (e) { avisar(e.message || String(e)); } }
     metaSemana = meta;
     salvar(CHAVE_META, meta);
     try {
@@ -274,6 +289,7 @@ async function concluirBoasVindas(pulou, aplicar = false) {
   if (pulou && !window.radarNuvem?.ficha?.onboardingFeito) {
     try { await window.radarNuvem?.atualizarMinhaFicha({ onboardingFeito: true }); } catch {}
   }
+  cacheCompat.clear(); // a compatibilidade usa as preferências
   if (aplicar) {
     filtros.paraVoce = true; // mostra só o que combina com as preferências
     sincronizarControles();

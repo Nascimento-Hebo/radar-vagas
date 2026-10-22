@@ -173,7 +173,11 @@ function cartao(v) {
   if (compat) {
     const c = el("span", `compat ${compat.pct >= 70 ? "alta" : compat.pct >= 40 ? "media" : "baixa"}`);
     c.append(el("strong", null, `${compat.pct}%`), " compatível");
-    c.title = compat.falta.length ? `Seu CV não mostra: ${compat.falta.join(", ")}` : "Seu CV mostra todas as tecnologias desta vaga";
+    c.title = [
+      `Tecnologias: ${compat.tem.length} de ${v.stack.length} no seu CV${compat.falta.length ? ` (falta ${compat.falta.join(", ")})` : ""}`,
+      ...compat.fatores.map(([nome, ok]) => `${nome}: ${ok ? "combina com suas preferências" : "diferente do que você procura"}`),
+    ].join("\n");
+    c.setAttribute("aria-label", `${compat.pct}% compatível. ${c.title.replace(/\n/g, ". ")}`);
     topoCartao.append(c);
   }
   cab.append(topoCartao, el("h2", "titulo", v.titulo), el("div", "empresa", v.empresa || v.fonte));
@@ -309,11 +313,26 @@ function renderAtalhos() {
 const ehLink = (texto) => /^https?:\/\/\S+\.\S+/i.test(texto);
 let linkExterno = "";
 
-function mostrarExterna(url) {
+function mostrarExterna(url, { soTexto = false } = {}) {
   linkExterno = url;
   const box = $("externa");
-  box.hidden = !url;
-  if (!url) return;
+  box.hidden = !url && !soTexto;
+  $("externa-gatilho").hidden = !box.hidden;
+  if (box.hidden) return;
+  $("externa-titulo").textContent = soTexto ? "Vaga de outro site" : "Link de vaga de outro site";
+  $("externa-explica").textContent = soTexto
+    ? "Copie o anúncio inteiro no site da vaga (título, empresa e requisitos) e cole abaixo. A IA lê e adapta seu CV."
+    : "A IA abre esse link, lê os requisitos e adapta seu CV, tudo aqui dentro.";
+  document.querySelector(".externa-texto").open = soTexto;
+  $("externa-abrir").hidden = !url;
+  const adaptar = $("externa-adaptar");
+  adaptar.innerHTML = ICONES.cv;
+  adaptar.append("Ler a vaga e adaptar meu CV");
+  if (soTexto) {
+    $("externa-site").textContent = "LinkedIn, Indeed, site da empresa…";
+    setTimeout(() => $("externa-descricao").focus(), 50);
+    return;
+  }
   let site = url;
   try { site = new URL(url).hostname.replace(/^www\./, ""); } catch {}
   $("externa-site").textContent = site;
@@ -321,25 +340,54 @@ function mostrarExterna(url) {
   abrir.href = url;
   abrir.innerHTML = ICONES.externo;
   abrir.append("Abrir o site da vaga");
-  const adaptar = $("externa-adaptar");
-  adaptar.innerHTML = ICONES.cv;
-  adaptar.append("Ler a vaga e adaptar meu CV");
 }
 
 $("externa-adaptar").addEventListener("click", () => {
-  if (!linkExterno) return;
-  let site = "outro site";
-  try { site = new URL(linkExterno).hostname.replace(/^www\./, ""); } catch {}
-  abrirAdaptador({
-    id: `externa-${linkExterno}`,
-    externa: true,
-    titulo: "Vaga de " + site,
-    empresa: "",
-    local: site,
-    link: linkExterno,
-    descricao: $("externa-descricao").value.trim(),
-  }); // em cv.js
+  const descricao = $("externa-descricao").value.trim();
+  if (!linkExterno && descricao.length < 80) { avisar("Cole o texto completo da vaga (título, empresa e requisitos)."); $("externa-descricao").focus(); return; }
+  adaptarVagaExterna({ link: linkExterno, descricao });
 });
+$("externa-gatilho").addEventListener("click", () => { $("busca").value = ""; filtros.texto = ""; mostrarExterna("", { soTexto: true }); render(); });
+
+// Vaga de fora (link e/ou texto): vira uma "vaga" para o adaptador. O título real a IA tira do texto.
+function adaptarVagaExterna({ link = "", descricao = "", titulo = "" }) {
+  let site = "outro site";
+  try { site = new URL(link).hostname.replace(/^www\./, ""); } catch {}
+  const primeira = descricao.split("\n").map((l) => l.trim()).find((l) => l.length > 3 && l.length < 120) || "";
+  abrirAdaptador({
+    id: `externa-${link || hash(descricao.slice(0, 2000))}`,
+    externa: true,
+    titulo: titulo || (link ? "Vaga de " + site : primeira || "Vaga de outro site"),
+    empresa: "",
+    local: link ? site : "",
+    link,
+    descricao,
+  }); // em cv.js
+}
+
+// Extensão do navegador: abre o site com #vaga=<texto em base64 UTF-8>&link=...&titulo=...
+function lerVagaDoEndereco() {
+  // Clique na notificação de vagas novas: abre já filtrado em "Para você"
+  if (location.hash === "#para-voce") {
+    history.replaceState(null, "", location.pathname + location.search);
+    if (Object.keys(prefs()).length) { filtros.paraVoce = true; render(); }
+    return;
+  }
+  if (!location.hash.startsWith("#vaga=")) return;
+  const params = new URLSearchParams(location.hash.slice(1));
+  let descricao = "";
+  try { descricao = new TextDecoder().decode(Uint8Array.from(atob(params.get("vaga") || ""), (c) => c.charCodeAt(0))); } catch {}
+  history.replaceState(null, "", location.pathname + location.search); // tira o texto do endereço
+  if (descricao.trim().length < 40) return;
+  // Não gasta IA sozinho (o link pode vir de qualquer lugar): preenche a caixa e a pessoa confere e clica
+  const link = params.get("link") || "";
+  mostrarExterna(/^https?:\/\//i.test(link) ? link : "", { soTexto: !/^https?:\/\//i.test(link) });
+  $("externa-descricao").value = descricao.slice(0, 15000);
+  document.querySelector(".externa-texto").open = true;
+  $("externa-explica").textContent = "A extensão trouxe o anúncio abaixo. Confira e clique em \"Ler a vaga e adaptar meu CV\".";
+  $("externa").scrollIntoView({ block: "center" });
+  $("externa-adaptar").focus();
+}
 
 // ---------- Tela ----------
 
@@ -499,7 +547,7 @@ const TECS_CV = {
   "Docker": /docker/i, "AWS": /\baws\b|amazon web services/i, "Git": /\bgit\b|github|gitlab/i, "APIs REST": /\brest\b|restful|\bapis?\b/i,
   "GraphQL": /graphql/i, "Testes": /jest|vitest|cypress|playwright|testes|testing|tdd/i,
 };
-const textoDoCv = () => { const p = ler(CHAVE_PERFIL_APP, {}); return [p.cvTexto, p.cvExtraido].filter(Boolean).join("\n"); };
+const textoDoCv = () => { const p = ler(CHAVE_PERFIL_APP, {}); return [p.cvTexto, p.cvExtraido, (p.aprendidas || []).join(", ")].filter(Boolean).join("\n"); };
 let cvParaCompat = textoDoCv();
 const cacheCompat = new Map();
 
@@ -507,7 +555,15 @@ function compatibilidade(v) {
   if (!cvParaCompat || !v.stack?.length) return null;
   if (cacheCompat.has(v.id)) return cacheCompat.get(v.id);
   const tem = v.stack.filter((tec) => (TECS_CV[tec] || new RegExp(tec.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i")).test(cvParaCompat));
-  const r = { pct: Math.round((tem.length / v.stack.length) * 100), tem, falta: v.stack.filter((tec) => !tem.includes(tec)) };
+  const pctTec = (tem.length / v.stack.length) * 100;
+  // Com preferências salvas, nível, local e contratação valem 1/4 da nota; as tecnologias, 3/4
+  const p = prefs();
+  const fatores = [];
+  if (p.nivel && p.nivel !== "todos" && v.nivel && v.nivel !== "Não informado") fatores.push(["Nível", String(v.nivel).includes(p.nivel)]);
+  if (p.local && p.local !== "todos") fatores.push(["Local", p.local === "remoto" ? v.modelo === "Remoto" : v.modelo === "Remoto" || infoLocal(v).ufs.has(p.local.slice(3))]);
+  if (p.regime && p.regime !== "todos" && v.regime && v.regime !== "Não informado") fatores.push(["Contratação", String(v.regime).includes(p.regime)]);
+  const pctPref = fatores.length ? (fatores.filter(([, ok]) => ok).length / fatores.length) * 100 : null;
+  const r = { pct: Math.round(pctPref == null ? pctTec : pctTec * 0.75 + pctPref * 0.25), tem, falta: v.stack.filter((tec) => !tem.includes(tec)), fatores };
   cacheCompat.set(v.id, r);
   return r;
 }
@@ -541,6 +597,20 @@ function renderAvisos() {
     a.append(b);
     box.append(a);
   }
+  compromissosProximos().forEach((x) => {
+    const a = el("div", "aviso azul");
+    a.innerHTML = svg('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>');
+    a.append(el("span", null, `${textoCompromisso(x).titulo} — ${fmtCompromisso(x.compromisso)}.`));
+    const b = el("button", "btn pequeno primario", x.etapa === "teste" ? "Ver candidatura" : "Treinar a entrevista");
+    b.type = "button";
+    b.addEventListener("click", () => {
+      const vaga = dados.vagas.find((v) => candidaturas[v.id] === x);
+      if (x.etapa !== "teste" && vaga) abrirAdaptador(vaga);
+      else abrirPainel("candidaturas");
+    });
+    a.append(b);
+    box.append(a);
+  });
   const pendentes = Object.values(candidaturas).filter(precisaFollowup);
   if (pendentes.length) {
     const a = el("div", "aviso laranja");
@@ -590,7 +660,7 @@ function renderPainel() {
   $("painel-n-cvs").textContent = ler(CHAVE_HIST, []).length || "";
   const c = $("painel-corpo");
   c.textContent = "";
-  ({ candidaturas: painelCandidaturas, emails: painelEmails, cvs: painelCvs, dados: painelDados })[abaPainel](c); // painelEmails em email.js
+  ({ candidaturas: painelCandidaturas, emails: painelEmails, cvs: painelCvs, evoluir: painelEvoluir, dados: painelDados })[abaPainel](c); // painelEmails em email.js, painelEvoluir em evoluir.js
 }
 
 function painelCandidaturas(c) {
@@ -608,20 +678,116 @@ function painelCandidaturas(c) {
   });
   c.append(resumo);
 
+  c.append(el("p", "painel-nota quadro-dica", "Arraste os cartões entre as colunas (ou escolha a etapa no cartão)."));
   const colunas = el("div", "quadro");
   ETAPAS.forEach(([id, nome]) => {
     const col = el("section", `quadro-col etapa-${id}`);
     const itens = lista.filter(([, x]) => x.etapa === id);
     col.append(el("h3", null, `${nome} (${itens.length})`));
-    if (!itens.length) col.append(el("p", "quadro-vazio", "Nada aqui."));
+    if (!itens.length) col.append(el("p", "quadro-vazio", "Nada aqui ainda."));
     itens.forEach(([vid, x]) => col.append(cartaoCandidatura(vid, x)));
+    // Soltar um cartão aqui muda a etapa
+    col.addEventListener("dragover", (e) => { if (arrastando) { e.preventDefault(); col.classList.add("soltar"); } });
+    col.addEventListener("dragleave", (e) => { if (!col.contains(e.relatedTarget)) col.classList.remove("soltar"); });
+    col.addEventListener("drop", (e) => {
+      e.preventDefault();
+      col.classList.remove("soltar");
+      const x = candidaturas[arrastando];
+      arrastando = null;
+      if (x && x.etapa !== id) mudarEtapa(x, id);
+    });
     colunas.append(col);
   });
   c.append(colunas);
 }
 
+let arrastando = null; // id da candidatura sendo arrastada no quadro
+
+function mudarEtapa(x, etapa) {
+  x.etapa = etapa;
+  x.atualizadaEm = hojeLocal();
+  salvarCandidaturas();
+  render();
+  renderPainel();
+  if (etapa === "proposta") avisar("Proposta! Parabéns, esse é o resultado da sua constância.");
+  else if (etapa === "entrevista" || etapa === "teste") avisar(etapa === "entrevista" ? "Entrevista! Coloque a data no cartão para lembrar e baixar o convite da agenda." : "Teste técnico! Coloque o prazo no cartão para não esquecer.");
+}
+
+// ---------- Compromissos (entrevista, prazo de teste): lembrete e convite de agenda ----------
+
+const fmtCompromisso = (iso) => new Date(iso).toLocaleString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const diaLocal = (d) => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 10); };
+function compromissosProximos() {
+  const hoje = hojeLocal(), amanha = diaLocal(Date.now() + 86400000);
+  return Object.values(candidaturas).filter((c) => c.compromisso && [hoje, amanha].includes(diaLocal(c.compromisso)) && Date.parse(c.compromisso) > Date.now() - 3600000);
+}
+
+function textoCompromisso(x) {
+  return { titulo: `${x.etapa === "teste" ? "Entrega do teste" : "Entrevista"}: ${x.titulo || "vaga"}${x.empresa ? ` · ${x.empresa}` : ""}`, detalhes: [x.link && `Vaga: ${x.link}`, x.nota].filter(Boolean).join("\n") };
+}
+// Arquivo .ics: abre no Google Agenda, Outlook ou no calendário do celular, com aviso 1 hora antes
+function baixarIcs(x) {
+  const ini = new Date(x.compromisso), fim = new Date(ini.getTime() + 60 * 60000);
+  const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const esc = (s) => String(s).replace(/\\/g, "\\\\").replace(/[,;]/g, (m) => "\\" + m).replace(/\n/g, "\\n");
+  const { titulo, detalhes } = textoCompromisso(x);
+  const ics = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//OH Tech//Radar de Vagas//PT", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+    "BEGIN:VEVENT", `UID:${hash(titulo + x.compromisso)}@radar-vagas`, `DTSTAMP:${utc(new Date())}`, `DTSTART:${utc(ini)}`, `DTEND:${utc(fim)}`,
+    `SUMMARY:${esc(titulo)}`, `DESCRIPTION:${esc(detalhes)}`, ...(x.link ? [`URL:${x.link}`] : []),
+    "BEGIN:VALARM", "TRIGGER:-PT1H", "ACTION:DISPLAY", `DESCRIPTION:${esc(titulo)}`, "END:VALARM",
+    "END:VEVENT", "END:VCALENDAR",
+  ].join("\r\n");
+  const a = el("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+  a.download = `${titulo.replace(/[\\/:*?"<>|]/g, "").slice(0, 80)}.ics`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+function linkGoogleAgenda(x) {
+  const ini = new Date(x.compromisso), fim = new Date(ini.getTime() + 60 * 60000);
+  const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const { titulo, detalhes } = textoCompromisso(x);
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(titulo)}&dates=${utc(ini)}/${utc(fim)}&details=${encodeURIComponent(detalhes)}`;
+}
+
+function blocoCompromisso(x) {
+  const box = el("div", "cand-compromisso");
+  const rotulo = el("label");
+  rotulo.append(el("span", null, x.etapa === "teste" ? "Prazo do teste" : "Data da entrevista"));
+  const data = el("input");
+  data.type = "datetime-local";
+  if (x.compromisso) { const d = new Date(x.compromisso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); data.value = d.toISOString().slice(0, 16); }
+  data.addEventListener("change", () => {
+    x.compromisso = data.value ? new Date(data.value).toISOString() : "";
+    salvarCandidaturas();
+    renderPainel();
+    render();
+  });
+  rotulo.append(data);
+  box.append(rotulo);
+  if (x.compromisso) {
+    const acoes = el("div", "cand-agenda");
+    const ics = el("button", "btn pequeno", "Baixar convite (.ics)");
+    ics.type = "button";
+    ics.title = "Abre no Outlook, Apple Calendário ou no celular, com aviso 1 hora antes";
+    ics.addEventListener("click", () => baixarIcs(x));
+    const g = el("a", "btn pequeno", "Google Agenda");
+    g.href = linkGoogleAgenda(x);
+    g.target = "_blank";
+    g.rel = "noopener noreferrer";
+    acoes.append(ics, g);
+    box.append(acoes);
+  }
+  return box;
+}
+
 function cartaoCandidatura(id, x) {
   const card = el("article", "cand");
+  card.draggable = true;
+  card.addEventListener("pointerdown", (e) => { card.draggable = !e.target.closest("input, textarea, select, button, a"); });
+  card.addEventListener("dragstart", (e) => { arrastando = id; card.classList.add("arrastando"); e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", id); });
+  card.addEventListener("dragend", () => { arrastando = null; card.classList.remove("arrastando"); document.querySelectorAll(".quadro-col.soltar").forEach((c) => c.classList.remove("soltar")); });
   const titulo = el("a", "cand-titulo", x.titulo || "Vaga");
   if (x.link) { titulo.href = x.link; titulo.target = "_blank"; titulo.rel = "noopener noreferrer"; }
   card.append(titulo, el("div", "cand-empresa", [x.empresa, `candidatei em ${fmtData(x.data)}`].filter(Boolean).join(" · ")));
@@ -631,18 +797,11 @@ function cartaoCandidatura(id, x) {
   sel.setAttribute("aria-label", "Etapa da candidatura");
   ETAPAS.forEach(([v, nome]) => { const o = el("option", null, nome); o.value = v; sel.append(o); });
   sel.value = x.etapa;
-  sel.addEventListener("change", () => {
-    x.etapa = sel.value;
-    x.atualizadaEm = hojeLocal();
-    salvarCandidaturas();
-    render();
-    renderPainel();
-    if (x.etapa === "proposta") avisar("Proposta! Parabéns, esse é o resultado da sua constância.");
-    else if (x.etapa === "entrevista") avisar("Entrevista marcada. Use \"Preparar entrevista\" no adaptador de CV para treinar.");
-  });
+  sel.addEventListener("change", () => mudarEtapa(x, sel.value));
   const dias = diasDesde(x.atualizadaEm || x.data);
   linha.append(sel, el("span", "cand-dias", dias === 0 ? "hoje" : `há ${dias} ${dias === 1 ? "dia" : "dias"}`));
   card.append(linha);
+  if (x.etapa === "entrevista" || x.etapa === "teste" || x.compromisso) card.append(blocoCompromisso(x));
 
   if (precisaFollowup(x)) {
     const f = el("div", "cand-follow");
@@ -731,6 +890,7 @@ function painelDados(c) {
   });
   sec.append(ta, salvarCv);
   c.append(sec);
+  secaoNotificacoes(c); // em push.js
 
   const bkp = el("section", "dados-sec");
   bkp.append(el("h3", null, "Backup dos seus dados"));
@@ -782,8 +942,9 @@ function painelDados(c) {
   priv.append(el("h3", null, "Privacidade"));
   const ul = el("ul", "privacidade");
   [
-    "Seu CV, suas candidaturas e a chave do Gemini ficam só neste navegador. Não existe servidor nem conta da OH Tech guardando seus dados.",
-    "Quando você usa o adaptador, o texto da vaga e do seu CV vão para a API do Gemini (Google), com a sua chave, para gerar a resposta.",
+    "Seu CV, suas candidaturas e suas preferências ficam neste navegador e na sua conta (Firebase, do Google), para você usar em qualquer aparelho. Só você e o administrador do Radar têm acesso. O PDF do CV fica só neste navegador.",
+    "Quando você usa a IA (adaptador, plano de estudos, revisão do perfil), o texto da vaga e do seu CV vão para o Gemini (Google) para gerar a resposta.",
+    "Se você ativar as notificações, o endereço técnico de entrega deste aparelho fica na sua conta. Desativar apaga.",
     "Ao usar \"Usar minha localização\", só a cidade é buscada no OpenStreetMap; a posição exata não é guardada.",
   ].forEach((t) => ul.append(el("li", null, t)));
   priv.append(ul);
@@ -793,7 +954,7 @@ function painelDados(c) {
   c.append(priv);
 }
 
-const CHAVES_BACKUP = [CHAVE_CAND, CHAVE_META, CHAVE_PERFIL_APP, CHAVE_HIST, CHAVE_TEMA];
+const CHAVES_BACKUP = [CHAVE_CAND, CHAVE_META, CHAVE_PERFIL_APP, CHAVE_HIST, CHAVE_TEMA, "radar-vagas:evoluir"];
 function exportarDados() {
   const dadosBkp = { app: "radar-vagas", versao: 1, exportadoEm: new Date().toISOString(), dados: {} };
   for (const k of CHAVES_BACKUP) { const v = ler(k, null); if (v != null) dadosBkp.dados[k] = v; }
@@ -1000,6 +1161,7 @@ fetch("vagas.json", { cache: "no-store" })
       : "O arquivo não foi encontrado. Rode <code>npm run buscar</code> para criá-lo.";
   })
   .finally(() => { carregado = true; completarCandidaturas(); montarLocais(); render(); });
+lerVagaDoEndereco();
 
 // Modo aplicativo: funciona instalado e mostra a última lista mesmo sem internet
 if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
