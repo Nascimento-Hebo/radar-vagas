@@ -1255,16 +1255,46 @@ const SIM_PERGUNTAS = 6;
 const Reconhecimento = window.SpeechRecognition || window.webkitSpeechRecognition;
 let sim = null; // { perguntas, i, respostas, resultado }
 
-function falar(texto) {
-  if (!("speechSynthesis" in window)) return;
+// ---------- Voz do recrutador: a voz pt-BR mais natural do aparelho, num ritmo de conversa ----------
+
+const CHAVE_VOZ = "radar-vagas:voz";
+const VELOCIDADES = [{ v: 1, rotulo: "Normal" }, { v: 1.2, rotulo: "Ágil" }, { v: 1.4, rotulo: "Rápida" }];
+const temVoz = "speechSynthesis" in window;
+let vozes = [];
+const carregarVozes = () => { vozes = speechSynthesis.getVoices().filter((v) => v.lang?.toLowerCase().replace("_", "-").startsWith("pt")); };
+if (temVoz) { carregarVozes(); speechSynthesis.addEventListener?.("voiceschanged", carregarVozes); }
+const ajustesVoz = () => ({ vel: 1.2, nome: "", auto: false, ...ler(CHAVE_VOZ, {}) });
+
+// Vozes neurais (Edge "Online (Natural)", Google, Siri premium) soam como gente; as antigas, como robô
+function notaVoz(v) {
+  const n = v.name.toLowerCase();
+  let nota = v.lang.toLowerCase().replace("_", "-") === "pt-br" ? 100 : 0;
+  if (/natural|neural|online|premium|enhanced|aprimorad/.test(n)) nota += 50;
+  if (/google/.test(n)) nota += 30;
+  if (/francisca|antonio|thalita|luciana|felipe/.test(n)) nota += 10;
+  if (!v.localService) nota += 5;
+  return nota;
+}
+
+function vozEscolhida() {
+  const { nome } = ajustesVoz();
+  return vozes.find((v) => v.name === nome) || [...vozes].sort((a, b) => notaVoz(b) - notaVoz(a))[0] || null;
+}
+
+function falar(texto, aoTerminar) {
+  if (!temVoz) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(texto);
-  u.lang = "pt-BR";
-  u.rate = 1.02;
-  const voz = speechSynthesis.getVoices().find((v) => v.lang?.toLowerCase().startsWith("pt"));
+  const voz = vozEscolhida();
+  u.lang = voz?.lang || "pt-BR";
   if (voz) u.voice = voz;
+  u.rate = ajustesVoz().vel;
+  u.pitch = 1;
+  u.onend = u.onerror = () => aoTerminar?.();
   speechSynthesis.speak(u);
 }
+
+const pararVoz = () => { if (temVoz) speechSynthesis.cancel(); };
 
 async function montarSimulador(box, p) {
   box.textContent = "";
@@ -1330,8 +1360,43 @@ function mostrarPerguntaSim(box, p) {
   conversa.append(linha);
   box.append(conversa);
 
-  const ouvir = botao("Ouvir a pergunta", "btn pequeno", () => falar(q.pergunta));
-  if (!("speechSynthesis" in window)) ouvir.hidden = true;
+  const ouvir = botao("Ouvir a pergunta", "btn pequeno", () => {
+    if (speechSynthesis.speaking) { pararVoz(); return; }
+    ouvir.textContent = "Parar a voz";
+    falar(q.pergunta, () => { ouvir.textContent = "Ouvir a pergunta"; });
+  });
+  if (!temVoz) ouvir.hidden = true;
+
+  // Ajustes da voz: velocidade, qual voz e ler sozinho (ficam salvos)
+  const ajustes = el("div", "sim-voz");
+  if (temVoz) {
+    // As vozes mudam de aparelho para aparelho, então isto fica só neste navegador
+    const salvarVoz = (mudanca) => { try { localStorage.setItem(CHAVE_VOZ, JSON.stringify({ ...ajustesVoz(), ...mudanca })); } catch {} };
+    const vel = el("select");
+    vel.setAttribute("aria-label", "Velocidade da voz");
+    VELOCIDADES.forEach(({ v, rotulo }) => { const o = el("option", null, `Voz ${rotulo.toLowerCase()}`); o.value = v; o.selected = v === ajustesVoz().vel; vel.append(o); });
+    vel.addEventListener("change", () => { salvarVoz({ vel: Number(vel.value) }); falar(q.pergunta); });
+    ajustes.append(vel);
+    if (vozes.length > 1) {
+      const qual = el("select");
+      qual.setAttribute("aria-label", "Qual voz usar");
+      const atual = vozEscolhida()?.name;
+      [...vozes].sort((a, b) => notaVoz(b) - notaVoz(a)).forEach((v) => {
+        const o = el("option", null, v.name.replace(/^(Microsoft|Google)\s+/, "").replace(/\s*-\s*Portuguese.*$/i, ""));
+        o.value = v.name; o.selected = v.name === atual; qual.append(o);
+      });
+      qual.addEventListener("change", () => { salvarVoz({ nome: qual.value }); falar(q.pergunta); });
+      ajustes.append(qual);
+    }
+    const auto = el("label", "sim-auto");
+    const caixa = el("input");
+    caixa.type = "checkbox";
+    caixa.checked = ajustesVoz().auto;
+    caixa.addEventListener("change", () => salvarVoz({ auto: caixa.checked }));
+    auto.append(caixa, document.createTextNode(" Ler cada pergunta sozinho"));
+    ajustes.append(auto);
+    if (ajustesVoz().auto) setTimeout(() => { ouvir.textContent = "Parar a voz"; falar(q.pergunta, () => { ouvir.textContent = "Ouvir a pergunta"; }); }, 250);
+  }
 
   const ta = el("textarea", "sim-resposta");
   ta.rows = 6;
@@ -1359,7 +1424,7 @@ function mostrarPerguntaSim(box, p) {
     });
     ferramentas.append(mic);
   }
-  box.append(ferramentas, ta);
+  box.append(ferramentas, ajustes, ta);
 
   const acoes = el("div", "cv-acoes");
   acoes.append(
@@ -1367,9 +1432,10 @@ function mostrarPerguntaSim(box, p) {
       if (!ta.value.trim()) { avisar("Escreva ou fale sua resposta (ou use Pular)."); return; }
       sim.respostas[sim.i] = ta.value.trim();
       sim.i++;
+      pararVoz();
       mostrarPerguntaSim(box, p);
     }),
-    botao("Pular", "btn", () => { sim.respostas[sim.i] = ""; sim.i++; mostrarPerguntaSim(box, p); }),
+    botao("Pular", "btn", () => { pararVoz(); sim.respostas[sim.i] = ""; sim.i++; mostrarPerguntaSim(box, p); }),
     botao("Recomeçar", "link-btn", () => { if (confirm("Recomeçar a simulação do zero?")) { sim = null; montarSimulador(box, p); } }),
   );
   box.append(acoes);
@@ -1461,3 +1527,4 @@ function imprimir(p) {
 
 $("cv-fechar").addEventListener("click", () => $("cv").close());
 $("cv").addEventListener("click", (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+$("cv").addEventListener("close", pararVoz);

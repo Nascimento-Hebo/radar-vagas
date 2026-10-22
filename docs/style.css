@@ -865,3 +865,8 @@ dialog:focus, dialog:focus-visible { outline: none; }
 @keyframes sobe { from { transform: translateY(40px); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { dialog.cv { animation: none; } }
 @media print { .folha .editado { background: none; } }
+
+/* Ajustes da voz do recrutador no simulador */
+.sim-voz { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
+.sim-voz select { font: inherit; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; max-width: 100%; }
+.sim-auto { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
