@@ -143,8 +143,12 @@ function painelEmails(c) {
     b.type = "button";
     b.addEventListener("click", async () => {
       b.disabled = true;
-      try { await nuvem.conectarGmail(); buscarEmails(); }
-      catch (e) { avisar(nuvem.mensagemErro(e)); b.disabled = false; }
+      try { await nuvem.conectarGmail(); emailEstado.erro = ""; buscarEmails(); }
+      catch (e) {
+        emailEstado.erro = nuvem.mensagemErro(e);
+        console.warn("Gmail:", e?.code, e);
+        renderPainel();
+      }
     });
     caixa.append(txt, b);
     c.append(caixa);
