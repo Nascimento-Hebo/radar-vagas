@@ -78,6 +78,7 @@ async function criarConta(nome, email, senha) {
 }
 
 const recuperarSenha = (email) => sendPasswordResetEmail(auth, email);
+const reenviarVerificacao = () => sendEmailVerification(auth.currentUser);
 const sair = () => signOut(auth);
 
 // Traduz os erros do Firebase para mensagens que a pessoa entende
@@ -289,7 +290,7 @@ const nuvem = {
   get ficha() { return fichaUsuario; },
   get configIA() { return configIA; },
   ehAdmin: () => ehAdmin(),
-  entrarComGoogle, entrarComEmail, criarConta, recuperarSenha, sair, mensagemErro,
+  entrarComGoogle, entrarComEmail, criarConta, recuperarSenha, reenviarVerificacao, sair, mensagemErro,
   salvar: agendarEnvio,
   gerarIA,
   conectarGmail, desconectarGmail, gmailConectado: () => Boolean(tokenGmail()), gmail,

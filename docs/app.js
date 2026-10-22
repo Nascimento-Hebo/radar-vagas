@@ -815,6 +815,16 @@ function renderConta(u, admin) {
     a.setAttribute("role", "menuitem");
     menu.append(a);
   }
+  if (!u.emailVerified) {
+    const verificar = el("button", "conta-item", "Verificar meu e-mail");
+    verificar.type = "button";
+    verificar.setAttribute("role", "menuitem");
+    verificar.addEventListener("click", async () => {
+      try { await window.radarNuvem.reenviarVerificacao(); avisar(`Enviamos o link para ${u.email}. Veja também a caixa de spam. Depois de clicar no link, saia e entre de novo.`); }
+      catch (e) { avisar(window.radarNuvem.mensagemErro(e)); }
+    });
+    menu.append(verificar);
+  }
   const sairBtn = el("button", "conta-item", "Sair");
   sairBtn.type = "button";
   sairBtn.setAttribute("role", "menuitem");
