@@ -9,12 +9,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/fireba
 import {
   getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword,
   createUserWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification, updateProfile, signOut,
-  reauthenticateWithPopup, linkWithPopup,
+  reauthenticateWithPopup, linkWithPopup, deleteUser, EmailAuthProvider, reauthenticateWithCredential,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
   getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, collection, serverTimestamp, increment,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken as tokenAppCheck } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
 
 const config = {
   apiKey: "AIzaSyByGuqZQH4mPZhsHh7rozWRRat0fsJtGg0", // chave pública do app web (identifica o projeto; quem protege os dados são as regras do Firestore)
@@ -27,6 +28,11 @@ const config = {
 
 export const SUPER_ADMIN = "nascimentohebo2@gmail.com";
 const app = initializeApp(config);
+// App Check: prova (com reCAPTCHA invisível) que o pedido vem deste site. Sem isso, qualquer um poderia gastar a cota da IA e do banco.
+const RECAPTCHA_SITE_KEY = "6LfkX_stAAAAAHz8sBetbRCMgt9cI2K-6KDSqlgw";
+let appCheck = null;
+try { appCheck = initializeAppCheck(app, { provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY), isTokenAutoRefreshEnabled: true }); }
+catch (e) { console.warn("App Check não iniciou:", e); }
 const auth = getAuth(app);
 auth.languageCode = "pt";
 const db = getFirestore(app);
@@ -81,6 +87,30 @@ async function criarConta(nome, email, senha) {
 
 const recuperarSenha = (email) => sendPasswordResetEmail(auth, email);
 const reenviarVerificacao = () => sendEmailVerification(auth.currentUser);
+
+// Excluir minha conta (LGPD): apaga os dados, a ficha e a conta de login. Pede o login de novo se o Firebase exigir.
+async function excluirConta(senha = "") {
+  const u = auth.currentUser;
+  if (!u) throw new Error("Entre na sua conta primeiro.");
+  const reautenticar = async () => {
+    if (u.providerData.some((p) => p.providerId === "password") && senha) {
+      await reauthenticateWithCredential(u, EmailAuthProvider.credential(u.email, senha));
+    } else {
+      await reauthenticateWithPopup(u, new GoogleAuthProvider());
+    }
+  };
+  if (senha) await reautenticar(); // confirma antes de apagar qualquer coisa
+  const snaps = await getDocs(collection(db, "users", u.uid, "dados"));
+  await Promise.all(snaps.docs.map((d) => deleteDoc(d.ref)));
+  await deleteDoc(doc(db, "users", u.uid));
+  try { await deleteUser(u); }
+  catch (e) {
+    if (e?.code !== "auth/requires-recent-login") throw e;
+    await reautenticar();
+    await deleteUser(u);
+  }
+  try { localStorage.clear(); sessionStorage.clear(); } catch {}
+}
 const sair = () => signOut(auth);
 
 // Traduz os erros do Firebase para mensagens que a pessoa entende
@@ -189,7 +219,7 @@ async function contarUsoIA() {
     throw new Error(`Você chegou ao limite de ${configIA.limiteDiario} usos da IA por dia. Amanhã libera de novo.`);
   }
   fichaUsuario = { ...fichaUsuario, usoIA: { dia: hoje, n: uso + 1 } };
-  updateDoc(doc(db, "users", usuario.uid), { usoIA: { dia: hoje, n: uso + 1 }, usoIATotal: increment(1) }).catch(() => {});
+  updateDoc(doc(db, "users", usuario.uid), { usoIA: { dia: hoje, n: uso + 1 }, usoIATotal: increment(1), [`usoIADias.${hoje}`]: increment(1) }).catch(() => {}); // usoIADias alimenta o gráfico do admin
 }
 
 const TEMPO_MAX_IA = 45000; // se um modelo travar, passa para o próximo
@@ -314,6 +344,12 @@ async function apagarDadosDoUsuario(uid) {
   await Promise.all(snaps.docs.map((d) => deleteDoc(d.ref)));
   await deleteDoc(doc(db, "users", uid));
 }
+// A própria pessoa atualiza campos da ficha dela (preferências, alerta, primeiro acesso). As regras impedem mexer em papel e bloqueio.
+async function atualizarMinhaFicha(campos) {
+  if (!usuario) throw new Error("Entre na sua conta primeiro.");
+  await updateDoc(doc(db, "users", usuario.uid), campos);
+  fichaUsuario = { ...fichaUsuario, ...campos };
+}
 const salvarConfigSuporte = async (campos) => { await setDoc(doc(db, "config", "suporte"), campos, { merge: true }); configSuporte = { ...configSuporte, ...campos }; };
 const salvarConfigIA = async (campos) => { await setDoc(doc(db, "config", "ia"), campos, { merge: true }); configIA = { ...configIA, ...campos }; };
 
@@ -326,9 +362,12 @@ const nuvem = {
   get ficha() { return fichaUsuario; },
   get configIA() { return configIA; },
   get configSuporte() { return configSuporte; },
+  // Confere se o App Check consegue emitir o comprovante deste navegador (usado no painel do admin)
+  verificarAppCheck: async () => { if (!appCheck) return false; try { return Boolean((await tokenAppCheck(appCheck)).token); } catch { return false; } },
   ehAdmin: () => ehAdmin(),
-  entrarComGoogle, entrarComEmail, criarConta, recuperarSenha, reenviarVerificacao, sair, mensagemErro,
+  entrarComGoogle, entrarComEmail, criarConta, recuperarSenha, reenviarVerificacao, excluirConta, sair, mensagemErro,
   salvar: agendarEnvio,
+  atualizarMinhaFicha,
   gerarIA,
   conectarGmail, desconectarGmail, gmailConectado: () => Boolean(tokenGmail()), gmail,
   listarUsuarios, dadosDoUsuario, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA, salvarConfigSuporte,

@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+      TEM_FIREBASE: ${{ secrets.FIREBASE_SERVICE_ACCOUNT != '' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -45,6 +46,17 @@ jobs:
             git commit -m "Vagas de $(TZ=America/Sao_Paulo date +%d/%m/%Y)"
             git push
           fi
+
+      # Alerta diário: e-mail para quem ativou, só com as vagas novas que combinam com o que a pessoa procura.
+      - name: Alertas de vagas por e-mail
+        if: ${{ env.TEM_FIREBASE == 'true' }}
+        run: |
+          npm install --no-save --no-audit --no-fund nodemailer@10.0.16
+          node scripts/alertas.mjs
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
 
       # Se alguma fonte não respondeu, a execução fica vermelha e o GitHub avisa o dono do repositório por e-mail.
       # As vagas das outras fontes já foram salvas no passo anterior.

@@ -4,6 +4,7 @@ rules_version = '2';
 // - Cada pessoa lê e escreve só a própria ficha (users/{uid}) e os próprios dados (users/{uid}/dados/*).
 // - O super admin (e-mail verificado abaixo) lê e altera tudo, e é o único que muda "bloqueado" e "papel".
 // - Conta bloqueada não grava dados.
+// - A própria pessoa pode apagar a ficha e os dados (Excluir minha conta, LGPD).
 // - config/* (configuração da IA): todos que entraram leem; só o super admin altera.
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -31,11 +32,12 @@ service cloud.firestore {
         && request.resource.data.get("bloqueado", false) == false;
       allow update: if superAdmin()
         || (dono(uid) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["papel", "bloqueado", "criadoEm"]));
-      allow delete: if superAdmin();
+      allow delete: if superAdmin() || dono(uid); // "Excluir minha conta"
 
       match /dados/{nome} {
         allow read: if dono(uid) || superAdmin();
-        allow write: if superAdmin() || (dono(uid) && naoBloqueado(uid));
+        allow create, update: if superAdmin() || (dono(uid) && naoBloqueado(uid));
+        allow delete: if superAdmin() || dono(uid); // apagar os próprios dados vale mesmo com a conta bloqueada
       }
     }
 

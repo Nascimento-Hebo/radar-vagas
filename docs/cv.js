@@ -208,6 +208,7 @@ function abrirAdaptador(v) {
   cvAnalise = null;
   cvGerado = null;
   cvHistId = null;
+  sim = null;
   $("cv-vaga").textContent = v.titulo;
   $("cv-empresa").textContent = [v.empresa, v.local].filter(Boolean).join(" · ");
   const d = $("cv");
@@ -530,6 +531,7 @@ function abrirHistorico(h) {
   cvAnalise = h.analise;
   cvGerado = h.cv;
   cvHistId = h.id;
+  sim = null;
   $("cv-vaga").textContent = h.vaga.titulo;
   $("cv-empresa").textContent = [h.vaga.empresa, h.vaga.local].filter(Boolean).join(" · ");
   const d = $("cv");
@@ -670,7 +672,8 @@ function telaResultado(p, rascunho) {
   const abaCv = el("div", "cv-painel");
   const abaCarta = el("div", "cv-painel");
   const abaEntrevista = el("div", "cv-painel");
-  const botoesAba = [["1. O que a IA mudou", abaMudou], ["2. Antes e depois", abaCompara], ["3. CV final", abaCv], ["4. Carta e mensagens", abaCarta], ["5. Preparar entrevista", abaEntrevista]].map(([texto, painel]) => {
+  const abaSimular = el("div", "cv-painel");
+  const botoesAba = [["1. O que a IA mudou", abaMudou], ["2. Antes e depois", abaCompara], ["3. CV final", abaCv], ["4. Carta e mensagens", abaCarta], ["5. Preparar entrevista", abaEntrevista], ["6. Simular entrevista", abaSimular]].map(([texto, painel]) => {
     const b = botao(texto, "chip", () => mostrar(painel));
     b.setAttribute("role", "tab");
     abas.append(b);
@@ -681,9 +684,10 @@ function telaResultado(p, rascunho) {
     if (painel === abaCompara) montarComparacao();
     if (painel === abaCarta) montarExtra(abaCarta, "carta", p);
     if (painel === abaEntrevista) montarExtra(abaEntrevista, "entrevista", p);
+    if (painel === abaSimular) montarSimulador(abaSimular, p);
     $("cv").querySelector(".cv-interno").scrollIntoView({ block: "start" });
   }
-  c.append(abas, abaMudou, abaCompara, abaCv, abaCarta, abaEntrevista);
+  c.append(abas, abaMudou, abaCompara, abaCv, abaCarta, abaEntrevista, abaSimular);
 
   // ---- Aba 1: o que mudou ----
   const mudancas = (Array.isArray(g.mudancas) ? g.mudancas : []).filter((m) => m && (m.antes || m.depois));
@@ -931,6 +935,199 @@ async function gerarExtra(box, tipo, p) {
     erroBox.append(acoes);
     box.append(erroBox);
   }
+}
+
+// ---------- Simulador de entrevista: a IA faz o papel do recrutador desta vaga ----------
+
+const SIM_PERGUNTAS = 6;
+const Reconhecimento = window.SpeechRecognition || window.webkitSpeechRecognition;
+let sim = null; // { perguntas, i, respostas, resultado }
+
+function falar(texto) {
+  if (!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang = "pt-BR";
+  u.rate = 1.02;
+  const voz = speechSynthesis.getVoices().find((v) => v.lang?.toLowerCase().startsWith("pt"));
+  if (voz) u.voice = voz;
+  speechSynthesis.speak(u);
+}
+
+async function montarSimulador(box, p) {
+  box.textContent = "";
+  const salvo = cvHistId ? ler(CHAVE_HISTORICO, []).find((x) => x.id === cvHistId)?.extras?.simulacao : null;
+  if (!sim && salvo?.resultado) sim = { ...salvo, i: salvo.perguntas.length };
+  if (sim?.resultado) { mostrarResultadoSim(box, p); return; }
+  if (sim) { mostrarPerguntaSim(box, p); return; }
+
+  box.append(el("p", "cv-nota", `A IA faz o papel de quem vai te entrevistar na ${cvVaga.empresa || "empresa"}: ${SIM_PERGUNTAS} perguntas, uma por vez, técnicas e comportamentais, baseadas na vaga e no seu CV. No final você recebe uma nota e dicas para cada resposta.`));
+  const dicas = el("ul", "sim-dicas");
+  ["Responda como se fosse a entrevista de verdade, com exemplos do seu trabalho.", Reconhecimento ? "Pode responder falando: clique no microfone." : "Seu navegador não reconhece voz; responda escrevendo.", "Leva uns 10 minutos."].forEach((d) => dicas.append(el("li", null, d)));
+  box.append(dicas);
+  const acoes = el("div", "cv-acoes");
+  acoes.append(botao("Começar a simulação", "btn primario", () => iniciarSimulacao(box, p)));
+  box.append(acoes);
+}
+
+async function iniciarSimulacao(box, p) {
+  box.textContent = "";
+  const carregandoEl = el("p", "cv-carregando");
+  carregandoEl.append(el("span", "cv-spin"), document.createTextNode("Preparando a entrevista…"));
+  box.append(carregandoEl);
+  const g = cvGerado || {};
+  const pedido = `Você é recrutador(a) técnico(a) da ${cvVaga.empresa || "empresa"} entrevistando ${p.nome || "a pessoa candidata"} para a vaga "${cvVaga.titulo}".
+Requisitos: ${(cvAnalise?.obrigatorios || []).join("; ")}. Desejáveis: ${(cvAnalise?.desejaveis || []).join("; ")}.
+CV da pessoa (JSON): ${JSON.stringify({ resumo: g.resumo, habilidades: g.habilidades, experiencias: g.experiencias, projetos: g.projetos })}
+Crie ${SIM_PERGUNTAS} perguntas de entrevista, em português do Brasil, na ordem de uma entrevista real: começa com "fale sobre você", depois técnicas ligadas aos requisitos e ao CV, e comportamentais (método STAR). Uma pergunta por item, curta e natural, como se estivesse falando.
+Responda só com JSON: { "perguntas": [{ "pergunta": "", "tipo": "abertura" | "técnica" | "comportamental", "avalia": "o que você quer descobrir com ela" }] }`;
+  try {
+    const r = lerJson(await gemini([{ text: pedido }], { json: true }));
+    const perguntas = (r.perguntas || []).filter((q) => q?.pergunta).slice(0, SIM_PERGUNTAS);
+    if (!perguntas.length) throw new Error("A IA não montou as perguntas. Tente de novo.");
+    sim = { perguntas, i: 0, respostas: [], resultado: null };
+    mostrarPerguntaSim(box, p);
+  } catch (e) {
+    box.textContent = "";
+    box.append(el("p", "cv-erro", e.message || String(e)));
+    const acoes = el("div", "cv-acoes");
+    acoes.append(botao("Tentar de novo", "btn primario", () => iniciarSimulacao(box, p)));
+    box.append(acoes);
+  }
+}
+
+function mostrarPerguntaSim(box, p) {
+  box.textContent = "";
+  if (sim.i >= sim.perguntas.length) { avaliarSimulacao(box, p); return; }
+  const q = sim.perguntas[sim.i];
+  const prog = el("div", "sim-progresso");
+  prog.append(el("span", null, `Pergunta ${sim.i + 1} de ${sim.perguntas.length}`), el("span", "selo", q.tipo || "pergunta"));
+  const barra = el("div", "sim-barra");
+  const fill = el("span");
+  fill.style.width = `${(sim.i / sim.perguntas.length) * 100}%`;
+  barra.append(fill);
+  box.append(prog, barra);
+
+  const conversa = el("div", "sim-conversa");
+  const linha = el("div", "msg-linha ia");
+  const av = el("div", "sim-recrutador");
+  av.innerHTML = svg('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>');
+  const balao = el("div", "msg ia");
+  balao.append(el("p", null, q.pergunta));
+  linha.append(av, balao);
+  conversa.append(linha);
+  box.append(conversa);
+
+  const ouvir = botao("Ouvir a pergunta", "btn pequeno", () => falar(q.pergunta));
+  if (!("speechSynthesis" in window)) ouvir.hidden = true;
+
+  const ta = el("textarea", "sim-resposta");
+  ta.rows = 6;
+  ta.placeholder = "Sua resposta…";
+  ta.setAttribute("aria-label", "Sua resposta");
+  ta.value = sim.respostas[sim.i] || "";
+
+  const ferramentas = el("div", "sim-ferramentas");
+  ferramentas.append(ouvir);
+  if (Reconhecimento) {
+    let rec = null;
+    const mic = botao("Responder falando", "btn pequeno", () => {
+      if (rec) { rec.stop(); return; }
+      rec = new Reconhecimento();
+      rec.lang = "pt-BR";
+      rec.continuous = true;
+      rec.interimResults = true;
+      const base = ta.value ? ta.value.trimEnd() + " " : "";
+      rec.onresult = (ev) => { ta.value = base + [...ev.results].map((r) => r[0].transcript).join(" "); };
+      rec.onend = () => { rec = null; mic.textContent = "Responder falando"; mic.classList.remove("gravando"); };
+      rec.onerror = (ev) => { avisar(ev.error === "not-allowed" ? "Libere o microfone para responder falando." : "Não consegui ouvir. Tente de novo ou escreva."); };
+      rec.start();
+      mic.textContent = "Parar de gravar";
+      mic.classList.add("gravando");
+    });
+    ferramentas.append(mic);
+  }
+  box.append(ferramentas, ta);
+
+  const acoes = el("div", "cv-acoes");
+  acoes.append(
+    botao(sim.i + 1 === sim.perguntas.length ? "Responder e ver meu resultado" : "Responder e ir para a próxima", "btn primario", () => {
+      if (!ta.value.trim()) { avisar("Escreva ou fale sua resposta (ou use Pular)."); return; }
+      sim.respostas[sim.i] = ta.value.trim();
+      sim.i++;
+      mostrarPerguntaSim(box, p);
+    }),
+    botao("Pular", "btn", () => { sim.respostas[sim.i] = ""; sim.i++; mostrarPerguntaSim(box, p); }),
+    botao("Recomeçar", "link-btn", () => { if (confirm("Recomeçar a simulação do zero?")) { sim = null; montarSimulador(box, p); } }),
+  );
+  box.append(acoes);
+  ta.focus();
+}
+
+async function avaliarSimulacao(box, p) {
+  box.textContent = "";
+  const carregandoEl = el("p", "cv-carregando");
+  carregandoEl.append(el("span", "cv-spin"), document.createTextNode("A IA está avaliando suas respostas…"));
+  box.append(carregandoEl);
+  const pares = sim.perguntas.map((q, i) => ({ pergunta: q.pergunta, avalia: q.avalia, resposta: sim.respostas[i] || "(pulou)" }));
+  const pedido = `Você entrevistou ${p.nome || "uma pessoa"} para a vaga "${cvVaga.titulo}"${cvVaga.empresa ? ` na ${cvVaga.empresa}` : ""}. Avalie as respostas como um(a) recrutador(a) justo(a) e construtivo(a), em português do Brasil.
+Perguntas e respostas (JSON): ${JSON.stringify(pares)}
+Responda só com JSON:
+{
+  "nota": número de 0 a 10,
+  "resumo": "2 frases sobre o desempenho geral",
+  "pontosFortes": ["..."],
+  "melhorar": ["..."],
+  "porPergunta": [{ "nota": 0-10, "comentario": "o que foi bom e o que faltou", "respostaMelhor": "como responder melhor, usando só o que a pessoa disse ou tem no CV" }]
+}`;
+  try {
+    sim.resultado = lerJson(await gemini([{ text: pedido }], { json: true }));
+    atualizarHistorico((h) => ({ extras: { ...(h.extras || {}), simulacao: { perguntas: sim.perguntas, respostas: sim.respostas, resultado: sim.resultado } } }));
+    mostrarResultadoSim(box, p);
+  } catch (e) {
+    box.textContent = "";
+    box.append(el("p", "cv-erro", e.message || String(e)));
+    const acoes = el("div", "cv-acoes");
+    acoes.append(botao("Tentar avaliar de novo", "btn primario", () => avaliarSimulacao(box, p)));
+    box.append(acoes);
+  }
+}
+
+function mostrarResultadoSim(box, p) {
+  box.textContent = "";
+  const r = sim.resultado;
+  const nota = Math.max(0, Math.min(10, Number(r.nota) || 0));
+  const topo = el("div", `sim-nota ${nota >= 7 ? "boa" : nota >= 5 ? "media" : "baixa"}`);
+  topo.append(el("strong", null, nota.toFixed(1).replace(".", ",")), el("span", null, "de 10"));
+  const resumo = el("div");
+  resumo.append(el("h4", null, "Resultado da simulação"), el("p", null, r.resumo || ""));
+  const cab = el("div", "sim-cab");
+  cab.append(topo, resumo);
+  box.append(cab);
+  const colunas = el("div", "cv-req");
+  [listaReq("Pontos fortes", lista(r.pontosFortes)), listaReq("Para melhorar", lista(r.melhorar))].forEach((n) => n && colunas.append(n));
+  box.append(colunas);
+
+  const ol = el("ol", "entrevista");
+  sim.perguntas.forEach((q, i) => {
+    const a = (r.porPergunta || [])[i] || {};
+    const li = el("li", "entrevista-item");
+    const d = el("details");
+    const s = el("summary");
+    s.append(el("span", "selo", `${a.nota ?? "–"}/10`), el("strong", null, q.pergunta));
+    d.append(s);
+    const sua = el("div", "cv-antes");
+    sua.append(el("b", null, "Você"), el("span", null, sim.respostas[i] || "(pulou)"));
+    d.append(sua);
+    if (a.comentario) d.append(el("p", "cv-nota", a.comentario));
+    if (a.respostaMelhor) { const m = el("div", "cv-depois"); m.append(el("b", null, "Melhor"), el("span", null, a.respostaMelhor)); d.append(m); }
+    li.append(d);
+    ol.append(li);
+  });
+  box.append(el("h4", null, "Pergunta por pergunta"), ol);
+  const acoes = el("div", "cv-acoes");
+  acoes.append(botao("Fazer outra simulação", "btn primario", () => { sim = null; montarSimulador(box, p); }));
+  box.append(acoes);
 }
 
 function imprimir(p) {

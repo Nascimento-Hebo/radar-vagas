@@ -14,8 +14,8 @@ const cv = ler("cv.js");
 
 const idsUsados = (js) => [...new Set([...js.matchAll(/\$\("([\w-]+)"\)/g)].map((m) => m[1]))];
 
-test("todo id que app.js, suporte.js e email.js procuram existe no index.html", () => {
-  const ids = ["app.js", "suporte.js", "email.js"].flatMap((arq) => idsUsados(ler(arq)));
+test("todo id que app.js, suporte.js, email.js e onboarding.js procuram existe no index.html", () => {
+  const ids = ["app.js", "suporte.js", "email.js", "onboarding.js"].flatMap((arq) => idsUsados(ler(arq)));
   const faltando = [...new Set(ids)].filter((id) => !html.includes(`id="${id}"`));
   assert.deepEqual(faltando, []);
 });
@@ -27,7 +27,7 @@ test("todo id que o admin.js procura existe no admin.html", () => {
 });
 
 test("todas as páginas usam a mesma versão dos arquivos", () => {
-  const versoes = new Set(["index.html", "login.html", "admin.html"].flatMap((p) => [...ler(p).matchAll(/\?v=(\d+)/g)].map((m) => m[1])));
+  const versoes = new Set(["index.html", "login.html", "admin.html", "termos.html", "privacidade.html"].flatMap((p) => [...ler(p).matchAll(/\?v=(\d+)/g)].map((m) => m[1])));
   assert.equal(versoes.size, 1, `versões misturadas: ${[...versoes].join(", ")}`);
 });
 

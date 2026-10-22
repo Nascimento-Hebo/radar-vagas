@@ -1,7 +1,7 @@
 // Página do Radar de Vagas (OH Tech): lê vagas.json e mostra com busca, filtros, radar e a área pessoal.
 // Candidaturas, meta da semana, CVs gerados, perfil e tema ficam só no navegador de quem usa (localStorage).
 
-const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", local: "todos", ocultar: false, salario: false, texto: "", ordem: "relevancia" };
+const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", local: "todos", ocultar: false, salario: false, paraVoce: false, texto: "", ordem: "relevancia" };
 const filtros = { ...FILTROS_PADRAO };
 let dados = { vagas: [] };
 let carregado = false;
@@ -78,6 +78,7 @@ function passa(v) {
   if (filtros.local !== "todos" && !noLocal(v, filtros.local)) return false;
   if (filtros.ocultar && candidaturas[v.id]) return false;
   if (filtros.salario && !v.salario) return false;
+  if (filtros.paraVoce && !combinaComPreferencias(v)) return false;
   if (filtros.texto) {
     const alvo = semAcento([v.titulo, v.empresa, v.local, ...(v.stack || []), ...(v.requisitos || [])].join(" "));
     if (!semAcento(filtros.texto).split(/\s+/).every((p) => alvo.includes(p))) return false;
@@ -156,7 +157,12 @@ function cartao(v) {
   selos.append(el("span", "selo area", v.area));
   if (st === "nova") selos.append(el("span", "selo nova", "Nova hoje"));
   if (st === "encerrada") selos.append(el("span", "selo encerrada", "Encerrada"));
-  if (st !== "encerrada" && (v.prioridade ?? 0) >= FOCO_MIN) {
+  const temPrefs = Object.keys(prefs()).length > 0;
+  if (st !== "encerrada" && temPrefs && combinaComPreferencias(v)) {
+    const f = el("span", "selo foco", "★ Para você");
+    f.title = "Combina com o que você procura (Minhas preferências)";
+    selos.append(f);
+  } else if (st !== "encerrada" && !temPrefs && (v.prioridade ?? 0) >= FOCO_MIN) {
     const f = el("span", "selo foco", "Combina com você");
     f.title = "Júnior, PJ, remoto ou no Paraná";
     selos.append(f);
@@ -280,6 +286,14 @@ const ATALHOS = [
 function renderAtalhos() {
   const box = $("atalhos");
   box.textContent = "";
+  if (Object.keys(prefs()).length) {
+    const b = el("button", "atalho destaque", "★ Para você");
+    b.type = "button";
+    b.title = "Só as vagas que combinam com Minhas preferências";
+    b.setAttribute("aria-pressed", String(filtros.paraVoce));
+    b.addEventListener("click", () => { filtros.paraVoce = !filtros.paraVoce; render(); });
+    box.append(b);
+  }
   ATALHOS.forEach(([rotulo, f]) => {
     const ativo = Object.entries({ ...FILTROS_PADRAO, ...f }).every(([k, v]) => filtros[k] === v);
     const b = el("button", "atalho", rotulo);
@@ -454,6 +468,26 @@ function montarLocais() {
   sel.value = filtros.local;
 }
 
+// Preferências do primeiro acesso / Minhas preferências (editadas em onboarding.js)
+function prefs() { return ler(CHAVE_PERFIL_APP, {}).preferencias || {}; }
+
+// Mesma regra do alerta por e-mail (scripts/vagas-core.mjs → combinaComAlerta), para o selo "Para você"
+function combinaComPreferencias(v, p = prefs()) {
+  if (!p || !Object.keys(p).length || v.status === "encerrada") return false;
+  if (p.area && p.area !== "todos" && v.area !== p.area) return false;
+  if (p.nivel && p.nivel !== "todos" && !String(v.nivel || "").includes(p.nivel)) return false;
+  if (p.regime && p.regime !== "todos" && !String(v.regime || "").includes(p.regime)) return false;
+  const local = p.local || "todos";
+  if (local === "remoto" && v.modelo !== "Remoto") return false;
+  if (local.startsWith("uf:") && v.modelo !== "Remoto" && !infoLocal(v).ufs.has(local.slice(3))) return false;
+  const tecs = (p.tecnologias || []).map(semAcento).filter(Boolean);
+  if (tecs.length) {
+    const alvo = [semAcento(v.titulo), ...(v.stack || []).map(semAcento)];
+    if (!tecs.some((t) => alvo.some((x) => x.includes(t)))) return false;
+  }
+  return true;
+}
+
 // ---------- Compatibilidade com o CV (calculada aqui, sem gastar IA) ----------
 
 const TECS_CV = {
@@ -496,6 +530,17 @@ function valorSalario(v) {
 function renderAvisos() {
   const box = $("avisos");
   box.textContent = "";
+  const novasParaVoce = carregado && Object.keys(prefs()).length ? dados.vagas.filter((v) => estado(v) === "nova" && combinaComPreferencias(v)).length : 0;
+  if (novasParaVoce && !filtros.paraVoce) {
+    const a = el("div", "aviso verde");
+    a.innerHTML = svg('<path d="M12 2l2.9 6.9L22 10l-5.5 4.7L18.2 22 12 18.3 5.8 22l1.7-7.3L2 10l7.1-1.1z"/>');
+    a.append(el("span", null, `${novasParaVoce} ${novasParaVoce === 1 ? "vaga nova hoje combina" : "vagas novas hoje combinam"} com o que você procura.`));
+    const b = el("button", "btn pequeno primario", "Ver só essas");
+    b.type = "button";
+    b.addEventListener("click", () => { filtros.paraVoce = true; render(); });
+    a.append(b);
+    box.append(a);
+  }
   const pendentes = Object.values(candidaturas).filter(precisaFollowup);
   if (pendentes.length) {
     const a = el("div", "aviso laranja");
@@ -708,6 +753,31 @@ function painelDados(c) {
   bkp.append(linha);
   c.append(bkp);
 
+  if (window.radarNuvem?.usuario) {
+    const exc = el("section", "dados-sec perigo-sec");
+    exc.append(el("h3", null, "Excluir minha conta"));
+    exc.append(el("p", "painel-nota", "Apaga para sempre sua conta de login, candidaturas, CVs gerados, perfil e conversas com o suporte. Não dá para desfazer."));
+    const b = el("button", "btn perigo", "Excluir minha conta");
+    b.type = "button";
+    b.addEventListener("click", async () => {
+      const u = window.radarNuvem.usuario;
+      if (!confirm("Excluir sua conta e todos os seus dados para sempre?")) return;
+      let senha = "";
+      if (u.providerData.some((p) => p.providerId === "password")) {
+        senha = prompt("Para confirmar, digite a senha da sua conta:") || "";
+        if (!senha) return;
+      }
+      b.disabled = true;
+      try {
+        await window.radarNuvem.excluirConta(senha);
+        alert("Sua conta foi excluída. Obrigado por usar o Radar de Vagas.");
+        location.replace("login.html");
+      } catch (e) { avisar(window.radarNuvem.mensagemErro(e)); b.disabled = false; }
+    });
+    exc.append(b);
+    c.append(exc);
+  }
+
   const priv = el("section", "dados-sec");
   priv.append(el("h3", null, "Privacidade"));
   const ul = el("ul", "privacidade");
@@ -717,6 +787,9 @@ function painelDados(c) {
     "Ao usar \"Usar minha localização\", só a cidade é buscada no OpenStreetMap; a posição exata não é guardada.",
   ].forEach((t) => ul.append(el("li", null, t)));
   priv.append(ul);
+  const links = el("p", "painel-nota");
+  links.innerHTML = 'Leia a <a href="privacidade.html" target="_blank" rel="noopener">Política de privacidade</a> e os <a href="termos.html" target="_blank" rel="noopener">Termos de uso</a>.'; // texto fixo do código
+  priv.append(links);
   c.append(priv);
 }
 
@@ -828,6 +901,11 @@ function renderConta(u, admin) {
     });
     menu.append(verificar);
   }
+  const prefBtn = el("button", "conta-item", "Minhas preferências");
+  prefBtn.type = "button";
+  prefBtn.setAttribute("role", "menuitem");
+  prefBtn.addEventListener("click", () => abrirBoasVindas(2)); // em onboarding.js
+  menu.append(prefBtn);
   const sairBtn = el("button", "conta-item", "Sair");
   sairBtn.type = "button";
   sairBtn.setAttribute("role", "menuitem");
@@ -882,7 +960,8 @@ function renderRadar(abertas) {
   const n = (x) => (carregado ? String(x) : "—");
   $("n-abertas").textContent = n(abertas.length);
   $("n-novas").textContent = n(abertas.filter((v) => estado(v) === "nova").length);
-  $("n-foco").textContent = n(abertas.filter((v) => (v.prioridade ?? 0) >= FOCO_MIN).length);
+  const temPrefs = Object.keys(prefs()).length > 0;
+  $("n-foco").textContent = n(abertas.filter((v) => (temPrefs ? combinaComPreferencias(v) : (v.prioridade ?? 0) >= FOCO_MIN)).length);
 }
 
 function sincronizarControles() {
