@@ -138,7 +138,9 @@ function painelEmails(c) {
     const caixa = el("div", "email-conectar");
     caixa.innerHTML = svg('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>');
     const txt = el("div");
-    txt.append(el("strong", null, "Conecte seu Gmail"), el("p", null, "Permissão só de leitura. O acesso vale por 1 hora; depois é só conectar de novo."));
+    const passos = el("ol", "email-passos");
+    ["Se o Google mostrar “O Google não verificou este app”, clique em Avançado → Acessar (não seguro).", "Na tela de permissões, marque a caixa “Ler seus e-mails” do Gmail.", "Clique em Continuar."].forEach((p) => passos.append(el("li", null, p)));
+    txt.append(el("strong", null, "Conecte seu Gmail"), el("p", null, "Permissão só de leitura. O acesso vale por 1 hora; depois é só conectar de novo."), passos);
     const b = el("button", "btn primario", "Conectar meu Gmail");
     b.type = "button";
     b.addEventListener("click", async () => {

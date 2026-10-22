@@ -254,13 +254,26 @@ async function conectarGmail() {
   } catch (e) {
     // Conta Google diferente da do login, ou já ligada a outro usuário: o Google ainda devolve o token do Gmail junto com o erro
     const credErro = GoogleAuthProvider.credentialFromError(e);
-    if (credErro?.accessToken) return guardarTokenGmail(credErro.accessToken);
+    if (credErro?.accessToken) return guardarTokenGmail(await conferirEscopo(credErro.accessToken));
     if (e?.code !== "auth/provider-already-linked") throw e;
     r = await reauthenticateWithPopup(usuario, provedor);
   }
   const cred = GoogleAuthProvider.credentialFromResult(r);
   if (!cred?.accessToken) throw new Error("O Google não liberou o acesso ao Gmail.");
-  return guardarTokenGmail(cred.accessToken);
+  return guardarTokenGmail(await conferirEscopo(cred.accessToken));
+}
+
+// O Google deixa a pessoa desmarcar a permissão do Gmail na tela de consentimento: confere antes de usar
+const PERMISSAO_GMAIL_FALTANDO = "O Google liberou o acesso sem a permissão do Gmail. Clique em \"Conectar meu Gmail\" de novo e, na tela de permissões, marque a caixa \"Ler seus e-mails\" antes de continuar.";
+async function conferirEscopo(token) {
+  try {
+    const r = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(token)}`);
+    const info = await r.json();
+    if (r.ok && !String(info.scope || "").split(" ").includes(SCOPE_GMAIL)) throw Object.assign(new Error(PERMISSAO_GMAIL_FALTANDO), { codigo: "gmail-sem-permissao" });
+  } catch (e) {
+    if (e.codigo) throw e; // sem internet para conferir: segue e o Gmail avisa se faltar
+  }
+  return token;
 }
 
 function guardarTokenGmail(token) {
@@ -277,6 +290,7 @@ async function gmail(caminho) {
   if (r.status === 401) { desconectarGmail(); throw Object.assign(new Error("O acesso ao Gmail venceu. Conecte de novo."), { codigo: "gmail-desconectado" }); }
   if (r.status === 403) {
     const j = await r.json().catch(() => ({}));
+    if (/insufficient.*scope/i.test(j.error?.message || "")) { desconectarGmail(); throw Object.assign(new Error(PERMISSAO_GMAIL_FALTANDO), { codigo: "gmail-desconectado" }); }
     throw new Error(/has not been used|disabled/i.test(j.error?.message || "") ? "A Gmail API ainda não foi ativada no projeto do Firebase." : `O Gmail recusou: ${j.error?.message || "sem permissão"}`);
   }
   if (!r.ok) throw new Error(`Gmail respondeu ${r.status}`);
