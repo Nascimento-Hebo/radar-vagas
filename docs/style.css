@@ -704,3 +704,4 @@ button:disabled { opacity: .6; cursor: wait; }
 .assistente-form textarea { width: 100%; font: 14.5px var(--font-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; padding: 10px 12px; resize: vertical; }
 .assistente-form .btn { justify-self: start; }
 @media (max-width: 640px) { .assistente { grid-template-columns: 1fr; } }
+.email-passos { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 3px; font-size: 13.5px; color: var(--muted); }
