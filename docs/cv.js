@@ -17,7 +17,7 @@ const CAMPOS = [
   ["nome", "Nome completo", "text", "name"],
   ["email", "E-mail", "email", "email"],
   ["telefone", "Telefone / WhatsApp", "tel", "tel"],
-  ["cidade", "Cidade", "text", "address-level2"],
+  ["cidade", "Cidade - UF (ex.: Palmeira - PR)", "text", "address-level2"],
   ["linkedin", "LinkedIn", "url", "url"],
   ["github", "GitHub ou portfólio", "url", "url"],
 ];
@@ -550,16 +550,68 @@ const MODELOS = [
   ["compacto", "Compacto"],
 ];
 
+// ---------- Linha de contato do CV: cada item com ícone, texto limpo e link ----------
+
+const icone = (paths) => `<svg class="folha-ic" viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>`;
+const ICONES_CONTATO = {
+  cidade: icone('<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'),
+  email: icone('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>'),
+  telefone: icone('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>'),
+  linkedin: icone('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>'),
+  github: icone('<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.1-1.3-.3-2.5-1-3.5.3-1.2.3-2.4 0-3.5 0 0-1 0-3 1.5a10.3 10.3 0 0 0-5.5 0C7.5 2 6.5 2 6.5 2c-.3 1.1-.3 2.3 0 3.5A5.4 5.4 0 0 0 5.5 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1-.9 1.6-.2.6-.2 1.2-.1 1.9v4"/><path d="M9 18c-4.5 2-5-2-7-2"/>'),
+  site: icone('<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'),
+};
+
+// "+5549999088498" -> "+55 (49) 99908-8498"; números de outros países ficam como vieram
+const telEstrangeiro = (tel) => /^\s*\+/.test(tel) && !/^\s*\+\s*55/.test(tel);
+function formatarTelefone(tel) {
+  if (telEstrangeiro(tel)) return String(tel).trim();
+  const d = String(tel || "").replace(/\D/g, "");
+  const br = d.length === 12 || d.length === 13 ? d.slice(2) : d.length === 10 || d.length === 11 ? d : "";
+  if (!br || (d.length >= 12 && !d.startsWith("55"))) return String(tel).trim();
+  const ddd = br.slice(0, 2), num = br.slice(2);
+  return `+55 (${ddd}) ${num.length === 9 ? `${num.slice(0, 5)}-${num.slice(5)}` : `${num.slice(0, 4)}-${num.slice(4)}`}`;
+}
+
+// "https://www.linkedin.com/in/fulano/" -> "linkedin.com/in/fulano"
+const linkLimpo = (url) => String(url || "").trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/+$/, "");
+const linkCompleto = (url) => (/^https?:\/\//i.test(url) ? url.trim() : `https://${linkLimpo(url)}`);
+
+function itensDeContato(p) {
+  const itens = [];
+  if (p.cidade) itens.push({ tipo: "cidade", rotulo: "Cidade", texto: p.cidade.trim() });
+  if (p.email) itens.push({ tipo: "email", rotulo: "E-mail", texto: p.email.trim(), link: `mailto:${p.email.trim()}` });
+  if (p.telefone) {
+    const d = p.telefone.replace(/\D/g, "");
+    const zap = d.length >= 10 ? (telEstrangeiro(p.telefone) || d.length > 11 ? d : `55${d}`) : "";
+    itens.push({ tipo: "telefone", rotulo: "Telefone / WhatsApp", texto: formatarTelefone(p.telefone), link: zap ? `https://wa.me/${zap}` : "" });
+  }
+  if (p.linkedin) itens.push({ tipo: "linkedin", rotulo: "LinkedIn", texto: linkLimpo(p.linkedin), link: linkCompleto(p.linkedin) });
+  if (p.github) {
+    const ehGithub = /github\.com/i.test(p.github);
+    itens.push({ tipo: ehGithub ? "github" : "site", rotulo: ehGithub ? "GitHub" : "Portfólio", texto: linkLimpo(p.github), link: linkCompleto(p.github) });
+  }
+  return itens;
+}
+
 // Monta o CV em duas partes (lateral e principal). Cada modelo arruma essas partes de um jeito no CSS.
 function folhaCv(p, g, modelo = "classico") {
   const f = el("article", `folha modelo-${modelo}`);
   const cab = el("header", "folha-cab");
   cab.append(el("h1", null, p.nome));
   if (g.titulo) cab.append(el("div", "folha-titulo", g.titulo));
-  const contato = [p.cidade, p.email, p.telefone, p.linkedin, p.github].filter(Boolean);
+  const contato = itensDeContato(p);
   if (contato.length) {
     const ul = el("ul", "folha-contato");
-    contato.forEach((c) => ul.append(el("li", null, c)));
+    contato.forEach((c) => {
+      const li = el("li");
+      li.innerHTML = ICONES_CONTATO[c.tipo]; // SVG fixo do código
+      const texto = c.link ? el("a", null, c.texto) : el("span", null, c.texto);
+      if (c.link) texto.href = c.link;
+      li.title = c.rotulo;
+      li.append(el("span", "sr", `${c.rotulo}: `), texto);
+      ul.append(li);
+    });
     cab.append(ul);
   }
   f.append(cab);
