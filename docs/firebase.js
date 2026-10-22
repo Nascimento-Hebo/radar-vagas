@@ -101,6 +101,9 @@ function mensagemErro(e) {
     "auth/unauthorized-domain": "Este endereço ainda não foi autorizado no Firebase (Authentication → Configurações → Domínios autorizados).",
     "auth/operation-not-allowed": "Esse tipo de login ainda não foi ativado no Firebase (Authentication → Método de login).",
     "auth/credential-already-in-use": "Essa conta Google já está ligada a outro usuário do Radar.",
+    "auth/user-mismatch": "Escolha a mesma conta Google com que você entrou no Radar.",
+    "auth/internal-error": "O Google recusou o pedido. Se apareceu \"app bloqueado\" ou \"acesso negado\", o administrador precisa liberar seu e-mail como testador do Gmail.",
+    "auth/admin-restricted-operation": "Essa operação está bloqueada nas configurações do Firebase.",
     "permission-denied": "Sem permissão para essa ação.",
   }[c];
   return m || e?.message || String(e);
@@ -245,11 +248,24 @@ async function conectarGmail() {
   provedor.addScope(SCOPE_GMAIL);
   provedor.setCustomParameters({ prompt: "consent", ...(usuario.email ? { login_hint: usuario.email } : {}) });
   const temGoogle = usuario.providerData.some((p) => p.providerId === "google.com");
-  const r = temGoogle ? await reauthenticateWithPopup(usuario, provedor) : await linkWithPopup(usuario, provedor);
+  let r;
+  try {
+    r = temGoogle ? await reauthenticateWithPopup(usuario, provedor) : await linkWithPopup(usuario, provedor);
+  } catch (e) {
+    // Conta Google diferente da do login, ou já ligada a outro usuário: o Google ainda devolve o token do Gmail junto com o erro
+    const credErro = GoogleAuthProvider.credentialFromError(e);
+    if (credErro?.accessToken) return guardarTokenGmail(credErro.accessToken);
+    if (e?.code !== "auth/provider-already-linked") throw e;
+    r = await reauthenticateWithPopup(usuario, provedor);
+  }
   const cred = GoogleAuthProvider.credentialFromResult(r);
   if (!cred?.accessToken) throw new Error("O Google não liberou o acesso ao Gmail.");
-  sessionStorage.setItem(CHAVE_TOKEN, JSON.stringify({ token: cred.accessToken, expira: Date.now() + 55 * 60000 }));
-  return cred.accessToken;
+  return guardarTokenGmail(cred.accessToken);
+}
+
+function guardarTokenGmail(token) {
+  sessionStorage.setItem(CHAVE_TOKEN, JSON.stringify({ token, expira: Date.now() + 55 * 60000 }));
+  return token;
 }
 
 const desconectarGmail = () => sessionStorage.removeItem(CHAVE_TOKEN);

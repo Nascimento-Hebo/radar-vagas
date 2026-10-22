@@ -1,6 +1,6 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=16";
+import "./firebase.js?v=17";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
@@ -19,6 +19,8 @@ const NOME_ETAPA = { candidatei: "Candidatei", entrevista: "Entrevista", teste: 
 
 function avisar(texto) {
   const t = $("toast");
+  const aberta = [...document.querySelectorAll("dialog[open]")].pop();
+  if (t.parentElement !== (aberta || document.body)) (aberta || document.body).append(t);
   t.textContent = texto;
   t.hidden = false;
   clearTimeout(avisar.timer);

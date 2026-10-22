@@ -87,6 +87,9 @@ function passa(v) {
 
 function avisar(texto) {
   const t = $("toast");
+  // janela aberta fica numa camada própria do navegador: o aviso precisa estar dentro dela para aparecer por cima
+  const aberta = [...document.querySelectorAll("dialog[open]")].pop();
+  if (t.parentElement !== (aberta || document.body)) (aberta || document.body).append(t);
   t.textContent = texto;
   t.hidden = false;
   clearTimeout(avisar.timer);
