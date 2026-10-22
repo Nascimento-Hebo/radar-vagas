@@ -1,6 +1,6 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=23";
+import "./firebase.js?v=24";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
@@ -36,18 +36,33 @@ window.addEventListener("radar:usuario", (e) => {
   $("carregando-conta").hidden = true;
   $("admin-sub").textContent = `Conectado como ${usuario.email}. Controle dos usuários cadastrados e da IA do Radar de Vagas.`;
   carregarTudo();
+  carregarErros();
 });
+
+function resumoDosDados(dados) {
+  const cands = Object.values(dados.candidaturas || {});
+  const etapas = {};
+  cands.forEach((c) => { const e = typeof c === "string" ? "candidatei" : c.etapa || "candidatei"; etapas[e] = (etapas[e] || 0) + 1; });
+  return { nCand: cands.length, nCvs: (dados.cvs || []).length, etapas, cvsVagas: (dados.cvs || []).map((h) => [h.vaga?.titulo || "Vaga", h.vaga?.empresa].filter(Boolean).join(" · ")) };
+}
+const somarEtapas = () => {
+  const etapas = {};
+  usuarios.forEach((u) => Object.entries(u.etapas || {}).forEach(([e, n]) => { etapas[e] = (etapas[e] || 0) + n; }));
+  return etapas;
+};
 
 async function carregarTudo() {
   preencherIA();
   preencherAssistente();
   try {
     const lista = await nuvem.listarUsuarios();
-    // Para cada pessoa, conta candidaturas e CVs (lê os dados dela)
+    // Os números vêm do resumo que cada pessoa grava na ficha (users/{uid}.resumo): 1 leitura por pessoa.
+    // Só quem ainda não tem resumo (conta antiga que não voltou ao site) tem os dados lidos inteiros.
     usuarios = await Promise.all(lista.map(async (u) => {
+      if (u.resumo) return { ...u, ...u.resumo, etapas: u.resumo.etapas || {}, cvsVagas: u.resumo.cvsVagas || [] };
       let dados = {};
       try { dados = await nuvem.dadosDoUsuario(u.uid); } catch {}
-      return { ...u, dados, nCand: Object.keys(dados.candidaturas || {}).length, nCvs: (dados.cvs || []).length };
+      return { ...u, dados, ...resumoDosDados(dados) };
     }));
     usuarios.sort((a, b) => (b.ultimoAcesso?.seconds || 0) - (a.ultimoAcesso?.seconds || 0));
     renderNumeros();
@@ -62,11 +77,7 @@ function renderNumeros() {
   const box = $("numeros");
   box.textContent = "";
   const seteDias = Date.now() / 1000 - 7 * 86400;
-  const etapas = {};
-  usuarios.forEach((u) => Object.values(u.dados.candidaturas || {}).forEach((c) => {
-    const et = typeof c === "string" ? "candidatei" : c.etapa || "candidatei";
-    etapas[et] = (etapas[et] || 0) + 1;
-  }));
+  const etapas = somarEtapas();
   const itens = [
     ["Usuários", usuarios.length],
     ["Ativos nos últimos 7 dias", usuarios.filter((u) => (u.ultimoAcesso?.seconds || 0) > seteDias).length],
@@ -202,23 +213,16 @@ function renderGraficos() {
   usuarios.forEach((u) => Object.entries(u.usoIADias || {}).forEach(([k, n]) => { ia[k] = (ia[k] || 0) + Number(n || 0); }));
   graficoColunas($("graf-ia"), dias14.map((k) => ({ rotulo: dataCurta(k), valor: ia[k] || 0 })), "Usos da IA");
 
-  const etapas = {};
-  usuarios.forEach((u) => Object.values(u.dados.candidaturas || {}).forEach((c) => {
-    const et = typeof c === "string" ? "candidatei" : c.etapa || "candidatei";
-    etapas[et] = (etapas[et] || 0) + 1;
-  }));
+  const etapas = somarEtapas();
   graficoBarras($("graf-etapas"), Object.entries(NOME_ETAPA).map(([k, nome]) => ({ rotulo: nome, valor: etapas[k] || 0 })), "Candidaturas");
 
   const vagas = {};
-  usuarios.forEach((u) => (u.dados.cvs || []).forEach((h) => {
-    const k = [h.vaga?.titulo || "Vaga", h.vaga?.empresa].filter(Boolean).join(" · ");
-    vagas[k] = (vagas[k] || 0) + 1;
-  }));
+  usuarios.forEach((u) => (u.cvsVagas || []).forEach((k) => { vagas[k] = (vagas[k] || 0) + 1; }));
   const top = Object.entries(vagas).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([rotulo, valor]) => ({ rotulo, valor }));
   graficoBarras($("graf-vagas"), top, "CVs gerados");
 
   // Funil: quantas pessoas chegam a cada passo (cada passo conta quem fez pelo menos uma vez)
-  const avancou = (u) => Object.values(u.dados.candidaturas || {}).some((c) => typeof c === "object" && ["entrevista", "teste", "proposta"].includes(c.etapa));
+  const avancou = (u) => ["entrevista", "teste", "proposta"].some((e) => (u.etapas || {})[e] > 0);
   const total = usuarios.length || 1;
   const funil = [
     ["Cadastrou", usuarios.length],
@@ -302,7 +306,18 @@ function secao(pai, titulo) {
   return s;
 }
 
-function abrirDetalhe(u) {
+// Os dados completos da pessoa só são lidos aqui, quando o admin abre o detalhe
+async function abrirDetalhe(u) {
+  if (!u.dados) {
+    $("detalhe-titulo").textContent = u.nome || u.email;
+    $("detalhe-corpo").textContent = "Carregando…";
+    if (!$("detalhe").open) $("detalhe").showModal();
+    try { u.dados = await nuvem.dadosDoUsuario(u.uid); } catch (e) { u.dados = {}; avisar(nuvem.mensagemErro(e)); }
+  }
+  desenharDetalhe(u);
+}
+
+function desenharDetalhe(u) {
   $("detalhe-titulo").textContent = u.nome || u.email;
   const c = $("detalhe-corpo");
   c.textContent = "";
@@ -371,7 +386,7 @@ function abrirDetalhe(u) {
     });
     perigo.append(apagar);
   }
-  $("detalhe").showModal();
+  if (!$("detalhe").open) $("detalhe").showModal();
 }
 
 function preencherIA() {
@@ -484,6 +499,52 @@ function exportarCsv() {
 $("filtro-usuarios").addEventListener("input", renderUsuarios);
 $("exportar").addEventListener("click", exportarCsv);
 $("recarregar").addEventListener("click", carregarTudo);
+
+// ---------- Erros do site ----------
+
+let erros = [];
+async function carregarErros() {
+  const box = $("erros");
+  box.textContent = "Carregando…";
+  try { erros = await nuvem.listarErros(); } catch (e) { box.textContent = nuvem.mensagemErro(e); return; }
+  renderErros();
+}
+
+function renderErros() {
+  const box = $("erros");
+  box.textContent = "";
+  if (!erros.length) { box.append(el("p", "painel-nota", "Nenhum erro registrado. Tudo certo.")); return; }
+  // Junta os iguais (mesma mensagem e lugar): quantas vezes, quantas pessoas, quando foi a última
+  const grupos = new Map();
+  erros.forEach((x) => {
+    const k = `${x.tipo}|${x.mensagem}|${x.origem}`;
+    const g = grupos.get(k) || { ...x, vezes: 0, pessoas: new Set(), paginas: new Set(), ultimo: null };
+    g.vezes++;
+    g.pessoas.add(x.uid);
+    g.paginas.add(x.pagina);
+    const quando = x.criadoEm?.toDate ? x.criadoEm.toDate() : null;
+    if (quando && (!g.ultimo || quando > g.ultimo)) g.ultimo = quando;
+    grupos.set(k, g);
+  });
+  const ROTULO = { js: "Erro de código", promessa: "Erro de código (assíncrono)", ia: "IA falhou" };
+  const ul = el("ul", "erros-lista");
+  [...grupos.values()].sort((a, b) => (b.ultimo || 0) - (a.ultimo || 0)).forEach((g) => {
+    const li = el("li", "erro-item");
+    const cab = el("div", "erro-cab");
+    cab.append(el("span", `selo erro-${g.tipo}`, ROTULO[g.tipo] || g.tipo), el("strong", null, `${g.vezes}×`), el("span", null, `${g.pessoas.size} ${g.pessoas.size === 1 ? "pessoa" : "pessoas"} · ${[...g.paginas].join(", ")}${g.ultimo ? ` · última: ${g.ultimo.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}` : ""}`));
+    li.append(cab, el("code", "erro-msg", g.mensagem));
+    if (g.origem) li.append(el("span", "erro-origem", g.origem));
+    ul.append(li);
+  });
+  box.append(ul);
+}
+
+$("erros-atualizar").addEventListener("click", carregarErros);
+$("erros-limpar").addEventListener("click", async () => {
+  if (!erros.length || !confirm(`Apagar os ${erros.length} registros de erro?`)) return;
+  try { await nuvem.apagarErros(erros.map((x) => x.id)); erros = []; renderErros(); avisar("Erros apagados."); }
+  catch (e) { avisar(nuvem.mensagemErro(e)); }
+});
 $("sair").addEventListener("click", async () => { await nuvem.sair(); location.replace("login.html"); });
 $("detalhe-fechar").addEventListener("click", () => $("detalhe").close());
 $("detalhe").addEventListener("click", (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });

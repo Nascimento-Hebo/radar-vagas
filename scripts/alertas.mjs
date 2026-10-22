@@ -1,7 +1,7 @@
 // Alerta diário: depois da busca, manda para cada pessoa as vagas novas de hoje que combinam com o que ela procura,
 // por e-mail (se ativou o alerta) e por notificação nos aparelhos que ela ativou.
 // Precisa dos secrets do GitHub:
-//   FIREBASE_SERVICE_ACCOUNT  conta de serviço com acesso ao Firestore (já configurada)
+//   FIREBASE_SERVICE_ACCOUNT  conta de serviço só com leitura do Firestore (já configurada)
 //   MAIL_USERNAME / MAIL_PASSWORD  Gmail que envia + senha de app do Gmail
 //   VAPID_PRIVATE_KEY  chave privada das notificações (a pública está em docs/push.js)
 // Sem MAIL_* ou sem VAPID_PRIVATE_KEY, aquele canal roda em modo de teste: mostra quantos mandaria, sem enviar.
@@ -68,12 +68,6 @@ async function pessoasComAlerta(sa, token) {
   return [...porUid.values()].filter((u) => !u.bloqueado);
 }
 
-// Aparelho que não existe mais (desinstalou, limpou o navegador): tira da ficha
-async function removerInscricao(sa, token, uid, id) {
-  const url = `https://firestore.googleapis.com/v1/projects/${sa.project_id}/databases/(default)/documents/users/${uid}?updateMask.fieldPaths=push.${id}`;
-  await fetch(url, { method: "PATCH", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ fields: {} }) }).catch(() => {});
-}
-
 function montarNotificacao(vagas, total) {
   const primeira = vagas[0];
   const corpo = total === 1
@@ -132,7 +126,7 @@ if (process.env.VAPID_PRIVATE_KEY) {
   console.log("Sem VAPID_PRIVATE_KEY: modo de teste, nenhuma notificação será enviada.");
 }
 
-let enviados = 0, falhas = 0, notificacoes = 0, removidas = 0;
+let enviados = 0, falhas = 0, notificacoes = 0, vencidas = 0;
 for (const p of pessoas) {
   const combinam = novasHoje.filter((v) => combinaComAlerta(v, p.alerta || {}));
   if (!combinam.length) continue;
@@ -155,15 +149,16 @@ for (const p of pessoas) {
   if (!aparelhos.length) continue;
   if (!webpush) { console.log(`  [teste] mandaria notificação para ${aparelhos.length} aparelho(s)`); continue; }
   const msg = montarNotificacao(combinam, combinam.length);
-  for (const [id, x] of aparelhos) {
+  for (const [, x] of aparelhos) {
     try {
       await webpush.sendNotification({ endpoint: x.endpoint, keys: x.keys }, msg, { TTL: 12 * 3600 });
       notificacoes++;
     } catch (e) {
-      if (e.statusCode === 404 || e.statusCode === 410) { await removerInscricao(sa, token, p.uid, id); removidas++; }
+      // Aparelho que não existe mais. A conta de serviço só lê o banco: quem tira da ficha é o próprio site (push.js)
+      if (e.statusCode === 404 || e.statusCode === 410) vencidas++;
       else { falhas++; console.warn(`  ! notificação falhou: ${e.statusCode || e.message}`); }
     }
   }
 }
-console.log(`E-mails: ${enviados} · notificações: ${notificacoes}${removidas ? ` · aparelhos removidos: ${removidas}` : ""}${falhas ? ` · falhas: ${falhas}` : ""}`);
+console.log(`E-mails: ${enviados} · notificações: ${notificacoes}${vencidas ? ` · aparelhos que não existem mais: ${vencidas}` : ""}${falhas ? ` · falhas: ${falhas}` : ""}`);
 if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `\n### Alertas\n${pessoas.length} pessoas com alerta · ${enviados} e-mails${transporte ? "" : " (modo de teste: falta MAIL_USERNAME/MAIL_PASSWORD)"} · ${notificacoes} notificações${webpush ? "" : " (modo de teste: falta VAPID_PRIVATE_KEY)"}\n`);

@@ -42,6 +42,52 @@ let metaSemana = ler(CHAVE_META, 5);
 const FOCO_MIN = 4; // prioridade a partir da qual a vaga combina com o foco do config.json (júnior, PJ, remoto, Paraná)
 
 const $ = (id) => document.getElementById(id);
+
+// ---------- Partes carregadas só quando a pessoa usa (abre o site mais rápido) ----------
+
+const MODULOS = {
+  cv: ["cv.js", "cv-ferramentas.js"],          // adaptador de CV
+  email: ["@cv", "email.js"],                  // central de e-mail (usa blocos do adaptador)
+  evoluir: ["@cv", "evoluir.js"],              // plano de estudos e perfil online (usa a IA do adaptador)
+  mercado: ["mercado.js"],
+};
+const VERSAO_ARQUIVOS = (document.querySelector('script[src*="app.js"]')?.getAttribute("src").match(/\?v=(\d+)/) || [])[1] || "";
+const modulosPedidos = new Map();
+const modulosProntos = new Set();
+
+function carregarArquivo(arq) {
+  return new Promise((ok, falha) => {
+    const s = document.createElement("script");
+    s.src = VERSAO_ARQUIVOS ? `${arq}?v=${VERSAO_ARQUIVOS}` : arq;
+    s.onload = ok;
+    s.onerror = () => falha(new Error("Sem conexão para carregar esta parte do site. Tente de novo."));
+    document.body.append(s);
+  });
+}
+function precisa(nome) {
+  if (!modulosPedidos.has(nome)) {
+    // "@cv" na lista = carregar o módulo cv antes
+    const p = (async () => { for (const arq of MODULOS[nome]) await (arq.startsWith("@") ? precisa(arq.slice(1)) : carregarArquivo(arq)); })();
+    p.then(() => modulosProntos.add(nome), () => modulosPedidos.delete(nome)); // se falhar, deixa tentar de novo
+    modulosPedidos.set(nome, p);
+  }
+  return modulosPedidos.get(nome);
+}
+const moduloPronto = (nome) => modulosProntos.has(nome);
+
+// Atalhos: até o cv.js chegar, estes nomes carregam o adaptador e chamam a versão de verdade (que substitui estas)
+async function abrirAdaptador(v) {
+  const atalho = abrirAdaptador;
+  try { await precisa("cv"); } catch (e) { avisar(e.message); return; }
+  if (window.abrirAdaptador !== atalho) window.abrirAdaptador(v);
+}
+async function abrirHistorico(h) {
+  const atalho = abrirHistorico;
+  try { await precisa("cv"); } catch (e) { avisar(e.message); return; }
+  if (window.abrirHistorico !== atalho) window.abrirHistorico(h);
+}
+// Carrega o adaptador em segundo plano quando o navegador estiver livre: o primeiro clique já abre na hora
+const quandoLivre = window.requestIdleCallback || ((fn) => setTimeout(fn, 2500));
 const svg = (paths) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>`;
 const ICONES = {
   externo: svg('<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'),
@@ -235,6 +281,35 @@ function cartao(v) {
   return li;
 }
 
+// ---------- Lista aos poucos ----------
+
+const POR_PAGINA = 30;
+let limiteLista = POR_PAGINA;
+let assinaturaLista = "";
+let observadorLista = null;
+
+// Último item da lista: carrega mais sozinho quando aparece na tela (e tem botão, para teclado e leitores de tela)
+function maisVagas(restantes) {
+  const li = el("li", "mais-vagas");
+  const b = el("button", "btn", `Mostrar mais ${Math.min(POR_PAGINA, restantes)} vagas (faltam ${restantes})`);
+  b.type = "button";
+  const carregarMais = () => {
+    observadorLista?.disconnect();
+    const y = window.scrollY;
+    limiteLista += POR_PAGINA;
+    render();
+    window.scrollTo(0, y);
+  };
+  b.addEventListener("click", carregarMais);
+  li.append(b);
+  if ("IntersectionObserver" in window) {
+    observadorLista?.disconnect();
+    observadorLista = new IntersectionObserver((itens) => { if (itens.some((i) => i.isIntersecting)) carregarMais(); }, { rootMargin: "600px 0px" });
+    requestAnimationFrame(() => observadorLista.observe(li));
+  }
+  return li;
+}
+
 function vazio(titulo, html) {
   const li = el("li", "vazio");
   li.append(el("h2", null, titulo));
@@ -415,7 +490,13 @@ function render() {
   else if (!carregado) lista.append(vazio("Carregando vagas…", "Só um instante."));
   else if (!dados.vagas.length) lista.append(vazio("Nenhuma vaga ainda", "Rode <code>npm run buscar</code> no terminal, na pasta do projeto. Depois atualize esta página."));
   else if (!abertas.length) lista.append(vazio("Nenhuma vaga com esses filtros", "Tente outra palavra na busca ou clique em \"Limpar filtros\"."));
-  else abertas.forEach((v) => lista.append(cartao(v)));
+  else {
+    // Mostra aos poucos: montar 300 cartões de uma vez deixa a abertura lenta no celular
+    const assinatura = JSON.stringify(filtros);
+    if (assinatura !== assinaturaLista) { assinaturaLista = assinatura; limiteLista = POR_PAGINA; }
+    abertas.slice(0, limiteLista).forEach((v) => lista.append(cartao(v)));
+    if (abertas.length > limiteLista) lista.append(maisVagas(abertas.length - limiteLista));
+  }
 
   const filtrado = Object.entries(FILTROS_PADRAO).some(([k, v]) => k !== "ordem" && filtros[k] !== v);
   $("contagem").textContent = carregado && total ? (filtrado ? `${abertas.length} de ${total} vagas` : `${total} vagas abertas`) : "";
@@ -660,7 +741,16 @@ function renderPainel() {
   $("painel-n-cvs").textContent = ler(CHAVE_HIST, []).length || "";
   const c = $("painel-corpo");
   c.textContent = "";
-  ({ candidaturas: painelCandidaturas, emails: painelEmails, cvs: painelCvs, evoluir: painelEvoluir, dados: painelDados })[abaPainel](c); // painelEmails em email.js, painelEvoluir em evoluir.js
+  // E-mails e Evoluir vêm de arquivos carregados só quando a aba abre (email.js, evoluir.js)
+  const modulo = { emails: "email", evoluir: "evoluir" }[abaPainel];
+  if (modulo && !moduloPronto(modulo)) {
+    const p = el("p", "cv-carregando");
+    p.append(el("span", "cv-spin"), "Carregando…");
+    c.append(p);
+    precisa(modulo).then(renderPainel, (e) => { c.textContent = ""; c.append(el("p", "cv-erro", e.message)); });
+    return;
+  }
+  ({ candidaturas: painelCandidaturas, emails: window.painelEmails, cvs: painelCvs, evoluir: window.painelEvoluir, dados: painelDados })[abaPainel](c);
 }
 
 function painelCandidaturas(c) {
@@ -1160,8 +1250,15 @@ fetch("vagas.json", { cache: "no-store" })
       ? "Abrindo o arquivo direto, o navegador bloqueia a leitura do JSON. Use a extensão <b>Live Server</b> do VS Code ou rode <code>npx serve docs</code>."
       : "O arquivo não foi encontrado. Rode <code>npm run buscar</code> para criá-lo.";
   })
-  .finally(() => { carregado = true; completarCandidaturas(); montarLocais(); render(); });
+  .finally(() => {
+    carregado = true; completarCandidaturas(); montarLocais(); render();
+    quandoLivre(() => precisa("cv").catch(() => {})); // adianta o adaptador sem atrasar a lista
+  });
 lerVagaDoEndereco();
+
+$("abrir-mercado").addEventListener("click", async () => {
+  try { await precisa("mercado"); abrirMercado(); } catch (e) { avisar(e.message); }
+});
 
 // Modo aplicativo: funciona instalado e mostra a última lista mesmo sem internet
 if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});

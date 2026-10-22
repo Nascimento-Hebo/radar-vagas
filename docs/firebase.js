@@ -13,6 +13,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
   getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, collection, serverTimestamp, increment, deleteField,
+  addDoc, query, orderBy, limit,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken as tokenAppCheck } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
@@ -182,10 +183,32 @@ function agendarEnvio(chave, valor) {
   timerEnvio = setTimeout(enviarPendentes, 800);
 }
 
+// Resumo na ficha (users/{uid}.resumo): o painel do admin lê só as fichas, sem abrir os dados de cada pessoa
+function montarResumo() {
+  const cands = Object.values(lerLocal("radar-vagas:candidaturas") || {});
+  const cvs = lerLocal("radar-vagas:cvs-gerados") || [];
+  const etapas = {};
+  cands.forEach((c) => { const e = typeof c === "string" ? "candidatei" : c.etapa || "candidatei"; etapas[e] = (etapas[e] || 0) + 1; });
+  return {
+    nCand: cands.length, nCvs: cvs.length, etapas,
+    cvsVagas: cvs.slice(0, 15).map((h) => [h.vaga?.titulo || "Vaga", h.vaga?.empresa].filter(Boolean).join(" · ")),
+  };
+}
+async function atualizarResumo() {
+  if (!usuario || fichaUsuario?.bloqueado) return;
+  const resumo = montarResumo();
+  if (JSON.stringify(resumo) === JSON.stringify(fichaUsuario?.resumo)) return;
+  try {
+    await updateDoc(doc(db, "users", usuario.uid), { resumo });
+    fichaUsuario = { ...fichaUsuario, resumo };
+  } catch (e) { console.warn("Resumo:", e); }
+}
+
 async function enviarPendentes() {
   if (!usuario || fichaUsuario?.bloqueado) return;
   const lote = [...pendentes.entries()];
   pendentes.clear();
+  if (lote.some(([k]) => k === "radar-vagas:candidaturas" || k === "radar-vagas:cvs-gerados")) atualizarResumo();
   for (const [chave, valor] of lote) {
     const ref = doc(db, "users", usuario.uid, "dados", SINCRONIZADAS[chave]);
     try {
@@ -253,6 +276,7 @@ async function gerarIA(partes, { json = false, lerLinks = false, sistema = "", h
     }
   }
   const msg = String(ultimoErro?.message || ultimoErro);
+  registrarErro("ia", msg, `modelos: ${configIA.modelos.join(", ")}`);
   if (/firebasevertexai|ai logic|has not been used|api.*disabled|PERMISSION_DENIED|403/i.test(msg)) {
     throw new Error("A IA ainda não foi ativada no Firebase (console → AI Logic → Começar → Gemini Developer API).");
   }
@@ -260,6 +284,33 @@ async function gerarIA(partes, { json = false, lerLinks = false, sistema = "", h
   if (/503|overload|unavailable/i.test(msg)) throw new Error("A IA está sobrecarregada agora. Tente de novo em instantes.");
   throw new Error(`A IA respondeu com erro: ${msg}`);
 }
+
+// ---------- Registro de erros (o super admin vê em admin.html) ----------
+// Só a mensagem, onde aconteceu e o navegador: nada de CV, vaga ou e-mail. No máximo 5 por página aberta.
+
+const MAX_ERROS_POR_PAGINA = 5;
+const errosEnviados = new Set();
+const RUIDO = /ResizeObserver loop|^Script error\.?$|chrome-extension:|moz-extension:|safari-extension:|Non-Error promise rejection|AbortError|Load failed|Failed to fetch|NetworkError/i;
+
+function registrarErro(tipo, mensagem, origem = "") {
+  const m = String(mensagem || "").slice(0, 500);
+  if (!usuario || !m || RUIDO.test(m) || RUIDO.test(origem) || errosEnviados.has(m) || errosEnviados.size >= MAX_ERROS_POR_PAGINA) return;
+  errosEnviados.add(m);
+  addDoc(collection(db, "erros"), {
+    tipo, mensagem: m, origem: String(origem).slice(0, 300),
+    pagina: (location.pathname.split("/").pop() || "index.html").slice(0, 200),
+    navegador: navigator.userAgent.slice(0, 200), uid: usuario.uid, criadoEm: serverTimestamp(),
+  }).catch(() => {});
+}
+window.addEventListener("error", (e) => registrarErro("js", e.message || String(e.error || ""), `${String(e.filename || "").split("/").pop()}:${e.lineno || 0}:${e.colno || 0}`));
+window.addEventListener("unhandledrejection", (e) => registrarErro("promessa", e.reason?.message || String(e.reason || ""), String(e.reason?.stack || "").split("\n")[1]?.trim() || ""));
+
+async function listarErros() {
+  if (!ehAdmin()) throw new Error("Só o super admin pode ver isso.");
+  const snaps = await getDocs(query(collection(db, "erros"), orderBy("criadoEm", "desc"), limit(200)));
+  return snaps.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+const apagarErros = (ids) => Promise.all(ids.map((id) => deleteDoc(doc(db, "erros", id))));
 
 // ---------- Gmail (central de e-mail) ----------
 
@@ -384,6 +435,7 @@ const nuvem = {
   atualizarMinhaFicha, registrarPush, removerPush,
   gerarIA,
   conectarGmail, desconectarGmail, gmailConectado: () => Boolean(tokenGmail()), gmail,
+  listarErros, apagarErros,
   listarUsuarios, dadosDoUsuario, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA, salvarConfigSuporte,
 };
 window.radarNuvem = nuvem;
@@ -395,6 +447,7 @@ onAuthStateChanged(auth, async (u) => {
     try {
       await registrarUsuario(u);
       await Promise.all([carregarDados(u), carregarConfigIA()]);
+      if (!fichaUsuario?.resumo) atualizarResumo(); // contas de antes do resumo
     } catch (e) {
       console.warn("Firebase:", e);
       window.dispatchEvent(new CustomEvent("radar:erro-nuvem", { detail: mensagemErro(e) }));

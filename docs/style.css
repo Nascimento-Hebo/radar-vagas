@@ -970,3 +970,17 @@ dialog:focus, dialog:focus-visible { outline: none; }
 .sim-fala-item small { font-size: 12px; color: var(--muted); }
 .confianca-baixa { color: var(--orange); }
 .lacuna .btn { white-space: nowrap; flex: none; }
+.mais-vagas { list-style: none; display: flex; justify-content: center; padding: 8px 0 24px; grid-column: 1 / -1; }
+
+/* Admin: erros do site */
+.erros-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.erro-item { display: grid; gap: 4px; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); min-width: 0; }
+.erro-cab { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+.erro-cab strong { color: var(--ink); }
+.erro-msg { font: 13px var(--font-mono, monospace); color: var(--ink); overflow-wrap: anywhere; }
+.erro-origem { font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.email-colar { display: grid; gap: 10px; padding: 14px 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.email-colar summary { cursor: pointer; font-weight: 600; }
+.email-colar[open] { gap: 10px; }
+.email-colar textarea { width: 100%; font: 14px var(--font-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; resize: vertical; margin-top: 10px; }
+.email-colar .btn { justify-self: start; }
