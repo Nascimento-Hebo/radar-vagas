@@ -1,7 +1,7 @@
-// Página do Radar de Vagas (OH Tech): lê vagas.json e mostra com busca e filtros simples.
-// As marcações de "já me candidatei", a meta da semana e a preferência de dicas ficam no navegador (localStorage).
+// Página do Radar de Vagas (OH Tech): lê vagas.json e mostra com busca, filtros, radar e a área pessoal.
+// Candidaturas, meta da semana, CVs gerados, perfil e tema ficam só no navegador de quem usa (localStorage).
 
-const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", remoto: false, ocultar: false, texto: "" };
+const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", remoto: false, ocultar: false, salario: false, texto: "", ordem: "relevancia" };
 const filtros = { ...FILTROS_PADRAO };
 let dados = { vagas: [] };
 let carregado = false;
@@ -11,7 +11,29 @@ const CHAVE_CAND = "radar-vagas:candidaturas";
 const CHAVE_META = "radar-vagas:meta-semana";
 const ler = (k, padrao) => { try { return JSON.parse(localStorage.getItem(k)) ?? padrao; } catch { return padrao; } };
 const salvar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
-let candidaturas = ler(CHAVE_CAND, {});
+const CHAVE_PERFIL_APP = "radar-vagas:perfil"; // o mesmo que o cv.js usa
+const CHAVE_HIST = "radar-vagas:cvs-gerados";
+const CHAVE_TEMA = "radar-vagas:tema";
+const ETAPAS = [
+  ["candidatei", "Candidatei"],
+  ["entrevista", "Entrevista"],
+  ["teste", "Teste técnico"],
+  ["proposta", "Proposta"],
+  ["recusado", "Não avançou"],
+];
+const NOME_ETAPA = Object.fromEntries(ETAPAS);
+const FOLLOWUP_DIAS = 7;
+
+// Antes era { id: "2026-10-21" }; agora cada candidatura guarda etapa, nota e os dados da vaga (que pode sumir do radar).
+function normalizarCandidaturas(c) {
+  const out = {};
+  for (const [id, x] of Object.entries(c || {})) {
+    out[id] = typeof x === "string" ? { data: x, etapa: "candidatei", nota: "", atualizadaEm: x } : { etapa: "candidatei", nota: "", ...x };
+  }
+  return out;
+}
+let candidaturas = normalizarCandidaturas(ler(CHAVE_CAND, {}));
+const salvarCandidaturas = () => salvar(CHAVE_CAND, candidaturas);
 const metaSemana = ler(CHAVE_META, 5);
 const FOCO_MIN = 4; // prioridade a partir da qual a vaga combina com o foco do config.json (júnior, PJ, remoto, Paraná)
 
@@ -51,6 +73,7 @@ function passa(v) {
   if (filtros.regime !== "todos" && !(v.regime || "").includes(filtros.regime)) return false;
   if (filtros.remoto && v.modelo !== "Remoto") return false;
   if (filtros.ocultar && candidaturas[v.id]) return false;
+  if (filtros.salario && !v.salario) return false;
   if (filtros.texto) {
     const alvo = semAcento([v.titulo, v.empresa, v.local, ...(v.stack || []), ...(v.requisitos || [])].join(" "));
     if (!semAcento(filtros.texto).split(/\s+/).every((p) => alvo.includes(p))) return false;
@@ -86,13 +109,16 @@ function inicioSemana() {
   d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
   return d.toISOString().slice(0, 10);
 }
-const feitasNaSemana = () => Object.values(candidaturas).filter((d) => d >= inicioSemana()).length;
+const feitasNaSemana = () => Object.values(candidaturas).filter((c) => c.data >= inicioSemana()).length;
+const diasDesde = (iso) => Math.floor((Date.parse(hojeLocal()) - Date.parse(String(iso).slice(0, 10))) / 86400000);
+const precisaFollowup = (c) => c.etapa === "candidatei" && diasDesde(c.atualizadaEm || c.data) >= FOLLOWUP_DIAS;
 
-function alternarCandidatura(id) {
+function alternarCandidatura(v) {
+  const id = v.id;
   const marcou = !candidaturas[id];
-  if (marcou) candidaturas[id] = hojeLocal();
+  if (marcou) candidaturas[id] = { data: hojeLocal(), etapa: "candidatei", nota: "", atualizadaEm: hojeLocal(), titulo: v.titulo, empresa: v.empresa, link: v.link };
   else delete candidaturas[id];
-  salvar(CHAVE_CAND, candidaturas);
+  salvarCandidaturas();
   render();
   if (!marcou) return;
   const falta = metaSemana - feitasNaSemana();
@@ -101,6 +127,10 @@ function alternarCandidatura(id) {
 
 function renderMeta() {
   const feitas = feitasNaSemana();
+  const n = Object.keys(candidaturas).length;
+  const pend = Object.values(candidaturas).filter(precisaFollowup).length;
+  $("abrir-painel-n").textContent = n ? String(n) : "";
+  $("abrir-painel-n").classList.toggle("alerta", pend > 0);
   $("meta-feitas").textContent = feitas;
   $("meta-total").textContent = metaSemana;
   $("meta-fill").style.width = `${Math.min(100, (feitas / metaSemana) * 100)}%`;
@@ -124,16 +154,26 @@ function cartao(v) {
     f.title = "Júnior, PJ, remoto ou no Paraná";
     selos.append(f);
   }
-  cab.append(selos, el("h2", "titulo", v.titulo), el("div", "empresa", v.empresa || v.fonte));
+  const compat = compatibilidade(v);
+  const topoCartao = el("div", "vaga-topo");
+  topoCartao.append(selos);
+  if (compat) {
+    const c = el("span", `compat ${compat.pct >= 70 ? "alta" : compat.pct >= 40 ? "media" : "baixa"}`);
+    c.append(el("strong", null, `${compat.pct}%`), " compatível");
+    c.title = compat.falta.length ? `Seu CV não mostra: ${compat.falta.join(", ")}` : "Seu CV mostra todas as tecnologias desta vaga";
+    topoCartao.append(c);
+  }
+  cab.append(topoCartao, el("h2", "titulo", v.titulo), el("div", "empresa", v.empresa || v.fonte));
   li.append(cab);
 
   const fatos = [v.nivel, v.regime, v.modelo === "Remoto" ? "100% remoto" : v.modelo, v.modelo !== "Remoto" && v.local]
     .filter((x) => x && x !== "Não informado");
   if (fatos.length) li.append(el("p", "fatos", fatos.join("  ·  ")));
+  if (v.salario) li.append(el("p", "salario", v.salario));
 
   if (v.stack?.length) {
     const sk = el("div", "stack");
-    v.stack.slice(0, 5).forEach((t) => sk.append(el("span", null, t)));
+    v.stack.slice(0, 5).forEach((t) => sk.append(el("span", compat?.tem.includes(t) ? "tem" : null, t)));
     if (v.stack.length > 5) sk.append(el("span", "mais", `+${v.stack.length - 5}`));
     li.append(sk);
   }
@@ -164,12 +204,15 @@ function cartao(v) {
   const rodape = el("div", "vaga-rodape");
   const tg = el("button", "toggle");
   tg.type = "button";
-  const marcada = Boolean(candidaturas[v.id]);
-  tg.setAttribute("aria-pressed", String(marcada));
+  const cand = candidaturas[v.id];
+  tg.setAttribute("aria-pressed", String(Boolean(cand)));
   const box = el("span", "box");
-  if (marcada) box.innerHTML = ICONES.check;
-  tg.append(box, document.createTextNode(marcada ? `Candidatei em ${fmtData(candidaturas[v.id])}` : "Já me candidatei"));
-  tg.addEventListener("click", () => alternarCandidatura(v.id));
+  if (cand) box.innerHTML = ICONES.check;
+  tg.append(box, document.createTextNode(!cand ? "Já me candidatei" : cand.etapa === "candidatei" ? `Candidatei em ${fmtData(cand.data)}` : `${NOME_ETAPA[cand.etapa]} · candidatei em ${fmtData(cand.data)}`));
+  tg.addEventListener("click", () => {
+    if (cand && cand.etapa !== "candidatei" && !confirm("Desmarcar apaga o andamento e as notas desta candidatura. Continuar?")) return;
+    alternarCandidatura(v);
+  });
   rodape.append(tg, el("span", "datas", v.publicadaEm ? `Publicada em ${fmtData(v.publicadaEm)}` : ""));
   li.append(rodape);
   return li;
@@ -285,8 +328,14 @@ function render() {
     : carregado ? "Ainda não há vagas carregadas." : "Carregando vagas…";
 
   const ordem = { nova: 0, aberta: 1, encerrada: 2 };
-  const vagas = [...dados.vagas].sort((a, b) =>
-    ordem[estado(a)] - ordem[estado(b)] || (b.prioridade ?? 0) - (a.prioridade ?? 0) || String(b.publicadaEm).localeCompare(String(a.publicadaEm)));
+  const recentes = (a, b) => String(b.publicadaEm).localeCompare(String(a.publicadaEm));
+  const criterio = {
+    relevancia: (a, b) => ordem[estado(a)] - ordem[estado(b)] || (b.prioridade ?? 0) - (a.prioridade ?? 0) || recentes(a, b),
+    compatibilidade: (a, b) => (compatibilidade(b)?.pct ?? -1) - (compatibilidade(a)?.pct ?? -1) || (b.prioridade ?? 0) - (a.prioridade ?? 0),
+    recentes,
+    salario: (a, b) => valorSalario(b) - valorSalario(a) || recentes(a, b),
+  }[filtros.ordem] || ((a, b) => 0);
+  const vagas = [...dados.vagas].sort(criterio);
   const abertas = vagas.filter((v) => estado(v) !== "encerrada" && passa(v));
   const fechadas = vagas.filter((v) => estado(v) === "encerrada" && passa(v));
   const total = vagas.filter((v) => estado(v) !== "encerrada").length;
@@ -299,7 +348,7 @@ function render() {
   else if (!abertas.length) lista.append(vazio("Nenhuma vaga com esses filtros", "Tente outra palavra na busca ou clique em \"Limpar filtros\"."));
   else abertas.forEach((v) => lista.append(cartao(v)));
 
-  const filtrado = Object.entries(FILTROS_PADRAO).some(([k, v]) => filtros[k] !== v);
+  const filtrado = Object.entries(FILTROS_PADRAO).some(([k, v]) => k !== "ordem" && filtros[k] !== v);
   $("contagem").textContent = carregado && total ? (filtrado ? `${abertas.length} de ${total} vagas` : `${total} vagas abertas`) : "";
   $("limpar").hidden = !filtrado;
   $("fechadas").hidden = !fechadas.length;
@@ -309,8 +358,333 @@ function render() {
   fechadas.forEach((v) => lf.append(cartao(v)));
   renderMeta();
   renderAtalhos();
+  renderAvisos();
   renderRadar(vagas.filter((v) => estado(v) !== "encerrada"));
 }
+
+// ---------- Compatibilidade com o CV (calculada aqui, sem gastar IA) ----------
+
+const TECS_CV = {
+  "React": /\breact(\.js|js)?\b/i, "Next.js": /next\.?js/i, "Angular": /angular/i, "Vue": /\bvue|nuxt/i,
+  "TypeScript": /typescript|\bts\b/i, "JavaScript": /javascript|\bjs\b|es6/i, "HTML/CSS": /\bhtml|\bcss/i, "Tailwind": /tailwind/i,
+  "Node.js": /node\.?js|\bnode\b/i, "NestJS": /nest\.?js/i, "Express": /express/i, "Java": /\bjava\b(?!script)/i, "Spring": /spring/i,
+  "Python": /python/i, "Django": /django/i, "FastAPI": /fastapi/i, "PHP": /\bphp\b/i, "Laravel": /laravel/i, ".NET": /\.net\b|dotnet/i,
+  "C#": /c#/i, "Go": /golang|\bgo\b/i, "Ruby": /\bruby|rails/i, "SQL": /\bsql\b|postgres|mysql|sql server|oracle/i, "MongoDB": /mongo/i,
+  "Docker": /docker/i, "AWS": /\baws\b|amazon web services/i, "Git": /\bgit\b|github|gitlab/i, "APIs REST": /\brest\b|restful|\bapis?\b/i,
+  "GraphQL": /graphql/i, "Testes": /jest|vitest|cypress|playwright|testes|testing|tdd/i,
+};
+const textoDoCv = () => { const p = ler(CHAVE_PERFIL_APP, {}); return [p.cvTexto, p.cvExtraido].filter(Boolean).join("\n"); };
+let cvParaCompat = textoDoCv();
+const cacheCompat = new Map();
+
+function compatibilidade(v) {
+  if (!cvParaCompat || !v.stack?.length) return null;
+  if (cacheCompat.has(v.id)) return cacheCompat.get(v.id);
+  const tem = v.stack.filter((tec) => (TECS_CV[tec] || new RegExp(tec.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i")).test(cvParaCompat));
+  const r = { pct: Math.round((tem.length / v.stack.length) * 100), tem, falta: v.stack.filter((tec) => !tem.includes(tec)) };
+  cacheCompat.set(v.id, r);
+  return r;
+}
+// Chamado pelo cv.js quando o CV muda
+function atualizarCompatibilidade() {
+  cvParaCompat = textoDoCv();
+  cacheCompat.clear();
+  render();
+}
+
+function valorSalario(v) {
+  const m = String(v.salario || "").match(/([\d.]+)(?:\s*a\s*([\d.]+))?/);
+  if (!m) return -1;
+  const a = Number(m[1].replace(/\./g, "")), b = m[2] ? Number(m[2].replace(/\./g, "")) : a;
+  return ((a + b) / 2) * (/US\$/.test(v.salario) ? 5 : 1); // dólar convertido por alto só para ordenar
+}
+
+// ---------- Avisos no topo da lista (follow-up e CV para compatibilidade) ----------
+
+function renderAvisos() {
+  const box = $("avisos");
+  box.textContent = "";
+  const pendentes = Object.values(candidaturas).filter(precisaFollowup);
+  if (pendentes.length) {
+    const a = el("div", "aviso laranja");
+    a.innerHTML = svg('<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>');
+    a.append(el("span", null, `${pendentes.length} ${pendentes.length === 1 ? "candidatura está" : "candidaturas estão"} há mais de ${FOLLOWUP_DIAS} dias sem resposta. Um follow-up educado pode destravar o processo.`));
+    const b = el("button", "btn pequeno", "Ver e mandar follow-up");
+    b.type = "button";
+    b.addEventListener("click", () => abrirPainel("candidaturas"));
+    a.append(b);
+    box.append(a);
+  }
+  if (!cvParaCompat && carregado && dados.vagas.length) {
+    const a = el("div", "aviso azul");
+    a.innerHTML = svg('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>');
+    a.append(el("span", null, "Adicione o texto do seu CV para ver a % de compatibilidade com cada vaga."));
+    const b = el("button", "btn pequeno", "Adicionar meu CV");
+    b.type = "button";
+    b.addEventListener("click", () => abrirPainel("dados"));
+    a.append(b);
+    box.append(a);
+  }
+}
+
+// ---------- Minha área: candidaturas, CVs gerados e meus dados ----------
+
+let abaPainel = "candidaturas";
+function abrirPainel(aba = abaPainel) {
+  abaPainel = aba;
+  const d = $("painel");
+  if (!d.open) d.showModal();
+  renderPainel();
+}
+
+function completarCandidaturas() {
+  let mudou = false;
+  for (const v of dados.vagas) {
+    const c = candidaturas[v.id];
+    if (c && !c.titulo) { Object.assign(c, { titulo: v.titulo, empresa: v.empresa, link: v.link }); mudou = true; }
+  }
+  if (mudou) salvarCandidaturas();
+}
+
+function renderPainel() {
+  document.querySelectorAll(".painel-aba").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.aba === abaPainel)));
+  const n = Object.keys(candidaturas).length;
+  $("painel-n-cand").textContent = n || "";
+  $("painel-n-cvs").textContent = ler(CHAVE_HIST, []).length || "";
+  const c = $("painel-corpo");
+  c.textContent = "";
+  ({ candidaturas: painelCandidaturas, cvs: painelCvs, dados: painelDados })[abaPainel](c);
+}
+
+function painelCandidaturas(c) {
+  const lista = Object.entries(candidaturas).sort((a, b) => String(b[1].atualizadaEm || b[1].data).localeCompare(String(a[1].atualizadaEm || a[1].data)));
+  if (!lista.length) {
+    c.append(el("p", "painel-vazio", "Você ainda não marcou nenhuma candidatura. Quando se candidatar, clique em \"Já me candidatei\" na vaga e acompanhe aqui cada etapa."));
+    return;
+  }
+  const resumo = el("div", "funil");
+  ETAPAS.forEach(([id, nome]) => {
+    const q = lista.filter(([, x]) => x.etapa === id).length;
+    const f = el("div", `funil-etapa etapa-${id}`);
+    f.append(el("strong", null, String(q)), el("span", null, nome));
+    resumo.append(f);
+  });
+  c.append(resumo);
+
+  const colunas = el("div", "quadro");
+  ETAPAS.forEach(([id, nome]) => {
+    const col = el("section", `quadro-col etapa-${id}`);
+    const itens = lista.filter(([, x]) => x.etapa === id);
+    col.append(el("h3", null, `${nome} (${itens.length})`));
+    if (!itens.length) col.append(el("p", "quadro-vazio", "Nada aqui."));
+    itens.forEach(([vid, x]) => col.append(cartaoCandidatura(vid, x)));
+    colunas.append(col);
+  });
+  c.append(colunas);
+}
+
+function cartaoCandidatura(id, x) {
+  const card = el("article", "cand");
+  const titulo = el("a", "cand-titulo", x.titulo || "Vaga");
+  if (x.link) { titulo.href = x.link; titulo.target = "_blank"; titulo.rel = "noopener noreferrer"; }
+  card.append(titulo, el("div", "cand-empresa", [x.empresa, `candidatei em ${fmtData(x.data)}`].filter(Boolean).join(" · ")));
+
+  const linha = el("div", "cand-linha");
+  const sel = el("select");
+  sel.setAttribute("aria-label", "Etapa da candidatura");
+  ETAPAS.forEach(([v, nome]) => { const o = el("option", null, nome); o.value = v; sel.append(o); });
+  sel.value = x.etapa;
+  sel.addEventListener("change", () => {
+    x.etapa = sel.value;
+    x.atualizadaEm = hojeLocal();
+    salvarCandidaturas();
+    render();
+    renderPainel();
+    if (x.etapa === "proposta") avisar("Proposta! Parabéns, esse é o resultado da sua constância.");
+    else if (x.etapa === "entrevista") avisar("Entrevista marcada. Use \"Preparar entrevista\" no adaptador de CV para treinar.");
+  });
+  const dias = diasDesde(x.atualizadaEm || x.data);
+  linha.append(sel, el("span", "cand-dias", dias === 0 ? "hoje" : `há ${dias} ${dias === 1 ? "dia" : "dias"}`));
+  card.append(linha);
+
+  if (precisaFollowup(x)) {
+    const f = el("div", "cand-follow");
+    f.append(el("span", null, "Hora do follow-up"));
+    const b = el("button", "btn pequeno", "Copiar mensagem");
+    b.type = "button";
+    b.addEventListener("click", async () => {
+      const nome = ler(CHAVE_PERFIL_APP, {}).nome || "";
+      const msg = `Olá! Tudo bem? Me candidatei à vaga de ${x.titulo || "desenvolvimento"}${x.empresa ? ` na ${x.empresa}` : ""} no dia ${fmtData(x.data)} e continuo com muito interesse na oportunidade. Fico à disposição para conversar e mandar qualquer informação que ajude. Obrigado(a)!${nome ? `\n${nome}` : ""}`;
+      try { await navigator.clipboard.writeText(msg); avisar("Mensagem copiada. Mande para o recrutador no LinkedIn ou por e-mail."); }
+      catch { prompt("Copie a mensagem:", msg); }
+      x.atualizadaEm = hojeLocal(); // conta como contato feito: o lembrete volta daqui a 7 dias
+      salvarCandidaturas();
+      render();
+      renderPainel();
+    });
+    f.append(b);
+    card.append(f);
+  }
+
+  const nota = el("textarea", "cand-nota");
+  nota.rows = 2;
+  nota.placeholder = "Anotações: nome do recrutador, data da entrevista, salário combinado…";
+  nota.value = x.nota || "";
+  nota.setAttribute("aria-label", "Anotações da candidatura");
+  nota.addEventListener("input", () => { x.nota = nota.value; salvarCandidaturas(); });
+  card.append(nota);
+
+  const rem = el("button", "cand-remover", "Remover");
+  rem.type = "button";
+  rem.addEventListener("click", () => {
+    if (!confirm("Remover esta candidatura do acompanhamento?")) return;
+    delete candidaturas[id];
+    salvarCandidaturas();
+    render();
+    renderPainel();
+  });
+  card.append(rem);
+  return card;
+}
+
+function painelCvs(c) {
+  const hist = ler(CHAVE_HIST, []);
+  if (!hist.length) {
+    c.append(el("p", "painel-vazio", "Os CVs que a IA adaptar ficam guardados aqui, para abrir de novo, baixar ou gerar a carta de apresentação sem gastar outra chamada."));
+    return;
+  }
+  const ul = el("ul", "hist");
+  hist.forEach((h) => {
+    const li = el("li", "hist-item");
+    const info = el("div");
+    info.append(el("strong", null, h.vaga?.titulo || "Vaga"), el("span", null, [h.vaga?.empresa, `gerado em ${fmtData(h.data)}`].filter(Boolean).join(" · ")));
+    const acoes = el("div", "hist-acoes");
+    const abrir = el("button", "btn pequeno primario", "Abrir");
+    abrir.type = "button";
+    abrir.addEventListener("click", () => { $("painel").close(); abrirHistorico(h); }); // em cv.js
+    const apagar = el("button", "btn pequeno", "Apagar");
+    apagar.type = "button";
+    apagar.addEventListener("click", () => {
+      salvar(CHAVE_HIST, ler(CHAVE_HIST, []).filter((x) => x.id !== h.id));
+      renderPainel();
+    });
+    acoes.append(abrir, apagar);
+    li.append(info, acoes);
+    ul.append(li);
+  });
+  c.append(ul);
+}
+
+function painelDados(c) {
+  const p = ler(CHAVE_PERFIL_APP, {});
+  const sec = el("section", "dados-sec");
+  sec.append(el("h3", null, "Seu CV em texto"));
+  sec.append(el("p", "painel-nota", "Usado para calcular a % de compatibilidade de cada vaga e pelo adaptador de CV. Se você enviou o CV em PDF no adaptador, o texto aparece aqui depois da primeira adaptação."));
+  const ta = el("textarea", "dados-cv");
+  ta.rows = 8;
+  ta.value = p.cvTexto || p.cvExtraido || "";
+  ta.placeholder = "Cole aqui o texto do seu CV: experiências, tecnologias, formação…";
+  ta.setAttribute("aria-label", "Texto do seu CV");
+  const salvarCv = el("button", "btn primario", "Salvar CV");
+  salvarCv.type = "button";
+  salvarCv.addEventListener("click", () => {
+    salvar(CHAVE_PERFIL_APP, { ...ler(CHAVE_PERFIL_APP, {}), cvTexto: ta.value });
+    atualizarCompatibilidade();
+    avisar("CV salvo. A compatibilidade das vagas foi atualizada.");
+  });
+  sec.append(ta, salvarCv);
+  c.append(sec);
+
+  const bkp = el("section", "dados-sec");
+  bkp.append(el("h3", null, "Backup dos seus dados"));
+  bkp.append(el("p", "painel-nota", "Leve suas candidaturas, CVs gerados e perfil para outro navegador ou computador. A chave do Gemini não vai junto no arquivo."));
+  const linha = el("div", "dados-acoes");
+  const exportar = el("button", "btn", "Baixar backup");
+  exportar.type = "button";
+  exportar.addEventListener("click", exportarDados);
+  const importar = el("label", "btn");
+  const arq = el("input");
+  arq.type = "file";
+  arq.accept = "application/json,.json";
+  arq.hidden = true;
+  arq.addEventListener("change", () => arq.files[0] && importarDados(arq.files[0]));
+  importar.append("Restaurar backup", arq);
+  const limpar = el("button", "btn perigo", "Apagar meus dados");
+  limpar.type = "button";
+  limpar.addEventListener("click", apagarDados);
+  linha.append(exportar, importar, limpar);
+  bkp.append(linha);
+  c.append(bkp);
+
+  const priv = el("section", "dados-sec");
+  priv.append(el("h3", null, "Privacidade"));
+  const ul = el("ul", "privacidade");
+  [
+    "Seu CV, suas candidaturas e a chave do Gemini ficam só neste navegador. Não existe servidor nem conta da OH Tech guardando seus dados.",
+    "Quando você usa o adaptador, o texto da vaga e do seu CV vão para a API do Gemini (Google), com a sua chave, para gerar a resposta.",
+    "Ao usar \"Usar minha localização\", só a cidade é buscada no OpenStreetMap; a posição exata não é guardada.",
+  ].forEach((t) => ul.append(el("li", null, t)));
+  priv.append(ul);
+  c.append(priv);
+}
+
+const CHAVES_BACKUP = [CHAVE_CAND, CHAVE_META, CHAVE_PERFIL_APP, CHAVE_HIST, CHAVE_TEMA];
+function exportarDados() {
+  const dadosBkp = { app: "radar-vagas", versao: 1, exportadoEm: new Date().toISOString(), dados: {} };
+  for (const k of CHAVES_BACKUP) { const v = ler(k, null); if (v != null) dadosBkp.dados[k] = v; }
+  if (dadosBkp.dados[CHAVE_PERFIL_APP]?.cvPdf) dadosBkp.dados[CHAVE_PERFIL_APP] = { ...dadosBkp.dados[CHAVE_PERFIL_APP], cvPdf: null };
+  const blob = new Blob([JSON.stringify(dadosBkp, null, 2)], { type: "application/json" });
+  const a = el("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `radar-vagas-backup-${hojeLocal()}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+async function importarDados(arquivo) {
+  try {
+    const j = JSON.parse(await arquivo.text());
+    if (j.app !== "radar-vagas" || !j.dados) throw new Error("formato");
+    if (!confirm("Restaurar este backup? Os dados atuais deste navegador serão substituídos.")) return;
+    for (const k of CHAVES_BACKUP) if (k in j.dados) salvar(k, j.dados[k]);
+    candidaturas = normalizarCandidaturas(ler(CHAVE_CAND, {}));
+    atualizarCompatibilidade();
+    renderPainel();
+    avisar("Backup restaurado.");
+  } catch { avisar("Esse arquivo não é um backup do Radar de Vagas."); }
+}
+function apagarDados() {
+  if (!confirm("Apagar candidaturas, CVs gerados, perfil e chave do Gemini deste navegador? Isso não pode ser desfeito.")) return;
+  for (const k of [...CHAVES_BACKUP, "radar-vagas:gemini-chave"]) { try { localStorage.removeItem(k); } catch {} }
+  candidaturas = {};
+  atualizarCompatibilidade();
+  renderPainel();
+  avisar("Seus dados foram apagados deste navegador.");
+}
+
+document.querySelectorAll(".painel-aba").forEach((b) => b.addEventListener("click", () => { abaPainel = b.dataset.aba; renderPainel(); }));
+$("abrir-painel").addEventListener("click", () => abrirPainel());
+$("painel-fechar").addEventListener("click", () => $("painel").close());
+$("painel").addEventListener("click", (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+
+// ---------- Tema claro / escuro ----------
+
+function aplicarTema(tema) {
+  document.documentElement.dataset.tema = tema;
+  const b = $("tema");
+  const escuro = tema === "escuro";
+  b.innerHTML = escuro
+    ? svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>')
+    : svg('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>');
+  b.setAttribute("aria-label", escuro ? "Usar tema claro" : "Usar tema escuro");
+  b.title = b.getAttribute("aria-label");
+  document.querySelector('meta[name="theme-color"]').content = escuro ? "#0a0f1d" : "#f5f7fc";
+}
+$("tema").addEventListener("click", () => {
+  const novo = document.documentElement.dataset.tema === "escuro" ? "claro" : "escuro";
+  salvar(CHAVE_TEMA, novo);
+  aplicarTema(novo);
+});
+aplicarTema(document.documentElement.dataset.tema || "escuro");
 
 // ---------- Radar: cada ponto é uma vaga aberta, colorida pela área ----------
 
@@ -349,6 +723,8 @@ function sincronizarControles() {
   $("f-regime").value = filtros.regime;
   $("f-remoto").checked = filtros.remoto;
   $("f-ocultar").checked = filtros.ocultar;
+  $("f-salario").checked = filtros.salario;
+  $("f-ordem").value = filtros.ordem;
   if (!linkExterno) $("busca").value = filtros.texto;
 }
 
@@ -357,6 +733,8 @@ $("f-nivel").addEventListener("change", (e) => { filtros.nivel = e.target.value;
 $("f-regime").addEventListener("change", (e) => { filtros.regime = e.target.value; render(); });
 $("f-remoto").addEventListener("change", (e) => { filtros.remoto = e.target.checked; render(); });
 $("f-ocultar").addEventListener("change", (e) => { filtros.ocultar = e.target.checked; render(); });
+$("f-salario").addEventListener("change", (e) => { filtros.salario = e.target.checked; render(); });
+$("f-ordem").addEventListener("change", (e) => { filtros.ordem = e.target.value; render(); });
 $("busca").addEventListener("input", (e) => {
   const valor = e.target.value.trim();
   if (ehLink(valor)) { mostrarExterna(valor); filtros.texto = ""; }
@@ -374,4 +752,7 @@ fetch("vagas.json", { cache: "no-store" })
       ? "Abrindo o arquivo direto, o navegador bloqueia a leitura do JSON. Use a extensão <b>Live Server</b> do VS Code ou rode <code>npx serve docs</code>."
       : "O arquivo não foi encontrado. Rode <code>npm run buscar</code> para criá-lo.";
   })
-  .finally(() => { carregado = true; render(); });
+  .finally(() => { carregado = true; completarCandidaturas(); render(); });
+
+// Modo aplicativo: funciona instalado e mostra a última lista mesmo sem internet
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
