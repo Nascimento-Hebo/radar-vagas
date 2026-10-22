@@ -64,9 +64,71 @@ h1 { font: 800 clamp(28px, 3.4vw, 42px)/1.1 var(--font-display); margin: 0; lett
 .marcar { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; cursor: pointer; padding: 6px 2px; }
 .marcar input { width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer; }
 
+/* Bloco de busca em duas colunas: busca e filtros | radar com números */
+.busca-area { grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 400px); gap: clamp(24px, 3vw, 48px); align-items: center; }
+.busca-principal { display: grid; gap: 16px; min-width: 0; }
+.busca-area .eyebrow { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.pulso { width: 8px; height: 8px; border-radius: 50%; background: var(--new); animation: pulso 2.2s ease-out infinite; }
+@keyframes pulso { 0% { box-shadow: 0 0 0 0 rgb(61 220 151 / .55); } 70%, 100% { box-shadow: 0 0 0 8px rgb(61 220 151 / 0); } }
+
+.radar-painel { display: grid; gap: 14px; justify-items: center; }
+.radar { position: relative; width: 100%; max-width: 300px; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgb(110 161 255 / .10), rgb(10 15 29 / .6) 72%);
+  box-shadow: inset 0 0 0 1px rgb(110 161 255 / .35), 0 0 0 6px rgb(110 161 255 / .05), 0 20px 50px -20px rgb(110 161 255 / .45); }
+/* marcações de grau na borda, a cada 10° */
+.radar-escala { position: absolute; inset: 0; border-radius: 50%;
+  background: repeating-conic-gradient(rgb(110 161 255 / .45) 0 .35deg, transparent .35deg 10deg);
+  mask: radial-gradient(circle closest-side, transparent 92%, #000 93%, #000 99%, transparent 100%); }
+.radar-anel { position: absolute; border-radius: 50%; border: 1px solid rgb(110 161 255 / .16); }
+.a1 { inset: 12.5%; } .a2 { inset: 25%; } .a3 { inset: 37.5%; }
+.radar-eixo { position: absolute; background: rgb(110 161 255 / .14); }
+.radar-eixo.h { left: 4%; right: 4%; top: 50%; height: 1px; }
+.radar-eixo.v { top: 4%; bottom: 4%; left: 50%; width: 1px; }
+.radar-varredura { position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 290deg, rgb(110 161 255 / .06) 310deg, rgb(110 161 255 / .32) 357deg, rgb(169 198 255 / .8) 359.5deg, transparent 360deg);
+  animation: gira 6s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
+.radar-centro { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px rgb(245 166 35 / .18), 0 0 12px var(--orange); }
+.radar-pontos { position: absolute; inset: 0; }
+.ponto { --c: var(--front); position: absolute; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--c); opacity: .3; animation: blip 6s linear infinite; }
+.ponto[data-area="Full-stack"] { --c: var(--full); }
+.ponto[data-area="Back-end"] { --c: var(--back); }
+.ponto.foco { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; }
+@keyframes blip { 0% { opacity: 1; box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 30%, transparent), 0 0 10px var(--c); } 30% { opacity: .6; box-shadow: none; } 100% { opacity: .3; } }
+
+.radar-legenda { display: flex; gap: 14px; list-style: none; margin: 0; padding: 0; font-size: 13px; color: var(--muted); }
+.radar-legenda li { display: inline-flex; align-items: center; gap: 6px; }
+.radar-legenda li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--front); }
+.radar-legenda [data-area="Full-stack"]::before { background: var(--full); }
+.radar-legenda [data-area="Back-end"]::before { background: var(--back); }
+
+.numeros { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; margin: 0; border: 1px solid var(--line); border-radius: 12px; background: rgb(10 15 29 / .5); overflow: hidden; }
+.numeros > div { padding: 10px 8px; text-align: center; }
+.numeros > div + div { border-left: 1px solid var(--line); }
+.numeros dt { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.numeros dd { margin: 2px 0 0; font: 700 24px var(--font-display); font-variant-numeric: tabular-nums; }
+.numeros .verde dd { color: var(--new); }
+.numeros .laranja dd { color: var(--orange); }
+
+.icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
+.dica-icone { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--orange); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 1000px) {
+  .busca-area { grid-template-columns: 1fr; }
+  .radar-painel { grid-template-columns: 180px minmax(0, 1fr); align-items: center; justify-items: stretch; }
+  .radar { max-width: 180px; grid-row: span 2; }
+}
+@media (max-width: 560px) {
+  .radar-painel { grid-template-columns: 1fr; justify-items: center; }
+  .radar { max-width: 220px; grid-row: auto; order: -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar-varredura, .ponto, .pulso { animation: none; }
+  .ponto { opacity: .8; }
+}
+
 /* Dica */
 .dica { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--orange-soft); border: 1px solid rgb(245 166 35 / .3); }
-.dica-icone { font-size: 20px; }
 .dica p { margin: 0; flex: 1; font-size: 15.5px; }
 .dica-botao { font: 600 14px var(--font-body); color: var(--orange); background: none; border: 0; cursor: pointer; white-space: nowrap; padding: 6px; }
 .dica-fechar { font-size: 22px; line-height: 1; color: var(--muted); background: none; border: 0; cursor: pointer; padding: 2px 6px; }

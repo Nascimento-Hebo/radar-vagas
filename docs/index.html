@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
   <header class="topo-site">
@@ -27,6 +27,8 @@
 
   <main class="wrap">
     <section class="busca-area">
+      <div class="busca-principal">
+      <div class="eyebrow"><span class="pulso" aria-hidden="true"></span> Radar ativo · atualizado todo dia às 7:15</div>
       <h1>Encontre sua próxima vaga</h1>
       <p class="sub" id="rodada">Carregando vagas…</p>
 
@@ -61,10 +63,30 @@
         <label class="marcar"><input type="checkbox" id="f-remoto"> Só 100% remoto</label>
         <label class="marcar"><input type="checkbox" id="f-ocultar"> Esconder as que já me candidatei</label>
       </div>
+      </div>
+
+      <div class="radar-painel" aria-label="Resumo do radar">
+        <div class="radar" aria-hidden="true">
+          <div class="radar-escala"></div>
+          <div class="radar-anel a1"></div><div class="radar-anel a2"></div><div class="radar-anel a3"></div>
+          <div class="radar-eixo h"></div><div class="radar-eixo v"></div>
+          <div class="radar-varredura"></div>
+          <div class="radar-pontos" id="radar-pontos"></div>
+          <div class="radar-centro"></div>
+        </div>
+        <ul class="radar-legenda" aria-hidden="true">
+          <li data-area="Front-end">Front-end</li><li data-area="Full-stack">Full-stack</li><li data-area="Back-end">Back-end</li>
+        </ul>
+        <dl class="numeros">
+          <div><dt>Abertas</dt><dd id="n-abertas">—</dd></div>
+          <div class="verde"><dt>Novas hoje</dt><dd id="n-novas">—</dd></div>
+          <div class="laranja"><dt>Combinam com você</dt><dd id="n-foco">—</dd></div>
+        </dl>
+      </div>
     </section>
 
     <aside class="dica" id="dica" aria-live="polite">
-      <span class="dica-icone" aria-hidden="true">💡</span>
+      <svg class="dica-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3Z"/></svg>
       <p id="dica-texto"></p>
       <button type="button" class="dica-botao" id="dica-proxima">Outra dica</button>
       <button type="button" class="dica-fechar" id="dica-fechar" aria-label="Esconder dicas">×</button>
@@ -108,7 +130,7 @@
   </dialog>
   <div id="impressao"></div>
 
-  <script src="app.js?v=8"></script>
-  <script src="cv.js?v=8"></script>
+  <script src="app.js?v=9"></script>
+  <script src="cv.js?v=9"></script>
 </body>
 </html>

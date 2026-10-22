@@ -142,7 +142,9 @@ function cartao(v) {
   abrir.rel = "noopener noreferrer";
   acoes.append(abrir);
   if (st !== "encerrada") {
-    const adaptar = el("button", "btn", "✨ Adaptar meu CV");
+    const adaptar = el("button", "btn");
+    adaptar.innerHTML = ICONE_IA; // SVG fixo do código
+    adaptar.append("Adaptar meu CV");
     adaptar.type = "button";
     adaptar.addEventListener("click", () => abrirAdaptador(v)); // em cv.js
     acoes.append(adaptar);
@@ -218,6 +220,39 @@ function render() {
   lf.textContent = "";
   fechadas.forEach((v) => lf.append(cartao(v)));
   renderMeta();
+  renderRadar(vagas.filter((v) => estado(v) !== "encerrada"));
+}
+
+// ---------- Radar: cada ponto é uma vaga aberta, colorida pela área ----------
+
+const ICONE_IA = '<svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>';
+const VARREDURA_S = 6; // mesma duração da animação .radar-varredura no CSS
+
+function hash(texto) {
+  let h = 2166136261;
+  for (const ch of String(texto)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+
+function renderRadar(abertas) {
+  const box = $("radar-pontos");
+  box.textContent = "";
+  abertas.slice(0, 80).forEach((v) => {
+    const h = hash(v.id);
+    const ang = h % 360;
+    const nova = estado(v) === "nova";
+    const r = nova ? 12 + ((h >>> 9) % 16) : 22 + ((h >>> 9) % 22); // % do raio; novas mais perto do centro
+    const p = el("span", `ponto${(v.prioridade ?? 0) >= FOCO_MIN ? " foco" : ""}`);
+    p.dataset.area = v.area;
+    p.style.left = `${50 + r * Math.sin((ang * Math.PI) / 180)}%`;
+    p.style.top = `${50 - r * Math.cos((ang * Math.PI) / 180)}%`;
+    p.style.animationDelay = `${(ang / 360) * VARREDURA_S}s`; // acende quando a varredura passa
+    box.append(p);
+  });
+  const n = (x) => (carregado ? String(x) : "—");
+  $("n-abertas").textContent = n(abertas.length);
+  $("n-novas").textContent = n(abertas.filter((v) => estado(v) === "nova").length);
+  $("n-foco").textContent = n(abertas.filter((v) => (v.prioridade ?? 0) >= FOCO_MIN).length);
 }
 
 function sincronizarControles() {
