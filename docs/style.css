@@ -819,3 +819,49 @@ dialog:focus, dialog:focus-visible { outline: none; }
 .mini { font: 700 16px var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 10px; min-width: 32px; height: 32px; cursor: pointer; }
 .mini:hover { border-color: var(--accent); color: var(--accent); }
 .mini:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- CV: abas internas, checagem de qualidade, disponibilidade ---------- */
+.cv-subabas { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 12px; background: var(--surface-2); width: fit-content; max-width: 100%; }
+.subaba { font: 600 14px var(--font-body); color: var(--muted); background: none; border: 0; border-radius: 9px; padding: 8px 14px; cursor: pointer; }
+.subaba[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgb(0 0 0 / .25); }
+.subaba:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.cv-subpainel { display: grid; gap: 14px; margin-top: 14px; }
+.qualidade { display: grid; gap: 10px; }
+.q-titulo { margin: 0; font: 700 15px var(--font-display); }
+.q-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px; }
+.q-cartao { display: grid; gap: 6px; align-content: start; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); font-size: 13.5px; }
+.q-cartao p { margin: 0; color: var(--muted); }
+.q-cartao .btn { justify-self: start; }
+.q-cab { display: flex; gap: 8px; align-items: center; }
+.q-cab strong { font-size: 14px; }
+.q-ponto { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--muted); }
+.q-cartao.ok .q-ponto { background: var(--new); }
+.q-cartao.medio .q-ponto { background: var(--orange); }
+.q-cartao.ruim .q-ponto { background: var(--perigo); }
+.q-cartao.ok { border-color: color-mix(in srgb, var(--new) 35%, transparent); }
+.q-cartao.medio { border-color: color-mix(in srgb, var(--orange) 40%, transparent); }
+.q-sugestoes, .q-lista { margin: 4px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 13px; }
+.q-sugestoes li.nao { color: var(--muted); }
+.q-reescritas { display: grid; gap: 10px; margin-top: 4px; }
+.q-reescrita { display: grid; gap: 5px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.q-reescrita.aplicada { opacity: .7; }
+.q-ok { font-size: 12.5px; color: var(--new); font-weight: 600; }
+.cand-barra .btn, .cand-barra .link-btn { flex: none; }
+.folha-disponivel { margin-top: 3px; font-size: 12.5px; color: var(--suave); }
+.modelo-executivo .folha-disponivel { color: #cfd8ee; }
+.folha .editado { background: rgb(255 214 102 / .35); border-radius: 3px; }
+.folha.sem-destaque .editado { background: none; }
+
+/* No celular, o adaptador abre de baixo para cima, como app */
+@media (max-width: 640px) {
+  dialog.cv { width: 100%; max-width: 100%; margin: auto 0 0; max-height: 94dvh; border-radius: 20px 20px 0 0; border-bottom: 0; animation: sobe .28s ease-out; }
+  dialog.cv .cv-interno { padding: 18px 16px 28px; }
+  dialog.cv .cv-interno::before { content: ""; justify-self: center; width: 44px; height: 5px; border-radius: 99px; background: var(--line-strong); margin-top: -6px; }
+  dialog.cv .btn { min-height: 44px; }
+  dialog.cv .cv-acoes .btn { flex: 1 1 140px; justify-content: center; }
+  .cv-abas { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .cv-abas .chip { white-space: nowrap; }
+}
+@keyframes sobe { from { transform: translateY(40px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { dialog.cv { animation: none; } }
+@media print { .folha .editado { background: none; } }
