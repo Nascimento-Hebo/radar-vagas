@@ -12,6 +12,7 @@ export default defineConfig({
     // Fora do CI dá para usar o Chrome já instalado: PW_CANAL=chrome npm run test:e2e
     ...(process.env.PW_CANAL ? { channel: process.env.PW_CANAL } : {}),
     locale: "pt-BR",
+    timezoneId: "America/Sao_Paulo", // datas de entrevista são horário de Brasília (o servidor do GitHub roda em UTC)
     acceptDownloads: true,
   },
   webServer: { command: "node test/e2e/servidor.mjs", url: "http://localhost:8790/index.html", reuseExistingServer: !process.env.CI },
