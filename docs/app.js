@@ -201,13 +201,17 @@ function render() {
   else if (!carregado) lista.append(vazio("Carregando vagas…", "Lendo o arquivo da última busca."));
   else if (!dados.vagas.length) lista.append(vazio("Nenhuma vaga ainda", "Rode <code>npm run buscar</code> no terminal, na pasta do projeto. Depois atualize esta página."));
   else if (!abertas.length) lista.append(vazio("Nenhuma vaga com esses filtros", "Tente liberar algum filtro, como área, nível ou tipo de contrato."));
-  else abertas.forEach((v) => lista.append(cartao(v)));
+  else abertas.forEach((v, i) => {
+    lista.append(cartao(v));
+    if ((i + 1) % 5 === 0 && i + 1 < abertas.length) lista.append(cartaoDica(Math.floor(i / 5)));
+  });
 
   const todasAbertas = vagas.filter((v) => estado(v) !== "encerrada");
   renderHud(todasAbertas);
   renderRadar(todasAbertas);
   renderMeta();
   renderLeitura(abertas, total);
+  renderAtalhos();
   dicas = montarDicas(todasAbertas, abertas);
   if (!dicaMostrada) mostrarDica(0);
   $("fechadas").hidden = !fechadas.length;
@@ -278,6 +282,7 @@ function renderMeta() {
   barra.setAttribute("aria-valuenow", feitas);
   barra.classList.toggle("completa", feitas >= metaSemana);
   const dia = (new Date().getDay() + 6) % 7; // 0 = segunda
+  renderSemana(dia);
   $("meta-msg").textContent = feitas >= metaSemana ? "Meta batida. Agora é qualidade: revise o LinkedIn e prepare-se para as entrevistas."
     : feitas === 0 && dia <= 1 ? "Semana nova, radar limpo. Comece pela primeira vaga da lista: é a que mais combina com você."
     : feitas === 0 ? "Ainda sem candidaturas nesta semana. Uma agora já tira você do zero."
@@ -285,28 +290,153 @@ function renderMeta() {
     : `Bom começo. Faltam ${metaSemana - feitas} para a meta. Uma por dia resolve.`;
 }
 
+function renderSemana(hoje) {
+  const box = $("semana");
+  box.textContent = "";
+  const seg = new Date(inicioSemana() + "T12:00:00");
+  const porDia = Object.values(candidaturas).reduce((m, d) => { m[d] = (m[d] || 0) + 1; return m; }, {});
+  const maior = Math.max(1, ...Object.values(porDia));
+  ["S", "T", "Q", "Q", "S", "S", "D"].forEach((letra, i) => {
+    const d = new Date(seg);
+    d.setDate(seg.getDate() + i);
+    const iso = d.toISOString().slice(0, 10);
+    const n = porDia[iso] || 0;
+    const col = el("div", `dia${i === hoje ? " hoje" : ""}${i > hoje ? " futuro" : ""}`);
+    col.title = `${d.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit" })}: ${n} ${n === 1 ? "candidatura" : "candidaturas"}`;
+    const b = el("span", "dia-barra");
+    b.style.height = `${n ? 18 + (n / maior) * 82 : 6}%`;
+    if (n) b.classList.add("cheio");
+    col.append(el("span", "dia-n", n ? String(n) : ""), b, el("span", "dia-letra", letra));
+    box.append(col);
+  });
+}
+
 function renderLeitura(abertas, total) {
   const box = $("leitura");
   box.textContent = "";
   if (!carregado || !total) return;
   const cont = el("span", "leitura-cont");
-  cont.append(el("strong", null, String(abertas.length)), ` de ${total} vagas na tela`);
-  box.append(cont);
+  cont.append(el("strong", null, String(abertas.length)), ` de ${total} vagas abertas`);
+  box.append(cont, el("span", "leitura-ordem", "Ordem: novas → no seu foco → mais recentes"));
+
+  const tecs = $("tecs");
+  tecs.textContent = "";
   const freq = {};
-  abertas.forEach((v) => (v.stack || []).forEach((t) => { freq[t] = (freq[t] || 0) + 1; }));
-  const top = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 5);
-  if (!top.length) return;
-  const tech = el("span", "leitura-tech");
-  tech.append(el("span", "leitura-rotulo", "Mais pedidas aqui:"));
+  abertas.forEach((v) => (v.stack || []).forEach((tec) => { freq[tec] = (freq[tec] || 0) + 1; }));
+  const top = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 12);
+  const maior = top[0]?.[1] || 1;
   top.forEach(([nome, qtd]) => {
     const b = el("button", "tech");
     b.type = "button";
-    b.title = `Buscar vagas com ${nome}`;
-    b.append(nome, el("span", null, String(qtd)));
-    b.addEventListener("click", () => { $("busca").value = nome; filtros.texto = nome; render(); });
-    tech.append(b);
+    b.title = `Ver vagas com ${nome}`;
+    b.setAttribute("aria-pressed", String(semAcento(filtros.texto) === semAcento(nome)));
+    const barra = el("span", "tech-barra");
+    barra.style.width = `${(qtd / maior) * 100}%`;
+    b.append(el("span", "tech-nome", nome), el("span", "tech-n", String(qtd)), barra);
+    b.addEventListener("click", () => {
+      const igual = semAcento(filtros.texto) === semAcento(nome);
+      filtros.texto = igual ? "" : nome;
+      $("busca").value = filtros.texto;
+      render();
+    });
+    tecs.append(b);
   });
-  box.append(tech);
+}
+
+const DICAS_LISTA = [
+  ["Leia a vaga até o fim", "Muitas vagas escondem o que realmente importa no último parágrafo: o modelo de trabalho, o salário ou a etapa técnica."],
+  ["Cada CV conta uma história", "Não mande o mesmo CV para tudo. Use o botão \"Adaptar meu CV\": leva um minuto e mostra o que a vaga quer ver."],
+  ["Mostre resultado, não tarefa", "Troque \"fiz telas em React\" por \"criei telas em React usadas por 5 mil clientes\". Números chamam atenção."],
+  ["Recrutador também é gente", "Uma mensagem curta no LinkedIn depois de se candidatar pode colocar seu CV no topo da pilha."],
+  ["Estude pelo que o mercado pede", "Repare nas tecnologias em alta na coluna da esquerda. É um mapa de estudo feito com vagas reais."],
+  ["Rejeição faz parte", "Quase todo mundo ouve muitos \"não\" antes do \"sim\". Cada candidatura é treino para a próxima."],
+  ["Portfólio abre portas", "Um projeto publicado, com README e link funcionando, vale mais que muitas linhas de curso no CV."],
+];
+
+function cartaoDica(n) {
+  const [titulo, texto] = DICAS_LISTA[n % DICAS_LISTA.length];
+  const li = el("li", "dica-lista");
+  li.append(el("span", "dica-lista-icone", "◆"));
+  const corpo = el("div");
+  corpo.append(el("strong", null, titulo), el("p", null, texto));
+  li.append(corpo);
+  return li;
+}
+
+const ATALHOS = [
+  ["Júnior remoto", { nivel: "Júnior", remoto: true }],
+  ["PJ remoto", { regime: "PJ", remoto: true }],
+  ["Front-end", { area: "Front-end" }],
+  ["Back-end", { area: "Back-end" }],
+  ["React", { texto: "React" }],
+  ["Java", { texto: "Java" }],
+];
+const FILTROS_PADRAO = { area: "todos", nivel: "todos", regime: "todos", remoto: false, ocultar: false, texto: "" };
+
+function aplicarFiltros(novos) {
+  Object.assign(filtros, FILTROS_PADRAO, novos);
+  document.querySelectorAll(".filtros .chip").forEach((c) => {
+    const f = c.dataset.f;
+    c.setAttribute("aria-pressed", String(f === "remoto" || f === "ocultar" ? filtros[f] : filtros[f] === c.dataset.v));
+  });
+  $("busca").value = filtros.texto;
+  render();
+}
+
+function renderAtalhos() {
+  const box = $("atalhos");
+  box.textContent = "";
+  ATALHOS.forEach(([rotulo, f]) => {
+    const ativo = Object.entries({ ...FILTROS_PADRAO, ...f }).every(([k, v]) => filtros[k] === v);
+    const b = el("button", "atalho", rotulo);
+    b.type = "button";
+    b.setAttribute("aria-pressed", String(ativo));
+    b.addEventListener("click", () => aplicarFiltros(ativo ? {} : f));
+    box.append(b);
+  });
+  const mudou = Object.entries(FILTROS_PADRAO).some(([k, v]) => filtros[k] !== v);
+  $("limpar").hidden = !mudou;
+}
+
+const CHAVE_CHECK = "radar-vagas:checklist";
+const CHECKS = [
+  "Li a vaga inteira, inclusive benefícios e modelo de trabalho",
+  "Adaptei o CV para esta vaga",
+  "Revisei o que a IA mudou no CV",
+  "Conferi meu LinkedIn e GitHub",
+  "Escrevi uma mensagem curta de apresentação",
+  "Marquei \"Já me candidatei\" na vaga",
+];
+let checks = ler(CHAVE_CHECK, {});
+
+function renderChecklist() {
+  const ul = $("checks");
+  ul.textContent = "";
+  CHECKS.forEach((texto, i) => {
+    const li = el("li");
+    const b = el("button", "check");
+    b.type = "button";
+    b.setAttribute("aria-pressed", String(Boolean(checks[i])));
+    b.append(el("span", "box", checks[i] ? "✓" : ""), el("span", null, texto));
+    b.addEventListener("click", () => {
+      checks[i] = !checks[i];
+      salvar(CHAVE_CHECK, checks);
+      renderChecklist();
+    });
+    li.append(b);
+    ul.append(li);
+  });
+  const feitos = CHECKS.filter((_, i) => checks[i]).length;
+  $("check-cont").textContent = feitos === CHECKS.length ? "Tudo pronto ✓" : `${feitos}/${CHECKS.length}`;
+  if (feitos === CHECKS.length) {
+    const li = el("li", "check-fim");
+    li.append(el("span", null, "Pronto para a próxima vaga?"));
+    const b = el("button", "mini texto", "Recomeçar");
+    b.type = "button";
+    b.addEventListener("click", () => { checks = {}; salvar(CHAVE_CHECK, checks); renderChecklist(); });
+    li.append(b);
+    ul.append(li);
+  }
 }
 
 const DICAS_FIXAS = [
@@ -316,7 +446,7 @@ const DICAS_FIXAS = [
   "Constância vence intensidade: uma candidatura bem feita por dia são mais de 20 por mês.",
   "Vagas novas chegam todo dia às 7:15. Volte de manhã para estar entre os primeiros a se candidatar.",
   "Marque \"Já me candidatei\" em cada vaga. Assim você acompanha a meta da semana e esconde o que já fez.",
-  "Use as tecnologias mais pedidas, logo acima da lista, para decidir o que estudar a seguir.",
+  "Use a lista \"Em alta nestas vagas\", na coluna da esquerda, para decidir o que estudar a seguir.",
   "Recrutador lê o CV em segundos. Os três primeiros itens de cada experiência são os que mais contam.",
   "Um projeto no GitHub com README caprichado vale mais que uma lista longa de cursos.",
 ];
@@ -381,6 +511,8 @@ document.querySelectorAll(".filtros .chip").forEach((b) => {
   });
 });
 $("busca").addEventListener("input", (e) => { filtros.texto = e.target.value.trim(); render(); });
+$("limpar").addEventListener("click", () => aplicarFiltros({}));
+renderChecklist();
 
 render();
 fetch("vagas.json", { cache: "no-store" })
