@@ -51,17 +51,29 @@ Para ver a página, abra `docs/index.html` com a extensão **Live Server** do VS
 3. **Libere o Action para salvar:** *Settings → Actions → General → Workflow permissions* → marque *Read and write permissions*.
 4. **Rode a primeira vez:** aba *Actions* → *Buscar vagas* → *Run workflow*. Depois ele roda sozinho todo dia às 7h15.
 
-## E-mail diário (opcional)
+## Firebase: contas, banco, IA e proteção
 
-O Action manda um e-mail com as vagas novas se você criar três *secrets* em *Settings → Secrets and variables → Actions*:
+O site usa o projeto Firebase `radar-de-vagas-1f800` (plano gratuito):
 
-| Secret | O que colocar |
+- **Login** (Authentication): Google ou e-mail e senha. Quem não está logado vai para `login.html`.
+- **Banco** (Firestore, São Paulo): ficha de cada pessoa em `users/{uid}` e os dados em `users/{uid}/dados/*`. As regras ficam em `firestore.rules` (publicar com `firebase deploy --only firestore:rules`): cada pessoa só vê o que é dela; só o super admin vê tudo.
+- **IA** (Firebase AI Logic, Gemini Developer API): ninguém precisa de chave. Modelos, limite diário e liga/desliga ficam no painel do admin.
+- **App Check** (reCAPTCHA Enterprise): exigido no banco e na IA, para ninguém usar a cota fora do site.
+- **Super admin**: `nascimentohebo2@gmail.com` (em `docs/firebase.js` e em `firestore.rules`). Painel em `admin.html`.
+
+## Alerta de vagas por e-mail
+
+No primeiro acesso (ou em *Minhas preferências*), a pessoa diz o que procura e pode ligar o alerta. Todo dia, depois da busca, `scripts/alertas.mjs` manda um e-mail só com as vagas novas que combinam com ela.
+
+Secrets do repositório (*Settings → Secrets and variables → Actions*):
+
+| Secret | O que é |
 |---|---|
-| `MAIL_USERNAME` | seu Gmail, que vai enviar |
-| `MAIL_PASSWORD` | uma **senha de app** do Gmail (não a sua senha normal). Crie em myaccount.google.com → Segurança → Senhas de app (precisa da verificação em duas etapas ativa) |
-| `MAIL_TO` | o e-mail que vai receber |
+| `FIREBASE_SERVICE_ACCOUNT` | já configurado: conta de serviço só com leitura do banco |
+| `MAIL_USERNAME` | o Gmail que envia os alertas |
+| `MAIL_PASSWORD` | uma **senha de app** desse Gmail (não a senha normal). Crie em myaccount.google.com → Segurança → Senhas de app (precisa da verificação em duas etapas) |
 
-Sem esses secrets, o passo do e-mail é pulado e o resto funciona normal.
+Sem `MAIL_USERNAME` e `MAIL_PASSWORD`, o passo roda em modo de teste e não envia nada. O Gmail aceita cerca de 500 e-mails por dia.
 
 ## Ajustar a busca
 
@@ -89,20 +101,25 @@ O botão **Adaptar meu CV** abre o adaptador dentro da própria página, usando 
    - **CV final:** editável, em 4 modelos (Clássico, Moderno, Executivo, Compacto; a IA sugere um). *Baixar PDF* abre a impressão do navegador ("Salvar como PDF").
    - **Carta e mensagens:** carta de apresentação, mensagem para o recrutador no LinkedIn e e-mail de follow-up.
    - **Preparar entrevista:** perguntas prováveis com roteiro de resposta baseado no seu CV.
+   - **Simular entrevista:** a IA faz o papel do recrutador, uma pergunta por vez (dá para ouvir a pergunta e responder falando), e no final dá nota e dicas para cada resposta.
 
 Achou uma vaga em outro site? Cole o link na busca: a IA lê a página e adapta o CV do mesmo jeito. Sites que pedem login (LinkedIn) não abrem para a IA; nesse caso, cole o texto da vaga no campo que aparece.
 
 O Gemini é instruído a não inventar empresas, cargos, datas ou tecnologias, mas leia o CV antes de enviar.
 
-**Chave do Gemini:** cada pessoa usa a própria chave gratuita, criada em [aistudio.google.com/apikey](https://aistudio.google.com/apikey). Na primeira vez a página pede a chave e guarda só no navegador de quem usa. Ela nunca vai para o repositório, porque o site é público. Os modelos ficam em `GEMINI_MODELOS`, no começo de `docs/cv.js`: a página tenta o primeiro (`gemini-flash-latest`) e passa para o próximo se ele estiver sobrecarregado ou sem cota.
+A IA roda pelo Firebase (veja a seção Firebase acima). Os modelos ficam no painel do admin; a página tenta o primeiro e passa para o próximo se ele estiver sobrecarregado, sem cota ou demorar mais de 45 segundos.
 
 ## Minha área
 
-O botão **Minha área**, no topo, guarda tudo só no navegador de quem usa:
+No primeiro acesso, a IA lê o CV, preenche o perfil e pergunta o que a pessoa procura (área, nível, contrato, onde e tecnologias); as vagas que combinam ganham o selo **★ Para você**.
+
+O botão **Minha área**, no topo, guarda tudo na conta da pessoa (e uma cópia no navegador):
 
 - **Candidaturas:** quadro com as etapas *Candidatei → Entrevista → Teste técnico → Proposta → Não avançou*, com anotações. Depois de 7 dias sem resposta aparece o aviso de follow-up, com uma mensagem pronta para copiar.
-- **CVs gerados:** os últimos 15 CVs adaptados, para abrir de novo sem gastar outra chamada da IA.
-- **Meus dados:** o texto do CV (usado na % de compatibilidade de cada vaga), backup em arquivo, restauração e "apagar meus dados".
+- **E-mails das empresas:** conecta o Gmail (só leitura) e mostra só as conversas com as empresas das candidaturas; a IA classifica cada e-mail, sugere a etapa e escreve respostas.
+- **CVs gerados** e **Meus dados:** texto do CV (usado na % de compatibilidade), backup, apagar dados e **Excluir minha conta**.
+
+O botão **Ajuda** abre o assistente de suporte com IA; nome, avatar e saudação dele são editados no painel do admin.
 
 A **% de compatibilidade** de cada vaga é calculada na própria página, comparando as tecnologias da vaga com o texto do seu CV. Não usa IA nem envia nada.
 
@@ -110,7 +127,8 @@ A **% de compatibilidade** de cada vaga é calculada na própria página, compar
 
 - A API da Gupy usada aqui é a mesma que o site da Gupy usa, mas **não é oficial**: pode mudar sem aviso. Se ela falhar, o script continua com as outras fontes e a execução do Action fica vermelha, para você saber.
 - O salário só aparece quando o anúncio informa um valor. Benefícios (vale, auxílio, bônus) são ignorados.
-- **Privacidade:** não existe servidor guardando dados. Quando você usa a IA, o texto da vaga e do CV vai para a API do Gemini (Google) com a sua chave.
+- **Privacidade:** veja `docs/privacidade.html` e `docs/termos.html`. Os e-mails do Gmail nunca são guardados.
+- **Gmail:** até o Google verificar o app, quem conecta o Gmail vê o aviso "app não verificado" (*Avançado → Acessar*) e o limite é de 100 pessoas.
 - A classificação (área, nível, contrato) é feita por palavras-chave no título e na descrição. Ela acerta na maioria das vagas, mas pode errar em títulos genéricos. Os testes em `test/` mostram os casos cobertos.
 
 ## Estrutura
