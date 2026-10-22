@@ -45,7 +45,7 @@ const SCOPE_GMAIL = "https://www.googleapis.com/auth/gmail.readonly";
 
 let usuario = null;
 let fichaUsuario = null; // documento users/{uid}
-let configIA = { ativa: true, modelos: ["gemini-2.5-flash", "gemini-flash-latest", "gemini-2.5-flash-lite"], limiteDiario: 60 };
+let configIA = { ativa: true, modelos: ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash"], limiteDiario: 60 };
 const pendentes = new Map();
 let timerEnvio = null;
 
@@ -186,6 +186,8 @@ async function contarUsoIA() {
   updateDoc(doc(db, "users", usuario.uid), { usoIA: { dia: hoje, n: uso + 1 }, usoIATotal: increment(1) }).catch(() => {});
 }
 
+const TEMPO_MAX_IA = 45000; // se um modelo travar, passa para o próximo
+
 // Gera texto com o Gemini. Tenta os modelos em ordem: se um estiver sobrecarregado ou sem cota, vai para o próximo.
 async function gerarIA(partes, { json = false, lerLinks = false, sistema = "", historico = null } = {}) {
   if (!usuario) throw new Error("Entre na sua conta para usar a IA.");
@@ -200,7 +202,7 @@ async function gerarIA(partes, { json = false, lerLinks = false, sistema = "", h
         generationConfig: { temperature: 0.3, ...(json ? { responseMimeType: "application/json" } : {}) },
         ...(lerLinks ? { tools: [{ urlContext: {} }] } : {}),
         ...(sistema ? { systemInstruction: sistema } : {}),
-      });
+      }, { timeout: TEMPO_MAX_IA });
       const r = historico
         ? await m.startChat({ history: historico }).sendMessage(converterPartes(partes))
         : await m.generateContent({ contents: [{ role: "user", parts: converterPartes(partes) }] });
@@ -210,7 +212,7 @@ async function gerarIA(partes, { json = false, lerLinks = false, sistema = "", h
     } catch (e) {
       ultimoErro = e;
       const msg = String(e?.message || e);
-      if (!/overload|503|429|quota|exhaust|not found|404|unavailable|500/i.test(msg)) break; // outro modelo não resolve
+      if (!/overload|503|429|quota|exhaust|not found|404|unavailable|500|timeout|timed out|abort/i.test(msg)) break; // outro modelo não resolve
     }
   }
   const msg = String(ultimoErro?.message || ultimoErro);
