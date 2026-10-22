@@ -65,20 +65,3 @@ jobs:
         run: |
           echo "::error title=Fonte de vagas com problema::${{ steps.busca.outputs.alerta }}"
           exit 1
-
-      # Opcional: e-mail com as vagas novas.
-      # Só roda se você criar os secrets MAIL_USERNAME, MAIL_PASSWORD e MAIL_TO (veja o README).
-      - name: Enviar e-mail com as vagas novas
-        if: ${{ steps.busca.outputs.novas != '0' && env.MAIL_USERNAME != '' }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          from: Radar de Vagas <${{ secrets.MAIL_USERNAME }}>
-          to: ${{ secrets.MAIL_TO }}
-          subject: "Radar de vagas: ${{ steps.busca.outputs.novas }} vagas novas"
-          convert_markdown: true
-          html_body: file://docs/novas.md
