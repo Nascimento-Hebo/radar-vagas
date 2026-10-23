@@ -25,6 +25,10 @@ window.radarNuvem = {
     if (p.startsWith("Monte")) return JSON.stringify(cvBase);
     if (p.startsWith("Você é mentor")) return JSON.stringify({ resumo: "Comece por Docker.", itens: [{ tecnologia: "Docker", porque: "Muito pedido.", tempo: "2 semanas", recursos: [{ nome: "Docs do Docker", url: "https://docs.docker.com/get-started/" }], projeto: "Suba sua API num container." }] });
     if (p.startsWith("Pesquise a empresa")) return JSON.stringify({ confianca: "baixa", oQueFaz: "Empresa de tecnologia.", produto: "Plataforma web.", porte: "", cultura: [], comoSePosicionar: ["Mostre APIs REST."], perguntasParaFazer: ["Como é o time?"], pesquisarAntes: ["Site da empresa"] });
+    if (p.includes("perguntas do formulário de candidatura")) {
+      window.__ultimoPedidoPerguntas = p;
+      return JSON.stringify({ respostas: [{ pergunta: "Por que você quer trabalhar nesta empresa?", resposta: "Porque a vaga une React e Node.js, que uso há 3 anos na Loja X, onde criei APIs REST usadas pelo aplicativo.", palavrasChave: ["React", "Node.js", "APIs REST"], dica: "Cite algo do produto da empresa." }] });
+    }
     if (p.includes("Ela colou um e-mail")) return JSON.stringify({ candidatura: "v1", tipo: "entrevista", etapa: "entrevista", resumo: "Convite para entrevista.", acao: "Confirmar o horário", prazo: "10/05 14h30", dataHora: "2030-05-10T14:30" });
     if (p.startsWith("Você é recrutador(a) técnico(a) da")) return JSON.stringify({ perguntas: [{ pergunta: "Fale sobre você.", tipo: "abertura", avalia: "comunicação" }, { pergunta: "Como você cria uma API REST em Node.js?", tipo: "técnica", avalia: "Node.js" }] });
     if (p.startsWith("Você é recrutador(a) técnico(a) entrevistando")) return JSON.stringify({ aprofundar: true, pergunta: "Como você tratou os erros nessa API?", avalia: "boas práticas" });
