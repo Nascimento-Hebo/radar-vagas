@@ -28,29 +28,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=24">
+  <link rel="stylesheet" href="style.css?v=25">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Conectando à sua conta…</div>
   <a class="pular" href="#vagas">Pular para as vagas</a>
   <header class="topo-site">
     <div class="topo-dentro">
-      <a class="marca" href="./" aria-label="OH Tech Technology — Radar de Vagas">
-        <img class="logo-escuro" src="oh-tech-logo.png" alt="OH Tech Technology" width="600" height="171">
-        <img class="logo-claro" src="oh-tech-logo-claro.png" alt="" width="600" height="171">
+      <a class="marca" href="./" aria-label="Radar de Vagas, da OH Tech Technology">
+        <img class="marca-logo logo-escuro" src="oh-tech-logo.png" alt="" width="600" height="171">
+        <img class="marca-logo logo-claro" src="oh-tech-logo-claro.png" alt="" width="600" height="171">
+        <img class="marca-icone" src="oh-tech-icone.png" alt="" width="40" height="40">
+        <span class="marca-nome"><strong>Radar de Vagas</strong><small>OH Tech Technology</small></span>
       </a>
       <div class="topo-acoes">
         <div class="meta-curta" id="meta-curta" title="Candidaturas marcadas nesta semana">
           <span class="meta-texto"><strong id="meta-feitas">0</strong> de <span id="meta-total">5</span> nesta semana</span>
           <span class="meta-barra" aria-hidden="true"><span id="meta-fill"></span></span>
         </div>
-        <button type="button" class="btn topo-btn" id="abrir-mercado" title="O que as vagas pedem e quanto pagam">
+        <button type="button" class="btn topo-btn topo-icone" id="abrir-mercado" title="O que as vagas pedem e quanto pagam">
           <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 4 3 5-7"/></svg>
           <span class="topo-btn-texto">Mercado</span>
         </button>
-        <button type="button" class="btn topo-btn" id="abrir-painel">
+        <button type="button" class="btn topo-btn topo-icone" id="abrir-painel">
           <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
-          Minha área <span class="contador" id="abrir-painel-n"></span>
+          <span class="topo-btn-texto">Minha área</span> <span class="contador" id="abrir-painel-n"></span>
         </button>
         <button type="button" class="icone-btn" id="tema"></button>
         <div class="conta" id="conta"></div>
@@ -61,14 +63,14 @@
   <main class="wrap" id="conteudo">
     <section class="busca-area">
       <div class="busca-principal">
-        <div class="eyebrow"><span class="pulso" aria-hidden="true"></span> Radar ativo · atualizado todo dia às 7:15</div>
+        <div class="eyebrow"><span class="pulso" aria-hidden="true"></span> Radar ativo<span class="eyebrow-extra"> · atualizado todo dia às 7:15</span></div>
         <h1>Encontre sua próxima vaga</h1>
         <p class="sub" id="rodada">Carregando vagas…</p>
 
         <label class="busca">
           <span class="sr">Buscar vagas ou colar link de vaga</span>
           <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input id="busca" type="search" placeholder="Busque por tecnologia ou empresa, ou cole o link de uma vaga" autocomplete="off">
+          <input id="busca" type="search" placeholder="Tecnologia, empresa ou link" autocomplete="off">
         </label>
 
         <button type="button" class="link-btn externa-gatilho" id="externa-gatilho">Achou a vaga no LinkedIn, Indeed ou no site da empresa? Cole o texto da vaga e adapte seu CV</button>
@@ -101,6 +103,11 @@
             <button class="aba" data-v="Full-stack" aria-pressed="false">Full-stack</button>
             <button class="aba" data-v="Back-end" aria-pressed="false">Back-end</button>
           </div>
+          <button type="button" class="btn filtros-botao" id="filtros-botao" aria-expanded="false" aria-controls="filtros-extra">
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
+            Filtros <span class="contador" id="filtros-n"></span>
+          </button>
+          <div class="filtros-extra" id="filtros-extra">
           <label class="seletor">Nível
             <select id="f-nivel">
               <option value="todos">Todos</option>
@@ -129,6 +136,7 @@
               <option value="salario">Maior salário</option>
             </select>
           </label>
+          </div>
         </div>
 
         <div class="atalhos" role="group" aria-label="Buscas rápidas">
@@ -244,7 +252,7 @@
   <!-- Suporte com IA -->
   <button type="button" class="suporte-btn" id="suporte-abrir" aria-controls="suporte" aria-expanded="false">
     <img class="suporte-avatar" id="suporte-avatar-btn" src="" alt="" width="32" height="32">
-    Ajuda
+    <span class="suporte-texto">Ajuda</span>
   </button>
   <section class="suporte" id="suporte" aria-labelledby="suporte-nome" hidden>
     <header class="suporte-cab">
@@ -268,11 +276,11 @@
     </form>
   </section>
 
-  <script src="app.js?v=24"></script>
-  <script src="push.js?v=24"></script>
-  <script src="onboarding.js?v=24"></script>
-  <script src="avatares.js?v=24"></script>
-  <script src="suporte.js?v=24"></script>
-  <script type="module" src="firebase.js?v=24"></script>
+  <script src="app.js?v=25"></script>
+  <script src="push.js?v=25"></script>
+  <script src="onboarding.js?v=25"></script>
+  <script src="avatares.js?v=25"></script>
+  <script src="suporte.js?v=25"></script>
+  <script type="module" src="firebase.js?v=25"></script>
 </body>
 </html>
