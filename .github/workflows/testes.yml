@@ -29,6 +29,9 @@ jobs:
       - name: Testes da lógica
         run: npm test
 
+      - name: Testes das regras do banco (emulador do Firestore)
+        run: npm run test:regras
+
       - name: Instalar o navegador
         run: npx playwright install --with-deps chromium
 

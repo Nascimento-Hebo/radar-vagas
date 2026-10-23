@@ -1,22 +1,32 @@
 rules_version = '2';
 
 // Regras do banco do Radar de Vagas.
-// - Cada pessoa lê e escreve só a própria ficha (users/{uid}) e os próprios dados (users/{uid}/dados/*).
-// - O super admin (e-mail verificado abaixo) lê e altera tudo, e é o único que muda "bloqueado" e "papel".
-// - Conta bloqueada não grava dados.
+// - Privacidade: o conteúdo de cada pessoa (users/{uid}/dados/* e users/{uid}/arquivos/*: CV, candidaturas,
+//   conversas com a IA, PDF do CV) só a própria pessoa lê. Nem o super admin lê; ele só pode apagar.
+// - A ficha (users/{uid}) tem só dados da conta e números. A pessoa lê a dela; o super admin lê todas
+//   e é o único que muda "bloqueado" e "papel".
+// - A pessoa só grava na ficha os campos que o site usa, e o e-mail da ficha tem que ser o do login dela.
+// - Uso da IA: o contador do dia só sobe de 1 em 1 e até o limite (config/ia.limiteDiario; 0 = sem limite).
+//   O site só chama a IA depois que o banco aceita o +1.
+// - E-mail não confirmado (conta de e-mail e senha) não grava dados, não usa a IA e não liga alerta por e-mail.
+// - Conta bloqueada não grava dados nem usa a IA.
 // - A própria pessoa pode apagar a ficha e os dados (Excluir minha conta, LGPD).
 // - config/* (configuração da IA): todos que entraram leem; só o super admin altera.
 // - erros/*: registro de erros do site; todos que entraram criam, só o super admin lê e apaga.
+// Testes: npm run test:regras (emulador do Firestore).
 service cloud.firestore {
   match /databases/{database}/documents {
 
     function logado() {
       return request.auth != null;
     }
+    function verificado() {
+      return request.auth.token.get("email_verified", false) == true;
+    }
     function superAdmin() {
       return logado()
-        && request.auth.token.email == "nascimentohebo2@gmail.com"
-        && request.auth.token.email_verified == true;
+        && request.auth.token.get("email", "") == "nascimentohebo2@gmail.com"
+        && verificado();
     }
     function dono(uid) {
       return logado() && request.auth.uid == uid;
@@ -25,20 +35,92 @@ service cloud.firestore {
       return !exists(/databases/$(database)/documents/users/$(uid))
         || get(/databases/$(database)/documents/users/$(uid)).data.get("bloqueado", false) != true;
     }
+    function texto(v, max) {
+      return v is string && v.size() <= max;
+    }
+
+    // Campos da conta, gravados pelo site a cada entrada
+    function contaValida(d) {
+      return texto(d.get("nome", ""), 200)
+        && d.get("email", "") == request.auth.token.get("email", "")
+        && texto(d.get("foto", ""), 2000)
+        && texto(d.get("provedor", ""), 200);
+    }
+
+    function resumoValido(r) {
+      return r is map && r.keys().hasOnly(["nCand", "nCvs", "etapas"])
+        && r.nCand is int && r.nCvs is int && r.etapas is map && r.etapas.size() <= 10;
+    }
+
+    function limiteIA() {
+      return exists(/databases/$(database)/documents/config/ia)
+        ? get(/databases/$(database)/documents/config/ia).data.get("limiteDiario", 60)
+        : 60;
+    }
+
+    // +1 no uso da IA: "em" é a hora do banco; no mesmo dia (UTC) soma 1, em dia novo volta para 1
+    function usoIAValido() {
+      let antes = resource.data.get("usoIA", {});
+      let novo = request.resource.data.get("usoIA", null);
+      let emAntes = antes.get("em", null);
+      let mesmoDia = emAntes is timestamp && emAntes.date() == request.time.date();
+      let limite = limiteIA();
+      return verificado()
+        && resource.data.get("bloqueado", false) != true
+        && novo is map && novo.keys().hasOnly(["dia", "n", "em"])
+        && novo.em == request.time && novo.n is int && texto(novo.get("dia", ""), 10)
+        && ((mesmoDia && novo.n == antes.n + 1) || (!mesmoDia && novo.n == 1))
+        && (limite == 0 || novo.n <= limite)
+        && request.resource.data.get("usoIATotal", 0) == resource.data.get("usoIATotal", 0) + 1
+        && request.resource.data.get("usoIADias", {}) is map;
+    }
+
+    function fichaValidaDoDono() {
+      let novo = request.resource.data;
+      let mudou = novo.diff(resource.data).affectedKeys();
+      return mudou.hasOnly(["nome", "email", "foto", "provedor", "ultimoAcesso", "resumo", "usoIA", "usoIATotal", "usoIADias",
+                            "push", "pushAtivo", "onboardingFeito", "alerta"])
+        && (!mudou.hasAny(["nome", "email", "foto", "provedor"]) || contaValida(novo))
+        && (!mudou.hasAny(["ultimoAcesso"]) || novo.ultimoAcesso == request.time)
+        && (!mudou.hasAny(["resumo"]) || resumoValido(novo.resumo))
+        && (!mudou.hasAny(["usoIA", "usoIATotal", "usoIADias"]) || usoIAValido())
+        && (!mudou.hasAny(["push"]) || (novo.push is map && novo.push.size() <= 10))
+        && (!mudou.hasAny(["pushAtivo"]) || novo.pushAtivo is bool)
+        && (!mudou.hasAny(["onboardingFeito"]) || novo.onboardingFeito is bool)
+        // alerta por e-mail ligado só com e-mail confirmado (senão daria para mandar e-mails para o endereço de outra pessoa)
+        && (!mudou.hasAny(["alerta"]) || (novo.alerta is map && novo.alerta.size() <= 30
+              && (verificado() || novo.alerta.get("ativo", false) == false)));
+    }
 
     match /users/{uid} {
       allow read: if dono(uid) || superAdmin();
       allow create: if dono(uid)
+        && request.resource.data.keys().hasOnly(["nome", "email", "foto", "provedor", "ultimoAcesso", "criadoEm", "papel", "bloqueado"])
         && request.resource.data.get("papel", "usuario") == "usuario"
-        && request.resource.data.get("bloqueado", false) == false;
-      allow update: if superAdmin()
-        || (dono(uid) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["papel", "bloqueado", "criadoEm"]));
+        && request.resource.data.get("bloqueado", false) == false
+        && contaValida(request.resource.data);
+      allow update: if superAdmin() || (dono(uid) && fichaValidaDoDono());
       allow delete: if superAdmin() || dono(uid); // "Excluir minha conta"
 
+      // Conteúdo da pessoa: só ela lê e grava. O super admin só apaga (sem ler).
       match /dados/{nome} {
-        allow read: if dono(uid) || superAdmin();
-        allow create, update: if superAdmin() || (dono(uid) && naoBloqueado(uid));
-        allow delete: if superAdmin() || dono(uid); // apagar os próprios dados vale mesmo com a conta bloqueada
+        allow read: if dono(uid);
+        allow create, update: if dono(uid) && verificado() && naoBloqueado(uid);
+        allow delete: if dono(uid) || superAdmin(); // apagar os próprios dados vale mesmo com a conta bloqueada
+      }
+
+      // PDF do CV: "cvPdf" (nome, assinatura, número de partes) e "cvPdf-0", "cvPdf-1"... (o arquivo em base64, em partes)
+      match /arquivos/{nome} {
+        allow read: if dono(uid);
+        allow create, update: if dono(uid) && verificado() && naoBloqueado(uid) && (
+          (nome.matches("cvPdf-[0-9]{1,2}")
+            && request.resource.data.keys().hasOnly(["dados"]) && texto(request.resource.data.dados, 700000))
+          || (nome == "cvPdf"
+            && request.resource.data.keys().hasOnly(["nome", "assinatura", "partes", "atualizadoEm"])
+            && texto(request.resource.data.nome, 300) && texto(request.resource.data.assinatura, 400)
+            && request.resource.data.partes is int && request.resource.data.partes >= 1 && request.resource.data.partes <= 16)
+        );
+        allow delete: if dono(uid) || superAdmin();
       }
     }
 

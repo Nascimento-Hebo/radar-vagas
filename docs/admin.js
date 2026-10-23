@@ -1,6 +1,8 @@
 // Painel do super admin: só abre para a conta definida em firebase.js (SUPER_ADMIN).
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
-import "./firebase.js?v=26";
+// Privacidade: o admin vê só a ficha de cada pessoa (conta e números). CV, candidaturas e conversas com a IA são só dela:
+// as regras do banco não deixam nem o super admin ler.
+import "./firebase.js?v=27";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);
@@ -39,12 +41,6 @@ window.addEventListener("radar:usuario", (e) => {
   carregarErros();
 });
 
-function resumoDosDados(dados) {
-  const cands = Object.values(dados.candidaturas || {});
-  const etapas = {};
-  cands.forEach((c) => { const e = typeof c === "string" ? "candidatei" : c.etapa || "candidatei"; etapas[e] = (etapas[e] || 0) + 1; });
-  return { nCand: cands.length, nCvs: (dados.cvs || []).length, etapas, cvsVagas: (dados.cvs || []).map((h) => [h.vaga?.titulo || "Vaga", h.vaga?.empresa].filter(Boolean).join(" · ")) };
-}
 const somarEtapas = () => {
   const etapas = {};
   usuarios.forEach((u) => Object.entries(u.etapas || {}).forEach(([e, n]) => { etapas[e] = (etapas[e] || 0) + n; }));
@@ -56,14 +52,9 @@ async function carregarTudo() {
   preencherAssistente();
   try {
     const lista = await nuvem.listarUsuarios();
-    // Os números vêm do resumo que cada pessoa grava na ficha (users/{uid}.resumo): 1 leitura por pessoa.
-    // Só quem ainda não tem resumo (conta antiga que não voltou ao site) tem os dados lidos inteiros.
-    usuarios = await Promise.all(lista.map(async (u) => {
-      if (u.resumo) return { ...u, ...u.resumo, etapas: u.resumo.etapas || {}, cvsVagas: u.resumo.cvsVagas || [] };
-      let dados = {};
-      try { dados = await nuvem.dadosDoUsuario(u.uid); } catch {}
-      return { ...u, dados, ...resumoDosDados(dados) };
-    }));
+    // Os números vêm do resumo (só contagens) que cada pessoa grava na ficha (users/{uid}.resumo).
+    // Conta antiga que ainda não voltou ao site não tem resumo: aparece com zero até a próxima visita.
+    usuarios = lista.map((u) => ({ ...u, nCand: u.resumo?.nCand || 0, nCvs: u.resumo?.nCvs || 0, etapas: u.resumo?.etapas || {} }));
     usuarios.sort((a, b) => (b.ultimoAcesso?.seconds || 0) - (a.ultimoAcesso?.seconds || 0));
     renderNumeros();
     renderGraficos();
@@ -216,11 +207,6 @@ function renderGraficos() {
   const etapas = somarEtapas();
   graficoBarras($("graf-etapas"), Object.entries(NOME_ETAPA).map(([k, nome]) => ({ rotulo: nome, valor: etapas[k] || 0 })), "Candidaturas");
 
-  const vagas = {};
-  usuarios.forEach((u) => (u.cvsVagas || []).forEach((k) => { vagas[k] = (vagas[k] || 0) + 1; }));
-  const top = Object.entries(vagas).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([rotulo, valor]) => ({ rotulo, valor }));
-  graficoBarras($("graf-vagas"), top, "CVs gerados");
-
   // Funil: quantas pessoas chegam a cada passo (cada passo conta quem fez pelo menos uma vez)
   const avancou = (u) => ["entrevista", "teste", "proposta"].some((e) => (u.etapas || {})[e] > 0);
   const total = usuarios.length || 1;
@@ -265,7 +251,7 @@ function renderUsuarios() {
     const acoes = el("td", "admin-acoes");
     const ver = el("button", "btn pequeno", "Ver");
     ver.type = "button";
-    ver.addEventListener("click", () => abrirDetalhe(u));
+    ver.addEventListener("click", () => desenharDetalhe(u));
     acoes.append(ver);
     if (u.email !== nuvem.SUPER_ADMIN) {
       const bloq = el("button", "btn pequeno", u.bloqueado ? "Desbloquear" : "Bloquear");
@@ -306,22 +292,10 @@ function secao(pai, titulo) {
   return s;
 }
 
-// Os dados completos da pessoa só são lidos aqui, quando o admin abre o detalhe
-async function abrirDetalhe(u) {
-  if (!u.dados) {
-    $("detalhe-titulo").textContent = u.nome || u.email;
-    $("detalhe-corpo").textContent = "Carregando…";
-    if (!$("detalhe").open) $("detalhe").showModal();
-    try { u.dados = await nuvem.dadosDoUsuario(u.uid); } catch (e) { u.dados = {}; avisar(nuvem.mensagemErro(e)); }
-  }
-  desenharDetalhe(u);
-}
-
 function desenharDetalhe(u) {
   $("detalhe-titulo").textContent = u.nome || u.email;
   const c = $("detalhe-corpo");
   c.textContent = "";
-  const d = u.dados || {};
 
   const info = secao(c, "Conta");
   const ul = el("ul", "admin-info");
@@ -329,48 +303,16 @@ function desenharDetalhe(u) {
     .forEach(([k, v]) => { const li = el("li"); li.append(el("span", null, k), el("strong", null, String(v))); ul.append(li); });
   info.append(ul);
 
-  const p = d.perfil || {};
-  const perfilSec = secao(c, "Perfil");
-  const up = el("ul", "admin-info");
-  [["Nome", p.nome], ["Cidade", p.cidade], ["Telefone", p.telefone], ["LinkedIn", p.linkedin], ["GitHub", p.github], ["CV em PDF", p.cvPdfNome]]
-    .forEach(([k, v]) => { if (!v) return; const li = el("li"); li.append(el("span", null, k), el("strong", null, String(v))); up.append(li); });
-  if (up.children.length) perfilSec.append(up); else perfilSec.append(el("p", "painel-nota", "Sem dados de perfil."));
-  if (p.cvTexto || p.cvExtraido) {
-    const det = el("details");
-    det.append(el("summary", null, "Ver texto do CV"), el("pre", "cv-original", p.cvTexto || p.cvExtraido));
-    perfilSec.append(det);
-  }
-
-  const cands = Object.values(d.candidaturas || {});
-  const candSec = secao(c, `Candidaturas (${cands.length})`);
-  if (!cands.length) candSec.append(el("p", "painel-nota", "Nenhuma."));
-  cands.forEach((x) => {
-    const linha = el("div", "admin-linha");
-    const cand = typeof x === "string" ? { data: x, etapa: "candidatei" } : x;
-    linha.append(el("strong", null, cand.titulo || "Vaga"), el("span", null, [cand.empresa, NOME_ETAPA[cand.etapa] || cand.etapa, cand.data].filter(Boolean).join(" · ")));
-    if (cand.nota) linha.append(el("span", "painel-nota", cand.nota));
-    candSec.append(linha);
-  });
-
-  const cvs = d.cvs || [];
-  const cvSec = secao(c, `CVs gerados (${cvs.length})`);
-  if (!cvs.length) cvSec.append(el("p", "painel-nota", "Nenhum."));
-  cvs.forEach((h) => {
-    const linha = el("div", "admin-linha");
-    linha.append(el("strong", null, h.vaga?.titulo || "Vaga"), el("span", null, [h.vaga?.empresa, h.data].filter(Boolean).join(" · ")));
-    cvSec.append(linha);
-  });
-
-  const conversa = d.suporte || [];
-  const supSec = secao(c, `Conversas com o suporte (${conversa.length} mensagens)`);
-  if (!conversa.length) supSec.append(el("p", "painel-nota", "Nenhuma."));
-  const msgs = el("div", "suporte-msgs admin-msgs");
-  conversa.forEach((m) => { const b = el("div", `msg ${m.de === "eu" ? "eu" : "ia"}`); b.append(el("p", null, m.texto)); msgs.append(b); });
-  if (conversa.length) supSec.append(msgs);
+  const uso = secao(c, "Uso do Radar");
+  const uu = el("ul", "admin-info");
+  [["Candidaturas", u.nCand], ...Object.entries(NOME_ETAPA).map(([k, nome]) => [`  · ${nome}`, u.etapas[k] || 0]), ["CVs gerados", u.nCvs]]
+    .forEach(([k, v]) => { const li = el("li"); li.append(el("span", null, k), el("strong", null, String(v))); uu.append(li); });
+  uso.append(uu);
+  uso.append(el("p", "painel-nota", "O conteúdo da conta (CV, candidaturas, CVs gerados e conversas com a IA) é privado de cada pessoa: nem o super admin consegue ler."));
 
   if (u.email !== nuvem.SUPER_ADMIN) {
     const perigo = secao(c, "Zona de perigo");
-    perigo.append(el("p", "painel-nota", "Apaga a ficha e todos os dados desta pessoa no Firebase. A conta de login continua existindo; para removê-la de vez, use Authentication no console do Firebase."));
+    perigo.append(el("p", "painel-nota", "Apaga a ficha e todos os dados desta pessoa no Firebase, sem abrir nada. A conta de login continua existindo; para removê-la de vez, use Authentication no console do Firebase."));
     const apagar = el("button", "btn perigo", "Apagar todos os dados deste usuário");
     apagar.type = "button";
     apagar.addEventListener("click", async () => {

@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=26">
+  <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
   <header class="topo-site">
@@ -40,7 +40,7 @@
     <h2>2. Quais dados tratamos</h2>
     <ul>
       <li><strong>Conta:</strong> nome, e-mail, foto do perfil Google (se você entrar com Google), data de cadastro e último acesso.</li>
-      <li><strong>Perfil e currículo:</strong> nome, cidade, e-mail, telefone, LinkedIn, GitHub e o texto do seu CV, se você preencher. O arquivo PDF do CV fica só no seu navegador e não é guardado no nosso banco de dados.</li>
+      <li><strong>Perfil e currículo:</strong> nome, cidade, e-mail, telefone, LinkedIn, GitHub e o texto do seu CV, se você preencher. Se você enviar o PDF do CV, ele fica guardado na sua conta para aparecer em todos os seus aparelhos; só você tem acesso a ele.</li>
       <li><strong>Uso do serviço:</strong> candidaturas que você marca (vaga, empresa, etapa, anotações), CVs gerados pela IA, meta semanal, tema escolhido, conversas com o assistente de suporte, plano de estudos, revisão do seu LinkedIn/GitHub e quantas vezes você usou a IA por dia.</li>
       <li><strong>Registros de erro:</strong> quando algo falha no site, guardamos a mensagem técnica do erro, a página, o navegador e a sua conta, para corrigir o problema. Nada do seu CV, das vagas ou dos e-mails entra nesse registro.</li>
       <li><strong>Notificações (só se você ativar):</strong> o endereço técnico de entrega de cada aparelho que você ativar (gerado pelo navegador) e se é celular ou computador. Desativar apaga.</li>
@@ -66,7 +66,7 @@
       <li><strong>Google reCAPTCHA</strong>: verifica se o acesso vem do nosso site e não de um robô.</li>
       <li><strong>Serviço de notificações do seu navegador</strong> (Google, Apple, Mozilla ou Microsoft): entrega o aviso de vagas novas, só se você ativar.</li>
       <li><strong>OpenStreetMap (Nominatim)</strong>: só quando você usa "Usar minha localização".</li>
-      <li><strong>Administrador do sistema</strong>: o super admin do Radar de Vagas pode ver os dados da sua conta (perfil, candidaturas, CVs gerados e conversas do suporte) para dar suporte, prevenir abuso e cumprir a lei. O administrador não tem acesso aos seus e-mails do Gmail.</li>
+      <li><strong>Administrador do sistema</strong>: o super admin do Radar de Vagas vê apenas os dados da conta (nome, e-mail, datas de cadastro e acesso) e números de uso (quantas candidaturas, CVs gerados e usos da IA), para dar suporte e prevenir abuso. Ele <strong>não tem acesso</strong> ao conteúdo da sua conta (currículo, PDF, candidaturas, CVs gerados, conversas com a IA) nem aos seus e-mails do Gmail: as regras do banco de dados não deixam. Ele pode bloquear ou apagar uma conta.</li>
     </ul>
     <p>Esses serviços podem guardar dados fora do Brasil, com as garantias previstas no art. 33 da LGPD (cláusulas contratuais do Google).</p>
 
@@ -87,10 +87,10 @@
     <p>Pela LGPD (art. 18), você pode: confirmar se tratamos seus dados; acessar e baixar seus dados ("Baixar backup" em Meus dados); corrigir dados; pedir a eliminação ("Excluir minha conta"); revogar consentimentos, como desconectar o Gmail ou desativar os alertas; e pedir informações sobre compartilhamento. Para o que não estiver no site, escreva para o e-mail do item 1. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
 
     <h2>8. Armazenamento no seu navegador</h2>
-    <p>O site guarda no seu navegador (localStorage) uma cópia dos seus dados, suas preferências e, se você enviar, o PDF do seu CV, para funcionar mais rápido e até sem internet. Não usamos cookies de publicidade nem de rastreamento.</p>
+    <p>O site guarda no seu navegador (localStorage) uma cópia dos seus dados, suas preferências e, se você enviar, o PDF do seu CV, para funcionar mais rápido e até sem internet. Quando você clica em "Sair", essa cópia é apagada do navegador; se outra conta entrar no mesmo aparelho, ela não vê nada da sua. Não usamos cookies de publicidade nem de rastreamento.</p>
 
     <h2>9. Segurança</h2>
-    <p>Usamos conexão segura (HTTPS), regras no banco de dados que impedem uma pessoa de ver os dados de outra, verificação App Check com reCAPTCHA e login pelo Firebase Authentication. Nenhum sistema é 100% seguro: se acontecer um incidente que traga risco a você, avisaremos você e a ANPD.</p>
+    <p>Usamos conexão segura (HTTPS), regras no banco de dados que impedem qualquer pessoa, inclusive o administrador, de ver o conteúdo da conta de outra, verificação App Check com reCAPTCHA e login pelo Firebase Authentication. Nenhum sistema é 100% seguro: se acontecer um incidente que traga risco a você, avisaremos você e a ANPD.</p>
 
     <h2>10. Crianças e adolescentes</h2>
     <p>O Radar de Vagas é voltado para pessoas a partir de 16 anos em busca de trabalho ou estágio. Menores de 18 anos devem usar com conhecimento dos responsáveis.</p>

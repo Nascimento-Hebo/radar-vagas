@@ -1084,7 +1084,7 @@ async function importarDados(arquivo) {
 }
 function apagarDados() {
   if (!confirm("Apagar suas candidaturas, CVs gerados e perfil (neste navegador e na sua conta)? Isso não pode ser desfeito.")) return;
-  for (const k of [...CHAVES_BACKUP, "radar-vagas:gemini-chave", "radar-vagas:suporte"]) {
+  for (const k of [...CHAVES_BACKUP, "radar-vagas:suporte"]) {
     try { localStorage.removeItem(k); } catch {}
     window.radarNuvem?.salvar(k, null);
   }
@@ -1161,7 +1161,7 @@ function renderConta(u, admin) {
     verificar.type = "button";
     verificar.setAttribute("role", "menuitem");
     verificar.addEventListener("click", async () => {
-      try { await window.radarNuvem.reenviarVerificacao(); avisar(`Enviamos o link para ${u.email}. Veja também a caixa de spam. Depois de clicar no link, saia e entre de novo.`); }
+      try { await window.radarNuvem.reenviarVerificacao(); avisar(`Enviamos o link para ${u.email}. Veja também a caixa de spam. Depois de clicar no link, volte aqui e recarregue a página.`); }
       catch (e) { avisar(window.radarNuvem.mensagemErro(e)); }
     });
     menu.append(verificar);
@@ -1198,7 +1198,9 @@ window.addEventListener("radar:usuario", (e) => {
   if (ficha?.bloqueado) avisar("Sua conta está bloqueada pelo administrador. Você pode ver as vagas, mas não salvar nem usar a IA.");
   renderConta(usuario, admin);
   recarregarDoNavegador();
+  if (!usuario.emailVerified) avisar("Confirme seu e-mail para salvar seus dados na nuvem e usar a IA: menu da conta → Verificar meu e-mail.");
 });
+window.addEventListener("radar:aviso", (e) => avisar(e.detail));
 window.addEventListener("radar:erro-nuvem", (e) => avisar(`Não consegui falar com a nuvem: ${e.detail}`));
 // Sem internet o Firebase não carrega: libera a página com os dados guardados neste navegador
 setTimeout(() => { if (!window.radarNuvem?.pronto) $("carregando-conta").hidden = true; }, navigator.onLine ? 12000 : 1500);

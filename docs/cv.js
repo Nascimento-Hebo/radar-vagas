@@ -2,14 +2,8 @@
 // 1) o Gemini lê a vaga e devolve requisitos + perguntas que faltam responder;
 // 2) a pessoa confere os dados (salvos no navegador) e o Gemini monta o CV para a vaga;
 // 3) o CV vira PDF pela impressão do navegador.
-// Com a conta conectada, a IA roda pelo Firebase AI Logic (window.radarNuvem.gerarIA) e ninguém precisa de chave.
-// Sem conta (modo offline ou teste local), cai no caminho antigo, com a chave do Gemini guardada no navegador.
+// A IA roda pelo Firebase AI Logic (window.radarNuvem.gerarIA): precisa da conta conectada e ninguém precisa de chave.
 
-// Tenta em ordem; se um modelo estiver sobrecarregado (503), sem cota (429) ou indisponível (404), passa para o próximo.
-const GEMINI_MODELOS = ["gemini-flash-latest", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-flash-lite-latest", "gemini-3.5-flash-lite"];
-let modeloBom = 0; // começa pelo último que funcionou
-const GEMINI_URL = (m) => `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
-const CHAVE_GEMINI = "radar-vagas:gemini-chave";
 const CHAVE_PERFIL = "radar-vagas:perfil";
 const MAX_PDF = 8 * 1024 * 1024;
 
@@ -30,58 +24,13 @@ let cvHistId = null; // entrada do histórico do CV que está aberto (para guard
 const CHAVE_HISTORICO = "radar-vagas:cvs-gerados";
 const MAX_HISTORICO = 15;
 
-// Guarda também em memória: se o navegador bloquear o localStorage, a chave vale pelo menos até fechar a aba.
-let chaveMemoria = "";
-function chaveGemini() { try { return localStorage.getItem(CHAVE_GEMINI) || chaveMemoria; } catch { return chaveMemoria; } }
-// Mostra só o começo e o tamanho, para conferir se a chave certa foi colada sem expor ela
-const mascarar = (k) => (k ? `${k.slice(0, 4)}… (${k.length} caracteres)` : "nenhuma");
-function guardarChave(k) {
-  chaveMemoria = k;
-  try { localStorage.setItem(CHAVE_GEMINI, k); return localStorage.getItem(CHAVE_GEMINI) === k; } catch { return false; }
-}
 function perfil() { return ler(CHAVE_PERFIL, {}); }
 
 // ---------- Gemini ----------
 
-const usaNuvem = () => Boolean(window.radarNuvem?.usuario);
-
 async function gemini(partes, { json = false, lerLinks = false } = {}) {
-  if (usaNuvem()) return window.radarNuvem.gerarIA(partes, { json, lerLinks });
-  const corpo = {
-    contents: [{ role: "user", parts: partes }],
-    generationConfig: { temperature: 0.3, ...(json ? { responseMimeType: "application/json" } : {}) },
-  };
-  if (lerLinks) corpo.tools = [{ url_context: {} }];
-  let r, resp;
-  for (let i = 0; i < GEMINI_MODELOS.length; i++) {
-    const n = (modeloBom + i) % GEMINI_MODELOS.length;
-    r = await fetch(GEMINI_URL(GEMINI_MODELOS[n]), {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": chaveGemini() },
-      body: JSON.stringify(corpo),
-    });
-    resp = await r.json().catch(() => ({}));
-    if (r.ok) { modeloBom = n; break; }
-    if (![404, 429, 500, 503].includes(r.status)) break; // erro de chave ou de pedido: outro modelo não resolve
-  }
-  if (!r.ok) {
-    const msg = resp.error?.message || `HTTP ${r.status}`;
-    if ((r.status === 400 && /api key/i.test(msg)) || r.status === 401 || r.status === 403) {
-      const motivo = (resp.error?.details || []).map((d) => d.reason).find(Boolean) || "";
-      const e = new Error(motivo === "ACCESS_TOKEN_TYPE_UNSUPPORTED"
-        ? "O Google ainda não aceita esta chave (erro ACCESS_TOKEN_TYPE_UNSUPPORTED). É um problema conhecido das chaves novas \"AQ.\" em algumas contas: crie uma chave nova no Google AI Studio, de preferência num projeto novo, e cole aqui."
-        : `O Google recusou a chave do Gemini (${msg}${motivo ? `, código ${motivo}` : ""}). Confira se ela foi criada no Google AI Studio e está liberada para a Gemini API.`);
-      e.message += ` Chave salva: ${mascarar(chaveGemini())}.`;
-      e.chave = true;
-      throw e;
-    }
-    if (r.status === 429) throw new Error("Limite gratuito do Gemini atingido em todos os modelos. Espere um minuto e tente de novo.");
-    if (r.status === 503) throw new Error("Todos os modelos do Gemini estão sobrecarregados agora. Espere um pouco e clique em \"Tentar de novo\".");
-    throw new Error(`O Gemini respondeu com erro: ${msg}`);
-  }
-  const texto = (resp.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
-  if (!texto) throw new Error("O Gemini não devolveu resposta. Tente de novo.");
-  return texto;
+  if (!window.radarNuvem?.usuario) throw new Error("Entre na sua conta para usar a IA.");
+  return window.radarNuvem.gerarIA(partes, { json, lerLinks });
 }
 
 function lerJson(texto) {
@@ -233,8 +182,7 @@ function abrirAdaptador(v) {
   $("cv-empresa").textContent = [v.empresa, v.local].filter(Boolean).join(" · ");
   const d = $("cv");
   if (!d.open) d.showModal();
-  if (!usaNuvem() && !chaveGemini()) telaChave();
-  else etapaVaga();
+  etapaVaga();
 }
 
 function corpoCv() {
@@ -264,55 +212,8 @@ function falha(e, repetir) {
   box.append(el("strong", null, "Não deu certo"), el("p", null, e.message || String(e)));
   const acoes = el("div", "grupo");
   acoes.append(botao("Tentar de novo", "btn primario", repetir));
-  if (e.chave && !usaNuvem()) acoes.append(botao("Trocar chave", "btn", telaChave)); // só oferece trocar quando o problema é a chave
   box.append(acoes);
   c.append(box);
-}
-
-function telaChave() {
-  const c = corpoCv();
-  const s = el("section", "cv-secao");
-  s.append(el("h3", null, "Conectar ao Gemini"));
-  const p = el("p", "cv-nota");
-  p.append("O adaptador usa a API do Gemini com a sua chave. Ela é gratuita: entre no ",
-    Object.assign(el("a", null, "Google AI Studio"), { href: "https://aistudio.google.com/apikey", target: "_blank", rel: "noopener" }),
-    ", clique em \"Create API key\" e cole aqui. A chave fica salva só neste navegador.");
-  s.append(p);
-  const campo = el("label", "campo");
-  const inp = el("input");
-  // Campo de texto (não "password") para o navegador não preencher sozinho com uma senha salva
-  inp.type = "text";
-  inp.name = "gemini-api-key";
-  inp.autocomplete = "off";
-  inp.spellcheck = false;
-  inp.setAttribute("data-1p-ignore", "");
-  inp.setAttribute("data-lpignore", "true");
-  inp.placeholder = "Cole aqui a chave criada no Google AI Studio";
-  inp.value = "";
-  campo.append(el("span", null, chaveGemini() ? `Chave da API do Gemini (salva agora: ${mascarar(chaveGemini())})` : "Chave da API do Gemini"), inp);
-  s.append(campo);
-  const acoes = el("div", "grupo");
-  acoes.append(botao("Salvar e continuar", "btn primario", () => {
-    const k = inp.value.trim().replace(/^["']|["']$/g, "");
-    if (!k) { inp.focus(); return; }
-    if (k.length < 30 || /\s/.test(k)) {
-      avisar("Isso não parece uma chave do Gemini (ela tem uns 40 a 60 caracteres, sem espaços). Copie de novo no AI Studio.");
-      inp.focus();
-      return;
-    }
-    if (!guardarChave(k)) avisar("O navegador não deixou salvar a chave: ela vale só até fechar esta aba.");
-    analises.clear();
-    etapaVaga();
-  }));
-  if (chaveGemini()) acoes.append(botao("Apagar chave", "btn", () => {
-    chaveMemoria = "";
-    try { localStorage.removeItem(CHAVE_GEMINI); } catch {}
-    inp.value = "";
-    avisar("Chave apagada deste navegador.");
-  }));
-  s.append(acoes);
-  c.append(s);
-  inp.focus();
 }
 
 async function etapaVaga() {
@@ -445,7 +346,6 @@ function telaDados() {
 
   const acoes = el("div", "cv-acoes");
   acoes.append(botao("Gerar CV para esta vaga", "btn primario", gerar));
-  if (!usaNuvem()) acoes.append(botao("Trocar chave do Gemini", "toggle", telaChave));
   c.append(acoes);
 }
 

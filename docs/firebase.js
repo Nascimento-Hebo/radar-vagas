@@ -1,6 +1,7 @@
 // Ponte entre a página e o Firebase (projeto radar-de-vagas-1f800, plano gratuito).
 // - Login: Google ou e-mail/senha (Firebase Authentication).
-// - Dados de cada pessoa: Firestore em users/{uid} e users/{uid}/dados/{nome}. O navegador guarda uma cópia (localStorage).
+// - Dados de cada pessoa: Firestore em users/{uid}, users/{uid}/dados/{nome} e users/{uid}/arquivos/* (PDF do CV).
+//   O navegador guarda uma cópia (localStorage) de uma conta por vez: veja conta-local.js.
 // - IA: Firebase AI Logic com a Gemini Developer API. A chave fica no Firebase, nunca no navegador.
 // - Gmail: token de leitura pedido pelo login do Google, só quando a pessoa conecta a central de e-mail.
 // As páginas (app.js, cv.js, admin.js) usam tudo por window.radarNuvem.
@@ -17,6 +18,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken as tokenAppCheck } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
+import { limparDadosLocais, prepararParaConta, assinaturaPdf, partesDoPdf, MAX_PARTES_PDF } from "./conta-local.js?v=27";
 
 const config = {
   apiKey: "AIzaSyByGuqZQH4mPZhsHh7rozWRRat0fsJtGg0", // chave pública do app web (identifica o projeto; quem protege os dados são as regras do Firestore)
@@ -39,7 +41,7 @@ auth.languageCode = "pt";
 const db = getFirestore(app);
 const ai = getAI(app, { backend: new GoogleAIBackend() });
 
-// Chaves do localStorage que vão para a nuvem. O PDF do CV não vai (pesa demais).
+// Chaves do localStorage que vão para a nuvem (users/{uid}/dados). O PDF do CV vai à parte, em users/{uid}/arquivos.
 const SINCRONIZADAS = {
   "radar-vagas:candidaturas": "candidaturas",
   "radar-vagas:meta-semana": "meta",
@@ -50,6 +52,7 @@ const SINCRONIZADAS = {
   "radar-vagas:evoluir": "evoluir",
 };
 const SCOPE_GMAIL = "https://www.googleapis.com/auth/gmail.readonly";
+try { localStorage.removeItem("radar-vagas:gemini-chave"); } catch {} // sobra de quando a IA usava a chave de cada pessoa
 
 let usuario = null;
 let fichaUsuario = null; // documento users/{uid}
@@ -102,8 +105,8 @@ async function excluirConta(senha = "") {
     }
   };
   if (senha) await reautenticar(); // confirma antes de apagar qualquer coisa
-  const snaps = await getDocs(collection(db, "users", u.uid, "dados"));
-  await Promise.all(snaps.docs.map((d) => deleteDoc(d.ref)));
+  const snaps = await Promise.all(["dados", "arquivos"].map((sub) => getDocs(collection(db, "users", u.uid, sub))));
+  await Promise.all(snaps.flatMap((s) => s.docs.map((d) => deleteDoc(d.ref))));
   await deleteDoc(doc(db, "users", u.uid));
   try { await deleteUser(u); }
   catch (e) {
@@ -113,7 +116,26 @@ async function excluirConta(senha = "") {
   }
   try { localStorage.clear(); sessionStorage.clear(); } catch {}
 }
-const sair = () => signOut(auth);
+
+// Tira a inscrição de notificações deste aparelho (para não chegar aviso de uma conta na outra)
+async function cancelarPushDoAparelho() {
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration();
+    await (await reg?.pushManager?.getSubscription())?.unsubscribe();
+  } catch {}
+}
+
+// Sair: termina de salvar, desliga as notificações deste aparelho e limpa o navegador para a próxima pessoa
+async function sair() {
+  clearTimeout(timerEnvio);
+  if (pendentes.size) await enviarPendentes().catch(() => {});
+  let idPush = "";
+  try { idPush = localStorage.getItem("radar-vagas:push-id") || ""; } catch {}
+  await cancelarPushDoAparelho();
+  if (idPush) await removerPush(idPush).catch(() => {});
+  await signOut(auth);
+  limparDadosLocais();
+}
 
 // Traduz os erros do Firebase para mensagens que a pessoa entende
 function mensagemErro(e) {
@@ -158,22 +180,74 @@ async function registrarUsuario(u) {
   fichaUsuario = (await getDoc(ref)).data();
 }
 
-// Traz os dados da nuvem para o navegador. Na primeira vez, sobe o que já existia neste navegador.
+/// Traz os dados da nuvem para o navegador. Só sobe o que está no navegador se ele for desta mesma conta:
+// dados de outra pessoa (ou de antes de existir o dono) são apagados, nunca copiados para a conta que entrou.
+// Devolve true quando apagou dados de outra pessoa (a página aberta precisa recarregar).
 async function carregarDados(u) {
   const snaps = await getDocs(collection(db, "users", u.uid, "dados"));
   const naNuvem = Object.fromEntries(snaps.docs.map((d) => [d.id, d.data().valor]));
+  let tinhaPush = false;
+  try { tinhaPush = Boolean(localStorage.getItem("radar-vagas:push-id")); } catch {}
+  const apagados = prepararParaConta(u.uid, { nomePdfDaConta: naNuvem.perfil?.cvPdfNome || "" });
+  if (apagados && tinhaPush) await cancelarPushDoAparelho(); // a inscrição era da outra conta
   for (const [chave, nome] of Object.entries(SINCRONIZADAS)) {
     const local = lerLocal(chave);
     if (nome in naNuvem) {
       let valor = naNuvem[nome];
       if (nome === "candidaturas" && local && typeof local === "object") valor = { ...local, ...valor }; // junta as duas listas
-      if (nome === "perfil" && local?.cvPdf) valor = { ...valor, cvPdf: local.cvPdf }; // PDF fica só no navegador
+      if (nome === "perfil" && local?.cvPdf) valor = { ...valor, cvPdf: local.cvPdf }; // o PDF vem à parte (sincronizarPdf)
       gravarLocal(chave, valor);
       if (nome === "candidaturas" && Object.keys(valor).length !== Object.keys(naNuvem[nome] || {}).length) agendarEnvio(chave, valor);
     } else if (local != null) {
       agendarEnvio(chave, local);
     }
   }
+  await sincronizarPdf(u, naNuvem.perfil).catch((e) => console.warn("PDF do CV:", e));
+  return apagados > 0;
+}
+
+// ---------- PDF do CV na nuvem: users/{uid}/arquivos/cvPdf (dados do arquivo) + cvPdf-0, cvPdf-1... (o conteúdo em partes) ----------
+
+let pdfNaNuvem = { assinatura: "", partes: 0 }; // o que está na nuvem agora
+
+const refArquivo = (uid, id) => doc(db, "users", uid, "arquivos", id);
+
+// Ao entrar: baixa o PDF da nuvem se este navegador não tem o mesmo; sobe o deste navegador se a nuvem ainda não tem (contas antigas)
+async function sincronizarPdf(u, perfilNaNuvem) {
+  const meta = (await getDoc(refArquivo(u.uid, "cvPdf"))).data();
+  pdfNaNuvem = { assinatura: meta?.assinatura || "", partes: meta?.partes || 0 };
+  const local = lerLocal("radar-vagas:perfil");
+  const pdfLocal = local?.cvPdf;
+  if (meta) {
+    if (assinaturaPdf(pdfLocal) === meta.assinatura) return;
+    const partes = await Promise.all(Array.from({ length: meta.partes }, (_, i) => getDoc(refArquivo(u.uid, `cvPdf-${i}`))));
+    if (partes.some((p) => !p.exists())) return;
+    const pdf = { nome: meta.nome, base64: partes.map((p) => p.data().dados).join("") };
+    if (assinaturaPdf(pdf) === meta.assinatura) gravarLocal("radar-vagas:perfil", { ...(lerLocal("radar-vagas:perfil") || {}), cvPdf: pdf });
+  } else if (pdfLocal?.base64 && usuario?.emailVerified) {
+    // Sem PDF na nuvem: sobe se a ficha desta conta registra esse PDF (ou se ainda não tem perfil); se ela tirou o PDF em outro aparelho, tira daqui também
+    if (!perfilNaNuvem || perfilNaNuvem.cvPdfNome === pdfLocal.nome) await enviarPdf(pdfLocal);
+    else gravarLocal("radar-vagas:perfil", { ...local, cvPdf: null });
+  }
+}
+
+async function enviarPdf(pdf) {
+  const assinatura = assinaturaPdf(pdf);
+  if (assinatura === pdfNaNuvem.assinatura) return;
+  const uid = usuario.uid;
+  if (!assinatura) { await apagarPdfDaNuvem(uid, pdfNaNuvem.partes); pdfNaNuvem = { assinatura: "", partes: 0 }; return; }
+  const partes = partesDoPdf(pdf.base64);
+  if (partes.length > MAX_PARTES_PDF) throw new Error("O PDF do CV é grande demais para guardar na nuvem.");
+  for (let i = 0; i < partes.length; i++) await setDoc(refArquivo(uid, `cvPdf-${i}`), { dados: partes[i] });
+  await setDoc(refArquivo(uid, "cvPdf"), { nome: pdf.nome || "", assinatura, partes: partes.length, atualizadoEm: serverTimestamp() });
+  for (let i = partes.length; i < pdfNaNuvem.partes; i++) await deleteDoc(refArquivo(uid, `cvPdf-${i}`)); // sobras de um PDF maior
+  pdfNaNuvem = { assinatura, partes: partes.length };
+}
+
+// Sem ler antes (o super admin não pode ler os arquivos): apaga todos os nomes possíveis
+async function apagarPdfDaNuvem(uid, partes = MAX_PARTES_PDF) {
+  await deleteDoc(refArquivo(uid, "cvPdf"));
+  await Promise.all(Array.from({ length: partes }, (_, i) => deleteDoc(refArquivo(uid, `cvPdf-${i}`))));
 }
 
 function agendarEnvio(chave, valor) {
@@ -183,16 +257,13 @@ function agendarEnvio(chave, valor) {
   timerEnvio = setTimeout(enviarPendentes, 800);
 }
 
-// Resumo na ficha (users/{uid}.resumo): o painel do admin lê só as fichas, sem abrir os dados de cada pessoa
+// Resumo na ficha (users/{uid}.resumo): só números. O painel do admin lê só isso; o conteúdo de cada pessoa é só dela.
 function montarResumo() {
   const cands = Object.values(lerLocal("radar-vagas:candidaturas") || {});
   const cvs = lerLocal("radar-vagas:cvs-gerados") || [];
   const etapas = {};
   cands.forEach((c) => { const e = typeof c === "string" ? "candidatei" : c.etapa || "candidatei"; etapas[e] = (etapas[e] || 0) + 1; });
-  return {
-    nCand: cands.length, nCvs: cvs.length, etapas,
-    cvsVagas: cvs.slice(0, 15).map((h) => [h.vaga?.titulo || "Vaga", h.vaga?.empresa].filter(Boolean).join(" · ")),
-  };
+  return { nCand: cands.length, nCvs: cvs.length, etapas };
 }
 async function atualizarResumo() {
   if (!usuario || fichaUsuario?.bloqueado) return;
@@ -204,8 +275,16 @@ async function atualizarResumo() {
   } catch (e) { console.warn("Resumo:", e); }
 }
 
+const AVISO_VERIFICAR = "Confirme seu e-mail para salvar seus dados na nuvem e usar a IA: clique no link que enviamos (menu da conta → Verificar meu e-mail) e recarregue a página.";
+let avisouVerificar = false;
+
 async function enviarPendentes() {
   if (!usuario || fichaUsuario?.bloqueado) return;
+  // Conta de e-mail e senha sem e-mail confirmado: o banco não aceita. Os dados ficam neste navegador e sobem depois de confirmar.
+  if (!usuario.emailVerified) {
+    if (!avisouVerificar) { avisouVerificar = true; window.dispatchEvent(new CustomEvent("radar:aviso", { detail: AVISO_VERIFICAR })); }
+    return;
+  }
   const lote = [...pendentes.entries()];
   pendentes.clear();
   if (lote.some(([k]) => k === "radar-vagas:candidaturas" || k === "radar-vagas:cvs-gerados")) atualizarResumo();
@@ -214,6 +293,7 @@ async function enviarPendentes() {
     try {
       if (valor == null) await deleteDoc(ref);
       else await setDoc(ref, { valor: semPdf(chave, valor), atualizadoEm: serverTimestamp() });
+      if (chave === "radar-vagas:perfil") await enviarPdf(valor?.cvPdf);
     } catch (e) {
       console.warn("Não consegui salvar na nuvem:", chave, e);
       window.dispatchEvent(new CustomEvent("radar:erro-nuvem", { detail: mensagemErro(e) }));
@@ -235,15 +315,40 @@ async function carregarConfigIA() {
 // Converte as partes no formato da API REST (inline_data) para o formato do SDK (inlineData)
 const converterPartes = (partes) => partes.map((p) => p.inline_data ? { inlineData: { mimeType: p.inline_data.mime_type, data: p.inline_data.data } } : p);
 
+const diaUTC = (d) => d.toISOString().slice(0, 10); // o banco conta o dia em UTC (request.time.date())
+const dataDe = (x) => (x?.toDate ? x.toDate() : x ? new Date(x) : null);
+
+// Usos da IA hoje, pelo horário que o banco registrou (usoIA.em). Fichas antigas, sem "em", começam do zero.
+function usoDeHoje() {
+  const em = dataDe(fichaUsuario?.usoIA?.em);
+  return em && diaUTC(em) === diaUTC(new Date()) ? fichaUsuario.usoIA.n || 0 : 0;
+}
+
+// Conta o uso ANTES de chamar a IA. As regras do banco só aceitam +1 por vez, até o limite do dia:
+// se o banco recusar, a IA não é chamada.
 async function contarUsoIA() {
   if (!usuario) return;
-  const hoje = new Date().toISOString().slice(0, 10);
-  const uso = fichaUsuario?.usoIA?.dia === hoje ? fichaUsuario.usoIA.n : 0;
-  if (!ehAdmin() && configIA.limiteDiario && uso >= configIA.limiteDiario) {
-    throw new Error(`Você chegou ao limite de ${configIA.limiteDiario} usos da IA por dia. Amanhã libera de novo.`);
+  if (!usuario.emailVerified) throw new Error(AVISO_VERIFICAR);
+  const ref = doc(db, "users", usuario.uid);
+  const limite = configIA.limiteDiario;
+  const msgLimite = `Você chegou ao limite de ${limite} usos da IA por dia. Amanhã libera de novo.`;
+  for (let tentativa = 0; tentativa < 2; tentativa++) {
+    const uso = usoDeHoje();
+    if (!ehAdmin() && limite && uso >= limite) throw new Error(msgLimite);
+    const hoje = diaUTC(new Date());
+    try {
+      // usoIADias alimenta o gráfico do admin
+      await updateDoc(ref, { usoIA: { dia: hoje, n: uso + 1, em: serverTimestamp() }, usoIATotal: increment(1), [`usoIADias.${hoje}`]: increment(1) });
+      fichaUsuario = { ...fichaUsuario, usoIA: { dia: hoje, n: uso + 1, em: new Date() } };
+      return;
+    } catch (e) {
+      if (e?.code !== "permission-denied") throw e;
+      // O contador pode ter mudado em outra aba ou aparelho: lê de novo do banco e tenta uma vez
+      fichaUsuario = (await getDoc(ref)).data();
+      if (fichaUsuario?.bloqueado) throw new Error("Sua conta está bloqueada. Fale com o administrador.");
+    }
   }
-  fichaUsuario = { ...fichaUsuario, usoIA: { dia: hoje, n: uso + 1 } };
-  updateDoc(doc(db, "users", usuario.uid), { usoIA: { dia: hoje, n: uso + 1 }, usoIATotal: increment(1), [`usoIADias.${hoje}`]: increment(1) }).catch(() => {}); // usoIADias alimenta o gráfico do admin
+  throw new Error(limite && usoDeHoje() >= limite ? msgLimite : "Não consegui registrar o uso da IA. Recarregue a página e tente de novo.");
 }
 
 const TEMPO_MAX_IA = 45000; // se um modelo travar, passa para o próximo
@@ -252,6 +357,7 @@ const TEMPO_MAX_IA = 45000; // se um modelo travar, passa para o próximo
 async function gerarIA(partes, { json = false, lerLinks = false, sistema = "", historico = null } = {}) {
   if (!usuario) throw new Error("Entre na sua conta para usar a IA.");
   if (fichaUsuario?.bloqueado) throw new Error("Sua conta está bloqueada. Fale com o administrador.");
+  if (!usuario.emailVerified) throw new Error(AVISO_VERIFICAR);
   if (configIA.ativa === false) throw new Error("A IA está desligada pelo administrador no momento.");
   await contarUsoIA();
   let ultimoErro;
@@ -386,19 +492,21 @@ async function listarUsuarios() {
   const snaps = await getDocs(collection(db, "users"));
   return snaps.docs.map((d) => ({ uid: d.id, ...d.data() }));
 }
-async function dadosDoUsuario(uid) {
-  const snaps = await getDocs(collection(db, "users", uid, "dados"));
-  return Object.fromEntries(snaps.docs.map((d) => [d.id, d.data().valor]));
-}
 const atualizarUsuario = (uid, campos) => updateDoc(doc(db, "users", uid), campos);
+// O super admin não lê o conteúdo de ninguém (as regras não deixam): apaga pelos nomes conhecidos, sem abrir
 async function apagarDadosDoUsuario(uid) {
-  const snaps = await getDocs(collection(db, "users", uid, "dados"));
-  await Promise.all(snaps.docs.map((d) => deleteDoc(d.ref)));
+  await Promise.all(Object.values(SINCRONIZADAS).map((nome) => deleteDoc(doc(db, "users", uid, "dados", nome))));
+  await apagarPdfDaNuvem(uid);
   await deleteDoc(doc(db, "users", uid));
 }
 // A própria pessoa atualiza campos da ficha dela (preferências, alerta, primeiro acesso). As regras impedem mexer em papel e bloqueio.
 async function atualizarMinhaFicha(campos) {
   if (!usuario) throw new Error("Entre na sua conta primeiro.");
+  // Alerta por e-mail só com o e-mail confirmado (senão daria para mandar alertas para o e-mail de outra pessoa)
+  if (campos.alerta?.ativo && !usuario.emailVerified) {
+    campos = { ...campos, alerta: { ...campos.alerta, ativo: false } };
+    window.dispatchEvent(new CustomEvent("radar:aviso", { detail: "O alerta por e-mail liga depois que você confirmar seu e-mail (menu da conta → Verificar meu e-mail)." }));
+  }
   await updateDoc(doc(db, "users", usuario.uid), campos);
   fichaUsuario = { ...fichaUsuario, ...campos };
 }
@@ -436,18 +544,25 @@ const nuvem = {
   gerarIA,
   conectarGmail, desconectarGmail, gmailConectado: () => Boolean(tokenGmail()), gmail,
   listarErros, apagarErros,
-  listarUsuarios, dadosDoUsuario, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA, salvarConfigSuporte,
+  listarUsuarios, atualizarUsuario, apagarDadosDoUsuario, salvarConfigIA, carregarConfigIA, salvarConfigSuporte,
 };
 window.radarNuvem = nuvem;
 
 onAuthStateChanged(auth, async (u) => {
   usuario = u;
   fichaUsuario = null;
+  if (!u) limparDadosLocais(); // ninguém conectado: nada pessoal fica no navegador
   if (u) {
     try {
+      // Conta de e-mail e senha: confere se a pessoa já clicou no link de confirmação (e atualiza o login para o banco saber)
+      if (!u.emailVerified && u.providerData.some((p) => p.providerId === "password")) {
+        try { await u.reload(); if (u.emailVerified) await u.getIdToken(true); } catch {}
+      }
       await registrarUsuario(u);
-      await Promise.all([carregarDados(u), carregarConfigIA()]);
-      if (!fichaUsuario?.resumo) atualizarResumo(); // contas de antes do resumo
+      const [apagouDeOutro] = await Promise.all([carregarDados(u), carregarConfigIA()]);
+      // A página aberta pode já ter mostrado dados de quem usou o navegador antes: recarrega só com os desta conta
+      if (apagouDeOutro && !/login\.html$/.test(location.pathname)) { location.reload(); return; }
+      if (!fichaUsuario?.resumo || fichaUsuario.resumo.cvsVagas) atualizarResumo(); // contas de antes do resumo, ou com o resumo antigo (que listava as vagas)
     } catch (e) {
       console.warn("Firebase:", e);
       window.dispatchEvent(new CustomEvent("radar:erro-nuvem", { detail: mensagemErro(e) }));

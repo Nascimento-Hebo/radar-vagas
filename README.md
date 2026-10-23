@@ -39,6 +39,7 @@ npm run buscar       # busca as vagas e atualiza docs/vagas.json e docs/historic
 npm install          # só para os testes de ponta a ponta
 npx playwright install chromium
 npm run test:e2e     # abre o site num navegador de verdade (Firebase simulado) e testa os fluxos principais
+npm run test:regras  # testa as regras do banco no emulador do Firestore (precisa de Java)
 ```
 
 Para ver a página, abra `docs/index.html` com a extensão **Live Server** do VS Code (botão "Go Live" no canto de baixo). Abrir o arquivo direto com dois cliques não funciona, porque o navegador bloqueia a leitura do JSON nesse modo.
@@ -65,11 +66,12 @@ O workflow **Testes** roda a cada envio de código: os testes da lógica e os de
 O site usa o projeto Firebase `radar-de-vagas-1f800` (plano gratuito):
 
 - **Login** (Authentication): Google ou e-mail e senha. Quem não está logado vai para `login.html`.
-- **Banco** (Firestore, São Paulo): a ficha de cada pessoa fica em `users/{uid}` e os dados em `users/{uid}/dados/*`. As regras ficam em `firestore.rules` (publicar com `firebase deploy --only firestore:rules`). Cada pessoa só vê o que é dela; só o super admin vê tudo.
+- **Banco** (Firestore, São Paulo): a ficha de cada pessoa (conta e números) fica em `users/{uid}`, os dados em `users/{uid}/dados/*` e o PDF do CV em `users/{uid}/arquivos/*` (em partes de até 700 mil caracteres). As regras ficam em `firestore.rules` (publicar com `firebase deploy --only firestore:rules`). O conteúdo de cada pessoa só ela lê: o super admin vê só as fichas e pode bloquear ou apagar, sem ler. E-mail não confirmado não grava dados nem usa a IA. O limite diário da IA é conferido pelas próprias regras.
 - **IA** (Firebase AI Logic, Gemini Developer API): ninguém precisa de chave. Modelos, limite diário e liga/desliga ficam no painel do admin.
 - **App Check** (reCAPTCHA Enterprise): exigido no banco e na IA, para ninguém usar a cota fora do site.
 - **Super admin**: `nascimentohebo2@gmail.com` (em `docs/firebase.js` e em `firestore.rules`). Painel em `admin.html`: usuários, funil (cadastro → primeiro acesso → CV gerado → candidatura → entrevista), uso da IA por dia, alertas ativos, **erros do site** e configuração da IA e do assistente.
-- **Resumo por pessoa** (`users/{uid}.resumo`): cada pessoa grava na própria ficha quantas candidaturas e CVs tem. O admin lê só as fichas; os dados completos de alguém só são lidos ao abrir o detalhe.
+- **Resumo por pessoa** (`users/{uid}.resumo`): cada pessoa grava na própria ficha só números (quantas candidaturas por etapa e CVs). É tudo o que o admin vê do uso de cada um.
+- **Navegador**: guarda os dados de uma conta por vez (`radar-vagas:dono`, em `docs/conta-local.js`). Ao sair, apaga; se outra conta entrar no mesmo navegador, os dados da anterior são apagados e nunca vão para a conta nova.
 - **Erros** (`erros/*`): erros do navegador e falhas da IA (só a mensagem, a página e o navegador). Quem está logado só cria; só o super admin lê e apaga.
 
 ## Alertas: e-mail e notificação
