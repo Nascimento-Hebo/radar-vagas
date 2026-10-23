@@ -50,6 +50,7 @@ const MODULOS = {
   email: ["@cv", "email.js"],                  // central de e-mail (usa blocos do adaptador)
   evoluir: ["@cv", "evoluir.js"],              // plano de estudos e perfil online (usa a IA do adaptador)
   mercado: ["mercado.js"],
+  perguntas: ["@cv", "perguntas.js"],         // respostas para o formulário da candidatura
 };
 const VERSAO_ARQUIVOS = (document.querySelector('script[src*="app.js"]')?.getAttribute("src").match(/\?v=(\d+)/) || [])[1] || "";
 const modulosPedidos = new Map();
@@ -914,6 +915,16 @@ function cartaoCandidatura(id, x) {
     f.append(b);
     card.append(f);
   }
+
+  // Perguntas do formulário da vaga: a IA responde com base no CV adaptado (perguntas.js, carregado ao abrir)
+  const nResp = (x.perguntas || []).length;
+  const perguntas = comIcone("button", "btn pequeno cand-perguntas", svg('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><path d="M12 17h.01"/>'), nResp ? `Respostas do formulário (${nResp})` : "IA: responder perguntas da vaga");
+  perguntas.type = "button";
+  perguntas.title = "Cole as perguntas do formulário de candidatura e a IA responde com base no seu CV adaptado";
+  perguntas.addEventListener("click", async () => {
+    try { await precisa("perguntas"); abrirPerguntas(id); } catch (e) { avisar(e.message); }
+  });
+  card.append(perguntas);
 
   const nota = el("textarea", "cand-nota");
   nota.rows = 2;

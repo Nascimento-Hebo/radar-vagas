@@ -182,3 +182,30 @@ test.describe("celular (360 px)", () => {
     await expect(page.getByRole("menuitem", { name: /Usar tema/ })).toBeVisible();
   });
 });
+
+test("candidatura: a IA responde as perguntas do formulário usando o CV adaptado da vaga", async ({ page }) => {
+  await page.goto("/index.html");
+  // Adapta o CV da primeira vaga (fica no histórico) e marca a candidatura
+  await page.locator("#lista .vaga").first().getByRole("button", { name: "Adaptar meu CV" }).click();
+  await expect(page.locator("#cv-folha")).toBeVisible({ timeout: 20000 });
+  await page.keyboard.press("Escape");
+  await page.locator("#lista .vaga").first().getByRole("button", { name: "Já me candidatei" }).click();
+  await page.locator("#abrir-painel").click();
+  await page.getByRole("button", { name: "IA: responder perguntas da vaga" }).click();
+  const d = page.locator("#perguntas");
+  await expect(d.locator(".perg-base")).toContainText("CV que a IA adaptou para esta vaga");
+  await d.getByRole("button", { name: "Por que você quer trabalhar nesta empresa?" }).click();
+  await d.getByRole("button", { name: "Curta" }).click();
+  await d.getByRole("button", { name: "IA: responder" }).click();
+  await expect(d.locator(".perg-resposta")).toHaveCount(1);
+  await expect(d.locator(".perg-resposta textarea")).toHaveValue(/APIs REST/);
+  await expect(d.locator(".perg-palavras")).toContainText("Node.js");
+  // O pedido levou o CV adaptado, as palavras-chave da vaga e o limite de tamanho
+  const pedido = await page.evaluate(() => window.__ultimoPedidoPerguntas);
+  expect(pedido).toContain("CV adaptado para esta vaga");
+  expect(pedido).toContain("Palavras-chave da vaga");
+  expect(pedido).toContain("300 caracteres");
+  // Fica salvo na candidatura: o botão mostra quantas respostas há
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Respostas do formulário (1)" })).toBeVisible();
+});

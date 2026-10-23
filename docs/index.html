@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=25">
+  <link rel="stylesheet" href="style.css?v=26">
 </head>
 <body>
   <div class="carregando-conta" id="carregando-conta" role="status"><span class="cv-spin"></span> Conectando à sua conta…</div>
@@ -218,6 +218,21 @@
   </dialog>
   <div id="impressao"></div>
 
+  <!-- Perguntas do formulário de candidatura: a IA responde com base no CV adaptado e na vaga (perguntas.js) -->
+  <dialog class="cv" id="perguntas" aria-labelledby="perguntas-vaga">
+    <div class="cv-interno">
+      <div class="cv-cab">
+        <div>
+          <div class="eyebrow">Perguntas da candidatura</div>
+          <h2 id="perguntas-vaga"></h2>
+          <div class="empresa" id="perguntas-empresa"></div>
+        </div>
+        <button class="cv-x" id="perguntas-fechar" type="button" aria-label="Fechar">×</button>
+      </div>
+      <div id="perguntas-corpo" class="perguntas-corpo"></div>
+    </div>
+  </dialog>
+
   <dialog class="cv onboarding" id="boasvindas" aria-label="Configurar o Radar de Vagas">
     <div class="cv-interno" id="ob-corpo"></div>
   </dialog>
@@ -276,11 +291,11 @@
     </form>
   </section>
 
-  <script src="app.js?v=25"></script>
-  <script src="push.js?v=25"></script>
-  <script src="onboarding.js?v=25"></script>
-  <script src="avatares.js?v=25"></script>
-  <script src="suporte.js?v=25"></script>
-  <script type="module" src="firebase.js?v=25"></script>
+  <script src="app.js?v=26"></script>
+  <script src="push.js?v=26"></script>
+  <script src="onboarding.js?v=26"></script>
+  <script src="avatares.js?v=26"></script>
+  <script src="suporte.js?v=26"></script>
+  <script type="module" src="firebase.js?v=26"></script>
 </body>
 </html>
