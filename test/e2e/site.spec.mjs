@@ -160,3 +160,25 @@ test("central de e-mail sem Gmail: cola o e-mail e a IA atualiza a candidatura",
   await expect(page.locator(".quadro-col.etapa-entrevista .cand")).toHaveCount(1);
   await expect(page.locator(".quadro-col.etapa-entrevista input[type='datetime-local']")).toHaveValue("2030-05-10T14:30");
 });
+
+test.describe("celular (360 px)", () => {
+  test.use({ viewport: { width: 360, height: 760 }, isMobile: true, hasTouch: true });
+  const rolaParaOLado = (page) => page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+
+  test("nada passa da largura da tela, o nome Radar de Vagas aparece e os filtros abrem", async ({ page }) => {
+    await page.goto("/index.html");
+    await expect(page.locator("#lista .vaga").first()).toBeVisible();
+    await expect(page.locator(".marca-nome strong")).toHaveText("Radar de Vagas");
+    expect(await rolaParaOLado(page)).toBe(false);
+    await expect(page.locator("#f-nivel")).toBeHidden();
+    await page.locator("#filtros-botao").click();
+    await page.locator("#f-nivel").selectOption("Júnior");
+    await expect(page.locator("#filtros-n")).toHaveText("1");
+    await page.locator("#abrir-painel").click();
+    expect(await rolaParaOLado(page)).toBe(false);
+    await page.locator("#painel-fechar").click();
+    await expect(page.locator("#painel")).toBeHidden();
+    await page.locator(".conta-btn").click();
+    await expect(page.getByRole("menuitem", { name: /Usar tema/ })).toBeVisible();
+  });
+});

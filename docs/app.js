@@ -499,6 +499,9 @@ function render() {
   }
 
   const filtrado = Object.entries(FILTROS_PADRAO).some(([k, v]) => k !== "ordem" && filtros[k] !== v);
+  // No celular, nível/contrato/local/ordem ficam recolhidos atrás de "Filtros": o número mostra quantos estão ligados
+  const extras = ["nivel", "regime", "local", "salario", "ocultar", "ordem"].filter((k) => filtros[k] !== FILTROS_PADRAO[k]).length;
+  $("filtros-n").textContent = extras ? String(extras) : "";
   $("contagem").textContent = carregado && total ? (filtrado ? `${abertas.length} de ${total} vagas` : `${total} vagas abertas`) : "";
   $("limpar").hidden = !filtrado;
   $("fechadas").hidden = !fechadas.length;
@@ -1152,6 +1155,12 @@ function renderConta(u, admin) {
     });
     menu.append(verificar);
   }
+  // No celular o botão de tema sai do topo (falta espaço) e vem para cá
+  const temaBtn = el("button", "conta-item so-celular", document.documentElement.dataset.tema === "escuro" ? "Usar tema claro" : "Usar tema escuro");
+  temaBtn.type = "button";
+  temaBtn.setAttribute("role", "menuitem");
+  temaBtn.addEventListener("click", () => { $("tema").click(); temaBtn.textContent = document.documentElement.dataset.tema === "escuro" ? "Usar tema claro" : "Usar tema escuro"; });
+  menu.append(temaBtn);
   const prefBtn = el("button", "conta-item", "Minhas preferências");
   prefBtn.type = "button";
   prefBtn.setAttribute("role", "menuitem");
@@ -1238,6 +1247,10 @@ $("busca").addEventListener("input", (e) => {
   if (ehLink(valor)) { mostrarExterna(valor); filtros.texto = ""; }
   else { mostrarExterna(""); filtros.texto = valor; }
   render();
+});
+$("filtros-botao").addEventListener("click", () => {
+  const aberto = $("filtros-extra").classList.toggle("aberto");
+  $("filtros-botao").setAttribute("aria-expanded", String(aberto));
 });
 $("limpar").addEventListener("click", () => { Object.assign(filtros, FILTROS_PADRAO); sincronizarControles(); render(); });
 
