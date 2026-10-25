@@ -1,14 +1,14 @@
 {
-  "atualizadoEm": "2026-10-24T14:00:50.957Z",
-  "dataRodada": "2026-10-24",
+  "atualizadoEm": "2026-10-25T14:22:40.424Z",
+  "dataRodada": "2026-10-25",
   "totais": {
-    "abertas": 314,
-    "novas": 95,
-    "encerradas": 66,
+    "abertas": 307,
+    "novas": 0,
+    "encerradas": 0,
     "porArea": {
       "Front-end": 30,
-      "Full-stack": 109,
-      "Back-end": 175
+      "Full-stack": 105,
+      "Back-end": 172
     }
   },
   "vagas": [
@@ -48,7 +48,7 @@
       "repeticoes": 3,
       "prioridade": 7,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -87,7 +87,7 @@
       "repeticoes": 3,
       "prioridade": 7,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -108,7 +108,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -135,7 +135,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -164,7 +164,7 @@
       "repeticoes": 2,
       "prioridade": 5,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -189,7 +189,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -200,7 +200,7 @@
       "nivel": "Júnior",
       "regime": "CLT",
       "modelo": "Remoto",
-      "local": "REMOTO",
+      "local": "Remoto",
       "stack": [
         "Vue",
         "TypeScript",
@@ -226,7 +226,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -237,7 +237,7 @@
       "nivel": "Júnior",
       "regime": "CLT",
       "modelo": "Remoto",
-      "local": "REMOTO",
+      "local": "Remoto",
       "stack": [
         "Angular",
         "Java",
@@ -263,7 +263,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -289,7 +289,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -317,7 +317,7 @@
       "repeticoes": 6,
       "prioridade": 4,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -342,7 +342,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -373,7 +373,7 @@
       "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -404,7 +404,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -435,7 +435,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -466,7 +466,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -496,7 +496,7 @@
       "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -527,7 +527,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -564,7 +564,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -592,7 +592,7 @@
       "repeticoes": 3,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -622,7 +622,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -650,7 +650,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -675,7 +675,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -700,7 +700,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -729,7 +729,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -754,7 +754,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -778,7 +778,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -808,7 +808,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -831,7 +831,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -861,7 +861,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -895,7 +895,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -923,7 +923,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -954,7 +954,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -979,7 +979,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1014,7 +1014,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1043,7 +1043,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1073,7 +1073,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1101,7 +1101,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1132,7 +1132,7 @@
       "repeticoes": 4,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1156,7 +1156,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1180,7 +1180,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1205,7 +1205,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1229,7 +1229,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1250,7 +1250,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1273,7 +1273,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1294,7 +1294,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1321,7 +1321,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1349,7 +1349,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1373,7 +1373,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1397,7 +1397,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1421,7 +1421,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1444,7 +1444,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1467,7 +1467,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1502,7 +1502,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1528,7 +1528,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1562,7 +1562,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1588,7 +1588,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1609,7 +1609,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1634,7 +1634,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1657,7 +1657,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1678,7 +1678,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1702,7 +1702,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1725,7 +1725,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1748,7 +1748,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1772,7 +1772,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1795,7 +1795,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1818,7 +1818,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1839,7 +1839,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1865,7 +1865,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1889,7 +1889,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1913,7 +1913,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1937,7 +1937,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1971,7 +1971,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -1994,7 +1994,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2017,7 +2017,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2040,7 +2040,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2063,7 +2063,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2086,7 +2086,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2109,7 +2109,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2132,7 +2132,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2156,7 +2156,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2180,7 +2180,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2213,7 +2213,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2236,7 +2236,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2260,7 +2260,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2285,7 +2285,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2308,7 +2308,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2332,7 +2332,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2355,7 +2355,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2378,7 +2378,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2401,7 +2401,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2433,7 +2433,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2468,7 +2468,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2491,7 +2491,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2514,7 +2514,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2538,7 +2538,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2568,7 +2568,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2594,7 +2594,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2618,7 +2618,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2643,7 +2643,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2682,7 +2682,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2721,7 +2721,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2751,7 +2751,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2782,7 +2782,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2805,7 +2805,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2836,7 +2836,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2867,7 +2867,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2898,7 +2898,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2927,7 +2927,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2956,7 +2956,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -2986,7 +2986,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3017,7 +3017,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3048,7 +3048,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3076,7 +3076,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3087,7 +3087,7 @@
       "nivel": "Pleno",
       "regime": "CLT",
       "modelo": "Remoto",
-      "local": "REMOTO",
+      "local": "Remoto",
       "stack": [
         "Angular",
         "Java",
@@ -3114,7 +3114,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3125,7 +3125,7 @@
       "nivel": "Pleno",
       "regime": "CLT",
       "modelo": "Remoto",
-      "local": "REMOTO",
+      "local": "Remoto",
       "stack": [
         "Java",
         "Spring",
@@ -3151,12 +3151,12 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
       "id": "gh-backend-br-vagas-12442",
-      "titulo": "Back-end Software Engineer  - USD (Micro1)",
+      "titulo": "Back-end Software Engineer - USD (Micro1)",
       "empresa": "Micro1",
       "area": "Back-end",
       "nivel": "Não informado",
@@ -3179,7 +3179,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3217,7 +3217,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3248,7 +3248,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3276,7 +3276,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3307,7 +3307,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3332,7 +3332,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3363,7 +3363,7 @@
       "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3394,7 +3394,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3421,7 +3421,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3452,7 +3452,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3483,7 +3483,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3514,7 +3514,7 @@
       "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3543,7 +3543,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3574,7 +3574,7 @@
       "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3605,7 +3605,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3635,7 +3635,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3659,7 +3659,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3690,7 +3690,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3715,7 +3715,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3746,7 +3746,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3771,7 +3771,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3802,7 +3802,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3833,7 +3833,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3863,7 +3863,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -3890,111 +3890,13 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12445726",
-      "titulo": "Desenvolvedor(a) FullStack - Java",
-      "empresa": "Recrutamento para área de tecnologia com Fit Cultural e Aderência Técnica.",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Angular",
-        "Java",
-        "Spring",
-        "SQL",
-        "Docker",
-        "Git",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://werecruiter.gupy.io/job/eyJqb2JJZCI6MTI0NDU3MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-09",
-      "prazo": "2027-01-29",
-      "repeticoes": 2,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12422552",
-      "titulo": "Pessoa Desenvolvedora Fullstack (Home Office)",
-      "empresa": "Somos BHS 💚",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Angular",
-        ".NET",
-        "C#",
-        "SQL",
-        "Docker",
-        "Git",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://bhs.gupy.io/job/eyJqb2JJZCI6MTI0MjI1NTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-09",
-      "prazo": "2026-11-04",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-board-4710718005",
-      "titulo": "SOFTWARE DEVELOPER SPECIALIST II",
-      "empresa": "Inter",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Não informado",
-      "local": "Belo Horizonte, MG, Curitiba, PR, Recife, PE, São Paulo, SP",
-      "stack": [
-        "Java",
-        "Spring",
-        "Python",
-        "Docker",
-        "AWS",
-        "Git"
-      ],
-      "requisitos": [
-        "Sólida experiência com desenvolvimento orientado a objetos, especialmente Java e Python.",
-        "Experiência avançada com arquitetura de microsserviços.",
-        "Conhecimento profundo em TDD, DDD, Clean Code e Arquitetura Hexagonal.",
-        "Vivência em ambientes ágeis (Scrum/Kanban).",
-        "Capacidade de resolver problemas complexos e atuar em cenários de alta criticidade.",
-        "Domínio de Git/Git Flow.",
-        "Experiência com Spring Boot e/ou Micronaut.",
-        "Experiência com Kafka, mensageria e arquitetura orientada a eventos."
-      ],
-      "salario": "",
-      "link": "https://boards.greenhouse.io/inter/jobs/4710718005?gh_jid=4710718005",
-      "fonte": "Greenhouse",
-      "publicadaEm": "2026-09-09",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
       "id": "gh-backend-br-vagas-12481",
-      "titulo": "Back-end ou Full Stack Developer (Node.s + React)",
-      "empresa": "Node.s + React",
+      "titulo": "Back-end ou Full Stack Developer (Node.js + React)",
+      "empresa": "Node.js + React",
       "area": "Full-stack",
       "nivel": "Sênior",
       "regime": "PJ",
@@ -4024,7 +3926,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4052,7 +3954,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4083,7 +3985,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4113,7 +4015,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4143,7 +4045,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4171,7 +4073,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4195,7 +4097,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4225,7 +4127,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4249,7 +4151,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4279,7 +4181,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4307,7 +4209,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4332,7 +4234,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4356,7 +4258,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4383,7 +4285,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4408,7 +4310,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4435,7 +4337,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4459,7 +4361,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4485,7 +4387,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4515,7 +4417,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4542,7 +4444,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4572,7 +4474,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4595,7 +4497,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4616,7 +4518,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4646,7 +4548,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4671,7 +4573,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4697,7 +4599,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4725,7 +4627,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4759,7 +4661,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4798,7 +4700,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4831,7 +4733,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4859,7 +4761,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4886,7 +4788,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4922,7 +4824,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4959,7 +4861,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -4983,7 +4885,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5015,7 +4917,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5049,7 +4951,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5084,7 +4986,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5119,7 +5021,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5152,7 +5054,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5187,7 +5089,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5220,7 +5122,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5241,7 +5143,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5272,7 +5174,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5296,7 +5198,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5327,7 +5229,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5357,7 +5259,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5378,7 +5280,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5409,7 +5311,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5440,7 +5342,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5470,7 +5372,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5498,7 +5400,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5526,7 +5428,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5557,7 +5459,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5584,7 +5486,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5615,7 +5517,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5640,7 +5542,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5671,7 +5573,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5705,7 +5607,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5741,7 +5643,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5772,18 +5674,18 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
       "id": "gh-backend-br-vagas-12438",
-      "titulo": "(Full-remote) Senior Embedded Engineer - Jobsity",
+      "titulo": "Senior Embedded Engineer - Jobsity",
       "empresa": "Jobsity",
       "area": "Back-end",
       "nivel": "Sênior",
       "regime": "Não informado",
       "modelo": "Remoto",
-      "local": "Brasil",
+      "local": "Remote",
       "stack": [
         "Python",
         "Docker"
@@ -5796,7 +5698,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5835,7 +5737,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5864,7 +5766,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5895,7 +5797,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5926,7 +5828,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5957,7 +5859,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -5984,7 +5886,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6014,7 +5916,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6043,7 +5945,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6074,7 +5976,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6104,7 +6006,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6135,46 +6037,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-react-brasil-vagas-3032",
-      "titulo": "Senior Full Stack Developer (React, Next.js e NestJS) na Aurum | US$ 5k",
-      "empresa": "Aurum | US$ 5k",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "PJ",
-      "modelo": "Híbrido",
-      "local": "São Paulo",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "HTML/CSS",
-        "Node.js",
-        "NestJS",
-        "Docker"
-      ],
-      "requisitos": [
-        "Experiência sólida em desenvolvimento de software, incluindo atuação como profissional sênior.",
-        "Domínio de React, Next.js, TypeScript e JavaScript moderno.",
-        "Experiência prática com Node.js e NestJS no desenvolvimento de APIs e serviços.",
-        "Conhecimento sólido de HTML5, CSS3, SASS/SCSS e design responsivo.",
-        "Experiência com testes automatizados usando Jest, Vitest, React Testing Library, Playwright ou ferramentas equivalentes.",
-        "Experiência com gerenciamento de estado usando Redux, Zustand, Recoil ou solução semelhante.",
-        "Conhecimento de APIs REST e integrações client-server.",
-        "Experiência com Git e pipelines de CI/CD."
-      ],
-      "salario": "US$ 5.000",
-      "link": "https://github.com/react-brasil/vagas/issues/3032",
-      "fonte": "GitHub · react-brasil/vagas",
-      "publicadaEm": "2026-09-09",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6205,7 +6068,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6243,7 +6106,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6270,7 +6133,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6293,7 +6156,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6314,7 +6177,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6351,7 +6214,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6386,7 +6249,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6421,7 +6284,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6456,7 +6319,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6491,7 +6354,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6525,7 +6388,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6559,7 +6422,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6594,7 +6457,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6629,7 +6492,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6666,7 +6529,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6695,7 +6558,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6724,7 +6587,7 @@
       "repeticoes": 4,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6755,7 +6618,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6788,7 +6651,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6820,7 +6683,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6852,7 +6715,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6875,7 +6738,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6899,7 +6762,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6932,7 +6795,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6963,7 +6826,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -6988,7 +6851,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7024,7 +6887,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7053,7 +6916,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7090,7 +6953,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7119,7 +6982,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7146,7 +7009,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7177,7 +7040,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7202,7 +7065,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7223,7 +7086,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7244,7 +7107,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7269,7 +7132,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7298,7 +7161,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7329,7 +7192,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7360,7 +7223,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7385,7 +7248,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7416,7 +7279,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7447,7 +7310,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7472,7 +7335,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7499,7 +7362,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7529,7 +7392,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7560,7 +7423,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7594,7 +7457,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7625,7 +7488,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7653,7 +7516,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7684,7 +7547,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7710,7 +7573,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7741,7 +7604,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7770,7 +7633,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7799,7 +7662,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7827,7 +7690,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7856,7 +7719,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7887,7 +7750,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7917,35 +7780,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12393296",
-      "titulo": "Pessoa Desenvolvedora Backend PHP Especialista I (OMS / E-commerce)",
-      "empresa": "Grupo Boticário",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "PHP",
-        "Laravel",
-        "Docker",
-        "Git",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTIzOTMyOTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-09",
-      "prazo": "2026-10-31",
-      "repeticoes": 2,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -7976,7 +7811,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8011,7 +7846,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8047,7 +7882,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8073,7 +7908,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8104,7 +7939,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8127,7 +7962,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8158,7 +7993,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8189,7 +8024,7 @@
       "repeticoes": 3,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8215,7 +8050,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8243,7 +8078,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8272,7 +8107,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8302,7 +8137,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8333,7 +8168,7 @@
       "repeticoes": 6,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8361,7 +8196,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8386,7 +8221,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8409,7 +8244,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8436,7 +8271,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8457,7 +8292,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8486,7 +8321,7 @@
       "repeticoes": 3,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8516,7 +8351,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8547,7 +8382,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8578,7 +8413,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8606,7 +8441,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8637,7 +8472,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8648,7 +8483,7 @@
       "nivel": "Sênior/Especialista",
       "regime": "PJ ou Freela",
       "modelo": "Híbrido",
-      "local": "Brasil",
+      "local": "Híbrido",
       "stack": [
         "React",
         "TypeScript",
@@ -8665,7 +8500,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8696,7 +8531,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8724,7 +8559,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8761,7 +8596,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8790,7 +8625,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8814,34 +8649,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12447728",
-      "titulo": "Desenvolvedor Sênior .Net",
-      "empresa": "Ouribank",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Híbrido",
-      "local": "São Paulo - São Paulo",
-      "stack": [
-        ".NET",
-        "SQL",
-        "AWS",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://ouribank.gupy.io/job/eyJqb2JJZCI6MTI0NDc3MjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-09",
-      "prazo": "2026-11-08",
-      "repeticoes": 1,
-      "prioridade": -1,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8867,7 +8675,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8893,7 +8701,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8919,7 +8727,7 @@
       "repeticoes": 2,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8940,7 +8748,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -8961,7 +8769,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
@@ -9000,32 +8808,7 @@
       "repeticoes": 1,
       "prioridade": -3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-frontendbr-vagas-8559",
-      "titulo": "Fullstack developer Python/React & IA na Evertec 🧡",
-      "empresa": "Evertec 🧡",
-      "area": "Full-stack",
-      "nivel": "Pleno/Sênior/Especialista",
-      "regime": "CLT",
-      "modelo": "Híbrido",
-      "local": "SP",
-      "stack": [
-        "React",
-        "Python",
-        "Git"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://github.com/frontendbr/vagas/issues/8559",
-      "fonte": "GitHub · frontendbr/vagas",
-      "publicadaEm": "2026-09-09",
-      "repeticoes": 2,
-      "prioridade": -3,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
       "status": "aberta"
     },
     {
