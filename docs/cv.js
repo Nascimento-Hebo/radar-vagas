@@ -20,7 +20,10 @@ const analises = new Map(); // id da vaga -> resposta da etapa 1 (evita pagar du
 let cvVaga = null;
 let cvAnalise = null;
 let cvGerado = null;
-let cvHistId = null; // entrada do histórico do CV que está aberto (para guardar carta e entrevista junto)
+// CV aberto: rascunho até a pessoa salvar (ou baixar, copiar, imprimir). Só então entra em "Meus CVs".
+// Carta, tradução, edições e simulação ficam junto dele.
+let cvEntrada = null;
+let cvSalvo = false;
 const CHAVE_HISTORICO = "radar-vagas:cvs-gerados";
 const MAX_HISTORICO = 15;
 
@@ -176,7 +179,8 @@ function abrirAdaptador(v) {
   cvVaga = v;
   cvAnalise = null;
   cvGerado = null;
-  cvHistId = null;
+  cvEntrada = null;
+  cvSalvo = false;
   sim = null;
   $("cv-vaga").textContent = v.titulo;
   $("cv-empresa").textContent = [v.empresa, v.local].filter(Boolean).join(" · ");
@@ -421,13 +425,14 @@ async function executarGeracao(p, respostas, rascunho) {
     salvar(CHAVE_PERFIL, { ...perfil(), cvExtraido: String(cvGerado.textoOriginal) });
   }
   if (typeof atualizarCompatibilidade === "function") atualizarCompatibilidade(); // em app.js
-  guardarNoHistorico(p);
+  criarRascunho(p);
   telaResultado(p, rascunho);
 }
 
-function guardarNoHistorico(p) {
+// Cada geração vira um rascunho, só em memória: gerar de novo para a mesma vaga troca o rascunho.
+function criarRascunho(p) {
   const { cvPdf, ...perfilLeve } = p; // o PDF não vai para o histórico (pesa demais)
-  const entrada = {
+  cvEntrada = {
     id: `cv-${Date.now()}`,
     data: new Date().toISOString().slice(0, 10),
     vaga: { id: cvVaga.id, titulo: cvVaga.titulo, empresa: cvVaga.empresa || "", local: cvVaga.local || "", link: cvVaga.link, externa: Boolean(cvVaga.externa) },
@@ -436,21 +441,33 @@ function guardarNoHistorico(p) {
     cv: cvGerado,
     extras: {},
   };
-  cvHistId = entrada.id;
-  const lista = [entrada, ...ler(CHAVE_HISTORICO, [])].slice(0, MAX_HISTORICO);
+  cvSalvo = false;
+}
+
+const cvSalvoDaVaga = (vagaId) => ler(CHAVE_HISTORICO, []).find((x) => x.vaga?.id === vagaId) || null;
+
+// Salva o CV aberto em "Meus CVs": um por vaga (substitui o que já existia para a mesma vaga)
+function salvarNoHistorico() {
+  if (!cvEntrada) return;
+  const outros = ler(CHAVE_HISTORICO, []).filter((x) => x.id !== cvEntrada.id && x.vaga?.id !== cvEntrada.vaga?.id);
+  const lista = [cvEntrada, ...outros].slice(0, MAX_HISTORICO);
   salvar(CHAVE_HISTORICO, lista);
-  if (!ler(CHAVE_HISTORICO, []).some((x) => x.id === entrada.id)) {
+  if (!ler(CHAVE_HISTORICO, []).some((x) => x.id === cvEntrada.id)) {
     // localStorage cheio: guarda só os mais recentes
     salvar(CHAVE_HISTORICO, lista.slice(0, 5));
   }
+  cvSalvo = true;
 }
 
+// Muda o CV aberto. Se já está salvo, grava na hora; se é rascunho, fica só aqui até salvar.
 function atualizarHistorico(mudanca) {
-  if (!cvHistId) return;
+  if (!cvEntrada) return;
+  Object.assign(cvEntrada, mudanca(cvEntrada) || {});
+  if (!cvSalvo) return;
   const lista = ler(CHAVE_HISTORICO, []);
-  const h = lista.find((x) => x.id === cvHistId);
-  if (!h) return;
-  Object.assign(h, mudanca(h) || {});
+  const i = lista.findIndex((x) => x.id === cvEntrada.id);
+  if (i < 0) return;
+  lista[i] = cvEntrada;
   salvar(CHAVE_HISTORICO, lista);
 }
 
@@ -459,7 +476,8 @@ function abrirHistorico(h) {
   cvVaga = h.vaga;
   cvAnalise = h.analise;
   cvGerado = h.cv;
-  cvHistId = h.id;
+  cvEntrada = h;
+  cvSalvo = true;
   sim = null;
   $("cv-vaga").textContent = h.vaga.titulo;
   $("cv-empresa").textContent = [h.vaga.empresa, h.vaga.local].filter(Boolean).join(" · ");
@@ -663,8 +681,7 @@ const CHAVE_MODELO_CV = "radar-vagas:modelo-cv";
 
 function telaResultado(p, rascunho) {
   const c = corpoCv();
-  const hist = () => (cvHistId ? ler(CHAVE_HISTORICO, []).find((x) => x.id === cvHistId) : null);
-  const textos = { pt: cvGerado, en: hist()?.extras?.en || null };
+  const textos = { pt: cvGerado, en: cvEntrada?.extras?.en || null };
   const original = String(cvGerado.textoOriginal || p.cvTexto || p.cvExtraido || "").trim();
   const preferido = ler(CHAVE_MODELO_CV, "");
   let modelo = MODELOS.some(([id]) => id === preferido) ? preferido : MODELOS.some(([id]) => id === cvGerado.modeloSugerido) ? cvGerado.modeloSugerido : "classico";
@@ -815,13 +832,34 @@ function telaResultado(p, rascunho) {
   const btPdf = botao("Baixar PDF", "btn primario", () => exportar("pdf", btPdf));
   const btDocx = botao("Baixar Word", "btn", () => exportar("docx", btDocx));
   baixar.append(btPdf, btDocx,
-    botao("Copiar texto", "btn", async () => { try { await navigator.clipboard.writeText(folha.innerText); avisar("Texto do CV copiado."); } catch { avisar("Não consegui copiar."); } }),
-    botao("Imprimir", "link-btn", () => imprimir(p)));
+    botao("Copiar texto", "btn", async () => { try { await navigator.clipboard.writeText(folha.innerText); garantirSalvo(); avisar("Texto do CV copiado."); } catch { avisar("Não consegui copiar."); } }),
+    botao("Imprimir", "link-btn", () => { garantirSalvo(); imprimir(p); }));
+  const estadoCv = el("div", "aviso cv-estado");
+  function mostrarEstado() {
+    estadoCv.textContent = "";
+    if (cvSalvo) {
+      estadoCv.className = "aviso verde cv-estado";
+      estadoCv.innerHTML = svg('<path d="M20 6 9 17l-5-5"/>');
+      estadoCv.append(el("span", null, "Salvo em CVs gerados. O que você mudar aqui fica salvo sozinho."));
+      return;
+    }
+    estadoCv.className = "aviso azul cv-estado";
+    estadoCv.innerHTML = svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>');
+    const substitui = cvSalvoDaVaga(cvVaga.id);
+    estadoCv.append(el("span", null, `Rascunho: ajuste o que quiser e salve quando estiver pronto. Baixar também salva.${substitui ? " Ao salvar, ele substitui o CV que você já tinha desta vaga." : ""}`));
+    estadoCv.append(botao("Salvar em CVs gerados", "btn pequeno primario", () => { garantirSalvo(); avisar("CV salvo em Minha área → CVs gerados."); }));
+  }
+  function garantirSalvo() {
+    if (cvSalvo) return;
+    salvarNoHistorico();
+    mostrarEstado();
+  }
+  mostrarEstado();
   const candidatura = el("div", "aviso verde cand-barra");
   candidatura.hidden = true;
   const lugarFolha = el("div");
-  const notaEdicao = el("p", "cv-nota", "Clique em qualquer texto do CV para corrigir. O que você mudar fica salvo sozinho.");
-  abaCv.append(barra, qualidade, baixar, candidatura, notaEdicao, lugarFolha);
+  const notaEdicao = el("p", "cv-nota", "Clique em qualquer texto do CV para corrigir.");
+  abaCv.append(barra, qualidade, estadoCv, baixar, candidatura, notaEdicao, lugarFolha);
 
   const chaveEdicao = () => `${modelo}-${idioma}`;
   let timerEdicao = null;
@@ -842,7 +880,7 @@ function telaResultado(p, rascunho) {
     folha.contentEditable = "true";
     folha.spellcheck = true;
     folha.lang = idioma === "en" ? "en" : "pt-BR";
-    const salvo = hist()?.edicoes?.[chaveEdicao()];
+    const salvo = cvEntrada?.edicoes?.[chaveEdicao()];
     if (salvo) folha.innerHTML = salvo; // conteúdo do próprio CV da pessoa, guardado na conta dela
     else if (idioma === "pt" && original) marcarNovidades(folha, original);
     folha.classList.toggle("sem-destaque", !destacar);
@@ -881,6 +919,7 @@ ${JSON.stringify({ titulo: g.titulo, resumo: g.resumo, habilidades: g.habilidade
     try {
       if (tipo === "pdf") await baixarPdf(folha, modelo, nomeArquivo());
       else await baixarDocx(folha, nomeArquivo());
+      garantirSalvo();
       perguntarCandidatura();
     } catch (e) {
       avisar(`${e.message || e} Use "Imprimir" e escolha "Salvar como PDF".`);
@@ -1165,7 +1204,7 @@ function blocoCopiavel(titulo, texto) {
 
 async function montarExtra(box, tipo, p) {
   const cfg = EXTRAS[tipo];
-  const salvo = cvHistId ? ler(CHAVE_HISTORICO, []).find((x) => x.id === cvHistId)?.extras?.[tipo] : null;
+  const salvo = cvEntrada?.extras?.[tipo];
   box.textContent = "";
   if (salvo) {
     box.append(el("p", "cv-nota", cfg.explica));
@@ -1258,7 +1297,7 @@ const pararVoz = () => { if (temVoz) speechSynthesis.cancel(); };
 
 async function montarSimulador(box, p) {
   box.textContent = "";
-  const salvo = cvHistId ? ler(CHAVE_HISTORICO, []).find((x) => x.id === cvHistId)?.extras?.simulacao : null;
+  const salvo = cvEntrada?.extras?.simulacao;
   if (!sim && salvo?.resultado) sim = { ...salvo, i: salvo.perguntas.length };
   if (sim?.resultado) { mostrarResultadoSim(box, p); return; }
   if (sim) { mostrarPerguntaSim(box, p); return; }
@@ -1562,6 +1601,26 @@ function imprimir(p) {
   window.print();
 }
 
-$("cv-fechar").addEventListener("click", () => $("cv").close());
-$("cv").addEventListener("click", (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+// Fechar com um rascunho não salvo: pergunta antes (salvar, descartar ou continuar ajustando)
+function fecharCv() {
+  if (!cvEntrada || cvSalvo) { $("cv").close(); return; }
+  const corpo = $("cv-corpo");
+  corpo.querySelector(".cv-sair")?.remove();
+  const a = el("div", "aviso laranja cv-sair");
+  a.setAttribute("role", "alertdialog");
+  a.innerHTML = svg('<path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>');
+  a.append(el("span", null, "Este CV ainda não foi salvo. Quer guardar em CVs gerados antes de fechar?"));
+  const acoes = el("div", "grupo");
+  const salvarFechar = botao("Salvar e fechar", "btn pequeno primario", () => { salvarNoHistorico(); avisar("CV salvo em Minha área → CVs gerados."); $("cv").close(); });
+  acoes.append(salvarFechar,
+    botao("Descartar", "btn pequeno", () => { cvEntrada = null; $("cv").close(); }),
+    botao("Continuar ajustando", "link-btn", () => a.remove()));
+  a.append(acoes);
+  corpo.prepend(a);
+  $("cv").querySelector(".cv-interno").scrollIntoView({ block: "start" });
+  salvarFechar.focus();
+}
+$("cv-fechar").addEventListener("click", fecharCv);
+$("cv").addEventListener("click", (e) => { if (e.target === e.currentTarget) fecharCv(); });
+$("cv").addEventListener("cancel", (e) => { if (cvEntrada && !cvSalvo) { e.preventDefault(); fecharCv(); } }); // tecla Esc
 $("cv").addEventListener("close", pararVoz);

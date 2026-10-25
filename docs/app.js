@@ -757,21 +757,138 @@ function renderPainel() {
   ({ candidaturas: painelCandidaturas, emails: window.painelEmails, cvs: painelCvs, evoluir: window.painelEvoluir, dados: painelDados })[abaPainel](c);
 }
 
+// Duas formas de ver: "lista" (grade organizada, com filtro e busca; padrão) e "quadro" (colunas para arrastar)
+const CHAVE_VISTA_CAND = "radar-vagas:vista-candidaturas";
+const filtroCand = { etapa: "todas", texto: "" };
+const candAbertas = new Set(); // linhas da lista com os detalhes abertos
+
 function painelCandidaturas(c) {
   const lista = Object.entries(candidaturas).sort((a, b) => String(b[1].atualizadaEm || b[1].data).localeCompare(String(a[1].atualizadaEm || a[1].data)));
   if (!lista.length) {
     c.append(el("p", "painel-vazio", "Você ainda não marcou nenhuma candidatura. Quando se candidatar, clique em \"Já me candidatei\" na vaga e acompanhe aqui cada etapa."));
     return;
   }
+  const vista = ler(CHAVE_VISTA_CAND, "lista") === "quadro" ? "quadro" : "lista";
+
+  // Resumo por etapa: na lista, clicar filtra
   const resumo = el("div", "funil");
   ETAPAS.forEach(([id, nome]) => {
     const q = lista.filter(([, x]) => x.etapa === id).length;
-    const f = el("div", `funil-etapa etapa-${id}`);
+    const f = el(vista === "lista" ? "button" : "div", `funil-etapa etapa-${id}`);
     f.append(el("strong", null, String(q)), el("span", null, nome));
+    if (vista === "lista") {
+      f.type = "button";
+      f.setAttribute("aria-pressed", String(filtroCand.etapa === id));
+      f.title = `Mostrar só ${nome}`;
+      f.addEventListener("click", () => { filtroCand.etapa = filtroCand.etapa === id ? "todas" : id; renderPainel(); });
+    }
     resumo.append(f);
   });
   c.append(resumo);
 
+  const barra = el("div", "cand-barra-vista");
+  const trocaVista = el("div", "cv-modelos");
+  trocaVista.setAttribute("role", "group");
+  trocaVista.setAttribute("aria-label", "Como mostrar as candidaturas");
+  [["lista", "Lista"], ["quadro", "Quadro"]].forEach(([id, nome]) => {
+    const b = el("button", "chip", nome);
+    b.type = "button";
+    b.setAttribute("aria-pressed", String(vista === id));
+    b.addEventListener("click", () => { try { localStorage.setItem(CHAVE_VISTA_CAND, JSON.stringify(id)); } catch {} renderPainel(); });
+    trocaVista.append(b);
+  });
+  barra.append(trocaVista);
+  c.append(barra);
+
+  if (vista === "quadro") { quadroCandidaturas(c, lista); return; }
+
+  const busca = el("input", "cand-busca");
+  busca.type = "search";
+  busca.placeholder = "Buscar vaga ou empresa";
+  busca.setAttribute("aria-label", "Buscar nas candidaturas");
+  busca.value = filtroCand.texto;
+  barra.append(busca);
+  const area = el("div");
+  c.append(area);
+  const desenhar = () => listaCandidaturas(area, lista);
+  busca.addEventListener("input", () => { filtroCand.texto = busca.value; desenhar(); });
+  desenhar();
+}
+
+function listaCandidaturas(area, lista) {
+  area.textContent = "";
+  const termo = semAcento(filtroCand.texto.trim());
+  const itens = lista.filter(([, x]) => (filtroCand.etapa === "todas" || x.etapa === filtroCand.etapa)
+    && (!termo || semAcento(`${x.titulo} ${x.empresa}`).includes(termo)));
+  if (filtroCand.etapa !== "todas" || termo) {
+    const info = el("p", "painel-nota cand-filtro-info", `${itens.length} de ${lista.length} candidaturas${filtroCand.etapa !== "todas" ? ` em ${NOME_ETAPA[filtroCand.etapa]}` : ""}.`);
+    const limpar = el("button", "link-btn", "Mostrar todas");
+    limpar.type = "button";
+    limpar.addEventListener("click", () => { filtroCand.etapa = "todas"; filtroCand.texto = ""; renderPainel(); });
+    info.append(" ", limpar);
+    area.append(info);
+  }
+  if (!itens.length) { area.append(el("p", "painel-vazio", "Nenhuma candidatura com esse filtro.")); return; }
+
+  const tabela = el("div", "cand-tabela");
+  tabela.setAttribute("role", "table");
+  tabela.setAttribute("aria-label", "Candidaturas");
+  const cab = el("div", "cand-tr cand-cab");
+  cab.setAttribute("role", "row");
+  ["Vaga", "Etapa", "Candidatei em", "Última mudança", ""].forEach((t) => { const th = el("span", null, t); th.setAttribute("role", "columnheader"); cab.append(th); });
+  tabela.append(cab);
+
+  itens.forEach(([id, x]) => {
+    const linha = el("div", `cand-tr etapa-${x.etapa}`);
+    linha.setAttribute("role", "row");
+    const vagaCel = el("div", "cand-td cand-vaga");
+    const titulo = el("a", "cand-titulo", x.titulo || "Vaga");
+    if (x.link) { titulo.href = x.link; titulo.target = "_blank"; titulo.rel = "noopener noreferrer"; }
+    vagaCel.append(titulo, el("span", "cand-empresa", x.empresa || ""));
+    const selos = el("span", "cand-selos");
+    if (precisaFollowup(x)) selos.append(el("span", "selo cand-selo-follow", "Follow-up"));
+    if (x.compromisso && Date.parse(x.compromisso) > Date.now() - 3600000) selos.append(el("span", "selo cand-selo-data", fmtCompromisso(x.compromisso)));
+    if ((x.perguntas || []).length) selos.append(el("span", "selo", `${x.perguntas.length} ${x.perguntas.length === 1 ? "resposta" : "respostas"}`));
+    if (selos.childElementCount) vagaCel.append(selos);
+
+    const etapaCel = el("div", "cand-td");
+    const sel = el("select", "cand-etapa");
+    sel.setAttribute("aria-label", `Etapa: ${x.titulo || "vaga"}`);
+    ETAPAS.forEach(([v, nome]) => { const o = el("option", null, nome); o.value = v; sel.append(o); });
+    sel.value = x.etapa;
+    sel.addEventListener("change", () => mudarEtapa(x, sel.value));
+    etapaCel.append(sel);
+
+    const dias = diasDesde(x.atualizadaEm || x.data);
+    const dataCel = el("div", "cand-td cand-data", fmtData(x.data));
+    dataCel.dataset.rotulo = "Candidatei em";
+    const mudCel = el("div", "cand-td cand-data", dias === 0 ? "hoje" : `há ${dias} ${dias === 1 ? "dia" : "dias"}`);
+    mudCel.dataset.rotulo = "Última mudança";
+
+    const acaoCel = el("div", "cand-td cand-acao");
+    const aberta = candAbertas.has(id);
+    const detalhes = el("button", "btn pequeno", aberta ? "Fechar" : "Detalhes");
+    detalhes.type = "button";
+    detalhes.setAttribute("aria-expanded", String(aberta));
+    detalhes.addEventListener("click", () => {
+      if (candAbertas.has(id)) candAbertas.delete(id); else candAbertas.add(id);
+      listaCandidaturas(area, lista);
+    });
+    acaoCel.append(detalhes);
+    [vagaCel, etapaCel, dataCel, mudCel, acaoCel].forEach((td) => td.setAttribute("role", "cell"));
+    linha.append(vagaCel, etapaCel, dataCel, mudCel, acaoCel);
+    tabela.append(linha);
+
+    if (aberta) {
+      const det = el("div", "cand-detalhe");
+      det.append(...extrasCandidatura(id, x));
+      tabela.append(det);
+    }
+  });
+  area.append(tabela);
+}
+
+function quadroCandidaturas(c, lista) {
   c.append(el("p", "painel-nota quadro-dica", "Arraste os cartões entre as colunas (ou escolha a etapa no cartão)."));
   const colunas = el("div", "quadro");
   ETAPAS.forEach(([id, nome]) => {
@@ -794,7 +911,6 @@ function painelCandidaturas(c) {
   });
   c.append(colunas);
 }
-
 let arrastando = null; // id da candidatura sendo arrastada no quadro
 
 function mudarEtapa(x, etapa) {
@@ -894,8 +1010,15 @@ function cartaoCandidatura(id, x) {
   sel.addEventListener("change", () => mudarEtapa(x, sel.value));
   const dias = diasDesde(x.atualizadaEm || x.data);
   linha.append(sel, el("span", "cand-dias", dias === 0 ? "hoje" : `há ${dias} ${dias === 1 ? "dia" : "dias"}`));
-  card.append(linha);
-  if (x.etapa === "entrevista" || x.etapa === "teste" || x.compromisso) card.append(blocoCompromisso(x));
+  card.append(linha, ...extrasCandidatura(id, x));
+  return card;
+}
+
+// O que cada candidatura tem além da etapa: data da entrevista, follow-up, respostas do formulário, anotações e remover.
+// Usado no cartão do quadro e nos detalhes da lista.
+function extrasCandidatura(id, x) {
+  const partes = [];
+  if (x.etapa === "entrevista" || x.etapa === "teste" || x.compromisso) partes.push(blocoCompromisso(x));
 
   if (precisaFollowup(x)) {
     const f = el("div", "cand-follow");
@@ -913,7 +1036,7 @@ function cartaoCandidatura(id, x) {
       renderPainel();
     });
     f.append(b);
-    card.append(f);
+    partes.push(f);
   }
 
   // Perguntas do formulário da vaga: a IA responde com base no CV adaptado (perguntas.js, carregado ao abrir)
@@ -924,7 +1047,7 @@ function cartaoCandidatura(id, x) {
   perguntas.addEventListener("click", async () => {
     try { await precisa("perguntas"); abrirPerguntas(id); } catch (e) { avisar(e.message); }
   });
-  card.append(perguntas);
+  partes.push(perguntas);
 
   const nota = el("textarea", "cand-nota");
   nota.rows = 2;
@@ -932,19 +1055,20 @@ function cartaoCandidatura(id, x) {
   nota.value = x.nota || "";
   nota.setAttribute("aria-label", "Anotações da candidatura");
   nota.addEventListener("input", () => { x.nota = nota.value; salvarCandidaturas(); });
-  card.append(nota);
+  partes.push(nota);
 
   const rem = el("button", "cand-remover", "Remover");
   rem.type = "button";
   rem.addEventListener("click", () => {
     if (!confirm("Remover esta candidatura do acompanhamento?")) return;
     delete candidaturas[id];
+    candAbertas.delete(id);
     salvarCandidaturas();
     render();
     renderPainel();
   });
-  card.append(rem);
-  return card;
+  partes.push(rem);
+  return partes;
 }
 
 function painelCvs(c) {
@@ -1121,8 +1245,17 @@ aplicarTema(document.documentElement.dataset.tema || "escuro");
 
 // ---------- Conta (Firebase): login obrigatório, menu do usuário e dados vindos da nuvem ----------
 
+// Contas antigas: cada ajuste do CV criava outra entrada. Fica só o CV mais recente de cada vaga.
+function juntarCvsRepetidos() {
+  const lista = ler(CHAVE_HIST, []);
+  const vistas = new Set();
+  const unicos = lista.filter((h) => { const k = h.vaga?.id || h.id; if (vistas.has(k)) return false; vistas.add(k); return true; });
+  if (unicos.length !== lista.length) salvar(CHAVE_HIST, unicos);
+}
+
 function recarregarDoNavegador() {
   candidaturas = normalizarCandidaturas(ler(CHAVE_CAND, {}));
+  juntarCvsRepetidos();
   metaSemana = ler(CHAVE_META, 5);
   const tema = ler(CHAVE_TEMA, null);
   if (tema) aplicarTema(tema);

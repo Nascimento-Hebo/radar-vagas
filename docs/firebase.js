@@ -18,7 +18,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken as tokenAppCheck } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
-import { limparDadosLocais, prepararParaConta, assinaturaPdf, partesDoPdf, MAX_PARTES_PDF } from "./conta-local.js?v=27";
+import { limparDadosLocais, prepararParaConta, assinaturaPdf, partesDoPdf, MAX_PARTES_PDF } from "./conta-local.js?v=28";
 
 const config = {
   apiKey: "AIzaSyByGuqZQH4mPZhsHh7rozWRRat0fsJtGg0", // chave pública do app web (identifica o projeto; quem protege os dados são as regras do Firestore)

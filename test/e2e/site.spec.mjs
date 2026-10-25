@@ -66,6 +66,7 @@ test("adapta o CV com um clique e baixa o PDF de verdade", async ({ page }) => {
   await cv.getByRole("button", { name: "Baixar PDF" }).click();
   expect((await download).suggestedFilename()).toMatch(/\.pdf$/);
   await expect(cv.getByText(/CV baixado!/)).toBeVisible();
+  await expect(cv.locator(".cv-estado")).toContainText("Salvo em CVs gerados"); // baixar salva o CV
 });
 
 test("vaga de outro site pelo texto colado abre o adaptador com o título lido pela IA", async ({ page }) => {
@@ -92,6 +93,7 @@ test("candidatura: marca, arrasta para Entrevista e oferece o convite da agenda"
   await page.goto("/index.html");
   await page.locator("#lista .vaga").first().getByRole("button", { name: "Já me candidatei" }).click();
   await page.locator("#abrir-painel").click();
+  await page.getByRole("button", { name: "Quadro", exact: true }).click();
   const col = (nome) => page.locator(".quadro-col").filter({ has: page.getByRole("heading", { name: new RegExp(`^${nome}`) }) });
   // pega o cartão pela borda: nos campos (etapa, anotações) o arrasto fica desligado de propósito
   await page.locator(".cand").first().dragTo(col("Entrevista"), { sourcePosition: { x: 6, y: 6 } });
@@ -157,8 +159,10 @@ test("central de e-mail sem Gmail: cola o e-mail e a IA atualiza a candidatura",
   await page.getByRole("button", { name: "IA: entender este e-mail" }).click();
   await page.getByRole("button", { name: "Mudar para Entrevista" }).click();
   await page.getByRole("tab", { name: /Candidaturas/ }).click();
-  await expect(page.locator(".quadro-col.etapa-entrevista .cand")).toHaveCount(1);
-  await expect(page.locator(".quadro-col.etapa-entrevista input[type='datetime-local']")).toHaveValue("2030-05-10T14:30");
+  const linha = page.locator(".cand-tr.etapa-entrevista");
+  await expect(linha).toHaveCount(1);
+  await linha.getByRole("button", { name: "Detalhes" }).click();
+  await expect(page.locator(".cand-detalhe input[type='datetime-local']")).toHaveValue("2030-05-10T14:30");
 });
 
 test.describe("celular (360 px)", () => {
@@ -189,8 +193,10 @@ test("candidatura: a IA responde as perguntas do formulário usando o CV adaptad
   await page.locator("#lista .vaga").first().getByRole("button", { name: "Adaptar meu CV" }).click();
   await expect(page.locator("#cv-folha")).toBeVisible({ timeout: 20000 });
   await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Salvar e fechar" }).click();
   await page.locator("#lista .vaga").first().getByRole("button", { name: "Já me candidatei" }).click();
   await page.locator("#abrir-painel").click();
+  await page.getByRole("button", { name: "Detalhes" }).click();
   await page.getByRole("button", { name: "IA: responder perguntas da vaga" }).click();
   const d = page.locator("#perguntas");
   await expect(d.locator(".perg-base")).toContainText("CV que a IA adaptou para esta vaga");
@@ -208,4 +214,54 @@ test("candidatura: a IA responde as perguntas do formulário usando o CV adaptad
   // Fica salvo na candidatura: o botão mostra quantas respostas há
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Respostas do formulário (1)" })).toBeVisible();
+});
+
+test("CV: fica como rascunho até salvar, e ajustar a mesma vaga não cria outro CV", async ({ page }) => {
+  await page.goto("/index.html");
+  const cv = page.locator("#cv");
+  const adaptar = async () => {
+    await page.locator("#lista .vaga").first().getByRole("button", { name: "Adaptar meu CV" }).click();
+    await expect(cv.locator("#cv-folha")).toBeVisible({ timeout: 20000 });
+  };
+  const nCvs = () => page.evaluate(() => JSON.parse(localStorage.getItem("radar-vagas:cvs-gerados") || "[]").length);
+
+  // Gerou e fechou sem salvar: pergunta, e descartar não guarda nada
+  await adaptar();
+  await expect(cv.locator(".cv-estado")).toContainText("Rascunho");
+  expect(await nCvs()).toBe(0);
+  await cv.getByRole("button", { name: "Fechar" }).click();
+  await cv.getByRole("button", { name: "Descartar" }).click();
+  await expect(cv).toBeHidden();
+  expect(await nCvs()).toBe(0);
+
+  // Gerou, salvou, gerou de novo para a mesma vaga e salvou: continua um só
+  await adaptar();
+  await cv.getByRole("button", { name: "Salvar em CVs gerados" }).click();
+  await expect(cv.locator(".cv-estado")).toContainText("Salvo em CVs gerados");
+  await cv.getByRole("button", { name: "Fechar" }).click();
+  await expect(cv).toBeHidden();
+  await adaptar();
+  await expect(cv.locator(".cv-estado")).toContainText("substitui o CV que você já tinha");
+  await cv.getByRole("button", { name: "Salvar em CVs gerados" }).click();
+  expect(await nCvs()).toBe(1);
+});
+
+test("candidaturas em lista: filtra pela etapa, busca e abre os detalhes", async ({ page }) => {
+  await page.goto("/index.html");
+  const vagas = page.locator("#lista .vaga");
+  await vagas.nth(0).getByRole("button", { name: "Já me candidatei" }).click();
+  await vagas.nth(1).getByRole("button", { name: "Já me candidatei" }).click();
+  await page.locator("#abrir-painel").click();
+  const linhas = page.locator(".cand-tabela .cand-tr:not(.cand-cab)");
+  await expect(linhas).toHaveCount(2);
+  // muda a etapa de uma pela lista e filtra clicando no resumo
+  await linhas.first().getByRole("combobox").selectOption("entrevista");
+  await page.locator("button.funil-etapa.etapa-entrevista").click();
+  await expect(linhas).toHaveCount(1);
+  await page.getByRole("button", { name: "Mostrar todas" }).click();
+  await page.getByRole("searchbox", { name: "Buscar nas candidaturas" }).fill("Beta");
+  await expect(linhas).toHaveCount(1);
+  await expect(linhas.first()).toContainText("Beta");
+  await linhas.first().getByRole("button", { name: "Detalhes" }).click();
+  await expect(page.locator(".cand-detalhe textarea")).toBeVisible();
 });
