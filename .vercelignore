@@ -1,0 +1,9 @@
+# A Vercel publica só a pasta docs/ (vercel.json). O resto não precisa subir.
+node_modules
+test
+test-results
+playwright-report
+scripts
+extensao
+.github
+*.log
