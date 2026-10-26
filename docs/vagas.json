@@ -1,93 +1,40 @@
 {
-  "atualizadoEm": "2026-10-25T14:22:40.424Z",
-  "dataRodada": "2026-10-25",
+  "atualizadoEm": "2026-10-26T16:48:07.432Z",
+  "dataRodada": "2026-10-26",
   "totais": {
-    "abertas": 307,
-    "novas": 0,
-    "encerradas": 0,
+    "abertas": 309,
+    "novas": 15,
+    "encerradas": 11,
     "porArea": {
-      "Front-end": 30,
-      "Full-stack": 105,
-      "Back-end": 172
+      "Front-end": 31,
+      "Full-stack": 108,
+      "Back-end": 170
     }
   },
   "vagas": [
     {
-      "id": "gh-frontendbr-vagas-8570",
-      "titulo": "Full Stack Developer Pleno na Rotha IA",
-      "empresa": "Rotha IA",
-      "area": "Full-stack",
-      "nivel": "Júnior/Pleno",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "SQL",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
-        "Pelo menos 3 anos com desenvolvimento web, com pelo menos um sistema em produção usado por clientes.",
-        "Domínio de React e TypeScript, com experiência em Next.js.",
-        "PostgreSQL além do básico: modelagem, índices, consultas complexas e migrations.",
-        "Supabase (Auth, RLS e Edge Functions) ou stack equivalente.",
-        "APIs REST e webhooks.",
-        "Testes automatizados e Git com revisão de código.",
-        "Autonomia e IA: usar IA (Claude Code, Cursor ou similar) para ganhar produtividade, revisando e sabendo explicar tudo o que entrega."
-      ],
-      "salario": "R$ 5.000",
-      "link": "https://github.com/frontendbr/vagas/issues/8570",
-      "fonte": "GitHub · frontendbr/vagas",
-      "publicadaEm": "2026-10-17",
-      "repeticoes": 3,
-      "prioridade": 7,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-frontendbr-vagas-8569",
-      "titulo": "Full Stack Developer Júnior na Rotha IA",
-      "empresa": "Rotha IA",
-      "area": "Full-stack",
+      "id": "remotar-168236",
+      "titulo": "Desenvolvedor Front-End Mobile (Angular/Ionic)",
+      "empresa": "MJV",
+      "area": "Front-end",
       "nivel": "Júnior",
-      "regime": "PJ ou Freela",
+      "regime": "Não informado",
       "modelo": "Remoto",
-      "local": "Remoto",
+      "local": "Remoto (Brasil)",
       "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "SQL",
+        "Angular",
         "Git",
-        "APIs REST",
-        "Testes"
+        "APIs REST"
       ],
-      "requisitos": [
-        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
-        "Pelo menos 1 ano com React e TypeScript (emprego, freela ou projetos próprios publicados).",
-        "Banco de dados relacional e SQL (PostgreSQL ou Supabase).",
-        "Integração de APIs REST.",
-        "Git no dia a dia.",
-        "Autonomia e IA: saber gerenciar o estado da aplicação, fazer requisições HTTP e implementar autenticação, e usar IA (Claude Code, Cursor ou similar) para ganhar produtividade sem ficar dependente dela.",
-        "Investigar um problema de ponta a ponta e explicar com clareza o que encontrou.",
-        "Next.js."
-      ],
-      "salario": "R$ 5.000",
-      "link": "https://github.com/frontendbr/vagas/issues/8569",
-      "fonte": "GitHub · frontendbr/vagas",
-      "publicadaEm": "2026-10-17",
-      "repeticoes": 3,
-      "prioridade": 7,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/168236",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
+      "repeticoes": 1,
+      "prioridade": 5,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -108,7 +55,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -135,7 +82,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -164,7 +111,7 @@
       "repeticoes": 2,
       "prioridade": 5,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -189,7 +136,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -226,7 +173,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -263,7 +210,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -289,7 +236,30 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-168220",
+      "titulo": "Analista de Sistemas HCM/C# Pleno",
+      "empresa": "Fraga Assessoria e Treinamento",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "C#"
+      ],
+      "requisitos": [],
+      "salario": "R$ 7.000",
+      "link": "https://remotar.com.br/job/168220",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
+      "repeticoes": 1,
+      "prioridade": 4,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -317,32 +287,7 @@
       "repeticoes": 6,
       "prioridade": 4,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167705",
-      "titulo": "Software Engineer | F&I",
-      "empresa": "DealerSpace",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "Java",
-        "Spring"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167705",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-22",
-      "repeticoes": 1,
-      "prioridade": 4,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -373,7 +318,7 @@
       "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -404,7 +349,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -435,7 +380,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -466,7 +411,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -496,7 +441,7 @@
       "repeticoes": 2,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -527,7 +472,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -564,7 +509,113 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12774448",
+      "titulo": "Desenvolvedor Fullstack DotNet +Angular Sênior (4819)",
+      "empresa": "Keep Simple",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Angular",
+        ".NET",
+        "C#",
+        "SQL",
+        "Docker",
+        "AWS",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://keepsimple.gupy.io/job/eyJqb2JJZCI6MTI3NzQ0NDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-26",
+      "prazo": "2026-12-22",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-168219",
+      "titulo": "Desenvolvedor Back End IoT/BMS Sênior",
+      "empresa": "Fraga Assessoria e Treinamento",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "AWS"
+      ],
+      "requisitos": [],
+      "salario": "R$ 15.000 a 18.000",
+      "link": "https://remotar.com.br/job/168219",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-168218",
+      "titulo": "Desenvolvedor(a) Full Stack Sênior",
+      "empresa": "Fraga Assessoria e Treinamento",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "C#",
+        "Git",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "R$ 15.600 a 18.000",
+      "link": "https://remotar.com.br/job/168218",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-168217",
+      "titulo": "Software Developer SR | Full Stack IoT Embarcado",
+      "empresa": "Fraga Assessoria e Treinamento",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python"
+      ],
+      "requisitos": [],
+      "salario": "R$ 15.600 a 18.000",
+      "link": "https://remotar.com.br/job/168217",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -592,7 +643,7 @@
       "repeticoes": 3,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -622,7 +673,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -650,7 +701,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -675,7 +726,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -700,7 +751,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -729,7 +780,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -754,7 +805,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -778,7 +829,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -808,30 +859,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167703",
-      "titulo": "Senior Software Engineer (Full Stack)",
-      "empresa": "Trampay",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "R$ 10.000 a 13.000",
-      "link": "https://remotar.com.br/job/167703",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-22",
-      "repeticoes": 1,
-      "prioridade": 3,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -861,7 +889,38 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12543590",
+      "titulo": "Desenvolvedor(a) Full Stack Júnior",
+      "empresa": "Claro",
+      "area": "Full-stack",
+      "nivel": "Júnior",
+      "regime": "CLT",
+      "modelo": "Presencial",
+      "local": "Rio de Janeiro - Rio de Janeiro",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "Node.js",
+        "Java",
+        "Spring",
+        "MongoDB"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://vempraclaro.gupy.io/job/eyJqb2JJZCI6MTI1NDM1OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-08",
+      "prazo": "2026-10-27",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -895,7 +954,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -923,7 +982,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -954,7 +1013,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -979,7 +1038,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1014,7 +1073,67 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12781071",
+      "titulo": "ESPECIALISTA DESENVOLVEDOR FULLSTACK (JAVA, ANGULAR, SPRINGBOOT) - RHA4302",
+      "empresa": "Spread Tecnologia",
+      "area": "Full-stack",
+      "nivel": "Especialista",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Angular",
+        "JavaScript",
+        "HTML/CSS",
+        "Java",
+        "Spring",
+        "Docker",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://spread.gupy.io/job/eyJqb2JJZCI6MTI3ODEwNzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-26",
+      "prazo": "2026-12-31",
+      "repeticoes": 2,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12782348",
+      "titulo": "Desenvolvedor Python PL/GCP",
+      "empresa": "Stefanini Group",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Presencial",
+      "local": "Curitiba - Paraná",
+      "stack": [
+        "Python",
+        "SQL",
+        "Docker",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI3ODIzNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-26",
+      "prazo": "2026-11-30",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1043,7 +1162,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1073,7 +1192,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1101,7 +1220,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1132,7 +1251,7 @@
       "repeticoes": 4,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1156,7 +1275,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1180,7 +1299,37 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-168150",
+      "titulo": "Desenvolvedor Frontend React Pleno",
+      "empresa": "Deliver IT",
+      "area": "Front-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "Tailwind",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/168150",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-23",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1205,7 +1354,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1229,7 +1378,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1250,7 +1399,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1273,7 +1422,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1294,7 +1443,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1321,7 +1470,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1349,7 +1498,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1373,7 +1522,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1397,7 +1546,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1421,7 +1570,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1444,7 +1593,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1467,7 +1616,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1502,7 +1651,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1528,7 +1677,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1562,7 +1711,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1588,7 +1737,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1609,7 +1758,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1634,7 +1783,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1657,7 +1806,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1678,7 +1827,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1702,7 +1851,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1725,7 +1874,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1748,7 +1897,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1772,7 +1921,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1795,7 +1944,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1818,7 +1967,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1839,7 +1988,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1865,7 +2014,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1889,7 +2038,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1913,7 +2062,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1937,7 +2086,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1971,7 +2120,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -1994,7 +2143,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2017,7 +2166,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2040,7 +2189,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2063,7 +2212,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2086,7 +2235,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2109,7 +2258,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2132,7 +2281,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2156,7 +2305,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2180,7 +2329,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2213,7 +2362,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2236,7 +2385,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2260,7 +2409,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2285,7 +2434,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2308,7 +2457,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2332,7 +2481,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2355,7 +2504,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2378,7 +2527,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2401,7 +2550,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2433,7 +2582,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2468,7 +2617,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2491,7 +2640,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2514,7 +2663,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2538,7 +2687,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2568,7 +2717,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2594,7 +2743,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2618,7 +2767,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2643,7 +2792,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2682,7 +2831,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2721,7 +2870,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2751,7 +2900,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2782,7 +2931,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2805,7 +2954,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2836,7 +2985,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2867,7 +3016,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2898,7 +3047,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2927,7 +3076,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2956,7 +3105,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -2986,7 +3135,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3017,38 +3166,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12724494",
-      "titulo": "Desenvolvedor Java Fullstack",
-      "empresa": "Certsys",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Angular",
-        "JavaScript",
-        "HTML/CSS",
-        "Java",
-        "Spring",
-        ".NET",
-        "SQL",
-        "Docker"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://certsys.gupy.io/job/eyJqb2JJZCI6MTI3MjQ0OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-14",
-      "prazo": "2026-12-13",
-      "repeticoes": 2,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3076,7 +3194,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3114,7 +3232,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3151,7 +3269,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3179,45 +3297,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-backend-br-vagas-12441",
-      "titulo": "Full Stack Developer - Cogfy",
-      "empresa": "Cogfy",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "PJ",
-      "modelo": "Híbrido",
-      "local": "ou Híbrido - São Paulo/SP",
-      "stack": [
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "SQL",
-        "Docker",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Experiência sólida em produção com Node.js",
-        "Domínio forte de TypeScript",
-        "Experiência com APIs REST, webhooks, autenticação e integrações",
-        "Bom entendimento de arquitetura backend e modularização",
-        "Experiência com bancos relacionais e modelagem multi-tenant",
-        "Familiaridade com filas, workers e processamento assíncrono",
-        "Experiência com testes automatizados, observabilidade e CI/CD",
-        "Desejável: produtos SaaS B2B ou B2G"
-      ],
-      "salario": "",
-      "link": "https://github.com/backend-br/vagas/issues/12441",
-      "fonte": "GitHub · backend-br/vagas",
-      "publicadaEm": "2026-10-09",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3248,7 +3328,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3276,7 +3356,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3307,7 +3387,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3332,7 +3412,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3363,7 +3443,7 @@
       "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3394,7 +3474,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3421,7 +3501,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3452,7 +3532,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3483,7 +3563,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3514,7 +3594,7 @@
       "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3543,38 +3623,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12649638",
-      "titulo": "Desenvolvedor Frontend React Pleno",
-      "empresa": "Deliver IT",
-      "area": "Front-end",
-      "nivel": "Pleno",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "TypeScript",
-        "JavaScript",
-        "HTML/CSS",
-        "Tailwind",
-        "Git",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI2NDk2MzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-30",
-      "prazo": "2026-11-29",
-      "repeticoes": 3,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3605,7 +3654,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3635,7 +3684,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3659,7 +3708,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3690,7 +3739,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3715,7 +3764,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3746,7 +3795,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3771,7 +3820,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3802,7 +3851,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3833,7 +3882,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3863,34 +3912,125 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
-      "id": "gupy-12456418",
-      "titulo": "Desenvolvedor Backend",
-      "empresa": "Gaudium",
-      "area": "Back-end",
-      "nivel": "Não informado",
+      "id": "gh-backend-br-vagas-12484",
+      "titulo": "Sr Software Engineer - Stealth",
+      "empresa": "Stealth",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Híbrido",
+      "local": "Híbrido",
+      "stack": [
+        "Next.js",
+        "JavaScript",
+        "Go",
+        "AWS"
+      ],
+      "requisitos": [
+        "Forte experiência em backend e conhecimentos de frontend;",
+        "Experiência em startups ou empresas de tecnologia;",
+        "Vivência prática construindo soluções com IA;",
+        "Visão de produto e negócio;",
+        "Autonomia para lidar com desafios abertos e prioridades em evolução."
+      ],
+      "salario": "",
+      "link": "https://github.com/backend-br/vagas/issues/12484",
+      "fonte": "GitHub · backend-br/vagas",
+      "publicadaEm": "2026-10-26",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12776564",
+      "titulo": "Desenvolvedor FrontEnd React  - Sênior",
+      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
+      "area": "Front-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Git",
+        "APIs REST",
+        "GraphQL",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NzY1NjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-26",
+      "prazo": "2026-12-22",
+      "repeticoes": 2,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12782449",
+      "titulo": "Pessoa Desenvolvedora Full Stack Sênior – Java e React. (remoto) - 2449",
+      "empresa": "Softplan",
+      "area": "Full-stack",
+      "nivel": "Sênior",
       "regime": "CLT",
       "modelo": "Remoto",
       "local": "Brasil",
       "stack": [
+        "React",
         "JavaScript",
-        "PHP",
-        "Go",
-        "APIs REST"
+        "HTML/CSS",
+        "Java",
+        "Spring",
+        "SQL",
+        "Docker",
+        "Git"
       ],
       "requisitos": [],
       "salario": "",
-      "link": "https://gaudium.gupy.io/job/eyJqb2JJZCI6MTI0NTY0MTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "link": "https://softplan.gupy.io/job/eyJqb2JJZCI6MTI3ODI0NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
-      "publicadaEm": "2026-09-10",
-      "prazo": "2026-11-06",
+      "publicadaEm": "2026-10-26",
+      "prazo": "2026-11-26",
+      "repeticoes": 2,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-168243",
+      "titulo": "Senior Backend Software Engineer",
+      "empresa": "iFood",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Docker",
+        "AWS",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/168243",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
       "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "prioridade": 1,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3926,7 +4066,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3954,7 +4094,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -3985,7 +4125,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4015,7 +4155,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4045,7 +4185,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4073,7 +4213,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4097,7 +4237,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4127,7 +4267,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4151,7 +4291,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4181,7 +4321,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4209,7 +4349,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4234,7 +4374,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4258,7 +4398,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4285,7 +4425,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4310,7 +4450,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4337,7 +4477,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4361,7 +4501,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4387,7 +4527,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4417,7 +4557,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4444,7 +4584,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4474,7 +4614,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4497,7 +4637,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4518,7 +4658,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4548,86 +4688,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167901",
-      "titulo": "Software Engineer Open Finance Sênior",
-      "empresa": "iFood",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "Python",
-        "Go"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167901",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167900",
-      "titulo": "Software Engineer Sênior - B2B Tech iFood Pago",
-      "empresa": "iFood",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "Docker",
-        "AWS",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167900",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167899",
-      "titulo": "Software Engineer Sênior - Plataformas iFood Pago",
-      "empresa": "iFood",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "Spring",
-        "SQL",
-        "AWS",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167899",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4661,7 +4722,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4700,7 +4761,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4733,35 +4794,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167885",
-      "titulo": "Software Engineer Sênior - Plataforma Banking",
-      "empresa": "iFood",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "Go",
-        "SQL",
-        "Docker",
-        "AWS",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167885",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4788,7 +4821,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4824,7 +4857,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4861,7 +4894,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4885,7 +4918,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4917,7 +4950,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4951,7 +4984,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -4986,7 +5019,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5021,7 +5054,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5054,7 +5087,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5089,7 +5122,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5122,7 +5155,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5143,7 +5176,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5174,7 +5207,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5198,7 +5231,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5229,7 +5262,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5259,7 +5292,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5280,12 +5313,12 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
       "id": "gupy-12746375",
-      "titulo": "DESENVOLVEDOR FULLSTACK SR - RHA4239",
+      "titulo": "DESENVOLVEDOR FULLSTACK JAVA/ANGULAR SR - RHA4239",
       "empresa": "Spread Tecnologia",
       "area": "Full-stack",
       "nivel": "Sênior",
@@ -5294,13 +5327,12 @@
       "local": "Brasil",
       "stack": [
         "Angular",
-        "JavaScript",
-        "HTML/CSS",
         "Java",
         "Spring",
         "Docker",
         "Git",
-        "APIs REST"
+        "APIs REST",
+        "Testes"
       ],
       "requisitos": [],
       "salario": "",
@@ -5308,10 +5340,10 @@
       "fonte": "Gupy",
       "publicadaEm": "2026-10-19",
       "prazo": "2027-02-28",
-      "repeticoes": 1,
+      "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5342,7 +5374,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5372,7 +5404,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5400,7 +5432,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5428,7 +5460,45 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gh-backend-br-vagas-12441",
+      "titulo": "Full Stack Developer - Cogfy",
+      "empresa": "Cogfy",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Híbrido",
+      "local": "ou Híbrido - São Paulo/SP",
+      "stack": [
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "SQL",
+        "Docker",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [
+        "Experiência sólida em produção com Node.js",
+        "Domínio forte de TypeScript",
+        "Experiência com APIs REST, webhooks, autenticação e integrações",
+        "Bom entendimento de arquitetura backend e modularização",
+        "Experiência com bancos relacionais e modelagem multi-tenant",
+        "Familiaridade com filas, workers e processamento assíncrono",
+        "Experiência com testes automatizados, observabilidade e CI/CD",
+        "Desejável: produtos SaaS B2B ou B2G"
+      ],
+      "salario": "",
+      "link": "https://github.com/backend-br/vagas/issues/12441",
+      "fonte": "GitHub · backend-br/vagas",
+      "publicadaEm": "2026-10-09",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-22",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5459,7 +5529,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5486,7 +5556,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5517,7 +5587,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5542,7 +5612,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5573,7 +5643,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5607,7 +5677,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5643,7 +5713,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5674,7 +5744,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5698,7 +5768,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5737,7 +5807,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5766,7 +5836,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5797,7 +5867,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5828,7 +5898,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5859,7 +5929,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5886,7 +5956,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5916,7 +5986,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5945,7 +6015,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -5976,7 +6046,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6006,7 +6076,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6037,7 +6107,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6068,7 +6138,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6106,7 +6176,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6133,7 +6203,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6156,7 +6226,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6177,7 +6247,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6214,7 +6284,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6249,7 +6319,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6284,7 +6354,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6319,7 +6389,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6354,7 +6424,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6388,7 +6458,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6422,7 +6492,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6457,7 +6527,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6492,7 +6562,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6529,7 +6599,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6558,7 +6628,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6587,7 +6657,7 @@
       "repeticoes": 4,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6618,7 +6688,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6651,7 +6721,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6683,7 +6753,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6715,7 +6785,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6738,31 +6808,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-167699",
-      "titulo": "Especialista em Desenvolvimento Backend | Arquitetura de Microsserviços",
-      "empresa": "LWSA",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Go",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167699",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-22",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6795,7 +6841,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6826,7 +6872,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6851,7 +6897,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6887,7 +6933,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6916,7 +6962,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6953,7 +6999,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -6982,7 +7028,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7009,7 +7055,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7040,7 +7086,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7065,7 +7111,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7086,7 +7132,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7107,7 +7153,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7132,7 +7178,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7161,7 +7207,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7192,7 +7238,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7223,7 +7269,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7245,10 +7291,10 @@
       "fonte": "Gupy",
       "publicadaEm": "2026-10-09",
       "prazo": "2026-11-10",
-      "repeticoes": 3,
+      "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7279,7 +7325,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7310,7 +7356,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7335,7 +7381,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7362,7 +7408,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7392,7 +7438,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7423,7 +7469,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7457,7 +7503,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7488,7 +7534,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7516,7 +7562,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7547,7 +7593,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7573,7 +7619,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7604,7 +7650,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7633,7 +7679,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7662,7 +7708,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7690,7 +7736,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7719,7 +7765,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7750,7 +7796,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7780,7 +7826,36 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12776710",
+      "titulo": "Desenvolvedor Full Stack java - Sênior",
+      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Híbrido",
+      "local": "São Paulo - São Paulo",
+      "stack": [
+        "React",
+        "Java",
+        "Spring",
+        "SQL",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NzY3MTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-26",
+      "prazo": "2026-12-22",
+      "repeticoes": 2,
+      "prioridade": -1,
+      "encontradaEm": "2026-10-26",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7811,7 +7886,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7846,7 +7921,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7882,7 +7957,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7908,7 +7983,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7939,7 +8014,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7962,7 +8037,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -7993,7 +8068,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8024,7 +8099,7 @@
       "repeticoes": 3,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8050,7 +8125,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8078,7 +8153,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8107,7 +8182,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8137,7 +8212,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8168,7 +8243,7 @@
       "repeticoes": 6,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8196,7 +8271,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8221,7 +8296,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8244,7 +8319,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8271,7 +8346,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8292,7 +8367,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8318,10 +8393,10 @@
       "fonte": "Gupy",
       "publicadaEm": "2026-10-14",
       "prazo": "2026-12-13",
-      "repeticoes": 3,
+      "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8351,7 +8426,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8382,7 +8457,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8413,7 +8488,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8441,7 +8516,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8472,7 +8547,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8500,7 +8575,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8531,7 +8606,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8559,7 +8634,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8596,7 +8671,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8625,31 +8700,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-frontendbr-vagas-8562",
-      "titulo": "Front-end Developer React-USD (Jcal)",
-      "empresa": "Jcal",
-      "area": "Front-end",
-      "nivel": "Sênior/Especialista",
-      "regime": "Não informado",
-      "modelo": "Híbrido",
-      "local": "Curitiba",
-      "stack": [
-        "React",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "US$ 5.000",
-      "link": "https://github.com/frontendbr/vagas/issues/8562",
-      "fonte": "GitHub · frontendbr/vagas",
-      "publicadaEm": "2026-09-10",
-      "repeticoes": 1,
-      "prioridade": -1,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8675,7 +8726,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8701,7 +8752,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8727,7 +8778,7 @@
       "repeticoes": 2,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8748,7 +8799,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8769,7 +8820,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
     },
     {
@@ -8808,8 +8859,338 @@
       "repeticoes": 1,
       "prioridade": -3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-25",
+      "verificadaEm": "2026-10-26",
       "status": "aberta"
+    },
+    {
+      "id": "gh-frontendbr-vagas-8570",
+      "titulo": "Full Stack Developer Pleno na Rotha IA",
+      "empresa": "Rotha IA",
+      "area": "Full-stack",
+      "nivel": "Júnior/Pleno",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto",
+      "stack": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "SQL",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [
+        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
+        "Pelo menos 3 anos com desenvolvimento web, com pelo menos um sistema em produção usado por clientes.",
+        "Domínio de React e TypeScript, com experiência em Next.js.",
+        "PostgreSQL além do básico: modelagem, índices, consultas complexas e migrations.",
+        "Supabase (Auth, RLS e Edge Functions) ou stack equivalente.",
+        "APIs REST e webhooks.",
+        "Testes automatizados e Git com revisão de código.",
+        "Autonomia e IA: usar IA (Claude Code, Cursor ou similar) para ganhar produtividade, revisando e sabendo explicar tudo o que entrega."
+      ],
+      "salario": "R$ 5.000",
+      "link": "https://github.com/frontendbr/vagas/issues/8570",
+      "fonte": "GitHub · frontendbr/vagas",
+      "publicadaEm": "2026-10-17",
+      "repeticoes": 3,
+      "prioridade": 7,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "gh-frontendbr-vagas-8569",
+      "titulo": "Full Stack Developer Júnior na Rotha IA",
+      "empresa": "Rotha IA",
+      "area": "Full-stack",
+      "nivel": "Júnior",
+      "regime": "PJ ou Freela",
+      "modelo": "Remoto",
+      "local": "Remoto",
+      "stack": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "SQL",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [
+        "Ensino superior completo ou em andamento em Computação, Sistemas de Informação, Engenharia de Software, ADS ou área relacionada.",
+        "Pelo menos 1 ano com React e TypeScript (emprego, freela ou projetos próprios publicados).",
+        "Banco de dados relacional e SQL (PostgreSQL ou Supabase).",
+        "Integração de APIs REST.",
+        "Git no dia a dia.",
+        "Autonomia e IA: saber gerenciar o estado da aplicação, fazer requisições HTTP e implementar autenticação, e usar IA (Claude Code, Cursor ou similar) para ganhar produtividade sem ficar dependente dela.",
+        "Investigar um problema de ponta a ponta e explicar com clareza o que encontrou.",
+        "Next.js."
+      ],
+      "salario": "R$ 5.000",
+      "link": "https://github.com/frontendbr/vagas/issues/8569",
+      "fonte": "GitHub · frontendbr/vagas",
+      "publicadaEm": "2026-10-17",
+      "repeticoes": 3,
+      "prioridade": 7,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167705",
+      "titulo": "Software Engineer | F&I",
+      "empresa": "DealerSpace",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Java",
+        "Spring"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/167705",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-22",
+      "repeticoes": 1,
+      "prioridade": 4,
+      "encontradaEm": "2026-10-23",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167703",
+      "titulo": "Senior Software Engineer (Full Stack)",
+      "empresa": "Trampay",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "R$ 10.000 a 13.000",
+      "link": "https://remotar.com.br/job/167703",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-22",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-23",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "gupy-12724494",
+      "titulo": "Desenvolvedor Java Fullstack",
+      "empresa": "Certsys",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Angular",
+        "JavaScript",
+        "HTML/CSS",
+        "Java",
+        "Spring",
+        ".NET",
+        "SQL",
+        "Docker"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://certsys.gupy.io/job/eyJqb2JJZCI6MTI3MjQ0OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-14",
+      "prazo": "2026-12-13",
+      "repeticoes": 2,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "gupy-12649638",
+      "titulo": "Desenvolvedor Frontend React Pleno",
+      "empresa": "Deliver IT",
+      "area": "Front-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "Tailwind",
+        "Git",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI2NDk2MzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-09-30",
+      "prazo": "2026-11-29",
+      "repeticoes": 3,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167901",
+      "titulo": "Software Engineer Open Finance Sênior",
+      "empresa": "iFood",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Python",
+        "Go"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/167901",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-23",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167900",
+      "titulo": "Software Engineer Sênior - B2B Tech iFood Pago",
+      "empresa": "iFood",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Docker",
+        "AWS",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/167900",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-23",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167899",
+      "titulo": "Software Engineer Sênior - Plataformas iFood Pago",
+      "empresa": "iFood",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Spring",
+        "SQL",
+        "AWS",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/167899",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-23",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167885",
+      "titulo": "Software Engineer Sênior - Plataforma Banking",
+      "empresa": "iFood",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Go",
+        "SQL",
+        "Docker",
+        "AWS",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/167885",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-23",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-24",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
+    },
+    {
+      "id": "remotar-167699",
+      "titulo": "Especialista em Desenvolvimento Backend | Arquitetura de Microsserviços",
+      "empresa": "LWSA",
+      "area": "Back-end",
+      "nivel": "Especialista",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Go",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/167699",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-22",
+      "repeticoes": 1,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-23",
+      "verificadaEm": "2026-10-25",
+      "status": "encerrada",
+      "encerradaEm": "2026-10-26"
     },
     {
       "id": "remotar-167543",
