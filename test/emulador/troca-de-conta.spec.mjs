@@ -49,7 +49,9 @@ async function entrar(page, email) {
 async function sair(page) {
   await page.locator(".conta-btn").click();
   await page.getByRole("menuitem", { name: "Sair" }).click();
-  await page.waitForURL(/login\.html/);
+  // O botão e o aviso de "ninguém conectado" levam ao login quase juntos: espera a página final, seja qual for o caminho
+  await expect(page).toHaveURL(/login\.html/, { timeout: 10000 });
+  await expect(page.locator("#email")).toBeVisible();
 }
 
 test("conta B entrando depois que a A saiu: não vê nada da A, nem no navegador nem na nuvem", async ({ page }) => {
