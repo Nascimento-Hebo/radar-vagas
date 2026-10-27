@@ -265,3 +265,17 @@ test("candidaturas em lista: filtra pela etapa, busca e abre os detalhes", async
   await linhas.first().getByRole("button", { name: "Detalhes" }).click();
   await expect(page.locator(".cand-detalhe textarea")).toBeVisible();
 });
+
+test("CV no padrão ATS: títulos de seção padrão e aviso quando o modelo tem duas colunas", async ({ page }) => {
+  await page.goto("/index.html");
+  await page.evaluate(() => localStorage.setItem("radar-vagas:modelo-cv", JSON.stringify("moderno")));
+  await page.locator("#lista .vaga").first().getByRole("button", { name: "Adaptar meu CV" }).click();
+  const cv = page.locator("#cv");
+  await expect(cv.locator("#cv-folha")).toBeVisible({ timeout: 20000 });
+  await expect(cv.locator("#cv-folha h2", { hasText: "Experiência Profissional" })).toBeVisible();
+  await expect(cv.locator("#cv-folha h2", { hasText: "Habilidades Técnicas" })).toBeVisible();
+  const cartao = cv.locator(".q-cartao", { hasText: "Formato para ATS" });
+  await expect(cartao).toContainText("duas colunas");
+  await cartao.getByRole("button", { name: "Usar o modelo Clássico" }).click();
+  await expect(cv.locator(".q-cartao", { hasText: "Formato pronto para ATS" })).toBeVisible();
+});

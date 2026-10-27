@@ -102,7 +102,7 @@ Responda só com JSON, em português, neste formato:
   "resumo": "1 ou 2 frases sobre a vaga",
   "obrigatorios": ["requisitos obrigatórios, curtos"],
   "desejaveis": ["diferenciais / desejáveis, curtos"],
-  "palavrasChave": ["tecnologias e termos que um filtro de RH buscaria"],
+  "palavrasChave": ["até 20 termos que um sistema de triagem (ATS) buscaria, escritos EXATAMENTE como aparecem no anúncio (mesma grafia, ex.: \"Node.js\", \"CI/CD\", \"Scrum\"): tecnologias, ferramentas, metodologias, certificações e o nome do cargo. Os mais importantes primeiro."],
   "perguntas": [{ "id": "p1", "pergunta": "pergunta curta e direta", "tipo": "texto" | "sim_nao" | "numero", "dica": "exemplo de resposta" }]
 }
 Regras para "perguntas": no máximo 5, só sobre o que essa vaga exige e que ${temCv ? "não aparece no CV" : "um CV precisaria mostrar"} (ex.: anos com uma tecnologia, um projeto com X, disponibilidade para o modelo de trabalho). Não pergunte nome, e-mail, telefone, cidade, LinkedIn nem GitHub.
@@ -151,6 +151,16 @@ Regras:
 - Frases curtas, verbos de ação, cabe em uma página.
 - Em "lacunas", liste requisitos obrigatórios que a pessoa não comprovou, para ela saber.
 
+Regras ATS (os sistemas e as IAs que fazem a triagem de currículos):
+- Use as palavras-chave da vaga com a MESMA grafia do anúncio (se a vaga diz "Node.js", não escreva "NodeJS"). Siglas: na primeira vez, escreva por extenso e a sigla, ex.: "Amazon Web Services (AWS)", "Integração e Entrega Contínuas (CI/CD)".
+- Cada palavra-chave que a pessoa realmente tem deve aparecer em "habilidades" E também dentro de uma frase de experiência ou projeto mostrando onde e como foi usada. A triagem por IA avalia o contexto, não só a lista.
+- O "resumo" deve citar o nome do cargo da vaga e as 3 a 5 palavras-chave mais importantes que a pessoa tem.
+- "habilidades": só competências técnicas, uma por item, nomes curtos, as pedidas na vaga primeiro. Sem níveis, notas ou estrelas.
+- Períodos no formato "MM/AAAA – MM/AAAA" ou "MM/AAAA – atual" (use só o ano se o CV original só tiver o ano).
+- Texto simples: sem emojis, símbolos decorativos, tabelas ou frases inteiras em maiúsculas.
+- Não repita palavras-chave à força (cada uma no máximo 2 ou 3 vezes no CV inteiro): as IAs de triagem penalizam currículos "recheados" de termos.
+- Use números e resultados só quando a pessoa os informou.
+
 Responda só com JSON neste formato:
 {
   "titulo": "título profissional com o nome do cargo como está na vaga (ex.: Desenvolvedor Full Stack Pleno) + as 2 ou 3 tecnologias principais que a pessoa realmente tem, separadas por ·. Não suba o nível além do que o CV mostra.",
@@ -162,14 +172,14 @@ Responda só com JSON neste formato:
   "certificacoes": ["..."],
   "idiomas": ["..."],
   "textoOriginal": "o texto completo do CV original, como está no anexo, em texto simples (para comparar antes e depois)",
-  "modeloSugerido": "classico" | "moderno" | "executivo" | "compacto",
+  "modeloSugerido": "classico" | "compacto",
   "motivoModelo": "1 frase: por que esse visual combina com a vaga",
   "mudancas": [{ "secao": "Resumo | Habilidades | Experiência | Projetos | Formação | Outros", "tipo": "reescrito" | "adicionado" | "removido" | "reordenado", "antes": "trecho como estava no CV original (vazio se foi adicionado)", "depois": "trecho como ficou (vazio se foi removido)", "motivo": "por que mudou, ligado à vaga" }],
   "conferir": ["frases do CV novo que a pessoa precisa confirmar que são verdade (números, tempo de experiência, tecnologias que vieram das respostas)"],
   "lacunas": ["..."]
 }
 Em "mudancas", liste TODAS as alterações relevantes em relação ao CV original, uma por item, citando os trechos de verdade. O campo "depois" é OBRIGATÓRIO e deve trazer o texto novo exatamente como ficou no CV (só fica vazio quando o tipo é "removido").
-Modelos: "classico" (uma coluna, tradicional), "moderno" (coluna lateral com contato e habilidades; bom para tech e startups), "executivo" (cabeçalho forte; bom para pleno/sênior e empresas grandes), "compacto" (denso, para muita experiência).`;
+Modelos (sugira só os de uma coluna, que os sistemas de triagem leem sem erro): "classico" (tradicional) ou "compacto" (denso, para muita experiência).`;
   return lerJson(await gemini([{ text: pedido }, ...partesDoCv(p)], { json: true }));
 }
 
@@ -542,8 +552,9 @@ function itensDeContato(p) {
 }
 
 const TITULOS_SECAO = {
-  pt: { resumo: "Resumo", habilidades: "Habilidades", experiencia: "Experiência", projetos: "Projetos", formacao: "Formação", certificacoes: "Certificações", idiomas: "Idiomas" },
-  en: { resumo: "Summary", habilidades: "Skills", experiencia: "Experience", projetos: "Projects", formacao: "Education", certificacoes: "Certifications", idiomas: "Languages" },
+  // Nomes padrão: os sistemas de triagem (ATS) procuram as seções por estes títulos
+  pt: { resumo: "Resumo Profissional", habilidades: "Habilidades Técnicas", experiencia: "Experiência Profissional", projetos: "Projetos", formacao: "Formação Acadêmica", certificacoes: "Certificações", idiomas: "Idiomas" },
+  en: { resumo: "Professional Summary", habilidades: "Technical Skills", experiencia: "Professional Experience", projetos: "Projects", formacao: "Education", certificacoes: "Certifications", idiomas: "Languages" },
 };
 
 // "Disponível: 100% remoto · PJ ou CLT", a partir de Minhas preferências
@@ -978,6 +989,15 @@ ${JSON.stringify({ titulo: g.titulo, resumo: g.resumo, habilidades: g.habilidade
       const k = add(ats.pct >= 75 ? "ok" : ats.pct >= 50 ? "medio" : "ruim", `Palavras-chave da vaga: ${ats.pct}%`, ats.faltando.length ? `Faltam: ${ats.faltando.slice(0, 6).join(", ")}${ats.faltando.length > 6 ? "…" : ""}` : "Seu CV cita todas as palavras-chave da vaga.");
       k.title = "Os sistemas de RH (ATS) filtram CVs por estas palavras.";
       if (ats.faltando.length) k.append(botao("IA: onde encaixar", "btn pequeno", (ev) => sugerirPalavras(ats.faltando, ev.currentTarget, k)));
+    }
+    const formato = checagemFormatoAts(folha, modelo, cvVaga);
+    const kfmt = add(formato.problemas.length ? "medio" : "ok", formato.problemas.length ? "Formato para ATS: ajustar" : "Formato pronto para ATS", formato.problemas.length ? "" : "Uma coluna, títulos padrão, cargo da vaga no topo e datas em todas as experiências.");
+    kfmt.title = "ATS são os sistemas (muitos com IA) que leem e filtram os CVs antes do recrutador.";
+    if (formato.problemas.length) {
+      const ul = el("ul", "q-lista");
+      formato.problemas.forEach((x) => ul.append(el("li", null, x)));
+      kfmt.append(ul);
+      if (formato.colunas) kfmt.append(botao("Usar o modelo Clássico", "btn pequeno", () => { salvar(CHAVE_MODELO_CV, "classico"); modelo = "classico"; montarFolha(); avisar("Modelo Clássico: uma coluna, lido sem erro pelos sistemas de RH."); }));
     }
     const fracas = frasesFracas(folha);
     const kf = add(fracas.length ? "medio" : "ok", fracas.length ? `${fracas.length} ${fracas.length === 1 ? "frase pode" : "frases podem"} ficar mais forte${fracas.length === 1 ? "" : "s"}` : "Frases com verbo de ação", fracas.length ? "Começam com \"responsável por\", \"ajudei\" ou parecido." : "Nenhuma frase fraca encontrada.");

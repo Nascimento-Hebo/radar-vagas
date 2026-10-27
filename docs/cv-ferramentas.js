@@ -205,6 +205,27 @@ function notaAts(folha, analise) {
   return { pct: Math.round((cobertas.length / termos.length) * 100), cobertas, faltando };
 }
 
+// ---------- Formato para ATS: o que atrapalha a leitura automática do CV (calculado aqui, sem IA) ----------
+
+function checagemFormatoAts(folha, modelo, vaga) {
+  const problemas = [];
+  const colunas = modelo === "moderno" || modelo === "executivo";
+  if (colunas) problemas.push(modelo === "moderno"
+    ? "O modelo Moderno tem duas colunas: alguns sistemas leem as colunas misturadas. Para enviar por site de vagas, prefira o Clássico ou o Compacto."
+    : "O modelo Executivo põe nome e contato numa faixa colorida: alguns sistemas não leem esse bloco. Prefira o Clássico ou o Compacto.");
+  // O título do CV deve ter o nome do cargo da vaga (ex.: "Desenvolvedor Full Stack")
+  const comuns = ["vaga", "para", "pessoa", "remoto", "remota", "junior", "pleno", "senior", "home", "office"];
+  const palavras = (x) => semAcento(x).replace(/[^a-z0-9#+ ]/g, " ").split(/\s+/).filter((w) => w.length >= 4 && !comuns.includes(w));
+  const doCargo = palavras(vaga?.titulo || "").slice(0, 4);
+  const titulo = semAcento(folha.querySelector(".folha-titulo")?.innerText || "");
+  if (doCargo.length && !doCargo.some((w) => titulo.includes(w))) problemas.push(`Coloque o nome do cargo da vaga ("${vaga.titulo}") no título, logo abaixo do seu nome.`);
+  // Toda experiência com período
+  const semData = [...folha.querySelectorAll(".folha-item")].filter((n) => n.closest("section")?.style.order === "3" && !textoLimpo(n.querySelector("span")));
+  if (semData.length) problemas.push(`${semData.length} ${semData.length === 1 ? "experiência está" : "experiências estão"} sem período (mês/ano de início e fim).`);
+  if (!folha.querySelector(".folha-contato")) problemas.push("Faltam e-mail e telefone no topo: preencha em Meus dados.");
+  return { problemas, colunas };
+}
+
 // ---------- Frases fracas: sem verbo de ação ou sem resultado ----------
 
 const RE_FRACA = /^(respons[aá]vel por|fui respons[aá]vel|ajudei|auxiliei|auxiliava|participei|participa[cç][aã]o|trabalhei (com|em|no|na)|atuei (com|em|no|na)|fazia|realizava|tarefas|atividades|suporte a|apoio a)/i;
