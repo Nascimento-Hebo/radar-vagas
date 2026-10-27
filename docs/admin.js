@@ -2,7 +2,7 @@
 // As regras do Firestore também bloqueiam qualquer outra conta, então esconder a página não é a única proteção.
 // Privacidade: o admin vê só a ficha de cada pessoa (conta e números). CV, candidaturas e conversas com a IA são só dela:
 // as regras do banco não deixam nem o super admin ler.
-import "./firebase.js?v=29";
+import "./firebase.js?v=30";
 
 const nuvem = window.radarNuvem;
 const $ = (id) => document.getElementById(id);

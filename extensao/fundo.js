@@ -1,7 +1,7 @@
 // Extensão do Radar de Vagas: pega o anúncio da página aberta e abre o adaptador de CV com ele.
 // Não lê nada sozinha: só age quando a pessoa clica no ícone ou no menu do botão direito (permissão activeTab).
 
-const SITE = "https://nascimento-hebo.github.io/radar-vagas/";
+const SITE = "https://radar-vagas-five.vercel.app/";
 const MAX_TEXTO = 15000;
 
 // Roda dentro da página da vaga: texto selecionado ou, sem seleção, o miolo da página

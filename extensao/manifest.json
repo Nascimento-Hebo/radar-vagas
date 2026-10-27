@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Radar de Vagas: adaptar meu CV",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Em qualquer página de vaga (LinkedIn, Indeed, Gupy, site da empresa), um clique manda o anúncio para o Radar de Vagas adaptar seu CV.",
   "icons": { "48": "icone.png", "128": "icone.png" },
   "action": { "default_title": "Adaptar meu CV para esta vaga", "default_icon": "icone.png" },

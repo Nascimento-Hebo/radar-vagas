@@ -14,11 +14,11 @@
   <link rel="manifest" href="manifest.webmanifest">
   <meta property="og:title" content="Radar de Vagas · OH Tech">
   <meta property="og:description" content="Vagas de tecnologia atualizadas todo dia e CV adaptado por IA para cada vaga.">
-  <meta property="og:image" content="https://nascimento-hebo.github.io/radar-vagas/og.png">
+  <meta property="og:image" content="https://radar-vagas-five.vercel.app/og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=30">
 </head>
 <body class="pagina-login">
   <main class="login">
@@ -80,12 +80,12 @@
         <button type="button" class="link-btn" id="esqueci">Esqueci minha senha</button>
       </form>
 
-      <p class="login-privacidade">Ao continuar, você concorda com os <a href="termos.html" target="_blank" rel="noopener">Termos de uso</a> e com a <a href="privacidade.html" target="_blank" rel="noopener">Política de privacidade</a>. Suas candidaturas e CVs ficam na sua conta; só você e o administrador do sistema têm acesso.</p>
+      <p class="login-privacidade">Ao continuar, você concorda com os <a href="termos.html" target="_blank" rel="noopener">Termos de uso</a> e com a <a href="privacidade.html" target="_blank" rel="noopener">Política de privacidade</a>. Suas candidaturas e CVs ficam na sua conta e só você tem acesso: nem o administrador do sistema consegue ler.</p>
     </section>
   </main>
 
   <script type="module">
-    import "./firebase.js?v=29";
+    import "./firebase.js?v=30";
     const $ = (id) => document.getElementById(id);
     const nuvem = window.radarNuvem;
     const volta = new URLSearchParams(location.search).get("volta") || "index.html";

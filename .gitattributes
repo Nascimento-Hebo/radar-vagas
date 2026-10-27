@@ -1,0 +1,4 @@
+# Fim de linha LF em todos os arquivos de texto (o projeto roda no Windows e no Linux do GitHub)
+* text=auto eol=lf
+*.png binary
+*.zip binary

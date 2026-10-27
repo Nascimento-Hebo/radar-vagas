@@ -38,6 +38,9 @@ jobs:
       - name: Testes de ponta a ponta
         run: npm run test:e2e
 
+      - name: Troca de conta com o Firebase de verdade (emuladores de login e banco)
+        run: npm run test:emulador
+
       - name: Guardar o relatório se falhar
         if: failure()
         uses: actions/upload-artifact@v7

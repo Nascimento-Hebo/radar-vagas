@@ -8,17 +8,17 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {
-  getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword,
+  getAuth, connectAuthEmulator, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword,
   createUserWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification, updateProfile, signOut,
   reauthenticateWithPopup, linkWithPopup, deleteUser, EmailAuthProvider, reauthenticateWithCredential,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, collection, serverTimestamp, increment, deleteField,
+  getFirestore, connectFirestoreEmulator, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, collection, serverTimestamp, increment, deleteField,
   addDoc, query, orderBy, limit,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken as tokenAppCheck } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
-import { limparDadosLocais, prepararParaConta, assinaturaPdf, partesDoPdf, MAX_PARTES_PDF } from "./conta-local.js?v=29";
+import { limparDadosLocais, prepararParaConta, assinaturaPdf, partesDoPdf, MAX_PARTES_PDF } from "./conta-local.js?v=30";
 
 const config = {
   apiKey: "AIzaSyByGuqZQH4mPZhsHh7rozWRRat0fsJtGg0", // chave pública do app web (identifica o projeto; quem protege os dados são as regras do Firestore)
@@ -30,15 +30,22 @@ const config = {
 };
 
 export const SUPER_ADMIN = "nascimentohebo2@gmail.com";
-const app = initializeApp(config);
+// Testes com o emulador do Firebase (test/emulador): só em localhost e só quando o teste define window.__radarEmulador.
+// Usa um projeto "demo-", que nunca toca o Firebase de verdade.
+const EMULADOR = ["localhost", "127.0.0.1"].includes(location.hostname) ? window.__radarEmulador || null : null;
+const app = initializeApp(EMULADOR ? { ...config, projectId: EMULADOR.projeto } : config);
 // App Check: prova (com reCAPTCHA invisível) que o pedido vem deste site. Sem isso, qualquer um poderia gastar a cota da IA e do banco.
 const RECAPTCHA_SITE_KEY = "6LfkX_stAAAAAHz8sBetbRCMgt9cI2K-6KDSqlgw";
 let appCheck = null;
-try { appCheck = initializeAppCheck(app, { provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY), isTokenAutoRefreshEnabled: true }); }
+if (!EMULADOR) try { appCheck = initializeAppCheck(app, { provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_SITE_KEY), isTokenAutoRefreshEnabled: true }); }
 catch (e) { console.warn("App Check não iniciou:", e); }
 const auth = getAuth(app);
 auth.languageCode = "pt";
 const db = getFirestore(app);
+if (EMULADOR) {
+  connectAuthEmulator(auth, EMULADOR.auth, { disableWarnings: true });
+  connectFirestoreEmulator(db, "127.0.0.1", EMULADOR.firestore);
+}
 const ai = getAI(app, { backend: new GoogleAIBackend() });
 
 // Chaves do localStorage que vão para a nuvem (users/{uid}/dados). O PDF do CV vai à parte, em users/{uid}/arquivos.

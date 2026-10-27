@@ -5,7 +5,7 @@ Busca todo dia vagas de **front-end, full-stack e back-end** no GitHub, na Gupy,
 - um painel do mercado e o acompanhamento das candidaturas;
 - um adaptador de CV com IA (Gemini) e alertas por e-mail e notificação.
 
-Site: https://nascimento-hebo.github.io/radar-vagas/ · Um projeto **OH Tech Technology**.
+Site: https://radar-vagas-five.vercel.app/ (também em https://nascimento-hebo.github.io/radar-vagas/) · Um projeto **OH Tech Technology**.
 
 Feito com **Node.js** (script de busca) e **HTML, CSS e JavaScript puro** (página), com Firebase no plano gratuito.
 
@@ -40,6 +40,7 @@ npm install          # só para os testes de ponta a ponta
 npx playwright install chromium
 npm run test:e2e     # abre o site num navegador de verdade (Firebase simulado) e testa os fluxos principais
 npm run test:regras  # testa as regras do banco no emulador do Firestore (precisa de Java)
+npm run test:emulador # troca de conta no mesmo navegador com login e banco de verdade (emuladores; precisa de Java)
 ```
 
 Para ver a página, abra `docs/index.html` com a extensão **Live Server** do VS Code (botão "Go Live" no canto de baixo). Abrir o arquivo direto com dois cliques não funciona, porque o navegador bloqueia a leitura do JSON nesse modo.

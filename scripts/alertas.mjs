@@ -13,7 +13,7 @@ import { dirname, join } from "node:path";
 import { combinaComAlerta } from "./vagas-core.mjs";
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://nascimento-hebo.github.io/radar-vagas/";
+const SITE = "https://radar-vagas-five.vercel.app/";
 const MAX_VAGAS_POR_EMAIL = 15;
 const VAPID_PUBLICA = "BD0x7EOdUjwhMPycjYPwwOFuKa8YjBWE3zlibdKU0rnkNtWF9V63DzFScOFGlpBWgj5bsW9zkX0WFg8vYSjKSL4"; // a mesma de docs/push.js
 

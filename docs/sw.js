@@ -3,9 +3,9 @@
 // vagas.json: tenta a rede primeiro (vagas do dia) e cai para a última cópia guardada.
 // Chamadas a outros sites (Gemini, GitHub, fontes) nunca passam por aqui.
 
-const VERSAO = "radar-v29"; // trocar junto com o ?v= do index.html
+const VERSAO = "radar-v30"; // trocar junto com o ?v= do index.html
 const ARQUIVOS = [
-  "./", "index.html", "login.html", "termos.html", "privacidade.html", "extensao.html", "style.css?v=29", "app.js?v=29", "cv.js?v=29", "cv-ferramentas.js?v=29", "email.js?v=29", "mercado.js?v=29", "evoluir.js?v=29", "push.js?v=29", "perguntas.js?v=29", "onboarding.js?v=29", "suporte.js?v=29", "avatares.js?v=29", "firebase.js?v=29", "conta-local.js?v=29",
+  "./", "index.html", "login.html", "termos.html", "privacidade.html", "extensao.html", "style.css?v=30", "app.js?v=30", "cv.js?v=30", "cv-ferramentas.js?v=30", "email.js?v=30", "mercado.js?v=30", "evoluir.js?v=30", "push.js?v=30", "perguntas.js?v=30", "onboarding.js?v=30", "suporte.js?v=30", "avatares.js?v=30", "firebase.js?v=30", "conta-local.js?v=30",
   "oh-tech-logo.png", "oh-tech-logo-claro.png", "oh-tech-icone.png", "icone-192.png", "icone-512.png", "manifest.webmanifest",
 ];
 

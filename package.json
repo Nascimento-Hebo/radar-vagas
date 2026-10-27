@@ -11,7 +11,8 @@
     "buscar": "node scripts/buscar-vagas.mjs",
     "test": "node --test test/*.test.mjs",
     "test:e2e": "playwright test",
-    "test:regras": "npx -y firebase-tools@13.35.1 emulators:exec --only firestore --project demo-radar \"node --test test/regras/*.test.mjs\""
+    "test:regras": "npx -y firebase-tools@13.35.1 emulators:exec --only firestore --project demo-radar \"node --test test/regras/*.test.mjs\"",
+    "test:emulador": "npx -y firebase-tools@13.35.1 emulators:exec --only auth,firestore --project demo-radar \"npx playwright test -c playwright.emulador.config.mjs\""
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "6.0.0",
