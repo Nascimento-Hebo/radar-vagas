@@ -1,89 +1,177 @@
-# Radar de vagas · 29/10/2026
+# Radar de vagas · 30/10/2026
 
-38 vagas novas · 31 encerradas · 318 abertas no total
+82 vagas novas · 123 encerradas · 276 abertas no total
 
 ## Front-end
 
-- **Desenvolvedor Front-End** · Grupo Henry Schein Brasil · Não informado · CLT · Remoto  
-  https://remotar.com.br/job/168621
+- **Desenvolvedor(a) VTEX/IO** · Skelt Beauty Brands · Pleno · CLT · Remoto  
+  https://remotar.com.br/job/169109
+- **Work From Home Technical SEO Specialist (React & Storyblok)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169096
+- **Work From Home SEO Engineer – React/Storyblok** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169041
+- **Work From Home Nuxt.js Frontend Developer (Contentful)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168956
+- **Work From Home Headless CMS Frontend Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168922
+- **Work From Home Frontend Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168897
+- **Work From Home Staff Frontend Engineer** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/169081
+- **DESENVOLVEDOR FRONT END SR** · Stefanini Group · Sênior · CLT · Híbrido  
+  https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MDc5MTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 
 ## Full-stack
 
-- **Desenvolvedor(a) Fullstack Junior - Vaga Afirmativa para Pessoas com Deficiência** · Magalu Cloud · Júnior · Não informado · Remoto  
-  https://remotar.com.br/job/168630
-- **Pessoa Desenvolvedora Fullstack .NET Júnior** · Knewin · Júnior · Não informado · Remoto  
-  https://remotar.com.br/job/168591
-- **Desenvolvimento .NET + Angular — Front End / FullStack** · Solutis · Júnior/Pleno/Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168704
-- **Engenharia de Software Fullsatck Pleno - Python e React | RD Station (Remoto)** · RD Station · Pleno · Não informado · Remoto  
-  https://job-boards.greenhouse.io/rdstation/jobs/8923667002
-- **Desenvolvedor Full Stack - Pleno** · V.tal | o futuro passa por aqui · Pleno · CLT · Remoto  
-  https://vtal.gupy.io/job/eyJqb2JJZCI6MTI3MzY4MTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Remote Contractor - Full Stack Software Developer** · Stack Builders · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/168587
-- **Profissional Fullstack (Next/React/IA) Sênior** · Luby · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168708
-- **Pessoa Desenvolvedora Full Stack Senior (.NET/React) | IA Generativa (Remoto)** · Pitang · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168703
-- **Desenvolvedor Full Stack Sênior** · Premiersoft · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168635
-- **Senior Full-Stack Engineer - LATAM** · Space Inch · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168585
-- **Software Engineer - Latam** · Reacher · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168580
-- **Principal Engineer (LATAM)** · Terrific · Especialista · Não informado · Remoto  
-  https://remotar.com.br/job/168588
-- **Desenvolvedor(a) de Sistemas | FULLSTACK** · Brisanet · Não informado · CLT · Presencial  
-  https://brisanet.gupy.io/job/eyJqb2JJZCI6MTI1NDUwMzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Full Cycle Developer (Júnior) na Coodesh** · Coodesh · Júnior · CLT · Não informado  
+  https://github.com/react-brasil/vagas/issues/3038
+- **Pessoa Desenvolvedora Fullstack Node/React III (IAM | Segurança da Informação)** · Grupo Boticário · Não informado · CLT · Remoto  
+  https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3OTk0MDcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Pessoa Desenvolvedora Full Stack - Go (Golang e React)** · MK Solutions · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169104
+- **Work From Home Next.js Node.js Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168954
+- **Work From Home Java Fullstack Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168934
+- **Work From Home Fullstack Python + React Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168901
+- **Work From Home Fullstack Engineer (Python + React)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168900
+- **Intermediate Test Engineer (Manual/Automation)** · Dev.Pro · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/168771
+- **Work From Home Full-stack Python AI Engineer** · BairesDev · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168899
+- **Desenvolvedor(a) Full Stack Sênior | Java + Angular** · Marlabs · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168854
+- **.NET Blazor Full Stack Senior Developer** · Marlabs · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168852
+- **Desenvolvedor(a) Full Stack Sênior (C# / React) | PDV** · Estapar · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168804
+- **Senior AI Platform Engineer** · WTI Labs · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168731
+- **Sr. Full Stack Software Engineer** · UserGems · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168729
+- **Pessoa Desenvolvedora Fullstack React/Kotlin/Java Especialista I (RGM e Demanda)** · Grupo Boticário · Especialista · CLT · Remoto  
+  https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI3OTg4NTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Work From Home Full-Stack .NET Technical Lead** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168898
+- **Pessoa Desenvolvedora Fullstack Especialista I - Vaga Afirmativa para PcD ·** · Confidencial · Especialista · CLT · Remoto  
+  https://confg.gupy.io/job/eyJqb2JJZCI6MTI1OTc0MDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Senior / Lead Full Stack Engineer (TypeScript + React)** · Solvd · Sênior/Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168748
 
 ## Back-end
 
-- **Desenvolvedor(a) de Software Typescript / Elixir | Júnior | Remoto | Mobilidade Elétrica** · Vonbz · Júnior · CLT · Remoto  
-  https://remotar.com.br/job/168694
-- **Desenvolvimento .NET  — Back End** · Solutis · Júnior/Pleno/Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168705
-- **Analista Programador .NET Junior** · Stefanini Latam · Júnior · Não informado · Híbrido  
-  https://stefaninilatam.gupy.io/job/eyJqb2JJZCI6MTI4MDIyNTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Desenvolvedor(a) de Software Typescript / Elixir | Pleno | Remoto | Mobilidade Elétrica** · Vonbz · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/168701
-- **Desenvolvedor(a) BackEnd Java/Node** · NAVA · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/168699
-- **Engenheiro de Software** · Gringo & Zapay · Não informado · CLT · Remoto  
-  https://remotar.com.br/job/168676
-- **Desenvolvedor de automação .Net - [K2-574]** · K2 Solutions · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/168671
-- **Engenharia de Software Pleno** · Sicredi · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/168654
-- **Desenvolvedor(a) C# Desktop - Pleno (Time Prosoft Fiscal)** · Alterdata Software · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/168620
-- **Engenheiro(a) de IA – Agentes** · Omie · Não informado · CLT · Remoto  
-  https://remotar.com.br/job/168613
-- **Distinguished Software Engineer, AI** · SecurityScorecard · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/168583
-- **Support Engineer (Contract)** · Retell AI · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/168581
-- **Grupo QuintoAndar | Senior Software Engineer** · Grupo QuintoAndar · Sênior · Não informado · Remoto  
-  https://job-boards.greenhouse.io/quintoandar/jobs/4471889009
-- **Grupo QuintoAndar | Senior Software Engineer - IAM** · Grupo QuintoAndar · Sênior · Não informado · Remoto  
-  https://job-boards.greenhouse.io/quintoandar/jobs/4472023009
-- **Senior Integration Developer (Celigo)** · Sagan Recruitment · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168672
-- **Desenvolvedor Backend Node Sênior** · Mblabs · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168640
-- **Desenvolvedor Backend Kotlin - Sênior** · Grupo FCamara · Sênior · CLT · Remoto  
-  https://remotar.com.br/job/168614
-- **462 - Desenvolvedor Backend .Net/C# Sênior** · Grupo Mooven Fornax · Sênior · CLT · Remoto  
-  https://remotar.com.br/job/168606
-- **Senior Software Engineer** · Sardine · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/168582
-- **Desenvolvedor Back-end Sênior (Remoto)** · Zenvia Jobs · Sênior · CLT · Remoto  
-  https://remotar.com.br/job/168205
-- **Desenvolvedor Senior Back End Ipaas** · Quality Digital · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/166112
-- **Staff Backend Software Engineer (Vaga Afirmativa para Mulheres)** · iFood · Especialista · Não informado · Remoto  
-  https://remotar.com.br/job/168693
-- **22636-Analista Desenvolvedor Java** · Hitss Brasil · Não informado · CLT · Híbrido  
-  https://globalhitss.gupy.io/job/eyJqb2JJZCI6MTI3MTkwNzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **[Distribution/REX] Software Engineer Pleno** · Stone - Linkedin · Pleno · Não informado · Não informado  
-  https://job-boards.greenhouse.io/stone/jobs/8045173003
+- **Pessoa Desenvolvedora Back-End Pleno** · Caju · Pleno · CLT · Remoto  
+  https://caju.gupy.io/job/eyJqb2JJZCI6MTI3NDcyMDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Work From Home Unity VR/AR Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169103
+- **Work From Home T-SQL Developer with Automated Testing** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169088
+- **Work From Home Systems Engineer (Go & Hypervisors)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169085
+- **Work From Home Release Engineer (Java & Spinnaker)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169080
+- **Work From Home Redox API Integration Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169077
+- **Work From Home Real-Time 3D .NET Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169076
+- **Work From Home Python Snowflake Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169071
+- **Work From Home Python Release Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169069
+- **Work From Home Python LLM Application Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169068
+- **Work From Home Serverless Backend Engineer (Python/AWS)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169047
+- **Work From Home Sitecore CMS Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169060
+- **Work From Home Sitecore Developer (.NET)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169063
+- **Work From Home Python GraphQL Backend Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169067
+- **Desenvolvedor Mulesoft** · Premiersoft · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169058
+- **Work From Home Python ETL Engineer (AWS Glue)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/169051
+- **Work From Home Palantir Foundry Engineer - Houston** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168961
+- **Work From Home Ontology Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168958
+- **Work From Home MLOps Engineer (Python)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168952
+- **Work From Home Microsoft Bot Framework Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168951
+- **Work From Home Medical Imaging Visualization Engineer (.NET)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168950
+- **Work From Home Magento 2 PHP Developer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168947
+- **Work From Home Knowledge Graph Engineer (OWL/RDF & Python)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168937
+- **Work From Home Knowledge Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168936
+- **Work From Home Java CI/CD Engineer (Spinnaker)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168933
+- **Work From Home Healthcare Integration Engineer (.NET & Redox)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168923
+- **Work From Home GraphQL API Developer (Python)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168907
+- **Work From Home Golang Virtualization Engineer** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168906
+- **Work From Home Computational Biologist (Python)** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168874
+- **Work From Home Business Development Executive / Ref. 0097E** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168866
+- **Work From Home Build Systems Engineer (Python) / Ref. 0117E** · BairesDev · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168865
+- **Desenvolvedor Backend Node Pleno** · Mblabs · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/168811
+- **Analista Desenvolvedor Java Pl** · Globalweb Corp · Pleno · CLT · Remoto  
+  https://remotar.com.br/job/168781
+- **Kernel Developer - KernelCare ELS Team (remote work, LATAM)** · TuxCare · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/168727
+- **Desenvolvedor de Software Sênior(Java)** · Montreal Oficial · Sênior · CLT · Remoto  
+  https://remotar.com.br/job/169093
+- **Desenvolvedor(a) Python Sênior (IA)** · Extractta · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168988
+- **Senior Cloud Platform Engineer | Kubernetes** · Marlabs · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168859
+- **Engenheiro(a) de Software Sênior | Java, AWS & Data** · Marlabs · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168856
+- **Desenvolvedor(a) .NET/SQL – Sênior** · Marlabs · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168853
+- **Desenvolvedor de Software Sênior(Java)** · Montreal | Tecnologia e Inovação · Sênior · CLT · Remoto  
+  https://montreal.gupy.io/job/eyJqb2JJZCI6MTI4MDU4MTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Senior Software Engineer (Elasticsearch, Scala)** · Solvd · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168740
+- **Senior Software Engineer - LATAM** · Wagmo · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/168730
+- **Desenvolvedor(a) Back End Java Sênior** · Solutis · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/165379
+- **Engenheiro(a) de Software Back-End Java Sênior (Foco em SDD & IA) | Híbrido | São Paulo/SP** · Solutis · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/165357
+- **Work From Home Staff Backend Engineer – Python** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/169075
+- **Trabalhe de Casa Staff Backend Engineer – Python** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/169078
+- **Trabalhe de Casa Principal Software Engineer – Python/AWS** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168989
+- **Work From Home Principal Software Engineer – Python/AWS** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168980
+- **Trabalhe de Casa Principal Python Engineer** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168978
+- **Work From Home Principal Python Engineer** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168977
+- **Trabalhe de Casa Principal Backend Engineer (Python)** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168971
+- **Work From Home Principal Backend Engineer (Python)** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168970
+- **Work From Home Node.js Technical Lead** · BairesDev · Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/168955
+- **Pessoa Desenvolvedora Java Pleno (Híbrido/BH)** · Somos BHS 💚 · Pleno · CLT · Híbrido  
+  https://bhs.gupy.io/job/eyJqb2JJZCI6MTI4MDkxNTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Grupo QuintoAndar | Staff Software Engineer** · Grupo QuintoAndar · Especialista · Não informado · Remoto  
+  https://job-boards.greenhouse.io/quintoandar/jobs/4471917009
+- **Desenvolvedor Backend Java - Sênior** · VENHA SER #SANGUELARANJA 🧡🚀 · Sênior · CLT · Híbrido  
+  https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NDA5MDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 
