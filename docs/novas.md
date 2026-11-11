@@ -1,69 +1,95 @@
-# Radar de vagas · 10/11/2026
+# Radar de vagas · 11/11/2026
 
-28 vagas novas · 22 encerradas · 285 abertas no total
+41 vagas novas · 43 encerradas · 283 abertas no total
 
 ## Front-end
 
-- **Senior Frontend Developer** · EPAM · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170557
-- **Senior Software Engineer, Front End, Dashboard** · Caliza · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170486
-- **Staff Software Engineer - Frontend** · Playlist · Sênior/Especialista · Não informado · Remoto  
-  https://remotar.com.br/job/170513
+- **Desenvolvedor Apex** · CTC · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/170836
+- **Desenvolvedor(a) React Especialista** · Platform Builders · Especialista · CLT · Remoto  
+  https://remotar.com.br/job/170766
+- **Lead Frontend Developer** · EPAM · Sênior/Especialista · Não informado · Remoto  
+  https://remotar.com.br/job/170596
 
 ## Full-stack
 
-- **Full-Stack Engineer** · Darkroom · Júnior · Não informado · Remoto  
-  https://remotar.com.br/job/170528
-- **Desenvolvedor Fullstack Senior** · Grupo FCamara · Sênior · PJ · Remoto  
-  https://remotar.com.br/job/170541
-- **Pessoa Desenvolvedora Full Stack Pleno | Remoto** · Aurum Software · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/170551
-- **Remote Full Stack Developer (Frontend-Focused) - Brazil** · Brafton · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/170480
-- **Senior JavaScript Full-Stack Developer** · EPAM · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170555
-- **Senior Full-Stack .NET Developer** · EPAM · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170554
-- **Software Engineer III | FullStack** · Playlist · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170514
-- **Senior Software Engineer - MAAS** · Canonical · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170505
-- **Senior Software Engineer - Full Stack (Agent Max)** · iFood · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170501
-- **Engenheiro Full Stack Sênior** · Juvo · Sênior · CLT · Remoto  
-  https://remotar.com.br/job/165561
-- **Desenvolvedor FullStack Pleno** · Scania Latin America · Pleno · CLT · Híbrido  
-  https://scania.gupy.io/job/eyJqb2JJZCI6MTI4NjE5NDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Desenvolvedor Fullstack Java Pleno** · Extreme Digital Solutions · Pleno · PJ · Remoto  
+  https://remotar.com.br/job/170683
+- **Desenvolvedor Fullstack React/Node.js (express)** · Sevenred · Sênior · PJ · Remoto  
+  https://remotar.com.br/job/170768
+- **Desenvolvedor(a) Fullstack (Java + Angular)** · NAVA · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/170828
+- **Desenvolvedor(a) Full Stack Pleno** · Tech6 Group · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/170705
+- **Desenvolvedor II** · Extreme Digital Solutions · Não informado · CLT · Remoto  
+  https://remotar.com.br/job/170704
+- **3726: Fullstack Pleno (SpringBoot + Angular) (TC304)** · mazzatech · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/170690
+- **Desenvolvedor(a) Fullstack Pleno [Gover]** · Paipe · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/170688
+- **Software Developer** · NeoWork · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/170611
+- **Full Stack Software Engineer (React, TypeScript & Node.js)** · Insi · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/170608
+- **Desenvolvedor(a) Full Stack Pleno (Node.js, React)** · Insi · Pleno · CLT · Remoto  
+  https://remotar.com.br/job/170605
+- **Pessoa Desenvolvedora Fullstack Sênior** · VENHA SER #SANGUELARANJA 🧡🚀 · Sênior · CLT · Remoto  
+  https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4NzExNzAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Senior Full Stack Software Engineer** · iFood · Sênior · CLT · Remoto  
+  https://remotar.com.br/job/170810
+- **Remote Full-time Contractor - Full Stack TypeScript Software Developer - Brazil** · Stack Builders · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170794
+- **Desenvolvedor(a) Full Stack Java Sênior** · Grupo SysMap · Sênior · CLT · Remoto  
+  https://remotar.com.br/job/170775
+- **Senior Full Stack Engineer** · MrBeast · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170590
+- **Desenvolvedor(a) Fullstack Sênior** · Paipe · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170640
+- **Senior Full Stack (React / Python / AWS)** · Insi · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170609
+- **Desenvolvedor FullStack - Pleno** · VENHA SER #SANGUELARANJA 🧡🚀 · Pleno · CLT · Híbrido  
+  https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4NzA4NjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Desenvolvedor(a) Full Stack Pleno (.NET)** · Claro · Pleno · CLT · Presencial  
+  https://vempraclaro.gupy.io/job/eyJqb2JJZCI6MTI3MjMwNTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Staff Software Engineer - Full Stack (Agent Max)** · iFood · Sênior/Especialista · CLT · Remoto  
+  https://remotar.com.br/job/170811
 
 ## Back-end
 
-- **Desenvolvedor(a) .NET / Dynamics / Azure – Júnior** · Stefanini Group · Júnior · CLT · Híbrido  
-  https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4NjEwMjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Desenvolvedor .Net - PcD | Maxpar** · Grupo Autoglass Tech · Não informado · CLT · Remoto  
-  https://autoglasstech.gupy.io/job/eyJqb2JJZCI6MTI4NjI5MTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Desenvolvedor de Sistemas| Backend - Java | Pix e Open Finance | Cresol CSC (Remoto)** · Cresol Oficial · Não informado · CLT · Remoto  
-  https://cresolcarreiras.gupy.io/job/eyJqb2JJZCI6MTI4NTU2NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **Desenvolvedor Java** · Montreal Oficial · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/170539
-- **Java Developer | Mid (Remote)** · Compass.UOL · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/170545
-- **Java Back-End Developer | Mid (Remote)** · Compass.UOL · Pleno · CLT · Remoto  
-  https://remotar.com.br/job/170546
-- **Software Engineer III - Backend** · Playlist · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/170517
-- **Distributed Systems Testing Software Engineer, Python / Go** · Canonical · Não informado · Não informado · Remoto  
-  https://remotar.com.br/job/170507
-- **DESENVOLVEDOR PLENO** · Geekhunter · Pleno · Não informado · Remoto  
-  https://remotar.com.br/job/170490
-- **Senior Python Developer** · EPAM · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170556
-- **Senior Software Engineer, Back End, Accounting & Treasury** · Caliza · Sênior · Não informado · Remoto  
-  https://remotar.com.br/job/170484
-- **Desenvolvedor(a) .NET / Dynamics / Azure – Pleno** · Stefanini Group · Pleno · CLT · Híbrido  
-  https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4NjEwMjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
-- **IA ENGINEER SPECIALIST II | CHANNELS** · Inter · Não informado · Não informado · Não informado  
-  https://boards.greenhouse.io/inter/jobs/4748904005?gh_jid=4748904005
-- **Staff Software Engineer for Identity Management (Go/Golang)** · Canonical · Sênior/Especialista · Não informado · Remoto  
-  https://remotar.com.br/job/170508
+- **Desenvolvedor(a) Júnior** · Ahlex · Júnior · PJ · Remoto  
+  https://remotar.com.br/job/170795
+- **Desenvolvedor Python; Java; Go; TypeScript ou C# (Inglês)** · Insi · Não informado · CLT ou PJ · Remoto  
+  https://remotar.com.br/job/170607
+- **Desenvolvedor III** · Extreme Digital Solutions · Pleno/Sênior · PJ · Remoto  
+  https://remotar.com.br/job/170823
+- **Engenheiro de IA SR** · Insi · Sênior · CLT ou PJ · Remoto  
+  https://remotar.com.br/job/170606
+- **Arquiteto de Software ASP.NET** · Memora · Não informado · Não informado · Remoto  
+  https://remotar.com.br/job/170586
+- **[Tecnologia] Desenvolvedor(a) Back end Pleno** · Contabilizei · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/170703
+- **Pessoa Desenvolvedora Ruby on Rails Pleno** · Gogroup · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/170685
+- **Desenvolvedor(a) Back-end Pleno – Node.js** · Pantheon · Pleno · CLT · Remoto  
+  https://remotar.com.br/job/170639
+- **Pessoa Desenvolvedora Power Platform - Pleno** · dti digital · Pleno · Não informado · Remoto  
+  https://remotar.com.br/job/170637
+- **Analista de Qualidade de Software II** · Insi · Não informado · CLT · Remoto  
+  https://remotar.com.br/job/170604
+- **Senior Software Engineer - Backend Legal Pros** · Jusbrasil · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170803
+- **Desenvolvedor Python Sênior** · Premiersoft · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170797
+- **Remote Contractor Brazil - Senior Python Engineer** · Stack Builders · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170793
+- **Desenvolvedor de Software SR (Java/Spring)** · Join | Creative Tech · Sênior · CLT · Remoto  
+  https://jointecnologia.gupy.io/job/eyJqb2JJZCI6MTI4Njg3MzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
+- **Desenvolvedor Delphi Sênior** · Grupo Fácil · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170744
+- **Pessoa Desenvolvedora Backend C# / SQL Server Sênior** · Extractta · Sênior · Não informado · Remoto  
+  https://remotar.com.br/job/170740
+- **Sênior .NET Backend Developer - REMOTO** · Verity · Sênior · CLT · Remoto  
+  https://remotar.com.br/job/170581
+- **ANALISTA DESENVOLVEDOR PYTHON** · Stefanini Group · Sênior · CLT · Híbrido  
+  https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4NzE2NDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal
 
