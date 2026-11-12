@@ -1,14 +1,14 @@
 {
-  "atualizadoEm": "2026-11-11T17:53:49.531Z",
-  "dataRodada": "2026-11-11",
+  "atualizadoEm": "2026-11-12T18:19:24.665Z",
+  "dataRodada": "2026-11-12",
   "totais": {
-    "abertas": 283,
-    "novas": 41,
-    "encerradas": 43,
+    "abertas": 287,
+    "novas": 49,
+    "encerradas": 46,
     "porArea": {
-      "Front-end": 23,
-      "Full-stack": 114,
-      "Back-end": 146
+      "Front-end": 18,
+      "Full-stack": 125,
+      "Back-end": 144
     }
   },
   "vagas": [
@@ -34,7 +34,7 @@
       "repeticoes": 1,
       "prioridade": 7,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -73,7 +73,7 @@
       "repeticoes": 1,
       "prioridade": 7,
       "encontradaEm": "2026-11-08",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -94,7 +94,7 @@
       "repeticoes": 1,
       "prioridade": 7,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -125,7 +125,7 @@
       "repeticoes": 2,
       "prioridade": 7,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -146,7 +146,7 @@
       "repeticoes": 1,
       "prioridade": 6,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -167,7 +167,58 @@
       "repeticoes": 1,
       "prioridade": 6,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170956",
+      "titulo": "Pessoa Desenvolvedora Júnior Golang",
+      "empresa": "Quality Digital",
+      "area": "Back-end",
+      "nivel": "Júnior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Go",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170956",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 5,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170883",
+      "titulo": "Desenvolvedor(a) Full Stack Júnior – Node.js | React Native",
+      "empresa": "Vericode",
+      "area": "Full-stack",
+      "nivel": "Júnior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "SQL",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170883",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 5,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -206,7 +257,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -237,7 +288,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -268,7 +319,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-11-05",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -299,36 +350,7 @@
       "repeticoes": 2,
       "prioridade": 5,
       "encontradaEm": "2026-10-27",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12745394",
-      "titulo": "PESSOA DESENVOLVEDORA JÚNIOR VTEX (FRONT-END)",
-      "empresa": "Quality Digital",
-      "area": "Front-end",
-      "nivel": "Júnior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Next.js",
-        "JavaScript",
-        "Go",
-        "AWS",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI3NDUzOTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-22",
-      "prazo": "2026-12-18",
-      "repeticoes": 1,
-      "prioridade": 5,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -365,7 +387,7 @@
       "repeticoes": 1,
       "prioridade": 5,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -391,7 +413,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -430,7 +452,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -451,7 +473,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -482,7 +504,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -512,7 +534,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -543,7 +565,7 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -574,7 +596,216 @@
       "repeticoes": 1,
       "prioridade": 4,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171038",
+      "titulo": "Pessoa Desenvolvedora Back-end Java Sênior",
+      "empresa": "Zallpy Digital",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "CLT ou PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Spring",
+        "SQL",
+        "MongoDB",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171038",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171032",
+      "titulo": "Pessoa Desenvolvedora de Automações e Agentes Bilíngue Sênior",
+      "empresa": "RPO Solutions",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        ".NET",
+        "C#",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171032",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12874135",
+      "titulo": "DESENVOLVEDOR FULL STACK SR",
+      "empresa": "Globalweb",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "Angular",
+        "Java",
+        "Spring",
+        "SQL",
+        "MongoDB",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://sejaglobalweb.gupy.io/job/eyJqb2JJZCI6MTI4NzQxMzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-11",
+      "prazo": "2026-11-30",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170961",
+      "titulo": "Desenvolvedor Full Stack Sr",
+      "empresa": "Globalweb Corp",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170961",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170896",
+      "titulo": "Desenvolvedor (a) Fullstack Sênior",
+      "empresa": "Aevium",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        ".NET",
+        "C#",
+        "SQL",
+        "Docker"
+      ],
+      "requisitos": [
+        "Experiência sólida como desenvolvedor(a) Fullstack Sênior",
+        "Back-end: C#, .NET / .NET Core, ASP.NET Web API",
+        "Criação e manutenção de APIs REST",
+        "Entity Framework Core e SQL Server",
+        "Boas práticas: SOLID, Clean Architecture, Design Patterns",
+        "Autenticação/autorização (JWT, OAuth)",
+        "Front-end: React.js com TypeScript",
+        "Hooks, gerenciamento de estado (Context, Redux ou similar)"
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170896",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170895",
+      "titulo": "Desenvolvedor (a) Backend Sênior",
+      "empresa": "Aevium",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        ".NET",
+        "C#",
+        "SQL",
+        "Docker",
+        "AWS",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [
+        "Experiência sólida com desenvolvimento backend utilizando .NET Core/.NET 6+ e C#",
+        "Conhecimento avançado em arquitetura de microsserviços e APIs REST",
+        "Experiência com bancos de dados relacionais (SQL Server, PostgreSQL ou similares)",
+        "Vivência com mensageria (RabbitMQ, Kafka ou similares)",
+        "Experiência com práticas de CI/CD",
+        "Conhecimento em Docker e conteinerização",
+        "Experiência com Git e versionamento de código",
+        "Vivência em metodologias ágeis (Scrum/Kanban)"
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170895",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170932",
+      "titulo": "Senior AI/ML Platform Engineer (AWS & Agentic AI)",
+      "empresa": "Zallpy Digital",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "CLT ou PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Ruby",
+        "AWS"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170932",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -599,7 +830,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -624,7 +855,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -650,7 +881,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -683,7 +914,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -714,7 +945,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -745,7 +976,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -775,7 +1006,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -802,35 +1033,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170252",
-      "titulo": "Senior Fullstack Engineer",
-      "empresa": "CPP Digital",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "AWS",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170252",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 3,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -861,7 +1064,7 @@
       "repeticoes": 2,
       "prioridade": 3,
       "encontradaEm": "2026-11-03",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -893,7 +1096,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -920,7 +1123,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-28",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -951,35 +1154,7 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12771592",
-      "titulo": "Desenvolvedor Full Stack Java/React - Sênior",
-      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Java",
-        "Docker",
-        "AWS",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NzE1OTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-23",
-      "prazo": "2026-12-21",
-      "repeticoes": 3,
-      "prioridade": 3,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1009,7 +1184,267 @@
       "repeticoes": 1,
       "prioridade": 3,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171048",
+      "titulo": "Desenvolvedor FullStack PL (Springboot + Angular)",
+      "empresa": "Union IT",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Angular",
+        "Java",
+        "Spring",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171048",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171028",
+      "titulo": "Pessoa Desenvolvedora Full Stack",
+      "empresa": "MJV",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171028",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170985",
+      "titulo": "Manager II, Platform Engineering (Compute) - Brazil",
+      "empresa": "Housecall Pro",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "Go",
+        "Ruby",
+        "AWS",
+        "Git"
+      ],
+      "requisitos": [],
+      "salario": "US$ 8.500",
+      "link": "https://remotar.com.br/job/170985",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12874093",
+      "titulo": "Desenvolvedor Backend .Net Core",
+      "empresa": "3CON | IT & Digital",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        ".NET",
+        "C#",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://trescon.gupy.io/job/eyJqb2JJZCI6MTI4NzQwOTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-11",
+      "prazo": "2027-01-10",
+      "repeticoes": 2,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170959",
+      "titulo": "Desenvolvedor(a) Full Stack Java",
+      "empresa": "Hitss Brasil",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170959",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170982",
+      "titulo": "Software Dev Engr II",
+      "empresa": "CSG",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "JavaScript",
+        "Node.js",
+        "Java",
+        "Python",
+        ".NET",
+        "C#",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170982",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170905",
+      "titulo": "Desenvolvedor(a) Full-Stack Pleno (Java/React)",
+      "empresa": "Zummit",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Angular",
+        "JavaScript",
+        "HTML/CSS",
+        "Java",
+        "Spring",
+        "Ruby",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170905",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170857",
+      "titulo": "Pessoa Desenvolvedora Pleno Golang",
+      "empresa": "Quality Digital",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Go",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170857",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170945",
+      "titulo": "Desenvolvedor Fullstack Pleno",
+      "empresa": "Maxtrack",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Vue",
+        "JavaScript",
+        "Node.js",
+        "Python",
+        "PHP",
+        "C#"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170945",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170923",
+      "titulo": "Desenvolvedor Back-end",
+      "empresa": "Turbo Partners",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170923",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1034,7 +1469,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1060,7 +1495,38 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12867285",
+      "titulo": "22647-Desenvolvedor (a) Full Stack Java",
+      "empresa": "Hitss Brasil",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "Node.js",
+        "Java",
+        "Spring",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://globalhitss.gupy.io/job/eyJqb2JJZCI6MTI4NjcyODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-10",
+      "prazo": "2026-11-30",
+      "repeticoes": 2,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1089,7 +1555,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1112,7 +1578,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1139,7 +1605,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1168,7 +1634,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1189,7 +1655,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1214,7 +1680,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1235,7 +1701,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1260,7 +1726,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1284,7 +1750,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1312,7 +1778,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1351,7 +1817,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1381,7 +1847,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1420,7 +1886,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1450,7 +1916,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1476,11 +1942,11 @@
       "link": "https://aurum.gupy.io/job/eyJqb2JJZCI6MTI4NTkwNzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
       "fonte": "Gupy",
       "publicadaEm": "2026-11-09",
-      "prazo": "2027-01-08",
+      "prazo": "2026-12-01",
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1511,7 +1977,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1542,7 +2008,7 @@
       "repeticoes": 3,
       "prioridade": 2,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1570,7 +2036,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1600,7 +2066,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1629,7 +2095,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1652,7 +2118,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1675,7 +2141,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1698,7 +2164,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1725,7 +2191,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1750,7 +2216,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1781,7 +2247,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1811,32 +2277,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170417",
-      "titulo": "Desenvolvedor(a) Java Pleno",
-      "empresa": "Platform Builders",
-      "area": "Back-end",
-      "nivel": "Pleno",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "Spring",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170417",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-09",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1860,7 +2301,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1895,7 +2336,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1925,7 +2366,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1956,7 +2397,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -1987,7 +2428,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2018,7 +2459,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2041,505 +2482,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170231",
-      "titulo": "Desenvolvedor Full Stack Pleno (React + C#)",
-      "empresa": "mazzatech",
-      "area": "Full-stack",
-      "nivel": "Pleno",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "C#"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170231",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170202",
-      "titulo": "Work From Home Computational Biologist (Python)",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170202",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170194",
-      "titulo": "Work From Home Business Development Executive",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Go"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170194",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170193",
-      "titulo": "Work From Home Build Systems Engineer (Python)",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170193",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170191",
-      "titulo": "Work From Home Boomi Integration Engineer",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "SQL"
-      ],
-      "requisitos": [
-        "Experience with integration architecture.",
-        "Background in requirements gathering.",
-        "Experience with technical specification design.",
-        "Familiarity with API design.",
-        "Knowledge of integration best practices.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170191",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170190",
-      "titulo": "Work From Home Boomi Integration Developer",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "SQL"
-      ],
-      "requisitos": [
-        "Experience with integration architecture.",
-        "Background in requirements gathering.",
-        "Experience with technical specification design.",
-        "Familiarity with API design.",
-        "Knowledge of integration best practices.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170190",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170189",
-      "titulo": "Work From Home Bioinformatics Engineer (DNAnexus & Python)",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170189",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170186",
-      "titulo": "Work From Home Backend Engineer (Java & Python)",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170186",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 2,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170183",
-      "titulo": "Work From Home Azure Chatbot Engineer",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170183",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170182",
-      "titulo": "Work From Home AWS Lambda Python Developer",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "AWS"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170182",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170181",
-      "titulo": "Work From Home AWS Java Developer",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "AWS",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170181",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170168",
-      "titulo": "Work From Home Appium Test Automation Engineer",
-      "empresa": "BairesDev",
-      "area": "Front-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170168",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170167",
-      "titulo": "Work From Home API Test Automation Engineer (Playwright)",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170167",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170166",
-      "titulo": "Work From Home API & UI Test Automation Engineer",
-      "empresa": "BairesDev",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170166",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170158",
-      "titulo": "Work From Home AI Automation Engineer",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "AWS",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [
-        "Experience with Apify.",
-        "Familiarity with Snowflake, PostgreSQL, or ElasticSearch.",
-        "Experience with CRM integration such as Salesforce.",
-        "Experience building browser extensions such as Chrome plugins.",
-        "Familiarity with chat observability tools.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170158",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170152",
-      "titulo": "Work From Home Adobe Commerce Developer (Magento & PHP)",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "PHP"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170152",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170143",
-      "titulo": "Desenvolvedor(a) FullStack PHP",
-      "empresa": "Hitss Brasil",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "PHP",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170143",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170144",
-      "titulo": "Desenvolvedor Java",
-      "empresa": "Hitss Brasil",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java",
-        "SQL"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170144",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170110",
-      "titulo": "Profissional Backend (Python/Django) Pleno - Remoto",
-      "empresa": "Luby",
-      "area": "Back-end",
-      "nivel": "Pleno",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "Django",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170110",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170120",
-      "titulo": "3716: Full Stack Pleno (React + C#)",
-      "empresa": "mazzatech",
-      "area": "Full-stack",
-      "nivel": "Pleno",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "C#"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170120",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2569,7 +2512,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2600,7 +2543,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-05",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2630,7 +2573,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-03",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2661,7 +2604,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-11-04",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2691,7 +2634,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2716,7 +2659,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-29",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2747,7 +2690,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-28",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2778,7 +2721,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-29",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2802,7 +2745,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-28",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2833,7 +2776,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2862,36 +2805,28 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
-      "id": "gupy-12745345",
-      "titulo": "12745345- PESSOA DESENVOLVEDORA PLENO VTEX (FRONT-END)",
-      "empresa": "Quality Digital",
-      "area": "Front-end",
-      "nivel": "Pleno",
-      "regime": "CLT",
+      "id": "remotar-168319",
+      "titulo": "Especialista Desenvolvedor Fullstack",
+      "empresa": "Spread Tecnologia",
+      "area": "Full-stack",
+      "nivel": "Especialista",
+      "regime": "PJ",
       "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Next.js",
-        "JavaScript",
-        "Go",
-        "AWS",
-        "APIs REST",
-        "Testes"
-      ],
+      "local": "Remoto (Brasil)",
+      "stack": [],
       "requisitos": [],
       "salario": "",
-      "link": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI3NDUzNDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-23",
-      "prazo": "2026-12-18",
+      "link": "https://remotar.com.br/job/168319",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-26",
       "repeticoes": 1,
       "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "encontradaEm": "2026-10-27",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2921,7 +2856,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2949,7 +2884,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -2980,7 +2915,7 @@
       "repeticoes": 5,
       "prioridade": 2,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3010,33 +2945,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12725139",
-      "titulo": "Analista Desenvolvedor(a) C#/.NET Pleno",
-      "empresa": "Vem Pra Pixeon",
-      "area": "Back-end",
-      "nivel": "Pleno",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        ".NET",
-        "C#",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://vemprapixeon.gupy.io/job/eyJqb2JJZCI6MTI3MjUxMzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-22",
-      "prazo": "2026-11-16",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3075,7 +2984,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3114,7 +3023,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3144,30 +3053,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-166900",
-      "titulo": "Desenvolvedor Full Stack Java",
-      "empresa": "Alterdata Software",
-      "area": "Full-stack",
-      "nivel": "Pleno",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Java"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/166900",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-19",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3198,7 +3084,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3229,37 +3115,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12729088",
-      "titulo": "Desenvolvedor Fullstack Java/Angular Pleno",
-      "empresa": "Deliver IT",
-      "area": "Full-stack",
-      "nivel": "Pleno",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Angular",
-        "Java",
-        "Spring",
-        "SQL",
-        "Docker",
-        "Git",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI3MjkwODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-15",
-      "prazo": "2026-11-30",
-      "repeticoes": 2,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3287,7 +3143,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3325,7 +3181,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3362,7 +3218,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3390,7 +3246,7 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3415,7 +3271,7 @@
       "repeticoes": 2,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3446,7 +3302,217 @@
       "repeticoes": 1,
       "prioridade": 2,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12879597",
+      "titulo": "Desenvolvedor FullStack .Net/React Sênior",
+      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        ".NET",
+        "C#",
+        "SQL",
+        "Docker",
+        "AWS",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4Nzk1OTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-12",
+      "prazo": "2027-01-11",
+      "repeticoes": 3,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12783729",
+      "titulo": "DESENVOLVEDOR(A) SÊNIOR (BACK-END)",
+      "empresa": "Quality Digital",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Node.js",
+        "SQL",
+        "Docker",
+        "Git",
+        "GraphQL",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI3ODM3MjksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-12",
+      "prazo": "2026-12-25",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12875171",
+      "titulo": "Desenvolvedor Python Sênior (Foco em IA)",
+      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Python"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4NzUxNzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-12",
+      "prazo": "2027-01-10",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171064",
+      "titulo": "Engenheiro(a) de Software Sênior",
+      "empresa": "CERC",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Node.js",
+        "Java",
+        "Spring",
+        "Python",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171064",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171060",
+      "titulo": "Desenvolvedor(a) Full Stack Sênior",
+      "empresa": "Magalu Cloud",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Go",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171060",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171035",
+      "titulo": "Desenvolvedor(a) Java/Angular Sênior",
+      "empresa": "Deloitte-RPO",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Angular",
+        "Java",
+        "Spring",
+        "SQL",
+        "AWS",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171035",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170996",
+      "titulo": "Contractor: Full Stack Engineer, Marketing",
+      "empresa": "Newsela",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "JavaScript",
+        "HTML/CSS"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170996",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170988",
+      "titulo": "Senior Software Engineer",
+      "empresa": "Housecall Pro",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Ruby"
+      ],
+      "requisitos": [],
+      "salario": "US$ 5.880 a 7.350",
+      "link": "https://remotar.com.br/job/170988",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3475,7 +3541,377 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170981",
+      "titulo": "Senior Software Engineer",
+      "empresa": "Coinbase",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Go",
+        "Ruby"
+      ],
+      "requisitos": [],
+      "salario": "R$ 36.955 a 38.900",
+      "link": "https://remotar.com.br/job/170981",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170980",
+      "titulo": "Senior Full-Stack Developer con experiencia en Node.js y React.js – Remoto (LATAM)",
+      "empresa": "Coderio",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "Tailwind",
+        "Node.js",
+        "NestJS",
+        "Express"
+      ],
+      "requisitos": [
+        "Experiencia: +5 años de experiencia comprobable en desarrollo de software Fullstack.",
+        "Sólido dominio técnico: Dominio experto de Node.js, React.js y TypeScript .",
+        "Bases de Datos & Cloud: Experiencia en modelado y consultas con PostgreSQL / SQL , así como conocimientos prácticos en AWS , integración de pipelines CI/CD y gestión de contenedores con Docker .",
+        "Nivel de Inglés: Intermedio / B2 (Capacidad para mantener conversaciones fluidas, articular soluciones técnicas y participar en reuniones internacionales).",
+        "Metodologías: Experiencia comprobada trabajando en entornos ágiles ( Scrum / Kanban ).",
+        "Soft Skills: Capacidad de abstracción, proactividad, buenas habilidades interpersonales para interactuar con áreas de negocio y autonomía para trabajar de forma remota.",
+        "Experiencia en orquestación avanzada con Kubernetes e Infraestructura como Código con Terraform / CloudFormation .",
+        "Conocimientos en arquitecturas orientadas a eventos (SQS / SNS / Kafka) o arquitecturas Serverless (AWS Lambda, API Gateway)."
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170980",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170976",
+      "titulo": "Senior Full-Stack Engineer - Internal Tools",
+      "empresa": "Alpaca",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "HTML/CSS",
+        "Tailwind",
+        "Go",
+        "SQL",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "US$ 500",
+      "link": "https://remotar.com.br/job/170976",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170975",
+      "titulo": "Senior Full-Stack Engineer - Alpaca Connect",
+      "empresa": "Alpaca",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Go",
+        "SQL",
+        "Docker",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "US$ 500",
+      "link": "https://remotar.com.br/job/170975",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170972",
+      "titulo": "Senior Data Platform Engineer",
+      "empresa": "Alpaca",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "SQL"
+      ],
+      "requisitos": [
+        "Experience with distributed query engines such as Trino, Presto, or Spark, and open table formats such as Apache Iceberg.",
+        "Experience with streaming and real-time data infrastructure such as Kafka, Redpanda, Flink, or Debezium.",
+        "Experience with AI and agent infrastructure, including MCP servers, retrieval systems, agent observability, or LLM evaluation.",
+        "Experience supporting ML infrastructure using technologies such as MLflow, Vertex AI, or similar platforms.",
+        "Experience with real-time analytics engines such as ClickHouse, Pinot, or Druid.",
+        "Experience designing and operating infrastructure across multiple cloud regions, including workload isolation and cost-performance trade-offs.",
+        "Competitive Salary & Stock Options",
+        "Health Benefits"
+      ],
+      "salario": "US$ 500",
+      "link": "https://remotar.com.br/job/170972",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170951",
+      "titulo": "Profissional Fullstack (.NET+Vue) Sênior",
+      "empresa": "Luby",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Vue",
+        "JavaScript",
+        ".NET",
+        "SQL",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170951",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170867",
+      "titulo": "Tech Lead .NET + React | Mercado Financeiro",
+      "empresa": "Spread Tecnologia",
+      "area": "Full-stack",
+      "nivel": "Sênior/Especialista",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        ".NET",
+        "C#",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170867",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170938",
+      "titulo": "Desenvolvedor Apex SR",
+      "empresa": "CTC",
+      "area": "Front-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "SQL",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170938",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170917",
+      "titulo": "Senior Software Engineer",
+      "empresa": "Segura®",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170917",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170915",
+      "titulo": "Arquiteto(a) de Software Freelance",
+      "empresa": "MJV",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Freela",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170915",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170902",
+      "titulo": "Desenvolvedor(a) Python/Spark | Engenharia de Software",
+      "empresa": "Jump",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170902",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170888",
+      "titulo": "Senior Full-stack Developer",
+      "empresa": "NTConsult",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170888",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170882",
+      "titulo": "Desenvolvedor(a) Back-end Sênior - Java",
+      "empresa": "Vericode",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170882",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-170861",
+      "titulo": "Pessoa Desenvolvedora Fullstack Sênior",
+      "empresa": "Grupo FCamara",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170861",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3505,7 +3941,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3541,7 +3977,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3566,31 +4002,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170794",
-      "titulo": "Remote Full-time Contractor - Full Stack TypeScript Software Developer - Brazil",
-      "empresa": "Stack Builders",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "TypeScript",
-        "SQL"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170794",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-11",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3620,7 +4032,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3649,33 +4061,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170775",
-      "titulo": "Desenvolvedor(a) Full Stack Java Sênior",
-      "empresa": "Grupo SysMap",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "Java",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170775",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-10",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3696,7 +4082,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3720,7 +4106,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3747,7 +4133,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3768,7 +4154,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3793,7 +4179,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3817,7 +4203,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3851,7 +4237,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3886,45 +4272,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170555",
-      "titulo": "Senior JavaScript Full-Stack Developer",
-      "empresa": "EPAM",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "TypeScript",
-        "JavaScript",
-        "Java",
-        "SQL",
-        "AWS",
-        "APIs REST"
-      ],
-      "requisitos": [
-        "3+ years of full-stack web engineering experience shipping production systems",
-        "Proficiency in TypeScript and React, including state management",
-        "Deep knowledge of UI accessibility patterns and browser performance optimization",
-        "Solid backend skills in Java or Kotlin on the JVM, or TypeScript for shared libraries",
-        "Extensive experience with gRPC + protobuf, HTTP, and REST",
-        "Hands-on data modeling experience with DynamoDB and PostgreSQL",
-        "Practical cloud platform experience using AWS, containers, and CI/CD as a consumer",
-        "Rigorous testing discipline across unit, integration, and end-to-end tests"
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170555",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-10",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3960,7 +4308,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -3989,7 +4337,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4019,7 +4367,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4045,7 +4393,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4079,7 +4427,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4112,7 +4460,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4137,7 +4485,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4158,7 +4506,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4184,7 +4532,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4208,7 +4556,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4234,7 +4582,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4259,7 +4607,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4293,7 +4641,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4321,7 +4669,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4346,7 +4694,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4369,7 +4717,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4394,7 +4742,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4427,7 +4775,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4452,7 +4800,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4478,7 +4826,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4515,7 +4863,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4549,7 +4897,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4585,7 +4933,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4621,7 +4969,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4647,7 +4995,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4681,7 +5029,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4711,7 +5059,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4737,7 +5085,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4762,7 +5110,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4795,7 +5143,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4826,7 +5174,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -4855,207 +5203,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170228",
-      "titulo": "Pessoa Desenvolvedora Backend Sênior",
-      "empresa": "Olist",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170228",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170227",
-      "titulo": "Senior Software Engineer",
-      "empresa": "Loggi",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "Django",
-        "FastAPI"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170227",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170215",
-      "titulo": "Desenvolvedor FrontEnd Angular Sênior",
-      "empresa": "Lyncas",
-      "area": "Front-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Angular",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170215",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170163",
-      "titulo": "Work From Home AI Full-stack Engineer (Next + Python)",
-      "empresa": "BairesDev",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "Python",
-        "AWS"
-      ],
-      "requisitos": [
-        "Experience with LLM evaluation, including LangSmith, Langfuse, LLM-as-judge, or golden datasets.",
-        "Experience with streaming chat interfaces, including token streaming and WebSockets.",
-        "Experience with analytics and charting UI using D3, Recharts, Visx, or similar.",
-        "Experience working inside an established design system such as Material or Carbon.",
-        "Strong accessibility (a11y) and responsive web app practices.",
-        "Familiarity with generative UI and model-driven components.",
-        "100% remote, work from anywhere.",
-        "Excellent compensation in USD or your local currency if preferred."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170163",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170141",
-      "titulo": "ESPECIALISTA DE TI - Desenvolvedor(a) Java Sênior Full Stack",
-      "empresa": "ValeCard",
-      "area": "Full-stack",
-      "nivel": "Sênior/Especialista",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Angular",
-        "Java",
-        "Spring",
-        "SQL",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170141",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170117",
-      "titulo": "Profissional Backend (Python/Django) Sênior",
-      "empresa": "Luby",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "Django"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170117",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170128",
-      "titulo": "Pessoa Desenvolvedora FulllStack Sênior",
-      "empresa": "Datum TI",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "NestJS",
-        "Java",
-        "Spring"
-      ],
-      "requisitos": [
-        "Experiência com Java 17+, Spring Boot e Hibernate;",
-        "Experiência com NodeJS + NestJS;",
-        "Experiência Bancos de Dados (SQL e NoSQL);",
-        "Oracle",
-        "MongoDB",
-        "Experiência com comunicação por mensageria (RabbitMQ e SQS);",
-        "Experiência, compreensão e entendimento de arquitetura de micro serviços.",
-        "Experiência com Design de APIs REST;"
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170128",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5082,7 +5230,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5118,7 +5266,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5148,7 +5296,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-04",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5179,7 +5327,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-11-05",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5209,7 +5357,7 @@
       "repeticoes": 4,
       "prioridade": 1,
       "encontradaEm": "2026-11-04",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5238,7 +5386,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-11-05",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5267,7 +5415,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-11-04",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5298,7 +5446,7 @@
       "repeticoes": 3,
       "prioridade": 1,
       "encontradaEm": "2026-11-03",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5326,36 +5474,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-board-4471857009",
-      "titulo": "Grupo QuintoAndar | Head of Engineering",
-      "empresa": "Grupo QuintoAndar",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "JavaScript",
-        "Node.js",
-        "Java",
-        "Python",
-        "Go",
-        "AWS"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://job-boards.greenhouse.io/quintoandar/jobs/4471857009",
-      "fonte": "Greenhouse",
-      "publicadaEm": "2026-10-29",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5385,7 +5504,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-29",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5421,7 +5540,32 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-29",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gh-board-8893388002",
+      "titulo": "Analytics Engineer (AI) | Martech",
+      "empresa": "Wellhub",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Brazil (Remote)",
+      "stack": [
+        "Python",
+        "Go",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://job-boards.greenhouse.io/gympass/jobs/8893388002",
+      "fonte": "Greenhouse",
+      "publicadaEm": "2026-10-27",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5453,7 +5597,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5484,7 +5628,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5520,7 +5664,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5548,7 +5692,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5578,7 +5722,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5606,38 +5750,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12753048",
-      "titulo": "Pessoa Desenvolvedora Frontend Sênior | Remoto",
-      "empresa": "Aurum",
-      "area": "Front-end",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Angular",
-        "TypeScript",
-        "JavaScript",
-        "HTML/CSS",
-        "Tailwind",
-        "Java",
-        "SQL"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://aurum.gupy.io/job/eyJqb2JJZCI6MTI3NTMwNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-20",
-      "prazo": "2026-12-19",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5668,7 +5781,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5696,7 +5809,30 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-166188",
+      "titulo": "Pessoa Desenvolvedora Full Stack Sênior | IA Generativa & Agentes",
+      "empresa": "BRQ",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "AWS"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/166188",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-14",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5723,7 +5859,7 @@
       "repeticoes": 2,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5754,7 +5890,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5779,7 +5915,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5810,37 +5946,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-165561",
-      "titulo": "Engenheiro Full Stack Sênior",
-      "empresa": "Juvo",
-      "area": "Full-stack",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        ".NET",
-        "C#",
-        "SQL",
-        "APIs REST"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/165561",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-06",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5871,7 +5977,34 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-165407",
+      "titulo": "Engenheiro(a) de Software Backend SR | Python & Java",
+      "empresa": "Objective",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Next.js",
+        "Java",
+        "Python",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/165407",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-05",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5895,7 +6028,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5926,7 +6059,7 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5957,7 +6090,97 @@
       "repeticoes": 1,
       "prioridade": 1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12879654",
+      "titulo": "Desenvolvedor Full Stack .net",
+      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Presencial",
+      "local": "São Bernardo do Campo - São Paulo",
+      "stack": [
+        ".NET",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [
+        "Sistemas legados em ASP.NET Web Forms e ASP.NET MVC;",
+        "Desenvolvimento de APIs REST com .NET Core;",
+        "Entity Framework Core com Migration;",
+        "Dominio de Clean Architecture;",
+        "Dominio dos princípios SOLID;",
+        "Conhecimento em metodologia Scrum e da ferramenta Azure DevOps;",
+        "Dominio de Git e processos de CI/CD."
+      ],
+      "salario": "",
+      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI4Nzk2NTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-12",
+      "prazo": "2027-01-11",
+      "repeticoes": 2,
+      "prioridade": 0,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12872806",
+      "titulo": "ANALISTA DESENVOLVEDOR PL (Cobol e Java)",
+      "empresa": "Stefanini Group",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Presencial",
+      "local": "Brasília - Distrito Federal",
+      "stack": [
+        "Java",
+        "SQL",
+        "Git",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4NzI4MDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-12",
+      "prazo": "2026-12-01",
+      "repeticoes": 1,
+      "prioridade": 0,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "gupy-12778015",
+      "titulo": "AZZAS F&L | Desenvolvedor FullStack I | Labs",
+      "empresa": "AZZAS 2154 FASHION & LIFESTYLE",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Híbrido",
+      "local": "Rio de Janeiro - Rio de Janeiro",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "SQL",
+        "Git"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://azzasfashion.gupy.io/job/eyJqb2JJZCI6MTI3NzgwMTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-11",
+      "prazo": "2026-12-22",
+      "repeticoes": 1,
+      "prioridade": 0,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -5987,7 +6210,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6018,7 +6241,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6043,7 +6266,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6068,7 +6291,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6097,7 +6320,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6129,7 +6352,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6150,7 +6373,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6176,7 +6399,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6205,46 +6428,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-07",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170129",
-      "titulo": "Pessoa Desenvolvedora FullStack Especialista",
-      "empresa": "Datum TI",
-      "area": "Full-stack",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "NestJS",
-        "Java",
-        "Spring"
-      ],
-      "requisitos": [
-        "Experiência com Java 17+, Spring Boot e Hibernate;",
-        "Experiência com NodeJS + NestJS;",
-        "Experiência Bancos de Dados (SQL e NoSQL);",
-        "Oracle",
-        "MongoDB",
-        "Experiência com comunicação por mensageria (RabbitMQ e SQS);",
-        "Experiência, compreensão e entendimento de arquitetura de micro serviços.",
-        "Experiência com Design de APIs REST;"
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170129",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6271,7 +6455,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6298,7 +6482,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6327,7 +6511,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-05",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6358,7 +6542,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-03",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6385,7 +6569,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6413,7 +6597,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6442,7 +6626,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6473,7 +6657,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-28",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6502,7 +6686,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-29",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6540,7 +6724,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-29",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6569,7 +6753,7 @@
       "repeticoes": 3,
       "prioridade": 0,
       "encontradaEm": "2026-10-28",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6600,7 +6784,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6631,7 +6815,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6669,7 +6853,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6700,7 +6884,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6733,7 +6917,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6765,7 +6949,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6797,7 +6981,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6830,44 +7014,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-board-4731723005",
-      "titulo": "SOFTWARE DEVELOPER SPECIALIST I (JAVA) |  PLATARFORM MG",
-      "empresa": "Inter",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Não informado",
-      "local": "Belo Horizonte, MG",
-      "stack": [
-        "Java",
-        "Spring",
-        "Python",
-        "Docker",
-        "AWS",
-        "Git"
-      ],
-      "requisitos": [
-        "Sólida experiência em OO, especialmente Java e Python.",
-        "Experiência com Inteligência Artificial;",
-        "Capacidade de questionar gaps em arquitetura e processo e propor soluções.",
-        "Experiência avançada com arquitetura de microsserviços.",
-        "Conhecimento profundo em TDD, DDD, Clean Code e Arquitetura Hexagonal.",
-        "Vivência em Scrum/Kanban.",
-        "Resolver problemas complexos em cenários de alta criticidade.",
-        "Git/Git Flow."
-      ],
-      "salario": "",
-      "link": "https://boards.greenhouse.io/inter/jobs/4731723005?gh_jid=4731723005",
-      "fonte": "Greenhouse",
-      "publicadaEm": "2026-10-19",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6894,7 +7041,7 @@
       "repeticoes": 2,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6919,7 +7066,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6940,7 +7087,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6961,7 +7108,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -6986,7 +7133,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7015,7 +7162,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7040,7 +7187,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7067,7 +7214,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7091,7 +7238,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-30",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7122,7 +7269,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7156,7 +7303,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7187,7 +7334,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7215,7 +7362,7 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7246,7 +7393,40 @@
       "repeticoes": 1,
       "prioridade": 0,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
+      "status": "aberta"
+    },
+    {
+      "id": "remotar-171058",
+      "titulo": "Lead Cloud Network Engineer",
+      "empresa": "EPAM",
+      "area": "Back-end",
+      "nivel": "Sênior/Especialista",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Ruby",
+        "AWS"
+      ],
+      "requisitos": [
+        "5+ years in large-scale network engineering with at least 3 years focused on public cloud (AWS strongly preferred)",
+        "Expertise in VPC architectures, subnetting, routing, segmentation, and IP address management (IPAM)",
+        "Proven experience architecting and operating AWS Cloud WAN, Transit Gateway, VPC peering, Direct Connect, site-to-site VPNs, and hybrid networking patterns",
+        "Familiarity with Zero Trust Network Access (ZTNA) concepts and cloud firewall integrations",
+        "Understanding of network security controls, observability, and performance tuning",
+        "Ability to define reusable design blueprints and codify them into self-service workflows",
+        "Excellent collaboration skills with enterprise networking, security, and application teams",
+        "Proficiency in English at a B2+ level"
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/171058",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-12",
+      "repeticoes": 1,
+      "prioridade": -1,
+      "encontradaEm": "2026-11-12",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7273,7 +7453,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7299,7 +7479,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7333,7 +7513,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-11",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7364,7 +7544,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7391,7 +7571,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7419,7 +7599,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7443,7 +7623,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-10",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7477,7 +7657,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-09",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7508,61 +7688,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "remotar-170133",
-      "titulo": "Senior Staff Data Platform Engineer",
-      "empresa": "Lemon Energia",
-      "area": "Back-end",
-      "nivel": "Sênior/Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Ruby"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/170133",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-11-06",
-      "repeticoes": 1,
-      "prioridade": -1,
-      "encontradaEm": "2026-11-06",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gupy-12805752",
-      "titulo": "DESENVOLVEDOR FRONT END SR",
-      "empresa": "Stefanini Group",
-      "area": "Front-end",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Híbrido",
-      "local": "Brasília - Distrito Federal",
-      "stack": [
-        "Angular",
-        "TypeScript",
-        "HTML/CSS",
-        "Java",
-        "Spring",
-        "SQL",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MDU3NTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-11-03",
-      "prazo": "2027-01-12",
-      "repeticoes": 1,
-      "prioridade": -1,
-      "encontradaEm": "2026-11-04",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7592,7 +7718,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-28",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7621,7 +7747,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7652,7 +7778,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-27",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7683,7 +7809,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7718,7 +7844,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7741,7 +7867,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7772,7 +7898,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7803,7 +7929,7 @@
       "repeticoes": 3,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7829,7 +7955,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7858,7 +7984,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7886,7 +8012,7 @@
       "repeticoes": 2,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7915,7 +8041,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-31",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7945,7 +8071,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -7976,7 +8102,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -8004,7 +8130,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -8032,33 +8158,7 @@
       "repeticoes": 1,
       "prioridade": -1,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
-      "status": "aberta"
-    },
-    {
-      "id": "gh-board-8016222003",
-      "titulo": "Especialista GTM Engineer - B2B (São Paulo, SP)",
-      "empresa": "Stone - Linkedin",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Híbrido",
-      "local": "Sao Paulo, Sao Paulo, Brasil",
-      "stack": [
-        "Python",
-        "SQL"
-      ],
-      "requisitos": [
-        "Além das vagas afirmativas, todas as vagas Stone também são destinadas a pessoas com deficiência."
-      ],
-      "salario": "",
-      "link": "https://job-boards.greenhouse.io/stone/jobs/8016222003",
-      "fonte": "Greenhouse",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": -2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -8084,7 +8184,7 @@
       "repeticoes": 2,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -8105,7 +8205,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -8126,7 +8226,7 @@
       "repeticoes": 1,
       "prioridade": -2,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
     },
     {
@@ -8165,8 +8265,1304 @@
       "repeticoes": 1,
       "prioridade": -3,
       "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-11-11",
+      "verificadaEm": "2026-11-12",
       "status": "aberta"
+    },
+    {
+      "id": "gupy-12745394",
+      "titulo": "PESSOA DESENVOLVEDORA JÚNIOR VTEX (FRONT-END)",
+      "empresa": "Quality Digital",
+      "area": "Front-end",
+      "nivel": "Júnior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Next.js",
+        "JavaScript",
+        "Go",
+        "AWS",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI3NDUzOTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-22",
+      "prazo": "2026-12-18",
+      "repeticoes": 1,
+      "prioridade": 5,
+      "encontradaEm": "2026-10-22",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170252",
+      "titulo": "Senior Fullstack Engineer",
+      "empresa": "CPP Digital",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "AWS",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170252",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 3,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gupy-12771592",
+      "titulo": "Desenvolvedor Full Stack Java/React - Sênior",
+      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "Java",
+        "Docker",
+        "AWS",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3NzE1OTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-23",
+      "prazo": "2026-12-21",
+      "repeticoes": 3,
+      "prioridade": 3,
+      "encontradaEm": "2026-10-24",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170417",
+      "titulo": "Desenvolvedor(a) Java Pleno",
+      "empresa": "Platform Builders",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Spring",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170417",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-09",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-09",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170231",
+      "titulo": "Desenvolvedor Full Stack Pleno (React + C#)",
+      "empresa": "mazzatech",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "C#"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170231",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170202",
+      "titulo": "Work From Home Computational Biologist (Python)",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170202",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170194",
+      "titulo": "Work From Home Business Development Executive",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Go"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170194",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170193",
+      "titulo": "Work From Home Build Systems Engineer (Python)",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170193",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170191",
+      "titulo": "Work From Home Boomi Integration Engineer",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "SQL"
+      ],
+      "requisitos": [
+        "Experience with integration architecture.",
+        "Background in requirements gathering.",
+        "Experience with technical specification design.",
+        "Familiarity with API design.",
+        "Knowledge of integration best practices.",
+        "100% remote work (from anywhere).",
+        "Excellent compensation in USD or your local currency if preferred",
+        "Hardware and software setup for you to work from home."
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170191",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170190",
+      "titulo": "Work From Home Boomi Integration Developer",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "SQL"
+      ],
+      "requisitos": [
+        "Experience with integration architecture.",
+        "Background in requirements gathering.",
+        "Experience with technical specification design.",
+        "Familiarity with API design.",
+        "Knowledge of integration best practices.",
+        "100% remote work (from anywhere).",
+        "Excellent compensation in USD or your local currency if preferred",
+        "Hardware and software setup for you to work from home."
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170190",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170189",
+      "titulo": "Work From Home Bioinformatics Engineer (DNAnexus & Python)",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170189",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170186",
+      "titulo": "Work From Home Backend Engineer (Java & Python)",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "Python"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170186",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 2,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170183",
+      "titulo": "Work From Home Azure Chatbot Engineer",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170183",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170182",
+      "titulo": "Work From Home AWS Lambda Python Developer",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "AWS"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170182",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170181",
+      "titulo": "Work From Home AWS Java Developer",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "AWS",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170181",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170168",
+      "titulo": "Work From Home Appium Test Automation Engineer",
+      "empresa": "BairesDev",
+      "area": "Front-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170168",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170167",
+      "titulo": "Work From Home API Test Automation Engineer (Playwright)",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170167",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170166",
+      "titulo": "Work From Home API & UI Test Automation Engineer",
+      "empresa": "BairesDev",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170166",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170158",
+      "titulo": "Work From Home AI Automation Engineer",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "SQL",
+        "AWS",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [
+        "Experience with Apify.",
+        "Familiarity with Snowflake, PostgreSQL, or ElasticSearch.",
+        "Experience with CRM integration such as Salesforce.",
+        "Experience building browser extensions such as Chrome plugins.",
+        "Familiarity with chat observability tools.",
+        "100% remote work (from anywhere).",
+        "Excellent compensation in USD or your local currency if preferred",
+        "Hardware and software setup for you to work from home."
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170158",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170152",
+      "titulo": "Work From Home Adobe Commerce Developer (Magento & PHP)",
+      "empresa": "BairesDev",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "PHP"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170152",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170143",
+      "titulo": "Desenvolvedor(a) FullStack PHP",
+      "empresa": "Hitss Brasil",
+      "area": "Full-stack",
+      "nivel": "Não informado",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "PHP",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170143",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170144",
+      "titulo": "Desenvolvedor Java",
+      "empresa": "Hitss Brasil",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170144",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170110",
+      "titulo": "Profissional Backend (Python/Django) Pleno - Remoto",
+      "empresa": "Luby",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "Django",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170110",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-06",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170120",
+      "titulo": "3716: Full Stack Pleno (React + C#)",
+      "empresa": "mazzatech",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "C#"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170120",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-06",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gupy-12745345",
+      "titulo": "12745345- PESSOA DESENVOLVEDORA PLENO VTEX (FRONT-END)",
+      "empresa": "Quality Digital",
+      "area": "Front-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Next.js",
+        "JavaScript",
+        "Go",
+        "AWS",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTI3NDUzNDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-23",
+      "prazo": "2026-12-18",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-23",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gupy-12725139",
+      "titulo": "Analista Desenvolvedor(a) C#/.NET Pleno",
+      "empresa": "Vem Pra Pixeon",
+      "area": "Back-end",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        ".NET",
+        "C#",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://vemprapixeon.gupy.io/job/eyJqb2JJZCI6MTI3MjUxMzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-22",
+      "prazo": "2026-11-16",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-22",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-166900",
+      "titulo": "Desenvolvedor Full Stack Java",
+      "empresa": "Alterdata Software",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Java"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/166900",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-19",
+      "repeticoes": 1,
+      "prioridade": 2,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gupy-12729088",
+      "titulo": "Desenvolvedor Fullstack Java/Angular Pleno",
+      "empresa": "Deliver IT",
+      "area": "Full-stack",
+      "nivel": "Pleno",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "Angular",
+        "Java",
+        "Spring",
+        "SQL",
+        "Docker",
+        "Git",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://deliverit.gupy.io/job/eyJqb2JJZCI6MTI3MjkwODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-15",
+      "prazo": "2026-11-30",
+      "repeticoes": 2,
+      "prioridade": 2,
+      "encontradaEm": "2026-10-22",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170794",
+      "titulo": "Remote Full-time Contractor - Full Stack TypeScript Software Developer - Brazil",
+      "empresa": "Stack Builders",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "TypeScript",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170794",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-11",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-11",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170775",
+      "titulo": "Desenvolvedor(a) Full Stack Java Sênior",
+      "empresa": "Grupo SysMap",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Java",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170775",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-10",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-11",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170555",
+      "titulo": "Senior JavaScript Full-Stack Developer",
+      "empresa": "EPAM",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "Java",
+        "SQL",
+        "AWS",
+        "APIs REST"
+      ],
+      "requisitos": [
+        "3+ years of full-stack web engineering experience shipping production systems",
+        "Proficiency in TypeScript and React, including state management",
+        "Deep knowledge of UI accessibility patterns and browser performance optimization",
+        "Solid backend skills in Java or Kotlin on the JVM, or TypeScript for shared libraries",
+        "Extensive experience with gRPC + protobuf, HTTP, and REST",
+        "Hands-on data modeling experience with DynamoDB and PostgreSQL",
+        "Practical cloud platform experience using AWS, containers, and CI/CD as a consumer",
+        "Rigorous testing discipline across unit, integration, and end-to-end tests"
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170555",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-10",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-10",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170228",
+      "titulo": "Pessoa Desenvolvedora Backend Sênior",
+      "empresa": "Olist",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170228",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170227",
+      "titulo": "Senior Software Engineer",
+      "empresa": "Loggi",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "Django",
+        "FastAPI"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170227",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170215",
+      "titulo": "Desenvolvedor FrontEnd Angular Sênior",
+      "empresa": "Lyncas",
+      "area": "Front-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Angular",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170215",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170163",
+      "titulo": "Work From Home AI Full-stack Engineer (Next + Python)",
+      "empresa": "BairesDev",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Python",
+        "AWS"
+      ],
+      "requisitos": [
+        "Experience with LLM evaluation, including LangSmith, Langfuse, LLM-as-judge, or golden datasets.",
+        "Experience with streaming chat interfaces, including token streaming and WebSockets.",
+        "Experience with analytics and charting UI using D3, Recharts, Visx, or similar.",
+        "Experience working inside an established design system such as Material or Carbon.",
+        "Strong accessibility (a11y) and responsive web app practices.",
+        "Familiarity with generative UI and model-driven components.",
+        "100% remote, work from anywhere.",
+        "Excellent compensation in USD or your local currency if preferred."
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170163",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170141",
+      "titulo": "ESPECIALISTA DE TI - Desenvolvedor(a) Java Sênior Full Stack",
+      "empresa": "ValeCard",
+      "area": "Full-stack",
+      "nivel": "Sênior/Especialista",
+      "regime": "PJ",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Angular",
+        "Java",
+        "Spring",
+        "SQL",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170141",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-07",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170117",
+      "titulo": "Profissional Backend (Python/Django) Sênior",
+      "empresa": "Luby",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Python",
+        "Django"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170117",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-06",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170128",
+      "titulo": "Pessoa Desenvolvedora FulllStack Sênior",
+      "empresa": "Datum TI",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "NestJS",
+        "Java",
+        "Spring"
+      ],
+      "requisitos": [
+        "Experiência com Java 17+, Spring Boot e Hibernate;",
+        "Experiência com NodeJS + NestJS;",
+        "Experiência Bancos de Dados (SQL e NoSQL);",
+        "Oracle",
+        "MongoDB",
+        "Experiência com comunicação por mensageria (RabbitMQ e SQS);",
+        "Experiência, compreensão e entendimento de arquitetura de micro serviços.",
+        "Experiência com Design de APIs REST;"
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170128",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-06",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gh-board-4471857009",
+      "titulo": "Grupo QuintoAndar | Head of Engineering",
+      "empresa": "Grupo QuintoAndar",
+      "area": "Back-end",
+      "nivel": "Sênior",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "JavaScript",
+        "Node.js",
+        "Java",
+        "Python",
+        "Go",
+        "AWS"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://job-boards.greenhouse.io/quintoandar/jobs/4471857009",
+      "fonte": "Greenhouse",
+      "publicadaEm": "2026-10-29",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-09",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gupy-12753048",
+      "titulo": "Pessoa Desenvolvedora Frontend Sênior | Remoto",
+      "empresa": "Aurum",
+      "area": "Front-end",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Brasil",
+      "stack": [
+        "React",
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "Tailwind",
+        "Java",
+        "SQL"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://aurum.gupy.io/job/eyJqb2JJZCI6MTI3NTMwNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-10-20",
+      "prazo": "2026-12-19",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-10-21",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-165561",
+      "titulo": "Engenheiro Full Stack Sênior",
+      "empresa": "Juvo",
+      "area": "Full-stack",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        ".NET",
+        "C#",
+        "SQL",
+        "APIs REST"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/165561",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-10-06",
+      "repeticoes": 1,
+      "prioridade": 1,
+      "encontradaEm": "2026-11-10",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170129",
+      "titulo": "Pessoa Desenvolvedora FullStack Especialista",
+      "empresa": "Datum TI",
+      "area": "Full-stack",
+      "nivel": "Especialista",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "NestJS",
+        "Java",
+        "Spring"
+      ],
+      "requisitos": [
+        "Experiência com Java 17+, Spring Boot e Hibernate;",
+        "Experiência com NodeJS + NestJS;",
+        "Experiência Bancos de Dados (SQL e NoSQL);",
+        "Oracle",
+        "MongoDB",
+        "Experiência com comunicação por mensageria (RabbitMQ e SQS);",
+        "Experiência, compreensão e entendimento de arquitetura de micro serviços.",
+        "Experiência com Design de APIs REST;"
+      ],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170129",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": 0,
+      "encontradaEm": "2026-11-06",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gh-board-4731723005",
+      "titulo": "SOFTWARE DEVELOPER SPECIALIST I (JAVA) |  PLATARFORM MG",
+      "empresa": "Inter",
+      "area": "Back-end",
+      "nivel": "Não informado",
+      "regime": "Não informado",
+      "modelo": "Não informado",
+      "local": "Belo Horizonte, MG",
+      "stack": [
+        "Java",
+        "Spring",
+        "Python",
+        "Docker",
+        "AWS",
+        "Git"
+      ],
+      "requisitos": [
+        "Sólida experiência em OO, especialmente Java e Python.",
+        "Experiência com Inteligência Artificial;",
+        "Capacidade de questionar gaps em arquitetura e processo e propor soluções.",
+        "Experiência avançada com arquitetura de microsserviços.",
+        "Conhecimento profundo em TDD, DDD, Clean Code e Arquitetura Hexagonal.",
+        "Vivência em Scrum/Kanban.",
+        "Resolver problemas complexos em cenários de alta criticidade.",
+        "Git/Git Flow."
+      ],
+      "salario": "",
+      "link": "https://boards.greenhouse.io/inter/jobs/4731723005?gh_jid=4731723005",
+      "fonte": "Greenhouse",
+      "publicadaEm": "2026-10-19",
+      "repeticoes": 1,
+      "prioridade": 0,
+      "encontradaEm": "2026-10-22",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "remotar-170133",
+      "titulo": "Senior Staff Data Platform Engineer",
+      "empresa": "Lemon Energia",
+      "area": "Back-end",
+      "nivel": "Sênior/Especialista",
+      "regime": "Não informado",
+      "modelo": "Remoto",
+      "local": "Remoto (Brasil)",
+      "stack": [
+        "Ruby"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://remotar.com.br/job/170133",
+      "fonte": "Remotar",
+      "publicadaEm": "2026-11-06",
+      "repeticoes": 1,
+      "prioridade": -1,
+      "encontradaEm": "2026-11-06",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gupy-12805752",
+      "titulo": "DESENVOLVEDOR FRONT END SR",
+      "empresa": "Stefanini Group",
+      "area": "Front-end",
+      "nivel": "Sênior",
+      "regime": "CLT",
+      "modelo": "Híbrido",
+      "local": "Brasília - Distrito Federal",
+      "stack": [
+        "Angular",
+        "TypeScript",
+        "HTML/CSS",
+        "Java",
+        "Spring",
+        "SQL",
+        "APIs REST",
+        "Testes"
+      ],
+      "requisitos": [],
+      "salario": "",
+      "link": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTI4MDU3NTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+      "fonte": "Gupy",
+      "publicadaEm": "2026-11-03",
+      "prazo": "2027-01-12",
+      "repeticoes": 1,
+      "prioridade": -1,
+      "encontradaEm": "2026-11-04",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
+    },
+    {
+      "id": "gh-board-8016222003",
+      "titulo": "Especialista GTM Engineer - B2B (São Paulo, SP)",
+      "empresa": "Stone - Linkedin",
+      "area": "Back-end",
+      "nivel": "Especialista",
+      "regime": "Não informado",
+      "modelo": "Híbrido",
+      "local": "Sao Paulo, Sao Paulo, Brasil",
+      "stack": [
+        "Python",
+        "SQL"
+      ],
+      "requisitos": [
+        "Além das vagas afirmativas, todas as vagas Stone também são destinadas a pessoas com deficiência."
+      ],
+      "salario": "",
+      "link": "https://job-boards.greenhouse.io/stone/jobs/8016222003",
+      "fonte": "Greenhouse",
+      "publicadaEm": "2026-10-23",
+      "repeticoes": 1,
+      "prioridade": -2,
+      "encontradaEm": "2026-10-23",
+      "verificadaEm": "2026-11-11",
+      "status": "encerrada",
+      "encerradaEm": "2026-11-12"
     },
     {
       "id": "gupy-12848626",
@@ -23439,804 +24835,6 @@
       "verificadaEm": "2026-10-28",
       "status": "encerrada",
       "encerradaEm": "2026-10-29"
-    },
-    {
-      "id": "remotar-168203",
-      "titulo": "Full Stack Developer II",
-      "empresa": "Hand Talk",
-      "area": "Full-stack",
-      "nivel": "Júnior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/168203",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 5,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "gh-backend-br-vagas-12474",
-      "titulo": "Back-end Developer JR - PORT LOUIS",
-      "empresa": "PORT LOUIS",
-      "area": "Back-end",
-      "nivel": "Júnior",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Remoto",
-      "stack": [
-        "Vue",
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "SQL",
-        "AWS"
-      ],
-      "requisitos": [
-        "Obrigatórios:",
-        "Conhecimento de Typescript",
-        "Conhecimento de Node e das bibliotecas mais comuns",
-        "Conhecimento de banco de dados MySQL",
-        "Vontade e disposição para aprender e se desenvolver",
-        "Desejáveis:",
-        "Conhecimento de banco de dados PostgreSQL e DynamoDB.",
-        "Conhecimento de ferramentas AWS (Lambda, S3, etc.)"
-      ],
-      "salario": "",
-      "link": "https://github.com/backend-br/vagas/issues/12474",
-      "fonte": "GitHub · backend-br/vagas",
-      "publicadaEm": "2026-10-19",
-      "repeticoes": 1,
-      "prioridade": 5,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "gupy-12543590",
-      "titulo": "Desenvolvedor(a) Full Stack Júnior",
-      "empresa": "Claro",
-      "area": "Full-stack",
-      "nivel": "Júnior",
-      "regime": "CLT",
-      "modelo": "Presencial",
-      "local": "Rio de Janeiro - Rio de Janeiro",
-      "stack": [
-        "React",
-        "TypeScript",
-        "JavaScript",
-        "HTML/CSS",
-        "Node.js",
-        "Java",
-        "Spring",
-        "MongoDB"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://vempraclaro.gupy.io/job/eyJqb2JJZCI6MTI1NDM1OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-08",
-      "prazo": "2026-10-27",
-      "repeticoes": 1,
-      "prioridade": 3,
-      "encontradaEm": "2026-10-26",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-168319",
-      "titulo": "Especialista Desenvolvedor Fullstack (Java, Angular, Springboot)",
-      "empresa": "Spread Tecnologia",
-      "area": "Full-stack",
-      "nivel": "Especialista",
-      "regime": "PJ",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Angular",
-        "Java",
-        "Spring"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/168319",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-26",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-27",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167813",
-      "titulo": "Work From Home Python Snowflake Developer / Ref. 1142E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167813",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167812",
-      "titulo": "Work From Home Python Release Engineer / Ref. 0117E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167812",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167811",
-      "titulo": "Work From Home Python LLM Application Engineer / Ref. 1219E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167811",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167810",
-      "titulo": "Work From Home Python GraphQL Backend Engineer / Ref. 0428E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "GraphQL"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167810",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167809",
-      "titulo": "Work From Home Python ETL Engineer (AWS Glue) / Ref. 0530E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "AWS"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167809",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167783",
-      "titulo": "Work From Home Palantir Foundry Engineer - Houston / Ref. 1193E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL"
-      ],
-      "requisitos": [
-        "Experience with AI-assisted development tools.",
-        "Familiarity with data governance concepts.",
-        "Domain exposure in energy, oil and gas, or related industries.",
-        "Hardware setup",
-        "Excellent compensation package — well above the market average.",
-        "Healthcare coverage (Vision and Dental).",
-        "Life Insurance.",
-        "401K Plan."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167783",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167780",
-      "titulo": "Work From Home Ontology Engineer / Ref. 0117E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167780",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167778",
-      "titulo": "Work From Home Nuxt.js Frontend Developer (Contentful) / Ref. 0880E",
-      "empresa": "BairesDev",
-      "area": "Front-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Vue",
-        "JavaScript"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167778",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167776",
-      "titulo": "Work From Home Next.js Node.js Developer / Ref. 0697E",
-      "empresa": "BairesDev",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Next.js",
-        "JavaScript",
-        "Node.js"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167776",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167773",
-      "titulo": "Work From Home MLOps Engineer (Python) / Ref. 1205E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167773",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167772",
-      "titulo": "Work From Home Microsoft Bot Framework Developer / Ref. 0194E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Não informado",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "JavaScript",
-        "C#"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167772",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "gupy-12746385",
-      "titulo": "DESENVOLVEDOR FULLSTACK (JAVA/ANGULAR/SPRINGBOOT/.NET/C#) - RHA4235",
-      "empresa": "Spread Tecnologia",
-      "area": "Full-stack",
-      "nivel": "Não informado",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "Angular",
-        "JavaScript",
-        "HTML/CSS",
-        "Java",
-        "Spring",
-        ".NET",
-        "C#",
-        "Docker"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://spread.gupy.io/job/eyJqb2JJZCI6MTI3NDYzODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-19",
-      "prazo": "2027-02-28",
-      "repeticoes": 2,
-      "prioridade": 2,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-168077",
-      "titulo": "3689: Senior API Engineer - REST APIs & PostgreSQL",
-      "empresa": "mazzatech",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "SQL",
-        "APIs REST",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://remotar.com.br/job/168077",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 1,
-      "encontradaEm": "2026-10-24",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "gupy-12782423",
-      "titulo": "Desenvolvedor Back .NET ESPECIALISTA",
-      "empresa": "VENHA SER #SANGUELARANJA 🧡🚀",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        ".NET",
-        "C#",
-        "Docker",
-        "Git",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI3ODI0MjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-26",
-      "prazo": "2026-12-25",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-27",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167801",
-      "titulo": "Trabalhe de Casa Principal Software Engineer – Python/AWS / Ref. 0071P",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "Docker",
-        "AWS"
-      ],
-      "requisitos": [
-        "Familiaridade com microsserviços e arquitetura orientada a eventos.",
-        "Experiência com pipelines de processamento em lote (batch).",
-        "Modalidade 100% remota - trabalhe de qualquer lugar.",
-        "Excelente remuneração em USD ou na sua moeda local, como preferir.",
-        "Hardware para você trabalhar de casa.",
-        "Horários flexíveis - faça seu próprio horário.",
-        "Licença parental remunerada, férias, e feriados nacionais.",
-        "Ambiente de trabalho inovador e multicultural."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167801",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167800",
-      "titulo": "Work From Home Principal Software Engineer – Python/AWS / Ref. 0071E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "Docker",
-        "AWS"
-      ],
-      "requisitos": [
-        "Familiarity with microservices and event-driven architecture.",
-        "Experience with batch processing pipelines.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home.",
-        "Flexible hours: create your own schedule.",
-        "Paid parental leaves, vacations, and holidays.",
-        "Innovative and multicultural work environment: collaborate and learn from the global Top 1% of talent."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167800",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167798",
-      "titulo": "Trabalhe de Casa Principal Python Engineer / Ref. 0071P",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "AWS"
-      ],
-      "requisitos": [
-        "Experiência na construção de produtos voltados ao consumidor final em grande escala.",
-        "Experiência com pipelines de processamento em lote (batch).",
-        "Modalidade 100% remota - trabalhe de qualquer lugar.",
-        "Excelente remuneração em USD ou na sua moeda local, como preferir.",
-        "Hardware para você trabalhar de casa.",
-        "Horários flexíveis - faça seu próprio horário.",
-        "Licença parental remunerada, férias, e feriados nacionais.",
-        "Ambiente de trabalho inovador e multicultural."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167798",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167797",
-      "titulo": "Work From Home Principal Python Engineer / Ref. 0071E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "AWS"
-      ],
-      "requisitos": [
-        "Background building consumer-facing products at scale.",
-        "Experience with batch processing pipelines.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home.",
-        "Flexible hours: create your own schedule.",
-        "Paid parental leaves, vacations, and holidays.",
-        "Innovative and multicultural work environment: collaborate and learn from the global Top 1% of talent."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167797",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167796",
-      "titulo": "Trabalhe de Casa Principal Backend Engineer (Python) / Ref. 0071P",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "Docker",
-        "AWS"
-      ],
-      "requisitos": [
-        "Experiência com Docker, Kubernetes ou ECS.",
-        "Experiência na construção de produtos voltados ao consumidor final em grande escala.",
-        "Modalidade 100% remota - trabalhe de qualquer lugar.",
-        "Excelente remuneração em USD ou na sua moeda local, como preferir.",
-        "Hardware para você trabalhar de casa.",
-        "Horários flexíveis - faça seu próprio horário.",
-        "Licença parental remunerada, férias, e feriados nacionais.",
-        "Ambiente de trabalho inovador e multicultural."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167796",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167795",
-      "titulo": "Work From Home Principal Backend Engineer (Python) / Ref. 0071E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "Python",
-        "SQL",
-        "Docker",
-        "AWS"
-      ],
-      "requisitos": [
-        "Experience with Docker, Kubernetes, or ECS.",
-        "Background building consumer-facing products at scale.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home.",
-        "Flexible hours: create your own schedule.",
-        "Paid parental leaves, vacations, and holidays.",
-        "Innovative and multicultural work environment: collaborate and learn from the global Top 1% of talent."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167795",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "remotar-167777",
-      "titulo": "Work From Home Node.js Technical Lead / Ref. 0111E",
-      "empresa": "BairesDev",
-      "area": "Back-end",
-      "nivel": "Especialista",
-      "regime": "Não informado",
-      "modelo": "Remoto",
-      "local": "Remoto (Brasil)",
-      "stack": [
-        "JavaScript",
-        "Node.js",
-        "AWS",
-        "Git",
-        "APIs REST",
-        "GraphQL"
-      ],
-      "requisitos": [
-        "Multi-cloud experience across AWS, Azure, and GCP.",
-        "100% remote work (from anywhere).",
-        "Excellent compensation in USD or your local currency if preferred",
-        "Hardware and software setup for you to work from home.",
-        "Flexible hours: create your own schedule.",
-        "Paid parental leaves, vacations, and holidays.",
-        "Innovative and multicultural work environment: collaborate and learn from the global Top 1% of talent.",
-        "Supportive environment with mentorship, promotions, skill development, and diverse growth opportunities."
-      ],
-      "salario": "",
-      "link": "https://remotar.com.br/job/167777",
-      "fonte": "Remotar",
-      "publicadaEm": "2026-10-23",
-      "repeticoes": 1,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-23",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "gupy-12559262",
-      "titulo": "PESSOA DESENVOLVEDORA FRONTEND (REACT) ESPECIALISTA I (VENDA DIRETA) ·",
-      "empresa": "Grupo Boticário",
-      "area": "Front-end",
-      "nivel": "Especialista",
-      "regime": "CLT",
-      "modelo": "Remoto",
-      "local": "Brasil",
-      "stack": [
-        "React",
-        "Python",
-        "Django",
-        "AWS",
-        "Testes"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://grupoboticario.gupy.io/job/eyJqb2JJZCI6MTI1NTkyNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-09-23",
-      "prazo": "2026-11-21",
-      "repeticoes": 2,
-      "prioridade": 0,
-      "encontradaEm": "2026-10-21",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
-    },
-    {
-      "id": "gupy-12592687",
-      "titulo": "Desenvolvedor Java Sênior – IA Generativa e Agentes",
-      "empresa": "Porto",
-      "area": "Back-end",
-      "nivel": "Sênior",
-      "regime": "CLT",
-      "modelo": "Híbrido",
-      "local": "São Paulo - São Paulo",
-      "stack": [
-        "React",
-        "Angular",
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "Java",
-        "Spring",
-        "SQL"
-      ],
-      "requisitos": [],
-      "salario": "",
-      "link": "https://porto.gupy.io/job/eyJqb2JJZCI6MTI1OTI2ODcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-      "fonte": "Gupy",
-      "publicadaEm": "2026-10-05",
-      "prazo": "2026-12-10",
-      "repeticoes": 1,
-      "prioridade": -1,
-      "encontradaEm": "2026-10-22",
-      "verificadaEm": "2026-10-27",
-      "status": "encerrada",
-      "encerradaEm": "2026-10-28"
     }
   ]
 }
